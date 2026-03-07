@@ -21,7 +21,6 @@ var marker1 = L.marker([14.594368660501456, 120.9704119965505], { icon: customIc
         <div style="text-align: center;">
             <img src="https://visitfortsantiago.com/wp-content/uploads/2019/02/rotator3.jpeg" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
             <h3>Fort Santiago</h3>
-            <p style="font-size: 12px; color: gray; margin: 0;">(Click pin for details)</p>
         </div>
     `)
     .on('mouseover', function (e) {
