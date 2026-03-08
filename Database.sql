@@ -26,12 +26,6 @@ CREATE TABLE Vehicles (
     hourly_rate DECIMAL(10,2) NOT NULL
 );
 
-CREATE TABLE Public_Tour_Routes (
-    route_id INT AUTO_INCREMENT PRIMARY KEY,
-    route_name VARCHAR(150) NOT NULL,
-    price_per_seat DECIMAL(10,2) NOT NULL
-);
-
 CREATE TABLE System_Users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     role_id INT,
@@ -40,16 +34,6 @@ CREATE TABLE System_Users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     FOREIGN KEY (role_id) REFERENCES Roles(role_id)
-);
-
-CREATE TABLE Route_Stops (
-    route_stop_id INT AUTO_INCREMENT PRIMARY KEY,
-    route_id INT,
-    attraction_id INT,
-    stop_order INT NOT NULL,
-    allotted_time_minutes INT NOT NULL,
-    FOREIGN KEY (route_id) REFERENCES Public_Tour_Routes(route_id),
-    FOREIGN KEY (attraction_id) REFERENCES Attractions(attraction_id)
 );
 
 CREATE TABLE Scheduled_Tours (
@@ -82,37 +66,12 @@ CREATE TABLE Attraction_Bookings (
     FOREIGN KEY (attraction_id) REFERENCES Attractions(attraction_id)
 );
 
-CREATE TABLE Public_Tour_Bookings (
-    reservation_id INT PRIMARY KEY, -- Acts as both PK and FK
-    schedule_id INT,
-    number_of_seats_booked INT NOT NULL,
-    FOREIGN KEY (reservation_id) REFERENCES Reservations(reservation_id),
-    FOREIGN KEY (schedule_id) REFERENCES Scheduled_Tours(schedule_id)
-);
-
-CREATE TABLE Private_Charters (
-    reservation_id INT PRIMARY KEY, -- Acts as both PK and FK
-    vehicle_id INT,
-    charter_start_datetime DATETIME NOT NULL,
-    charter_end_datetime DATETIME NOT NULL,
-    FOREIGN KEY (reservation_id) REFERENCES Reservations(reservation_id),
-    FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id)
-);
-
 CREATE TABLE Invoices (
     invoice_id INT AUTO_INCREMENT PRIMARY KEY,
     reservation_id INT,
     total_amount DECIMAL(10,2) NOT NULL,
     status VARCHAR(50) NOT NULL,
     FOREIGN KEY (reservation_id) REFERENCES Reservations(reservation_id)
-);
-
-CREATE TABLE Private_Charter_Itinerary (
-    itinerary_id INT AUTO_INCREMENT PRIMARY KEY,
-    reservation_id INT,
-    attraction_booking_id INT,
-    FOREIGN KEY (reservation_id) REFERENCES Private_Charters(reservation_id),
-    FOREIGN KEY (attraction_booking_id) REFERENCES Attraction_Bookings(attraction_booking_id)
 );
 
 CREATE TABLE Payments (
