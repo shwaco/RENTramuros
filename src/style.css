@@ -126,18 +126,18 @@ body, html {
 }
 
 .leaflet-popup-content h3 {
-    font-size: 24px;
+    font-size: 30px;
     margin-top: 5px;
     margin-bottom: 5px;
     color: #333; 
 }
 
 .leaflet-popup-content {
-    width: 500px; 
+    width: 600px; 
 }
 
 .leaflet-popup-content img {
-    width: 300%; 
-    height: 250px; 
+    width: 600%; 
+    height: 300px; 
     object-fit: cover;
 }
