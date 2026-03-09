@@ -30,6 +30,9 @@ header {
     background-color: #FFCC00;
     align-items: center;
     padding: 20px;
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    margin-bottom: 10px;
 }
 
 .primary-navigation ul {
@@ -39,16 +42,15 @@ header {
     margin-left: 50px;
     gap: 50px;
     justify-content: space-around;
+    font-size: small;
 }
 
 .primary-navigation a {
     text-decoration: none;
     color: black;
-    font-weight: 500;
+    font-weight: bold;
+
 }
-
-
-
 
 
 .primary-navigation a:hover,
@@ -56,7 +58,57 @@ header {
     color: white;
 }
 
+/* Engageble text */
+.container-1 {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
 
+.icon-container {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.line {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+
+}
+
+.line span {
+    width:100%;
+    display: block;
+    
+}
+
+.white {
+    background: white;
+    height: 2px;
+}
+
+
+.line .yellow {
+    background: yellow;
+    height: 2px;
+    width: 90%;
+    margin-left: auto;
+}
+
+.blue {
+    background: blue;
+    height: 2px;
+}
+
+
+.line .red {
+    background: red;
+    height: 2px;
+    width: 90%;
+
+}
 
 
 
