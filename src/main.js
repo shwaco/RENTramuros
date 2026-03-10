@@ -19,7 +19,7 @@ const customIcon = L.icon({
 var marker1 = L.marker([14.594368660501456, 120.9704119965505], { icon: customIcon }).addTo(map)
     .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://visitfortsantiago.com/wp-content/uploads/2019/02/rotator3.jpeg" style="width: 300px; border-radius: 8px; margin-bottom: 5px;">
+            <img src="https://visitfortsantiago.com/wp-content/uploads/2019/02/rotator3.jpeg" style="border-radius: 8px; margin-bottom: 5px;">
             <h3>Fort Santiago</h3>
         </div>
     `, { autoClose: false })
@@ -58,7 +58,7 @@ var marker1 = L.marker([14.594368660501456, 120.9704119965505], { icon: customIc
 var marker2 = L.marker([14.591924681662595, 120.97341080739596], { icon: customIcon }).addTo(map)
     .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://cjvoyage.home.blog/wp-content/uploads/2018/12/13.jpg" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://cjvoyage.home.blog/wp-content/uploads/2018/12/13.jpg" style="border-radius: 10px; margin-bottom: 10px;">
             <h3>Minor Basilica</h3>
         </div>
     `, { autoClose: false })
@@ -95,7 +95,7 @@ var marker2 = L.marker([14.591924681662595, 120.97341080739596], { icon: customI
 var marker3 = L.marker([14.589338241759469, 120.97513033287642], { icon: customIcon }).addTo(map)
     .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://www.filipinoart.ph/newsroom/wp-content/uploads/2020/04/San-Agustin-Museum3.jpg" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://www.filipinoart.ph/newsroom/wp-content/uploads/2020/04/San-Agustin-Museum3.jpg" style="border-radius: 8px; margin-bottom: 10px;">
             <h3>San Agustin Church (San Agustin Convent Museum)</h3>
         </div>
     `, { autoClose: false })
@@ -133,7 +133,7 @@ var marker3 = L.marker([14.589338241759469, 120.97513033287642], { icon: customI
 var marker4 = L.marker([14.589731466055865, 120.97504055051868], { icon: customIcon }).addTo(map)
    .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://gttp.images.tshiftcdn.com/316055/x/0/courtyard-of-casa-manila-inside-intramuros.jpg" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://gttp.images.tshiftcdn.com/316055/x/0/courtyard-of-casa-manila-inside-intramuros.jpg" style="border-radius: 8px; margin-bottom: 10px;">
             <h3>Casa Manila</h3>
         </div>
     `, { autoClose: false })
@@ -171,7 +171,7 @@ var marker4 = L.marker([14.589731466055865, 120.97504055051868], { icon: customI
 var marker5 = L.marker([14.585692433320624, 120.97566282272292], { icon: customIcon }).addTo(map)
      .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Baluarte_de_San_Diego_Intramuros.jpg" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Baluarte_de_San_Diego_Intramuros.jpg" style="border-radius: 8px; margin-bottom: 10px;">
             <h3>Baluarte de San Diego</h3>
         </div>
     `, { autoClose: false })
@@ -209,7 +209,7 @@ var marker5 = L.marker([14.585692433320624, 120.97566282272292], { icon: customI
 var marker6 = L.marker([14.59469639090222, 120.96959596771443], { icon: customIcon }).addTo(map)
     .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://virmuze-bucket.s3.amazonaws.com/gallery_slideshow0/exhibit_gallery_image/2022/05/27/9655ce3_exhibit_gallery_image.jpeg" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://virmuze-bucket.s3.amazonaws.com/gallery_slideshow0/exhibit_gallery_image/2022/05/27/9655ce3_exhibit_gallery_image.jpeg" style="border-radius: 8px; margin-bottom: 10px;">
             <h3>Rizal Shrine</h3>
         </div>
     `, { autoClose: false })
@@ -247,7 +247,7 @@ var marker6 = L.marker([14.59469639090222, 120.96959596771443], { icon: customIc
 var marker7 = L.marker([14.591682371482037, 120.97248916771434], { icon: customIcon }).addTo(map)
     .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://thumbs.dreamstime.com/b/palacio-del-gobernador-intramuros-manila-philippine-philippines-76280677.jpg" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://thumbs.dreamstime.com/b/palacio-del-gobernador-intramuros-manila-philippine-philippines-76280677.jpg" style="border-radius: 8px; margin-bottom: 10px;">
             <h3>Palacio Del Gobernador</h3>
         </div>
     `, { autoClose: false })
@@ -263,7 +263,7 @@ var marker7 = L.marker([14.591682371482037, 120.97248916771434], { icon: customI
         animate:true,
         duration: 1.0
     });
-        document.getElementById('panel-title').innerText = "Palacio Del Gobernado";
+        document.getElementById('panel-title').innerText = "Palacio Del Gobernador";
         document.getElementById('panel-img').src = "https://thumbs.dreamstime.com/b/palacio-del-gobernador-intramuros-manila-philippine-philippines-76280677.jpg";
         document.getElementById('panel-text').innerText = "An important government and historical site in the heart of Intramuros. It was once the residence of Spanish governor-generals, and stands as a symbol of political history during the colonial era. ";
         document.getElementById('panel-btn').href = "#";
@@ -285,7 +285,7 @@ var marker7 = L.marker([14.591682371482037, 120.97248916771434], { icon: customI
 var marker8 = L.marker([14.590052863152057, 120.97345112538642], { icon: customIcon }).addTo(map)
     .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://images.esquiremag.ph/esquiremagph/images/gallery/8205/main-museo-de-intramuros-2.jpg" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://images.esquiremag.ph/esquiremagph/images/gallery/8205/main-museo-de-intramuros-2.jpg" style="border-radius: 8px; margin-bottom: 10px;">
             <h3>Museo De Intramuros</h3>
         </div>
     `, { autoClose: false })
@@ -323,7 +323,7 @@ var marker8 = L.marker([14.590052863152057, 120.97345112538642], { icon: customI
 var marker9 = L.marker([14.587684179514117, 120.97698311004227], { icon: customIcon }).addTo(map)
     .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/9f/08/81/we-would-like-to-introduce.jpg?w=1200&h=-1&s=1" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/9f/08/81/we-would-like-to-introduce.jpg?w=1200&h=-1&s=1" style="border-radius: 8px; margin-bottom: 10px;">
             <h3>Silahi's Art and Artifacts Inc</h3>
         </div>
     `, { autoClose: false })
@@ -361,7 +361,7 @@ var marker9 = L.marker([14.587684179514117, 120.97698311004227], { icon: customI
 var marker10 = L.marker([14.587148079969733, 120.97520281004242], { icon: customIcon }).addTo(map)
     .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://thumbs.dreamstime.com/b/bagumbayan-light-sound-museum-facade-intramuros-walled-city-manila-philippines-ph-oct-october-173379833.jpg" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://thumbs.dreamstime.com/b/bagumbayan-light-sound-museum-facade-intramuros-walled-city-manila-philippines-ph-oct-october-173379833.jpg" style="border-radius: 8px; margin-bottom: 10px;">
             <h3>Rizal’s Bagumbayan Light and Sound Museum</h3>
         </div>
     `, { autoClose: false })
@@ -393,7 +393,7 @@ var marker10 = L.marker([14.587148079969733, 120.97520281004242], { icon: custom
 var marker11 = L.marker([14.589662875177895, 120.97510720819086], { icon: customIcon }).addTo(map)
     .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://media-cdn.tripadvisor.com/media/photo-s/02/73/db/3d/filename-img-0509-jpg.jpg" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://media-cdn.tripadvisor.com/media/photo-s/02/73/db/3d/filename-img-0509-jpg.jpg" style="border-radius: 8px; margin-bottom: 10px;">
             <h3>Barbara's Heritage Restaurant</h3>
         </div>
     `, { autoClose: false })
@@ -432,7 +432,7 @@ var marker11 = L.marker([14.589662875177895, 120.97510720819086], { icon: custom
 var marker12 = L.marker([14.589703266065198, 120.97540935422217], { icon: customIcon }).addTo(map)
     .bindPopup(`
         <div style="text-align: center;">
-            <img src="https://lh3.googleusercontent.com/p/AF1QipOt2mEJR3tsVMVdiH_EJOpYK5-jQSnbb33YnWo0=s680-w680-h510-rw" style="width: 300px; border-radius: 8px; margin-bottom: 10px;">
+            <img src="https://lh3.googleusercontent.com/p/AF1QipOt2mEJR3tsVMVdiH_EJOpYK5-jQSnbb33YnWo0=s680-w680-h510-rw" style="border-radius: 8px; margin-bottom: 10px;">
             <h3>Bambike Ecotours</h3>
         </div>
     `, { autoClose: false })
