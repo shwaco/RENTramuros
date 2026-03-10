@@ -51,6 +51,37 @@ body, html {
     margin-bottom: 30px;
 }
 
+.panel-dropdown {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.panel-dropdown summary {
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    outline: none; 
+    list-style-position: inside; 
+}
+
+.panel-dropdown summary:hover {
+    color: #007bff; 
+}
+
+#panel-operating-hours-details {
+    margin-top: 12px;
+    line-height: 1.8; 
+    color: #555;
+    font-size: 14px;
+}
+
+
+
 #close-panel-btn {
     position: absolute;
     top: 15px;
@@ -75,6 +106,7 @@ body, html {
 
 .book-now-btn {
     display: block;
+    margin-top: 30px;
     text-align: center;
     padding: 14px;
     background: #007bff;
@@ -155,7 +187,7 @@ body, html {
 
 #church-buttons {
     position: absolute;
-    top: 90px;
+    top: 140px;
     right: 20px;
     z-index: 9999;
 }
@@ -175,7 +207,7 @@ body, html {
 
 #foodplaces-buttons {
     position: absolute;
-    top: 140px;
+    top: 240px;
     right: 20px;
     z-index: 9999;
 }
@@ -214,7 +246,7 @@ body, html {
 
 #landmarks-buttons {
     position: absolute;
-    top: 240px;
+    top: 290px;
     right: 20px;
     z-index: 9999;
 }
@@ -234,7 +266,7 @@ body, html {
 
 #rides-buttons {
     position: absolute;
-    top: 290px;
+    top: 90px;
     right: 20px;
     z-index: 9999;
 }
