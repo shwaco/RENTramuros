@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Intramuros Map</title>
+
   </head>
   <body>
     <div id="search-container">
@@ -25,10 +26,11 @@
     </datalist>
     
     <button id="search-btn">Search</button>
+     <img id="map-logo" src="/imgs/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTramuros-logo">
 </div>
     <div id="map"></div>
     <div id="side-panel">
-    <button id="close-panel-btn" onclick="document.getElementById('side-panel').classList.remove('open')">✖</button>
+    <button id="close-panel-btn" onclick="document.getElementById('side-panel').classList.remove('open')">X</button>
     
     <img id="panel-img" src="" alt="Location Image">
     
@@ -40,6 +42,21 @@
             Book Now
         </a>
     </div>
+</div>
+<div id="church-buttons">
+    <button id="churches-btn" class="Churches-btn">⛪ Churches</button>
+</div>
+<div id="foodplaces-buttons">
+    <button id="food-places-btn" class="Food-places-btn">🍽️ Food Places</button>
+</div>
+<div id="museums-buttons">
+    <button id="museum-btn" class="Museum-btn">🖼️ Museums </button>
+</div>
+<div id="landmarks-buttons">
+    <button id="landmark-btn" class="Landmark-btn">🏛️ Historical Landmarks </button>
+</div>
+<div id="rides-buttons">
+    <button id="ride-btn" class="Rides-btn">🚲 Rides </button>
 </div>
     <script type="module" src="/src/main.js"></script>
   </body>
