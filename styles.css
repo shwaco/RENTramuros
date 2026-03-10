@@ -64,6 +64,7 @@ header {
     justify-content: center;
     margin: 20px;
     margin-bottom: 10px;
+    min-height: auto;
 }
 
 .icon-container {
@@ -113,8 +114,7 @@ header {
 
 /* Engageable text */
 
-
-.engageable .text h2 {
+.engageable .text h2{
     display: flex;
     justify-content: center;
     align-items: center;
