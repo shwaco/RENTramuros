@@ -51,36 +51,21 @@ body, html {
     margin-bottom: 30px;
 }
 
-.panel-dropdown {
-    background-color: #C99E10;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 12px;
-    margin-top: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.panel-dropdown summary {
-    font-weight: bold;
-    cursor: pointer;
-    color: #F4F1EA;
-    outline: none; 
-    list-style-position: inside; 
-}
-
-.panel-dropdown summary:hover {
-    color: #8D230F; 
+#panel-operating-hours-header {
+    text-align: left;
+    font-size: 18px;
+    color: #333;
+    margin-top: 25px;
+    margin-bottom: 10px;
 }
 
 #panel-operating-hours-details {
-    margin-top: 12px;
-    line-height: 1.8; 
-    color: #F4F1EA;
+    text-align: center;
+    line-height: 1.6;
+    color: #555;
     font-size: 14px;
+    margin-bottom: 20px;
 }
-
-
 
 #close-panel-btn {
     position: absolute;
