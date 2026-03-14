@@ -3,7 +3,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family:Arial, Helvetica, sans-serif
+    font-family: Arial, Helvetica, sans-serif;
+        \outline: 1px solid red !important;
+
 }
 
 body {
@@ -15,10 +17,12 @@ body {
 .navigation-wrapper {
     margin-top: 50px;
     box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.5);
+    width: 100%
 }
 
 #logo {
     margin-left: 50px;
+    max-inline-size: 100%;
 
 }
 
@@ -28,20 +32,21 @@ header {
     background-color: #C99E10;
     align-items: center;
     padding: 20px;
-    border-bottom: 2px solid black;
     border-top: 2px solid black;
+    border-bottom: 2px solid black;
     margin-bottom: 10px;
+
 }
 
 .primary-navigation ul {
     display: flex;
+    align-items: center;
     list-style: none;
-    margin-right: 50px;
-    margin-left: 50px;
+    margin: 0 20px;
     gap: 50px;
-    justify-content: space-around;
-    font-size: 300;
-    font-family: "Playfair Display";
+    justify-content: flex-end;
+    font-size: 1rem;
+    font-family: "Playfair Display", serif;
 
 }
 
@@ -49,13 +54,13 @@ header {
     text-decoration: none;
     color: black;
     font-weight: bold;
-
+    padding: 0.5em;
+    font-family: "Playfair Display";
 }
-
 
 .primary-navigation a:hover,
 .primary-navigation a:focus-visible {
-    color: white;
+    background-color: rgb(227, 227, 227);
 }
 
 /* Decorative lines */
@@ -81,8 +86,7 @@ header {
 
 .line span {
     width:100%;
-    display: block;
-    
+    display: block;    
 }
 
 .white {
@@ -120,6 +124,8 @@ header {
     font-weight: 150;
     color: whitesmoke;
     margin-bottom: 20px;
+    text-align: center;
+
 }
 
 /* Picture */
@@ -129,8 +135,14 @@ header {
     justify-content: center;
 }
 
+img {
+    display: block;
+    max-inline-size: 100%;
+}
+
 #cphoto {
-    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 /* About intramuros */
@@ -140,17 +152,38 @@ header {
     align-items: center;
     flex-direction: column;
     margin: 20px;
+
 }
 
 .intratext div {
     display: flex;
-    align-content: center;
+    justify-content: center;
+
+}
+
+
+.intratext span {
+    font-family: "Playfair Display", serif;
     color: white;
+    display: flex;
+    align-content: center;
     width: 80%;
     font-size: large;
     text-align: center;
     padding: 7px;
 }
 
+/* Popular destinations */
+.popular {
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+.popular h2 {
+    font-family: "Playfair Display", serif;
+    color: white;
+    margin-left: 20px;
+
+}
 
 
