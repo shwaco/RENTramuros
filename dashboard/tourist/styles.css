@@ -10,7 +10,7 @@
 
 
 body {
-    background-color: #8d230f;
+    background-color: white;
     height: 100vh;
     width: 100%;
     min-width: auto;
@@ -19,38 +19,41 @@ body {
 
 /* Navigation bar */
 nav {
-    background-color: #FFCC00;
+    background-color: gray;
     text-decoration: none;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-    padding: 0 6.7em 0;
 
 }
 
 nav ul {
-    width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    list-style: none;  
-
+    list-style: none;
 }
 
 
 nav li a{
-    position: relative;
     text-decoration: none;
-    padding: 1em 2em; 
+    padding: 0.5rem 1rem; 
     color: black;
-    height: auto;
-    width: auto;
 }
+
+nav .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 
 nav li a:hover {
     background-color: whitesmoke;
+    padding: 1rem;
 }
 
 #logo {
-    padding: 0.3rem;
+    padding: 0.5rem 1rem;
 }
 
 
@@ -68,7 +71,7 @@ nav .sidebar {
     z-index: 999;
     background-color: white;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
