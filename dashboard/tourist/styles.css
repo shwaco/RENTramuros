@@ -4,64 +4,84 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-        \outline: 1px solid red !important;
+    /* outline: 1px solid red !important; */
 
 }
 
+
 body {
     background-color: #8d230f;
+    height: 100vh;
+    width: 100%;
+    min-width: auto;
 }
 
 
 /* Navigation bar */
-.navigation-wrapper {
-    margin-top: 50px;
-    box-shadow: 5px 3px 5px rgba(0, 0, 0, 0.5);
-    width: 100%
+nav {
+    background-color: #FFCC00;
+    text-decoration: none;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+    padding: 0 6.7em 0;
+
+}
+
+nav ul {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none;  
+
+}
+
+
+nav li a{
+    position: relative;
+    text-decoration: none;
+    padding: 1em 2em; 
+    color: black;
+    height: auto;
+    width: auto;
+}
+
+nav li a:hover {
+    background-color: whitesmoke;
 }
 
 #logo {
-    margin-left: 50px;
-    max-inline-size: 100%;
-
+    padding: 0.3rem;
 }
 
-header {
+
+nav li:first-child {
+    margin-right: auto;
+}
+
+/* Sidebar */
+nav .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    z-index: 999;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
     display: flex;
-    justify-content: space-between;
-    background-color: #C99E10;
-    align-items: center;
-    padding: 20px;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    margin-bottom: 10px;
-
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 
-.primary-navigation ul {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    margin: 0 20px;
-    gap: 50px;
-    justify-content: flex-end;
-    font-size: 1rem;
-    font-family: "Playfair Display", serif;
-
+nav .sidebar li a {
+    display: block;
+    width: 100%;
+    padding: 1rem 2rem;
 }
 
-.primary-navigation a {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    padding: 0.5em;
-    font-family: "Playfair Display";
-}
 
-.primary-navigation a:hover,
-.primary-navigation a:focus-visible {
-    background-color: rgb(227, 227, 227);
-}
+
 
 /* Decorative lines */
 .container-1 {
@@ -141,8 +161,9 @@ img {
 }
 
 #cphoto {
-    display: flex;
+    display: block;
     justify-content: center;
+
 }
 
 /* About intramuros */
