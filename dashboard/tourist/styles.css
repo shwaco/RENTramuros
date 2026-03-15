@@ -22,7 +22,6 @@ nav {
     background-color: white;
     text-decoration: none;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-
 }
 
 nav ul {
@@ -31,24 +30,24 @@ nav ul {
     align-items: center;
     list-style: none;
     gap: 1rem;
+    margin-right: 10px;
 }
 
 
 nav li a{
     text-decoration: none;
-    padding: 1rem 1rem; 
+    padding: 0.7rem 1rem; 
     color: black;
 }
 
 nav .menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: none;
+    margin-right: 10px;
 }
 
 nav li a:hover {
     background-color: #f5f4f2;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 #logo {
@@ -88,6 +87,7 @@ nav .sidebar {
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
+    margin: 0;
 }
 
 nav .sidebar li a {
@@ -95,8 +95,6 @@ nav .sidebar li a {
     width: 100%;
     padding: 1rem 2rem;
 }
-
-
 
 
 /* Decorative lines */
@@ -223,4 +221,17 @@ img {
 
 }
 
+@media(max-width: 800px){
+    .hideOnMobile{
+        display: none;
+    }
+    nav .menu-btn {
+        display: flex;
+    }
+}
 
+@media(max-width: 500px){
+    nav .sidebar{
+        width: 100%;
+    }
+}
