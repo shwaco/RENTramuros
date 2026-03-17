@@ -29,8 +29,8 @@ nav ul {
     justify-content: flex-end;
     align-items: center;
     list-style: none;
-    gap: 1rem;
-    margin-right: 10px;
+    margin: 0 10px;
+    gap: 0.2rem;
 }
 
 
@@ -59,6 +59,10 @@ nav li a:hover {
 
 nav li:first-child {
     margin-right: auto;
+}
+
+nav .navbar li:last-child {
+    margin-left: 1rem;
 }
 
 nav button {
@@ -99,6 +103,10 @@ nav .sidebar li a {
     gap: 0.5rem;
     width: 100%;
     padding: 1rem 2rem;
+}
+
+nav .sidebar .hideOnMobile.last{
+    margin: 0;
 }
 
 
