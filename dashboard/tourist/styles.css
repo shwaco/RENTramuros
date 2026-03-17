@@ -94,7 +94,9 @@ nav .sidebar {
 }
 
 nav .sidebar li a {
-    display: block;
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
     width: 100%;
     padding: 1rem 2rem;
 }
@@ -224,7 +226,7 @@ img {
 
 }
 
-@media(max-width: 800px){
+@media(max-width: 900px){
     .hideOnMobile{
         display: none;
     }
