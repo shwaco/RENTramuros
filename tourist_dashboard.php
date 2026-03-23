@@ -2,34 +2,40 @@
 
 session_start();
 if(!isset($_SESSION['email'])) {
-    // User is not logged in or doesn't have the Admin role, redirect to login page
-    header("location: login_admin.php");
+    // User is not logged in or doesn't have the Tourist role, redirect to login page
+    header("location: login_tourist.php");
     exit();
 }
+
 ?>
+
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Dashboard</title>
+    <title>Tourist Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   </head>
   <body>
-    <h1 class="text-center text-warning mt-5">Admin Dashboard
+    <h1 class="text-center text-warning mt-5">Tourist Dashboard
     <?php
-    echo $_SESSION['email']; // Display the logged-in admin's email
+    echo $_SESSION['email']; // Display the logged-in tourist's email
     ?>
     </h1>
-        <div class="row">
+
+    <div class="container mt-5">
+       <a href="logout_tourist.php" class="btn btn-primary mt-5">Logout</a>
+    </div>
+        <!-- <div class="row">
             <div class="col-md-4">
                 <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
                     <div class="card-header">Manage System Users</div>
                     <div class="card-body">
                         <h5 class="card-title">Add, edit, or remove system users</h5>
                         <p class="card-text">Admins can manage all system users, including other admins, tour guides, and employees.</p>
-                        <a href="manage_tour_guide.php" class="btn btn-light">Go to User Management</a>
+                        <a href="signup_system_user.php" class="btn btn-light">Go to User Management</a>
                     </div>
                 </div>
             </div>
@@ -53,9 +59,6 @@ if(!isset($_SESSION['email'])) {
                     </div>
                 </div>
             </div>
-        </div> 
-        <div class="container mt-5">
-       <a href="logout_tour_guide.php" class="btn btn-primary mt-5">Logout</a>
-    </div> 
+        </div> -->
   </body>
 </html>

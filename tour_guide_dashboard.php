@@ -1,9 +1,9 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['email']) || !isset($_SESSION['role']) || $_SESSION['role']!="Admin") {
-    // User is not logged in or doesn't have the Admin role, redirect to login page
-    header("location: login_system_user.php");
+if(!isset($_SESSION['email'])) {
+    // User is not logged in or doesn't have the Tour Guide role, redirect to login page
+    header("location: login_tour_guide.php");
     exit();
 }
 
@@ -15,18 +15,18 @@ if(!isset($_SESSION['email']) || !isset($_SESSION['role']) || $_SESSION['role']!
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Dashboard</title>
+    <title>Tour Guide Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   </head>
   <body>
     <h1 class="text-center text-warning mt-5">Tour Guide Dashboard
     <?php
-    echo $_SESSION['email']; // Display the logged-in admin's email
+    echo $_SESSION['email']; // Display the logged-in tour guide's email
     ?>
     </h1>
 
     <div class="container mt-5">
-       <a href="logout_system_user.php" class="btn btn-primary mt-5">Logout</a>
+       <a href="logout_tour_guide.php" class="btn btn-primary mt-5">Logout</a>
     </div>
         <!-- <div class="row">
             <div class="col-md-4">
