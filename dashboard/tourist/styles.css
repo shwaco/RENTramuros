@@ -262,6 +262,23 @@ img {
 
 }
 
+.pop-container .slide-btn.two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 50;
+    top: 50%;
+    right: 0;
+    translate: 0 -50%;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 0.2rem;
+
+}
+
+
 .pop-container .slide-btn.one img {
     display: flex;
 }
