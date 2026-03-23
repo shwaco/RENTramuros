@@ -11,10 +11,9 @@
 
 body {
     background-color: white;
-    height: 100vh;
+    height: 100%;
     width: 100%;
-    min-width: auto;
-}
+    }
 
 
 /* Navigation bar */
@@ -70,14 +69,17 @@ nav button {
     padding: 0.75rem ;
     border-radius: 30px;
     cursor: pointer;
-    border: none;
-    background-color: #972914;
+    background-color: #8D230F;
     font-weight: 500;
+    border: none;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    
 }
 
 nav button:hover {
-    background-color: #C99E10;
+    background-color: #FFCC00;
     color: black;
+
 }
 
 /* Sidebar */
@@ -222,17 +224,59 @@ img {
 }
 
 /* Popular destinations */
-.popular {
-    padding: 10px;
-    margin-bottom: 50px;
+.pop-container {
+    padding: 1rem;
+    margin-bottom: 100px;
 }
 
-.popular h2 {
+.pop-container .pop {
     font-family: "Playfair Display", serif;
     color: black;
-    margin-left: 20px;
+    padding: 1rem;
 
 }
+
+.pop-container .slider1 ul {
+    display: flex;
+    justify-content: space-evenly;
+    text-decoration: none;
+    list-style: none;
+    padding: 1rem;
+    position: relative;
+    
+}
+
+.pop-container .slide-btn.one {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 50;
+    top: 50%;
+    left: 0;
+    translate: 0 -50%;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 0.2rem;
+
+}
+
+.pop-container .slide-btn.one img {
+    display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media(max-width: 900px){
     .hideOnMobile{
