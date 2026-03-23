@@ -242,10 +242,8 @@ img {
     align-items: center;
     text-decoration: none;
     list-style: none;
-    padding: 1rem 0;
     width: 100%;
     position: relative;
-    overflow: hidden;
     
 }
 
@@ -254,13 +252,20 @@ img {
     justify-content: flex-start;
     align-items: center;
     list-style: none;
-    gap: 0.2rem;
+    gap: 1rem;
     overflow-x: hidden;
-    width: 100%;
 }
 
 .pop-container .slider1 ul li {
     flex-shrink: 0;
+    width: calc((100% - 3rem) / 4);
+
+}
+
+.pop-container .slider1 ul img {
+    border-radius: 20px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .pop-container .slide-btn.one {
@@ -286,8 +291,13 @@ img {
     border-radius: 50%;
     padding: 0.2rem;
     box-shadow: 0 0 0.5px rgba(0, 0, 0, 0.5);
-    margin: 0.12rem;
+    margin: 0.2rem;
 }
+
+
+
+
+
 
 
 
