@@ -29,12 +29,12 @@ prevBtn.addEventListener('click', () => {
 })
 
 function updateButtonVisibility () {
-    if (track.scrollLeft <= 0) {
+    if (track.scrollLeft <= 5) {
         prevBtn.style.display = 'none';
     } else {
         prevBtn.style.display = 'flex';
     }
-    if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 1) {
+    if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 5) {
         nextBtn.style.display = 'none';
     } else {
         nextBtn.style.display = 'flex';
