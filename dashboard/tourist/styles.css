@@ -275,7 +275,9 @@ img {
     flex-shrink: 0;
     width: calc((100% - 4rem) / 5);
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 10px;
+    position: relative;
+
 }
 
 .pop-container .slider1 ul img {
@@ -290,6 +292,14 @@ img {
 
 }
 
+.pop-container .slider1 ul h1 {
+    position: absolute;
+    z-index: 10;
+    color: white;
+    top: 70%;
+    left: 2%
+
+}
 
 .pop-container .slide-btn.one {
     left: 0;
@@ -313,7 +323,7 @@ img {
     border: none;
     border-radius: 50%;
     padding: 0.2rem;
-    box-shadow: 0 0 0.5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
     margin: 0.2rem;
 }
 
