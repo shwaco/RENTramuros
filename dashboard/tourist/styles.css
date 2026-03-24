@@ -239,7 +239,7 @@ img {
 
 /* Popular destinations */
 .pop-container {
-    padding: 1rem;
+    padding: 1rem 3rem ;
     margin-bottom: 100px;
 }
 
@@ -316,15 +316,15 @@ img {
     align-items: center;
     position: absolute;
     z-index: 50;
-    top: 50%;
+    top: 65%;
     translate: 0 -50%;
     cursor: pointer;
     background-color: white;
     border: none;
     border-radius: 50%;
     padding: 0.2rem;
-    box-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.5);
-    margin: 0.2rem;
+    box-shadow: 0 1px 2px 0.2px rgba(0, 0, 0, 0.5);
+    margin: -1.5rem;
 }
 
 
