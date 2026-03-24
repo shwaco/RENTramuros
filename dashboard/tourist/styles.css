@@ -259,7 +259,6 @@ img {
 .pop-container .slider1 ul li {
     flex-shrink: 0;
     width: calc((100% - 3rem) / 4);
-
 }
 
 .pop-container .slider1 ul img {
