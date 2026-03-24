@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-    outline: 1px solid red !important;
+    /* outline: 1px solid red !important; */
 }
 
 
@@ -274,13 +274,22 @@ img {
 .pop-container .slider1 ul li {
     flex-shrink: 0;
     width: calc((100% - 4rem) / 5);
+    overflow: hidden;
+    border-radius: 20px;
 }
 
 .pop-container .slider1 ul img {
-    border-radius: 20px;
+
     width: 100%;
     object-fit: cover;
 }
+
+.pop-container .slider1 ul img:hover {
+    transition: 0.8s ease-in-out;
+    transform: scale(1.2);
+
+}
+
 
 .pop-container .slide-btn.one {
     left: 0;
