@@ -264,11 +264,13 @@ img {
 .pop-container .slider1 ul {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
     list-style: none;
     gap: 1rem;
     overflow-x: hidden;
     scroll-snap-type: x mandatory;
+    padding: 0;
+    margin: 0;
+    height: auto;
 }
 
 .pop-container .slider1 ul li {
@@ -277,6 +279,7 @@ img {
     overflow: hidden;
     border-radius: 10px;
     position: relative;
+    scroll-snap-align: start;
 
 }
 
@@ -284,6 +287,7 @@ img {
     transition: ease-in-out 0.4s;
     width: 100%;
     object-fit: cover;
+    aspect-ratio: 16 / 9;
 
 }
 

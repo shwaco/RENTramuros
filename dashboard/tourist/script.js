@@ -29,7 +29,7 @@ prevBtn.addEventListener('click', () => {
 })
 
 function updateButtonVisibility () {
-    if (track.scrollLeft <= 5) {
+    if (track.scrollLeft <= 10) {
         prevBtn.style.display = 'none';
     } else {
         prevBtn.style.display = 'flex';
