@@ -193,14 +193,13 @@ nav .sidebar .hideOnMobile.last{
 
 
 
-
 /* Popular destinations */
-.pop-container {
+.slider-container {
     padding: 1rem 3rem ;
     margin-bottom: 100px;
 }
 
-.pop-container .slider1  {
+.slider-container .slider  {
     display: flex;
     text-decoration: none;
     list-style: none;
@@ -209,7 +208,7 @@ nav .sidebar .hideOnMobile.last{
     
 }   
 
-.pop-container .pop {
+.slider-container .heading1 {
     font-family: "Playfair Display", serif;
     color: black;
     padding: 1rem 0;
@@ -217,7 +216,7 @@ nav .sidebar .hideOnMobile.last{
 }
 
 
-.pop-container .slider1 ul {
+.slider-container .slider ul {
     display: flex;
     justify-content: flex-start;
     list-style: none;
@@ -229,7 +228,7 @@ nav .sidebar .hideOnMobile.last{
     height: auto;
 }
 
-.pop-container .slider1 ul li {
+.slider-container .slider ul li {
     flex-shrink: 0;
     width: calc((100% - 4rem) / 5);
     overflow: hidden;
@@ -240,7 +239,7 @@ nav .sidebar .hideOnMobile.last{
 }
 
 
-.pop-container .slider1 ul li img {
+.slider-container .slider ul li img {
     transition: ease-in-out 0.4s;
     width: 100%;
     object-fit: cover;
@@ -249,11 +248,11 @@ nav .sidebar .hideOnMobile.last{
 
 }
 
-.pop-container .slider1 ul li:hover img {
+.slider-container .slider ul li:hover img {
     transform: scale(1.1);
 }
 
-.pop-container .slider1 ul p {
+.slider-container .slider ul p {
     position: absolute;
     color: white;
     top: 70%;
@@ -268,16 +267,16 @@ nav .sidebar .hideOnMobile.last{
 
 
 
-.pop-container .slide-btn.one {
+.slider-container .slide-btn.one {
     left: 0;
 }
 
-.pop-container .slide-btn.two {
+.slider-container .slide-btn.two {
     right: 0;
 
 }
 
-.pop-container .slider1 .slide-btn {
+.slider-container .slider .slide-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -296,12 +295,119 @@ nav .sidebar .hideOnMobile.last{
 
 }
 
-.pop-container .slider1 .slide-btn img {
+.slider-container .slider .slide-btn img {
     height: 3em;
     width: 3em;
     border-radius: 50%;
 }
 
+/* Free destinations */
+/* .slider-container {
+    padding: 1rem 3rem ;
+    margin-bottom: 100px;
+}
+
+.slider-container .slider.two  {
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    width: 100%;
+    position: relative;
+    
+}   
+
+.slider-container .heading2 {
+    font-family: "Playfair Display", serif;
+    color: black;
+    padding: 1rem 0;
+
+}
+
+
+.slider-container .slider.two ul {
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
+    gap: 1rem;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    padding: 0;
+    margin: 0;
+    height: auto;
+}
+
+.slider-container .slider.two ul li {
+    flex-shrink: 0;
+    width: calc((100% - 4rem) / 5);
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+    scroll-snap-align: start;
+
+}
+
+
+.slider-container .slider.two ul li img {
+    transition: ease-in-out 0.4s;
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    position: relative;
+
+}
+
+.slider-container .slider.two ul li:hover img {
+    transform: scale(1.1);
+}
+
+.slider-container .slider.two ul p {
+    position: absolute;
+    color: white;
+    top: 70%;
+    left: 4%;
+    font-weight: 800;
+    font-size: 1.7em;
+    font-family: 'playfair display';
+    text-shadow: 3px 3px 0.5px rgba(0, 0, 0, 0.5);
+    z-index: 500;
+    text-decoration-thickness: 1px;
+}
+
+
+
+.slider-container .slide-btn.one {
+    left: 0;
+}
+
+.slider-container .slide-btn.two {
+    right: 0;
+
+}
+
+.slider-container .slider.two .slide-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 50;
+    top: 50%;
+    translate: 0 0;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px 0.2px rgba(0, 0, 0, 0.5);
+    margin: -1.25rem;
+    max-height: 4em;
+    max-width: 4em;
+
+}
+
+.slider-container .slider.two .slide-btn img {
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+} */
 
 
 
