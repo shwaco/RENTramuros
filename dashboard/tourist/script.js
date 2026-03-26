@@ -9,10 +9,16 @@ function hideSidebar() {
     sidebar.style.display = 'none'
 }
 
-// Image slider 1
-const track =  document.querySelector('.slider1 ul');
-const prevBtn = document.getElementById('prev-btn1');
-const nextBtn = document.getElementById('next-btn1');
+// Image slider 
+const allSliders = document.querySelectorAll('.slider');
+
+
+allSliders.forEach(slider => {
+
+const track =  slider.querySelector('ul');
+const prevBtn = slider.querySelector('.slide-btn.one');
+const nextBtn = slider.querySelector('.slide-btn.two');
+
 
 function getScrollAmount() {
     const itemWidth = track.querySelector('li').clientWidth;
@@ -44,3 +50,5 @@ function updateButtonVisibility () {
 track.addEventListener('scroll', updateButtonVisibility);
 
 updateButtonVisibility();
+
+});
