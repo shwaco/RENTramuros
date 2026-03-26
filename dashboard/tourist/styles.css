@@ -209,33 +209,6 @@ img {
 
 }
 
-/* About intramuros */
-.intratext {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 20px;
-
-}
-
-.intratext div {
-    display: flex;
-    justify-content: center;
-
-}
-
-
-.intratext span {
-    font-family: "Playfair Display", serif;
-    color: black;
-    display: flex;
-    align-content: center;
-    width: 80%;
-    font-size: large;
-    text-align: center;
-    padding: 7px;
-}
 
 /* Popular destinations */
 .pop-container {
