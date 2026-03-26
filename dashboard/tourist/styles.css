@@ -244,8 +244,7 @@ img {
 }
 
 .pop-container .slider1  {
-    /* display: flex; */
-    /* align-items: center; */
+    display: flex;
     text-decoration: none;
     list-style: none;
     width: 100%;
@@ -289,7 +288,7 @@ img {
     width: 100%;
     object-fit: cover;
     aspect-ratio: 16 / 9;
-    z-index: 100;
+    position: relative;
 
 }
 
@@ -305,9 +304,9 @@ img {
     font-weight: 800;
     font-size: 1.7em;
     font-family: 'playfair display';
-    text-shadow: 3px 3px 1px rgba(0, 0, 0, 0.5);
-    text
+    text-shadow: 3px 3px 0.5px rgba(0, 0, 0, 0.5);
     z-index: 500;
+    text-decoration-thickness: 1px;
 }
 
 
@@ -327,16 +326,28 @@ img {
     align-items: center;
     position: absolute;
     z-index: 50;
-    top: 65%;
-    translate: 0 -50%;
+    top: 50%;
+    translate: 0 0;
     cursor: pointer;
     background-color: white;
     border: none;
     border-radius: 50%;
-    padding: 0.2rem;
     box-shadow: 0 1px 2px 0.2px rgba(0, 0, 0, 0.5);
-    margin: -1.5rem;
+    margin: -1.25rem;
+    max-height: 4em;
+    max-width: 4em;
+
 }
+
+.pop-container .slider1 .slide-btn img {
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+}
+
+
+
+
 
 
 
