@@ -191,23 +191,7 @@ nav .sidebar .hideOnMobile.last{
 
 }
 
-/* Picture */
 
-.cover {
-    display: flex;
-    justify-content: center;
-}
-
-img {
-    display: block;
-    max-inline-size: 100%;
-}
-
-#cphoto {
-    display: block;
-    justify-content: center;
-
-}
 
 
 /* Popular destinations */
