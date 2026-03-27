@@ -52,7 +52,7 @@ nav li a:hover {
 }
 
 #logo {
-    padding: 0.5rem 1rem;
+    /* padding: 0 1rem; */
 }
 
 nav li:first-child {
@@ -201,19 +201,13 @@ nav .sidebar .hideOnMobile.last{
     padding: 0 3rem ;
 }
 
-.main-slider-container .slider-container.one {
+.main-slider-container .slider-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 
 }
 
-.main-slider-container .slider-container.two {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
-}
 
 .slider-container .slider  {
     display: flex;
@@ -241,8 +235,6 @@ nav .sidebar .hideOnMobile.last{
     gap: 1rem;
     overflow-x: hidden;
     scroll-snap-type: x mandatory;
-    padding: 0;
-    margin: 0;
     height: auto;
 }
 
