@@ -351,8 +351,14 @@ var marker10 = L.marker([14.587148079969733, 120.97520281004242], { icon: custom
         document.getElementById('panel-btn').href = "#";
         
         document.getElementById('panel-operating-hours-details').innerHTML = `
-            Di ko makita operating hours T_T
-             `;
+            Monday: CLOSED <br>
+            Tuesday: 10:00AM - 6:00PM <br>
+            Wednesday: 10:00AM - 6:00PM <br>
+            Thursday: 10:00AM - 6:00PM <br>
+            Friday: 10:00AM - 6:00PM <br>
+            Saturday: 10:00AM - 6:00PM <br>
+            Sunday: 10:00AM - 6:00PM
+        `;
         document.getElementById('side-panel').classList.add('open');
     });
 var marker11 = L.marker([14.589662875177895, 120.97510720819086], { icon: customIcon }).addTo(map)
