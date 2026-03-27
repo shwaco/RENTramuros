@@ -52,8 +52,9 @@ nav li a:hover {
 }
 
 #logo {
-    /* padding: 0 1rem; */
+    display: block;
 }
+
 
 nav li:first-child {
     margin-right: auto;
@@ -198,14 +199,13 @@ nav .sidebar .hideOnMobile.last{
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    padding: 0 3rem ;
+    padding: 1rem 3rem ;
 }
 
 .main-slider-container .slider-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-
 }
 
 
@@ -235,7 +235,6 @@ nav .sidebar .hideOnMobile.last{
     gap: 1rem;
     overflow-x: hidden;
     scroll-snap-type: x mandatory;
-    height: auto;
 }
 
 .slider-container .slider ul li {
@@ -255,6 +254,7 @@ nav .sidebar .hideOnMobile.last{
     object-fit: cover;
     aspect-ratio: 16 / 9;
     position: relative;
+    display: block;
 
 }
 
