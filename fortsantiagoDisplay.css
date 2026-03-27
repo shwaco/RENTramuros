@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid green;
+}
+
+body{
+    min-height: 100vh;
+    padding: 2%;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 1. UPDATE THE MAIN CONTAINER */
+.fort-santiago-container {
+    width: 100%;
+    max-width: 848px; /* This is the exact pixel width of 4 columns + 3 gaps. Using pixels stops font-size math bugs! */
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Forces all text to snap to the left edge of the grid */
+}
+
+.fort-santiago-headlabel {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.box{
+    overflow: hidden;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+/* Modal Background */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    
+    /* Animation and Visibility */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Image */
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #bbb;
+}
+
+.grid-container {
+    display: grid;
+    /* THIS IS THE FIX: Fractions force the grid to touch the edges of the container */
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: 150px 150px;
+    gap: 16px; /* Use pixels here so the math matches your 848px max-width perfectly */
+    width: 100%; /* Forces the grid to stretch left-to-right */
+    
+    /* REMOVED justify-content: center; */
+    
+    grid-template-areas:
+        "box-1 box-1 box-2 box-2"
+        "box-1 box-1 box-3 box-4";
+}
+
+.fort-santiago-address {
+    width: 100%;
+    /* DELETE max-width from here */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    color: #444;
+    font-size: 1rem;
+    
+}
+
+.location-icon {
+    width: 18px;                 /* Sets the width of the icon */
+    height: 18px;                /* Sets the height of the icon */
+    object-fit: contain;         /* Ensures the icon maintains proportions */
+}
+
+.fort-santiago-overview-label {
+    width: 100%;                
+    /* DELETE max-width from here */
+    display: flex;              
+    justify-content: flex-start; 
+    align-items: center;
+    margin-top: 20px;           
+    font-size: 1.2rem;          
+    font-weight: 600;           
+    color: #333;                
+}
+.overview-container {
+    width: 100%; 
+    /* DELETE max-width from here */
+    margin-top: 10px;
+    display: flex; 
+    gap: 2em; 
+    align-items: flex-start;
+}
+
+.overview-text {
+    flex: 7; /* Takes up roughly 70% of the container */
+}
+
+.fort-santiago-overview {
+    display: block; /* CRITICAL: Forces the inline span to act like a paragraph box */
+    text-align: justify;;
+    color: #333; /* Pure black #000 can be a bit harsh; #333 is easier on eyes */
+    line-height: 1.6;
+    margin: 0; 
+    width: 100%;
+}
+
+.sticky-sidebar {
+    flex: 3; 
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    position: sticky;
+    top: 20px;
+    
+    /* ADDED THIS: Stacks everything neatly inside the sidebar */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Controls the space between the title, spans, and button */
+}
+
+/* ADDED THIS: Styles your new custom label */
+.sticky-sidebar-label {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px; /* Adds a tiny bit of extra breathing room below the title */
+    border-bottom: 2px solid #ddd; /* Optional: adds a nice dividing line */
+    padding-bottom: 8px;
+}
+
+/* Optional: Make your custom spans look consistent */
+.sticky-sidebar span {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Optional styling for the button inside the sticky window
+.book-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.book-btn:hover {
+    background-color: #555;
+}*/
+
+.book-btn{
+    margin-top: 10px;
+    background-color: #C99E10;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.book-btn:hover {
+    background-color: #8D230F;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+@media (max-width: 56em){
+    .grid-container {
+        grid-template-columns: 200px 200px 200px;
+        grid-template-rows: 150px 150px 150px;
+        grid-template-areas:
+            "box-1 box-1 box-2"
+            "box-1 box-1 box-2"
+            "box-3 box-4 box-4";
+    }
+    
+    /* ADD .fort-container here */
+    .fort-santiago-container,
+    .fort-santiago-headlabel, 
+    .fort-santiago-address,
+    .fort-santiago-overview-label, 
+    .overview-container {
+        max-width: calc(600px + 2em); 
+    }
+}
+
+@media (max-width: 42em){
+    .grid-container {
+        grid-template-columns: 200px 200px;
+        grid-template-rows: 150px 150px 150px 150px ;
+        grid-template-areas:
+            "box-1 box-1"
+            "box-1 box-1"
+            "box-2 box-2"
+            "box-3 box-4";
+    }
+
+    /* ADD .fort-container here */
+    .fort-santiago-container,
+    .fort-santiago-headlabel, 
+    .fort-santiago-address, 
+    .fort-santiago-overview-label, 
+    .overview-container {
+        max-width: calc(400px + 1em); 
+    }
+}
+
