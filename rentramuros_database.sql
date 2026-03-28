@@ -1,144 +1,456 @@
--- 1. Ensure we are targeting the exact database name from your screenshot
-USE rentramuros_database;
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 28, 2026 at 12:33 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
--- 2. Temporarily turn off relationship rules so we can safely delete old tables
-SET FOREIGN_KEY_CHECKS = 0;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
--- 3. Wipe the slate clean of any half-finished tables from previous attempts
-DROP TABLE IF EXISTS Payments, Invoices, Package_Bookings, Attraction_Bookings, Reservations, Package_Itinerary, Packages, Vehicles, Attractions, Customers, Admins, Tour_Guides;
 
--- 4. Turn the safety rules back on
-SET FOREIGN_KEY_CHECKS = 1;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
--- =========================================================================
--- LEVEL 1: Independent Tables (No Foreign Keys)
--- =========================================================================
+--
+-- Database: `rentramuros_database`
+--
 
-CREATE TABLE Admins (
-    admin_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL
-);
+-- --------------------------------------------------------
 
-CREATE TABLE Tour_Guides (
-    guide_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    languages_spoken VARCHAR(100)
-);
+--
+-- Table structure for table `admins`
+--
 
-CREATE TABLE Customers (
-    customer_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(20)
-);
+CREATE TABLE `admins` (
+  `admin_id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `otp` int(50) NOT NULL,
+  `is_verified` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE Attractions (
-    attraction_id INT AUTO_INCREMENT PRIMARY KEY,
-    attraction_name VARCHAR(100) NOT NULL,
-    entrance_fee DECIMAL(10,2) NOT NULL,
-    operating_hours VARCHAR(100)
-);
+--
+-- Dumping data for table `admins`
+--
 
-CREATE TABLE Vehicles (
-    vehicle_id INT AUTO_INCREMENT PRIMARY KEY,
-    vehicle_type VARCHAR(50) NOT NULL, 
-    passenger_capacity INT NOT NULL
-);
+INSERT INTO `admins` (`admin_id`, `first_name`, `last_name`, `email`, `password_hash`, `otp`, `is_verified`) VALUES
+(3, 'Lence', 'Jalimao', 'lencejeri95@gmail.com', '$2y$10$GufPJjz96hkvpiHs7V7A0.QqpKfd.QnGHAZVXngNdbmU/r4PsbVx2', 0, 1);
 
-CREATE TABLE Packages (
-    package_id INT AUTO_INCREMENT PRIMARY KEY,
-    package_name VARCHAR(150) NOT NULL,
-    description VARCHAR(255),
-    price_per_person DECIMAL(10,2) NOT NULL
-);
+-- --------------------------------------------------------
 
--- =========================================================================
--- LEVEL 2: Intermediate Tables
--- =========================================================================
+--
+-- Table structure for table `attractions`
+--
 
-CREATE TABLE Package_Itinerary (
-    package_itinerary_id INT AUTO_INCREMENT PRIMARY KEY,
-    package_id INT,
-    attraction_id INT,
-    visit_order INT NOT NULL,
-    FOREIGN KEY (package_id) REFERENCES Packages(package_id),
-    FOREIGN KEY (attraction_id) REFERENCES Attractions(attraction_id)
-);
+CREATE TABLE `attractions` (
+  `attraction_id` int(11) NOT NULL,
+  `attraction_name` varchar(100) NOT NULL,
+  `entrance_fee` decimal(10,2) NOT NULL,
+  `operating_hours` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE Reservations (
-    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT,
-    booking_date DATETIME NOT NULL,
-    status VARCHAR(50) NOT NULL, 
-    booking_type VARCHAR(50) NOT NULL, 
-    created_by_admin_id INT NULL, 
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
-    FOREIGN KEY (created_by_admin_id) REFERENCES Admins(admin_id)
-);
+-- --------------------------------------------------------
 
--- =========================================================================
--- LEVEL 3: Bookings and Invoices
--- =========================================================================
+--
+-- Table structure for table `attraction_bookings`
+--
 
-CREATE TABLE Attraction_Bookings (
-    attraction_booking_id INT AUTO_INCREMENT PRIMARY KEY,
-    reservation_id INT,
-    attraction_id INT,
-    visit_date DATE NOT NULL,
-    ticket_quantity INT NOT NULL,
-    FOREIGN KEY (reservation_id) REFERENCES Reservations(reservation_id),
-    FOREIGN KEY (attraction_id) REFERENCES Attractions(attraction_id)
-);
+CREATE TABLE `attraction_bookings` (
+  `attraction_booking_id` int(11) NOT NULL,
+  `reservation_id` int(11) DEFAULT NULL,
+  `attraction_id` int(11) DEFAULT NULL,
+  `visit_date` date NOT NULL,
+  `ticket_quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE Package_Bookings (
-    package_booking_id INT AUTO_INCREMENT PRIMARY KEY,
-    reservation_id INT,
-    package_id INT,
-    vehicle_id INT,
-    guide_id INT NULL, 
-    tour_date DATE NOT NULL,
-    passenger_count INT NOT NULL,
-    FOREIGN KEY (reservation_id) REFERENCES Reservations(reservation_id),
-    FOREIGN KEY (package_id) REFERENCES Packages(package_id),
-    FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id),
-    FOREIGN KEY (guide_id) REFERENCES Tour_Guides(guide_id)
-);
+-- --------------------------------------------------------
 
-CREATE TABLE Invoices (
-    invoice_id INT AUTO_INCREMENT PRIMARY KEY,
-    reservation_id INT,
-    total_amount DECIMAL(10,2) NOT NULL,
-    status VARCHAR(50) NOT NULL,
-    FOREIGN KEY (reservation_id) REFERENCES Reservations(reservation_id)
-);
+--
+-- Table structure for table `invoices`
+--
 
--- =========================================================================
--- LEVEL 4: Payments (With 2-Step Fix)
--- =========================================================================
+CREATE TABLE `invoices` (
+  `invoice_id` int(11) NOT NULL,
+  `reservation_id` int(11) DEFAULT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Step 1: Create the table without the self-referencing refund link
-CREATE TABLE Payments (
-    payment_id INT AUTO_INCREMENT PRIMARY KEY,
-    invoice_id INT,
-    customer_id INT,
-    transaction_type VARCHAR(50) NOT NULL, 
-    amount DECIMAL(10,2) NOT NULL,
-    linked_payment_id INT NULL, 
-    processed_by_admin_id INT NULL, 
-    timestamp DATETIME NOT NULL,
-    FOREIGN KEY (invoice_id) REFERENCES Invoices(invoice_id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
-    FOREIGN KEY (processed_by_admin_id) REFERENCES Admins(admin_id)
-);
+-- --------------------------------------------------------
 
--- Step 2: Add the self-referencing link for refunds
-ALTER TABLE Payments
-ADD FOREIGN KEY (linked_payment_id) REFERENCES Payments(payment_id);
+--
+-- Table structure for table `packages`
+--
+
+CREATE TABLE `packages` (
+  `package_id` int(11) NOT NULL,
+  `package_name` varchar(150) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `price_per_person` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `package_bookings`
+--
+
+CREATE TABLE `package_bookings` (
+  `package_booking_id` int(11) NOT NULL,
+  `reservation_id` int(11) DEFAULT NULL,
+  `package_id` int(11) DEFAULT NULL,
+  `vehicle_id` int(11) DEFAULT NULL,
+  `guide_id` int(11) DEFAULT NULL,
+  `tour_date` date NOT NULL,
+  `passenger_count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `package_itinerary`
+--
+
+CREATE TABLE `package_itinerary` (
+  `package_itinerary_id` int(11) NOT NULL,
+  `package_id` int(11) DEFAULT NULL,
+  `attraction_id` int(11) DEFAULT NULL,
+  `visit_order` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `payment_id` int(11) NOT NULL,
+  `invoice_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `transaction_type` varchar(50) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `linked_payment_id` int(11) DEFAULT NULL,
+  `processed_by_admin_id` int(11) DEFAULT NULL,
+  `timestamp` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservations`
+--
+
+CREATE TABLE `reservations` (
+  `reservation_id` int(11) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `booking_date` datetime NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `booking_type` varchar(50) NOT NULL,
+  `created_by_admin_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tourists`
+--
+
+CREATE TABLE `tourists` (
+  `customer_id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `phone_number` varchar(20) DEFAULT NULL,
+  `otp` int(50) NOT NULL,
+  `is_verified` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tour_guides`
+--
+
+CREATE TABLE `tour_guides` (
+  `guide_id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
+  `otp` int(50) NOT NULL,
+  `is_verified` tinyint(1) NOT NULL,
+  `current_status` varchar(20) DEFAULT 'Available',
+  `last_dispatch_time` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tour_guides`
+--
+
+INSERT INTO `tour_guides` (`guide_id`, `first_name`, `last_name`, `email`, `password_hash`, `otp`, `is_verified`, `current_status`, `last_dispatch_time`) VALUES
+(1, 'Lence', 'Jalimao', 'lencejeri95@gmail.com', '$2y$10$BdCVMAdNVDT3xWdxgm3u.utkSQAK9JCIaWLdSEmn95vDA1UFCq3Zq', 0, 1, 'Available', '2026-03-23 22:50:57'),
+(2, 'David Lloyd', 'Contreras', 'davidlloydcontreras@gmail.com', '$2y$10$Crc8OGKov5r37gRAkLQZtOu57utVBQUGUFVv3Vy4OBCR.bAxiOFRa', 0, 1, 'Available', '2026-03-23 23:30:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vehicles`
+--
+
+CREATE TABLE `vehicles` (
+  `vehicle_id` int(11) NOT NULL,
+  `vehicle_type` varchar(50) NOT NULL,
+  `passenger_capacity` int(11) NOT NULL,
+  `current_status` varchar(20) DEFAULT 'Available',
+  `last_dispatch_time` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `vehicles`
+--
+
+INSERT INTO `vehicles` (`vehicle_id`, `vehicle_type`, `passenger_capacity`, `current_status`, `last_dispatch_time`) VALUES
+(1, 'E-Tricycle', 6, 'Available', '2026-03-24 02:11:17'),
+(2, 'E-Tricycle', 6, 'Available', '2026-03-24 02:11:24'),
+(3, 'E-Tricycle', 6, 'Available', '2026-03-24 02:11:30'),
+(4, 'Kalesa', 6, 'Available', '2026-03-24 02:11:36'),
+(5, 'Kalesa', 6, 'Available', '2026-03-24 02:11:42'),
+(6, 'Kalesa', 6, 'Available', '2026-03-24 02:11:47'),
+(7, 'Tranvia', 20, 'Available', '2026-03-24 02:11:53'),
+(8, 'Tranvia', 20, 'Available', '2026-03-24 02:11:58'),
+(9, 'Tranvia', 20, 'Available', '2026-03-24 02:12:03'),
+(10, 'Kalesa', 6, 'Available', '2026-03-24 13:38:55');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`admin_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `attractions`
+--
+ALTER TABLE `attractions`
+  ADD PRIMARY KEY (`attraction_id`);
+
+--
+-- Indexes for table `attraction_bookings`
+--
+ALTER TABLE `attraction_bookings`
+  ADD PRIMARY KEY (`attraction_booking_id`),
+  ADD KEY `reservation_id` (`reservation_id`),
+  ADD KEY `attraction_id` (`attraction_id`);
+
+--
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`invoice_id`),
+  ADD KEY `reservation_id` (`reservation_id`);
+
+--
+-- Indexes for table `packages`
+--
+ALTER TABLE `packages`
+  ADD PRIMARY KEY (`package_id`);
+
+--
+-- Indexes for table `package_bookings`
+--
+ALTER TABLE `package_bookings`
+  ADD PRIMARY KEY (`package_booking_id`),
+  ADD KEY `reservation_id` (`reservation_id`),
+  ADD KEY `package_id` (`package_id`),
+  ADD KEY `vehicle_id` (`vehicle_id`),
+  ADD KEY `guide_id` (`guide_id`);
+
+--
+-- Indexes for table `package_itinerary`
+--
+ALTER TABLE `package_itinerary`
+  ADD PRIMARY KEY (`package_itinerary_id`),
+  ADD KEY `package_id` (`package_id`),
+  ADD KEY `attraction_id` (`attraction_id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`payment_id`),
+  ADD KEY `invoice_id` (`invoice_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `processed_by_admin_id` (`processed_by_admin_id`),
+  ADD KEY `linked_payment_id` (`linked_payment_id`);
+
+--
+-- Indexes for table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD PRIMARY KEY (`reservation_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `created_by_admin_id` (`created_by_admin_id`);
+
+--
+-- Indexes for table `tourists`
+--
+ALTER TABLE `tourists`
+  ADD PRIMARY KEY (`customer_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `tour_guides`
+--
+ALTER TABLE `tour_guides`
+  ADD PRIMARY KEY (`guide_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  ADD PRIMARY KEY (`vehicle_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `attractions`
+--
+ALTER TABLE `attractions`
+  MODIFY `attraction_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `attraction_bookings`
+--
+ALTER TABLE `attraction_bookings`
+  MODIFY `attraction_booking_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `packages`
+--
+ALTER TABLE `packages`
+  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `package_bookings`
+--
+ALTER TABLE `package_bookings`
+  MODIFY `package_booking_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `package_itinerary`
+--
+ALTER TABLE `package_itinerary`
+  MODIFY `package_itinerary_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `reservations`
+--
+ALTER TABLE `reservations`
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tourists`
+--
+ALTER TABLE `tourists`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tour_guides`
+--
+ALTER TABLE `tour_guides`
+  MODIFY `guide_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `attraction_bookings`
+--
+ALTER TABLE `attraction_bookings`
+  ADD CONSTRAINT `attraction_bookings_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`reservation_id`),
+  ADD CONSTRAINT `attraction_bookings_ibfk_2` FOREIGN KEY (`attraction_id`) REFERENCES `attractions` (`attraction_id`);
+
+--
+-- Constraints for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD CONSTRAINT `invoices_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`reservation_id`);
+
+--
+-- Constraints for table `package_bookings`
+--
+ALTER TABLE `package_bookings`
+  ADD CONSTRAINT `package_bookings_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`reservation_id`),
+  ADD CONSTRAINT `package_bookings_ibfk_2` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`),
+  ADD CONSTRAINT `package_bookings_ibfk_3` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`vehicle_id`),
+  ADD CONSTRAINT `package_bookings_ibfk_4` FOREIGN KEY (`guide_id`) REFERENCES `tour_guides` (`guide_id`);
+
+--
+-- Constraints for table `package_itinerary`
+--
+ALTER TABLE `package_itinerary`
+  ADD CONSTRAINT `package_itinerary_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`),
+  ADD CONSTRAINT `package_itinerary_ibfk_2` FOREIGN KEY (`attraction_id`) REFERENCES `attractions` (`attraction_id`);
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`invoice_id`),
+  ADD CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `tourists` (`customer_id`),
+  ADD CONSTRAINT `payments_ibfk_3` FOREIGN KEY (`processed_by_admin_id`) REFERENCES `admins` (`admin_id`),
+  ADD CONSTRAINT `payments_ibfk_4` FOREIGN KEY (`linked_payment_id`) REFERENCES `payments` (`payment_id`);
+
+--
+-- Constraints for table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `tourists` (`customer_id`),
+  ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`created_by_admin_id`) REFERENCES `admins` (`admin_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
