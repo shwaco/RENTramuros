@@ -6,7 +6,7 @@
 }
 
 body {
-  background-image: url("https://scontent.fmnl10-1.fna.fbcdn.net/v/t1.15752-9/647410720_2106378730184599_7954810583327950435_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=9f807c&_nc_eui2=AeHu-xnAVTAxLmva21k0GsJTdz83mQ0q8SJ3PzeZDSrxIidgLL3qMtPCricYiR79IJBQdFsIZ7vKacm4FfGkH7jU&_nc_ohc=rFOpSg1VgeYQ7kNvwH3xFh4&_nc_oc=AdkJqAtNmlNHIGrgFcef57yMEDSRNsIMTAnfHW4EhLai9q6I9BoZ7mXDV9guFaWPgng&_nc_zt=23&_nc_ht=scontent.fmnl10-1.fna&_nc_ss=8&oh=03_Q7cD4wEOSa6H4T8KczzkAz6G0TRI87PVGFVRhQ3nIGCEPopE6w&oe=69DF27FB");
+  background-color: rgba(6, 6, 6, 0.5);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -27,7 +27,6 @@ body {
 }
 
 /* Style for the name input bar */
-
 
 .reservation-form {
   background-color: rgba(244, 241, 234, 0.5);
