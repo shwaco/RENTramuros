@@ -21,11 +21,18 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             if(password_verify($password, $row['password_hash'])) {
 
               if($row['is_verified']==1) {
+
+              if ($row['current_status'] === 'Offline') {
+                    $g_id = $row['guide_id'];
+                    $update_sql = "UPDATE `tour_guides` SET current_status = 'Available', became_available_at = NOW() WHERE guide_id = '$g_id'";
+                    mysqli_query($con, $update_sql);
+              }
                 
                 // Start the session since credentials are correct
                 session_start();
                 $_SESSION['email']=$email;
-                header("location: tour_guide_dashboard.php");
+                $_SESSION['guide_id']=$row['guide_id'];
+                header("location: queue-management-system/index.php");
                 exit(); // Stops script execution after redirect
 
             } else {
