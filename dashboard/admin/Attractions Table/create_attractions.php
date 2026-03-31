@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+include_once('../connect_phpmyadmin.php');
 
 if(isset($_POST['submit'])){
 

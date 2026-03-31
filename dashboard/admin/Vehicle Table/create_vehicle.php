@@ -1,6 +1,6 @@
-<!-- <?php
+<!-- <1?php
 // 1. Connect to your database
-include 'connect_phpmyadmin.php'; 
+include 'asset/connect_phpmyadmin.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@ include 'connect_phpmyadmin.php';
 
 <?php
 // 1. Connect to the database
-include 'connect_phpmyadmin.php';
+include 'asset/connect_phpmyadmin.php';
 
 $error_message = "";
 
@@ -69,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             if (mysqli_stmt_execute($stmt)) {
                 // Success! Send them back to the queue table
-                header("Location: manage_vehicle.php");
+                header("Location: dashboard/admin/Vehicle Table/manage_vehicle.php");
                 exit();
             } else {
                 $error_message = "Error adding vehicle: " . mysqli_error($con);
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <form action="create_vehicle.php" method="POST">
+                        <form action="dashboard/admin/Vehicle Table/create_vehicle.php" method="POST">
                             
                             <div class="mb-4">
                                 <label for="vehicle_type" class="form-label">Select Vehicle Type</label>
@@ -119,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             
                             <button type="submit" class="btn btn-primary w-100 mb-2">Add to Fleet Queue</button>
-                            <a href="manage_vehicles.php" class="btn btn-outline-secondary w-100">Cancel</a>
+                            <a href="dashboard/admin/Vehicle Table/manage_vehicle.php" class="btn btn-outline-secondary w-100">Cancel</a>
                             
                         </form>
                     </div>

@@ -3,7 +3,7 @@
 session_start();
 if(!isset($_SESSION['email'])) {
     // User is not logged in or doesn't have the Tour Guide role, redirect to login page
-    header("location: login_tour_guide.php");
+    header("location: auth/log in/login_tour_guide.php");
     exit();
 }
 
@@ -26,7 +26,7 @@ if(!isset($_SESSION['email'])) {
     </h1>
 
     <div class="container mt-5">
-       <a href="logout_tour_guide.php" class="btn btn-primary mt-5">Logout</a>
+       <a href="auth/log out/logout_tour_guide.php" class="btn btn-primary mt-5">Logout</a>
     </div>
         <!-- <div class="row">
             <div class="col-md-4">

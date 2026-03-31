@@ -1,5 +1,5 @@
 <?php
-include 'connect_phpmyadmin.php';
+include 'asset/connect_phpmyadmin.php';
 
 if (isset($_GET['deleteid'])) {
     $id = $_GET['deleteid'];
@@ -12,7 +12,7 @@ if (isset($_GET['deleteid'])) {
     try {
         if (mysqli_stmt_execute($stmt)) {
             // Success! Send them straight back to the table
-            header("Location: manage_vehicle.php");
+            header("Location: dashboard/admin/Vehicle Table/manage_vehicle.php");
             exit();
         }
     } catch (mysqli_sql_exception $e) {
@@ -20,7 +20,7 @@ if (isset($_GET['deleteid'])) {
         // MySQL will block the deletion to protect your financial records.
         echo "<script>
                 alert('Cannot delete this vehicle because it is tied to an existing customer booking. Change its status to \"Under Maintenance\" instead.');
-                window.location.href = 'manage_vehicle.php';
+                window.location.href = 'dashboard/admin/Vehicle Table/manage_vehicle.php';
               </script>";
     }
 }

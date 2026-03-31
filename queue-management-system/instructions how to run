@@ -1,0 +1,34 @@
+Before doing this, make sure to run the queuing_system.sql after ma import yung rentramuros_database.sql sa files ni bou
+oh and running na yung XAMPP naka on na dapat yung msql and apache
+LINKS: 
+Sign up first: http://localhost/RENTRAMUROS/signup_tour_guide.php
+then log in: http://localhost/RENTramuros/login_tour_guide.php
+
+testing:
+try creating 2 accounts first para sa tour guides then magrereflect na yun sa table ng tour_guides
+and then i log in pareho sa magkaibang window or pwede namang naka incognito lang yung isa
+kung mapapansin niyo #3 and #4 yung accounts na nilog in niyosiya sa queue 
+(#3 and #4 siya kasi may dalawang nauna nang nagawang account si bou)
+so ang gawin niyo iedit niyo na lang yung dalawang naunang table sa db ng tour_guides tas baguhin niyo yung current_status to "offline"
+tas magiging #1 na yung unang account na nalog in niyo at #2 naman yung isa kasi pangalawa siya sa nalog in
+naka base sa timestamps yung queueing system like dun sa table ng tour_guides na "became_available_at"
+
+ngayong naka setup na pareho yung dalawang tour guides, mag add naman tayo ng tourists sa queue
+
+punta kayong tourists under rentramuros_database
+click insert 
+tapos imodify niyo yung 
+- first_name
+- last_name
+- email
+- phone number
+- queue number (pag naglagay kayo ng queue number ganto dapat format K-### for example K-001 if first tourist) (manual pa siya kasi wala pa yung tourist side)
+K - Kalesa    E - E-tricycle    T - Tranvias
+- service type
+tas click Go ignore niyo lang yung warning afterwards
+
+then balik kayo tour_guide (again manual pa siyang ineedit sa db kasi wala pa yung functions ng tourists) 
+edit niyo yung nauna sa queue 
+palitan niyo yung current_status ng "busy"
+then iassign niyo siya sa available na tourist sa "current_tourist_id"
+then refresh or reload niyo lang yung page nung dashboard magrereflect na yun

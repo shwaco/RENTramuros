@@ -5,7 +5,7 @@ $invalid=0;
 $unverified=0;
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-    include 'connect_phpmyadmin.php'; // Make sure this file has no echo statements!
+    include_once('asset/connect_phpmyadmin.php'); // Make sure this file has no echo statements!
     $email=$_POST['email'];
     $password=$_POST['password'];
 
@@ -21,11 +21,18 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             if(password_verify($password, $row['password_hash'])) {
 
               if($row['is_verified']==1) {
+
+              if ($row['current_status'] === 'Offline') {
+                    $g_id = $row['guide_id'];
+                    $update_sql = "UPDATE `tour_guides` SET current_status = 'Available', became_available_at = NOW() WHERE guide_id = '$g_id'";
+                    mysqli_query($con, $update_sql);
+              }
                 
                 // Start the session since credentials are correct
                 session_start();
                 $_SESSION['email']=$email;
-                header("location: tour_guide_dashboard.php");
+                $_SESSION['guide_id']=$row['guide_id'];
+                header("location: queue-management-system/index.php");
                 exit(); // Stops script execution after redirect
 
             } else {
@@ -58,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 if($unverified) {
     echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>Hold on!</strong> You need to verify your email address before logging in. 
-    <a href="resend_otp.php" class="alert-link">Click here to request a new code.</a>
+    <a href="auth/resend otp/resend_otp.php" class="alert-link">Click here to request a new code.</a>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>';
 }
@@ -77,7 +84,7 @@ if($invalid) {
 ?>
     <h1 class="text-center">Login to our website</h1>
     <div class="container mt-5">
-        <form action="login_tour_guide.php" method="POST">
+        <form action="auth/log in/login_tour_guide.php" method="POST">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input type="email" class="form-control" placeholder="Enter your email" name = "email">
@@ -88,7 +95,7 @@ if($invalid) {
   </div>
  
   <button type="submit" class="btn btn-primary w-100">Login</button>
-  <button type="button" class="btn btn-link w-100" onclick="window.location.href='signup_tour_guide.php'">Don't have an account? Sign up here.</button>
+  <button type="button" class="btn btn-link w-100" onclick="window.location.href='auth/sign up/signup_tour_guide.php'">Don't have an account? Sign up here.</button>
 </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

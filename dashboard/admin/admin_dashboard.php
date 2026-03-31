@@ -3,7 +3,7 @@
 session_start();
 if(!isset($_SESSION['email'])) {
     // User is not logged in or doesn't have the Admin role, redirect to login page
-    header("location: login_admin.php");
+    header("location: auth/log in/login_admin.php");
     exit();
 }
 ?>
@@ -68,6 +68,6 @@ if(!isset($_SESSION['email'])) {
         </div> 
 
         <div class="container mt-5">
-       <a href="logout_tour_guide.php" class="btn btn-primary mt-5">Logout</a></div> 
+       <a href="auth/log out/logout_admin.php" class="btn btn-primary mt-5">Logout</a></div> 
   </body>
 </html>

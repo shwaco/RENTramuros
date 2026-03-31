@@ -13,7 +13,7 @@ $error_msg = "";
 $success_msg = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    include 'connect_phpmyadmin.php';
+    include 'asset/connect_phpmyadmin.php';
     $email = $_POST['email'];
 
     // 1. Check if the email exists AND is currently unverified
@@ -37,12 +37,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'lencejeri95@gmail.com';     // UPDATE THIS
-            $mail->Password   = 'upzi slbd nrtq hrue';    // UPDATE THIS
+            $mail->Username   = 'RENTramuros@gmail.com';     // UPDATE THIS
+            $mail->Password   = 'yaue vvhh imjw dnnd';    // UPDATE THIS
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
             $mail->Port       = 465;
 
-            $mail->setFrom('lencejeri95@gmail.com', 'RENTramuros System');
+            $mail->setFrom('RENTramuros@gmail.com', 'RENTramuros System');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
@@ -53,7 +53,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             // 5. Send them back to the verification page
             $_SESSION['temp_email'] = $email;
-            header("location: otp_verification_tourist.php");
+            header("location: auth/otp verification/otp_verification_tourist.php");
             exit();
 
         } catch (Exception $e) {
@@ -85,7 +85,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
         ?>
 
-        <form action="resend_otp_tourist.php" method="POST">
+        <form action="auth/resend otp/resend_otp_tourist.php" method="POST">
           <div class="mb-3">
             <label class="form-label">Enter your registered email address</label>
             <input type="email" class="form-control" name="email" required>
@@ -94,7 +94,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </form>
         
         <div class="text-center mt-3">
-            <a href="login_tourist.php" class="text-decoration-none">Back to Login</a>
+            <a href="auth/log in/login_tourist.php" class="text-decoration-none">Back to Login</a>
         </div>
     </div>
 

@@ -1,26 +1,29 @@
 <?php
-include_once('../connect_phpmyadmin.php');
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: POST');
 
-if(isset($_GET['reservation_id'])) {
+include_once('./connect_phpmyadmin.php');
+
+$data = json_decode(file_get_contents("php://input"));
+
+if(!isset($data->reservation_id)) {
+    echo json_encode(["status" => "error", "message" => "Missing reservation_id."]);
+    exit();
+} 
+
+$reservation_id = $data->reservation_id;
+$sql = "UPDATE RESERVATIONS
+        SET status = 'Approve'
+        WHERE reservation_id = ?";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $reservation_id);
+
+if(mysqli_stmt_execute($stmt)) {
+    echo json_encode(["status" => "success", "message" => "Booking of #" . $reservation_id . " Approved Successfully!"]);
     
-    $reservation_id = $_GET['reservation_id'];
-
-    $sql = "UPDATE RESERVATIONS
-            SET status = 'Approve'
-            WHERE reservation_id = ?";
-
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $reservation_id);
-
-    if($stmt->execute()) {
-        echo "Booking Approved Successfully!";
-    }
-    else {
-        echo "Error Approving Booking.";
-    }
-
-    $stmt->close();
+} else {
+    echo json_encode(["status" => "error", "message" => "Error Approving Booking."]);
 }
-
-$conn->close();
 ?>

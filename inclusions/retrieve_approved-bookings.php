@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: GET');
 
-include_once('connect_phpmyadmin.php');
+include_once('./connect_phpmyadmin.php');
 
 $sql = "SELECT * FROM Reservations WHERE status = 'approved'";
 $result = mysqli_query($con, $sql);

@@ -5,7 +5,7 @@ $invalid=0;
 $unverified=0;
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-    include 'connect_phpmyadmin.php'; // Make sure this file has no echo statements!
+    include_once('asset/connect_phpmyadmin.php'); // Make sure this file has no echo statements!
     $email=$_POST['email'];
     $password=$_POST['password'];
 
@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                 // Start the session since credentials are correct
                 session_start();
                 $_SESSION['email']=$email;
-                header("location: tourist_dashboard.php");
+                header("location: dashboard/tourist_dashboard.php");
                 exit(); // Stops script execution after redirect
 
             } else {
@@ -58,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 if($unverified) {
     echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>Hold on!</strong> You need to verify your email address before logging in. 
-    <a href="resend_otp.php" class="alert-link">Click here to request a new code.</a>
+    <a href="auth/resend otp/resend_otp.php" class="alert-link">Click here to request a new code.</a>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>';
 }
@@ -77,7 +77,7 @@ if($invalid) {
 ?>
     <h1 class="text-center">Login to our website</h1>
     <div class="container mt-5">
-        <form action="login_tourist.php" method="POST">
+        <form action="auth/log in/login_tourist.php" method="POST">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
     <input type="email" class="form-control" placeholder="Enter your email" name = "email">
@@ -88,7 +88,7 @@ if($invalid) {
   </div>
  
   <button type="submit" class="btn btn-primary w-100">Login</button>
-  <button type="button" class="btn btn-link w-100" onclick="window.location.href='signup_tour_guide.php'">Don't have an account? Sign up here.</button>
+  <button type="button" class="btn btn-link w-100" onclick="window.location.href='auth/sign up/signup_tourist.php'">Don't have an account? Sign up here.</button>
 </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

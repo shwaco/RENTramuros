@@ -1,6 +1,6 @@
 <?php
 // 1. Connect to your database
-include 'connect_phpmyadmin.php'; 
+include 'asset/connect_phpmyadmin.php'; 
 ?>
 
 <!DOCTYPE html>

@@ -1,6 +1,6 @@
 <?php
 // 1. Connect to your database
-include 'connect_phpmyadmin.php'; 
+include 'asset/connect_phpmyadmin.php'; 
 ?>
 
 <!DOCTYPE html>
@@ -59,8 +59,8 @@ include 'connect_phpmyadmin.php';
                                 <td>{$row['last_dispatch_time']}</td>
                                 <td>{$queue_badge}</td>
                                 <td>
-                                    <a href='edit_vehicle.php?updateid={$row['vehicle_id']}' class='btn btn-primary btn-sm'>Edit</a>
-                                    <a href='delete_vehicle.php?deleteid={$row['vehicle_id']}' class='btn btn-danger btn-sm'>Delete</a>
+                                    <a href='dashboard/admin/Vehicle Table/edit_vehicle.php?updateid={$row['vehicle_id']}' class='btn btn-primary btn-sm'>Edit</a>
+                                    <a href='dashboard/admin/Vehicle Table/delete_vehicle.php?deleteid={$row['vehicle_id']}' class='btn btn-danger btn-sm'>Delete</a>
                                 </td>
                               </tr>";
                               
@@ -73,8 +73,8 @@ include 'connect_phpmyadmin.php';
             </tbody>
         </table>
         
-        <a href="create_vehicle.php" class="btn btn-success">Add New Vehicle</a>
-        <a href="admin_dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
+        <a href="dashboard/admin/Vehicle Table/create_vehicle.php" class="btn btn-success">Add New Vehicle</a>
+        <a href="dashboard/admin/admin_dashboard.php" class="btn btn-secondary">Back to Dashboard</a>
     </div>
 </body>
 </html>

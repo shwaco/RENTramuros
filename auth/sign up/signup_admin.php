@@ -13,7 +13,7 @@ $success=0;
 $email_address_error=0;
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-    include 'connect_phpmyadmin.php';
+    include_once('asset/connect_phpmyadmin.php');
     $email=$_POST['email'];
     $password=$_POST['password'];
     $first_name=$_POST['first_name'];
@@ -80,7 +80,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                     // 4. Temporarily save the email in a session and redirect to the OTP page
                     session_start();
                     $_SESSION['temp_email'] = $email;
-                    header("location: otp_verification_admin.php");
+                    header("location: auth/otp verification/otp_verification_admin.php");
                     exit();
 
                 } catch (Exception $e) {
@@ -119,12 +119,12 @@ if($success) {
     <strong>Success!</strong>Sign-up successful!
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>';
-  header("Location: login_admin.php");
+  header("Location: auth/log in/login_admin.php");
 }
 ?>
     <h1 class="text-center">Sign-up Page (Admin)</h1>
     <div class="container mt-5">
-        <form action="signup_admin.php" method="POST">
+        <form action="auth/sign up/signup_admin.php" method="POST">
    <div class="mb-3">
     <label for="exampleInputFirst_Name1" class="form-label">First Name</label>
     <input type="text" class="form-control" placeholder="Enter your first name" name = "first_name">

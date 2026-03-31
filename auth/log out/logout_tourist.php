@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header('location: login_tourist.php');
+header('location: auth/log in/login_tourist.php');
 ?>

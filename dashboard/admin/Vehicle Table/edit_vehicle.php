@@ -1,5 +1,5 @@
 <?php
-include 'connect_phpmyadmin.php';
+include 'asset/connect_phpmyadmin.php';
 $error_message = "";
 
 // 1. Get the ID from the URL (e.g., edit_vehicle.php?updateid=5)
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_stmt_bind_param($update_stmt, "sisi", $new_type, $new_capacity, $new_status, $id);
     
     if (mysqli_stmt_execute($update_stmt)) {
-        header("Location: manage_vehicle.php");
+        header("Location: dashboard/admin/Vehicle Table/manage_vehicle.php");
         exit();
     } else {
         $error_message = "Error updating vehicle: " . mysqli_error($con);
@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
                             
                             <button type="submit" class="btn btn-primary w-100 mb-2">Save Changes</button>
-                            <a href="manage_vehicle.php" class="btn btn-outline-secondary w-100">Cancel</a>
+                            <a href="dashboard/admin/Vehicle Table/manage_vehicle.php" class="btn btn-outline-secondary w-100">Cancel</a>
                         </form>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+include_once('../connect_phpmyadmin.php');
 
 $id = $_GET['id'];
 

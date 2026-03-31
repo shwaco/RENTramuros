@@ -3,7 +3,7 @@
 session_start();
 if(!isset($_SESSION['email'])) {
     // User is not logged in or doesn't have the Tourist role, redirect to login page
-    header("location: login_tourist.php");
+    header("location: auth/log in/login_tourist.php");
     exit();
 }
 
@@ -26,7 +26,7 @@ if(!isset($_SESSION['email'])) {
     </h1>
 
     <div class="container mt-5">
-       <a href="logout_tourist.php" class="btn btn-primary mt-5">Logout</a>
+       <a href="auth/log out/logout_tourist.php" class="btn btn-primary mt-5">Logout</a>
     </div>
         <!-- <div class="row">
             <div class="col-md-4">
