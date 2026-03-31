@@ -3,16 +3,19 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: GET');
 
-include_once('connect_phpmyadmin.php');
+// Step up one folder to find the connection file
+include_once('../asset/connect_phpmyadmin.php');
 
 $sql = "SELECT * FROM Reservations WHERE status = 'pending'";
-$result = mysqli_query($con, $sql);
+// Check if your connection file uses $con or $conn!
+$result = mysqli_query($con, $sql); 
 
 $bookings = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $bookings[] = $row;
+if ($result) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $bookings[] = $row;
+    }
 }
 
 echo json_encode(["status" => "success", "data" => $bookings]);
-
 ?>
