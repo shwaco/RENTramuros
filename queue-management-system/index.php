@@ -1,7 +1,6 @@
 <?php 
 require_once 'config.php'; 
 
-// THE BOUNCER
 if (!isset($_SESSION['guide_id'])) {
     header("Location: ../login_tour_guide.php");
     exit(); 

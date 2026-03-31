@@ -19,15 +19,12 @@ $conn = $db->getConnection();
 try {
     $conn->beginTransaction();
 
-    // 1. Mark the tourist as cancelled
     $conn->prepare("UPDATE tourists SET status = 'cancelled' WHERE customer_id = ?")
          ->execute([$touristId]);
 
-    // 2. FIXED: Free up the guide AND reset their timestamp so they go to the back of the line fairly
     $conn->prepare("UPDATE tour_guides SET current_status = 'Available', current_tourist_id = NULL, became_available_at = NOW() WHERE guide_id = ?")
          ->execute([$guideId]);
 
-    // 3. NEW: Tell the matchmaker to immediately check if anyone else is waiting for this guide
     require_once 'dispatch.php';
     runDispatch($conn);
 
