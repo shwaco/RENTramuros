@@ -15,11 +15,11 @@ try {
     $db = new Database();
     $conn = $db->getConnection();
 
-    // 1. Update the Guide: Back to Available & Clear current tourist
+    // inaaupdate yung tour guide as available 
     $stmtG = $conn->prepare("UPDATE tour_guides SET current_status = 'Available', current_tourist_id = NULL, became_available_at = NOW() WHERE guide_id = ?");
     $stmtG->execute([$guide_id]);
 
-    // 2. Update the Tourist: Mark as completed AND link the guide_id
+    // then minamark as completed yung tourist and nililink yung guide id ng tourist na nag tour sa kaniya sa db table ng toursits
     if ($customer_id) {
         $stmtT = $conn->prepare("UPDATE tourists SET status = 'completed', completed_at = NOW(), guide_id = ? WHERE customer_id = ?");
         $stmtT->execute([$guide_id, $customer_id]);

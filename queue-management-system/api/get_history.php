@@ -12,7 +12,7 @@ $db = new Database();
 $conn = $db->getConnection();
 
 try {
-    // We select the last 10 completed tours specifically for THIS guide
+    // may limit na 10 para hanggang 10 lang makikita sa dashboard for now
     $stmt = $conn->prepare("
         SELECT queue_number, first_name, last_name, service_type AS vehicle_type, completed_at 
         FROM tourists 

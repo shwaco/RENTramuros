@@ -2,18 +2,16 @@
 header('Content-Type: application/json');
 require_once '../config.php';
 
-// Get the data from the Tourist Form
 $data = json_decode(file_get_contents('php://input'), true);
 
 $db = new Database();
 $conn = $db->getConnection();
 
 try {
-    // We use a transaction to make sure the match is "Atomic" 
-    // (No two tourists can grab the same guide at the exact same millisecond)
+
     $conn->beginTransaction();
 
-    // 1. Find the #1 Guide in your queue
+    // tiga hanap ng naunang tour guide sa queue
     $stmt = $conn->query("
         SELECT guide_id, first_name 
         FROM tour_guides 
@@ -27,7 +25,7 @@ try {
     if ($assignedGuide) {
         $guideId = $assignedGuide['guide_id'];
 
-        // 2. Insert the Tourist (Status is 'active' immediately)
+        // tiga insert ng tourist tas minamark as active
         $stmtT = $conn->prepare("
             INSERT INTO tourists (first_name, last_name, email, phone_number, service_type, status, guide_id, called_at) 
             VALUES (?, ?, ?, ?, ?, 'active', ?, NOW())
@@ -43,7 +41,7 @@ try {
         
         $touristId = $conn->lastInsertId();
 
-        // 3. Update YOUR Guide to 'Busy' and link them to this tourist
+        // pang update ng guide as busy and paglink ng tourist sa db
         $stmtG = $conn->prepare("UPDATE tour_guides SET current_status = 'Busy', current_tourist_id = ? WHERE guide_id = ?");
         $stmtG->execute([$touristId, $guideId]);
 

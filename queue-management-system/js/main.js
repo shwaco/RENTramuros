@@ -1,6 +1,4 @@
-/**
- * Loads the tour history into the table
- */
+// para mag laod yung history
 async function loadHistory() {
     try {
         const response = await fetch('api/get_history.php');
@@ -25,9 +23,7 @@ async function loadHistory() {
     }
 }
 
-/**
- * Marks the tour as completed and puts the guide back in the queue
- */
+// tiga mark  ng tour as completed tas binabalik yung tour guide sa queue
 async function finishTour(customerId) {
     if (!customerId) {
         alert("Error: Could not find the Tourist ID.");
@@ -45,7 +41,6 @@ async function finishTour(customerId) {
             body: JSON.stringify({ customer_id: customerId }) 
         });
         
-        // If the server returned an error (like a PHP notice), this line will fail
         const result = await response.json();
 
         if (result.success) {
@@ -59,9 +54,7 @@ async function finishTour(customerId) {
     }
 }
 
-/**
- * Auto-refresh the page every 10 seconds to check for new assignments or queue changes
- */
+// para magrefresh yung page every 10 seconds
 function startPolling() {
     setInterval(() => {
         // If we are currently on the "Idle/Waiting" screen, refresh to see if assigned
@@ -71,7 +64,6 @@ function startPolling() {
     }, 10000);
 }
 
-// Initialize everything on page load
 document.addEventListener('DOMContentLoaded', () => {
     loadHistory();
     startPolling();

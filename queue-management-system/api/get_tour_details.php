@@ -11,7 +11,7 @@ $db = new Database();
 $conn = $db->getConnection();
 
 try {
-    // Simplified query using the tourists table you actually have
+    // pinasimple lang yung query sa table ng tourists
     $query = "SELECT t.customer_id, t.first_name, t.last_name, t.queue_number, 
               t.service_type AS vehicle_type, p.package_name,
               GROUP_CONCAT(a.attraction_name SEPARATOR ', ') as destinations

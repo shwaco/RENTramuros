@@ -8,7 +8,7 @@ if (isset($_SESSION['guide_id'])) {
     $conn = $db->getConnection();
 
     try {
-        // Tell the database Ernesto is going home!
+        // para ma set as offline sa db table ng tour guides
         $stmt = $conn->prepare("UPDATE tour_guides SET current_status = 'Offline', current_tourist_id = NULL WHERE guide_id = ?");
         $stmt->execute([$guide_id]);
     } catch (Exception $e) {

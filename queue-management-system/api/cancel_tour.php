@@ -1,6 +1,5 @@
-// basically wala pang purpose to ngayon eh
-
 <?php
+// FOR NOW Wala PA TONG PURPOSE 
 session_start();
 header('Content-Type: application/json');
 require_once '../config.php';

@@ -11,7 +11,7 @@ $guide_id = $_SESSION['guide_id'];
 $db = new Database();
 $conn = $db->getConnection();
 
-// 1. BULLETPROOF NAME FETCH: Get the guide's basic info first
+// taga kuha ng info ng guide
 $stmtInfo = $conn->prepare("SELECT first_name, current_status, became_available_at FROM tour_guides WHERE guide_id = ?");
 $stmtInfo->execute([$guide_id]);
 $guideInfo = $stmtInfo->fetch(PDO::FETCH_ASSOC);
@@ -19,7 +19,7 @@ $guideInfo = $stmtInfo->fetch(PDO::FETCH_ASSOC);
 $guideName = $guideInfo['first_name']; // Safely store the name!
 $currentStatus = $guideInfo['current_status'];
 
-// 2. Fetch assigned tour ONLY if they are busy
+// taga fetch ng assigned tour
 $isAssigned = false;
 $tourData = null;
 
@@ -45,7 +45,7 @@ if ($currentStatus === 'Busy') {
     }
 }
 
-// 3. Queue Position (If Available)
+// ito yung queue position
 $queuePosition = 0;
 if ($currentStatus === 'Available') {
     $stmtP = $conn->prepare("

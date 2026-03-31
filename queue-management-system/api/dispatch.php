@@ -13,10 +13,10 @@ function runDispatch($conn) {
         $tid = $tourist['customer_id'];
         $gid = $guide['guide_id'];
 
-        // Update tourist
+        // inaaupdate yung tourist
         $conn->prepare("UPDATE tourists SET status = 'serving', called_at = NOW() WHERE customer_id = ?")->execute([$tid]);
 
-        // Update guide (Link them to the tourist and mark Busy)
+        // inaaupdate yung tour guide tas nililink dun sa tourist and minamark siya as busy
         $conn->prepare("UPDATE tour_guides SET current_status = 'Busy', current_tourist_id = ? WHERE guide_id = ?")->execute([$tid, $gid]);
         
         return true;

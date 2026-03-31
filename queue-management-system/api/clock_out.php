@@ -8,7 +8,7 @@ if (isset($_SESSION['guide_id'])) {
     $conn = $db->getConnection();
 
     try {
-        // Mark the guide as completely Offline so they don't get tourists assigned
+        // minamark as offline yung guide para di makakuha ng tourist
         $stmt = $conn->prepare("UPDATE tour_guides SET current_status = 'Offline', current_tourist_id = NULL WHERE guide_id = ?");
         $stmt->execute([$guide_id]);
     } catch (Exception $e) {
@@ -17,11 +17,9 @@ if (isset($_SESSION['guide_id'])) {
     }
 } 
 
-// Destroy the session (log out of the browser)
 session_unset();
 session_destroy();
 
-// Go back to the login page
 header("Location: ../../login_tour_guide.php");
 exit();
 ?>
