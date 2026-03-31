@@ -1,5 +1,5 @@
 <?php
-include 'db_connect.php';
+include_once('../connect_phpmyadmin.php');
 
 if(isset($_GET['reservation_id'])) {
     

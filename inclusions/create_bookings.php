@@ -13,7 +13,7 @@ if(!isset($data->tourist_id) || !isset($data->booking_type)){
     exit();
 }
 
-include_once('connect_phpmyadmin.php');
+include_once('../connect_phpmyadmin.php');
 
 $data = json_decode(file_get_contents("php://input"), true);
 $tourist_id = $data->tourist_id;
