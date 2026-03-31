@@ -1,4 +1,5 @@
 Before doing this, make sure to run the queuing_system.sql after ma import yung rentramuros_database.sql sa files ni bou
+oh and running na yung XAMPP naka on na dapat yung msql and apache
 LINKS: 
 Sign up first: http://localhost/RENTRAMUROS/signup_tour_guide.php
 then log in: http://localhost/RENTramuros/login_tour_guide.php
@@ -31,5 +32,3 @@ edit niyo yung nauna sa queue
 palitan niyo yung current_status ng "busy"
 then iassign niyo siya sa available na tourist sa "current_tourist_id"
 then refresh or reload niyo lang yung page nung dashboard magrereflect na yun
-
-gmawa ako instruction pano irun as of now
