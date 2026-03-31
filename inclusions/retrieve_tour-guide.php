@@ -1,4 +1,5 @@
 <?php
+// for vehicle retrieval no ui yet
 header('Content-Type: application/json');
 
 require_once '../queue-management-system/config.php';
