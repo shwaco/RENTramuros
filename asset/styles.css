@@ -129,8 +129,10 @@ nav .sidebar .hideOnMobile.last{
 
 /* Hero section */
 .hero {
+    display: block;
     margin-bottom: 0.1rem;
     position: relative;
+    width: 100% ;
     
 }
 
@@ -145,11 +147,45 @@ nav .sidebar .hideOnMobile.last{
     top: 4rem;
     left: 50%;
     position: absolute;
+    translate: -50% 0;
+    gap: 10px;
+    width: fit-content;
 }
 
-.hero .lines .batch.one span {
-    background-color: blue;
+/* #cartwheel {
+    margin: 0 5px;
+} */
 
+.hero .lines .batch {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hero .lines .batch span {
+    display: block;
+    width: 100px;
+
+}
+
+.hero .lines .batch.one .line.one {
+    background: black;
+    height: 5px;
+}
+
+.hero .lines .batch .line.two {
+    background: yellow;
+    height: 5px;
+}
+
+.hero .lines .batch.two .line.one {
+    background: blue;
+    height: 5px;
+}
+
+.hero .lines .batch.two .line.two {
+    background: red;
+    height: 5px;
 }
 
 
