@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-    /* outline: 1px solid red !important; */
+    outline: 1px solid red !important;
 }
 
 
@@ -128,15 +128,31 @@ nav .sidebar .hideOnMobile.last{
 
 
 /* Hero section */
-/* .hero {
+.hero {
     margin-bottom: 0.1rem;
+    position: relative;
     
-} */
+}
 
 .hero img {
     display: block;
     width: 100% ;
 }
+
+.hero .lines {
+    display: flex;
+    justify-content: center;
+    top: 4rem;
+    left: 50%;
+    position: absolute;
+}
+
+.hero .lines .batch.one span {
+    background-color: blue;
+
+}
+
+
 
 
 /* Image sliders */
