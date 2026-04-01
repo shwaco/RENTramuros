@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tourist Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../asset/styles.css">
+
+    <script src="../../asset/script.js" defer></script>
+
+</head>
+<body>
+    
+    <!-- Navigation bar-->
+    <nav>
+
+        <!-- Sidebar -->
+        <ul class="sidebar">
+            <li onclick=hideSidebar()><a href="#"><img src="../../asset/img/close_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="close-button" width="auto" height="30"></a></li>
+            <li><a href="#"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
+            <li><a href="#"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+            <li><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+
+        <!-- Navigation bar -->
+        <ul class="navbar">
+            <li><img src="../../asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo"></li>
+            <li class="hideOnMobile"><a href="#"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
+            <li class="hideOnMobile"><a href="#"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+            <li class="hideOnMobile"><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+            <li class="hideOnMobile last"><a href="#">About</a></li>
+            <li><button type="button">Log in or Create Account</button></li>
+            <li onclick=showSidebar() class="menu-btn"><a href="#"><img src="../../asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
+        </ul>
+    </nav>
+
+    <!-- Decorative lines -->
+    <div class="container-1">
+        <div class="line">
+            <span class="white"></span>
+            <span class="yellow"></span>
+        </div>
+
+        <div class="icon-container">
+            <img src="../../asset/img/CARTWHEEL_ICON.svg" alt="CARTWHEEL_ICON" width="auto" height="20px" id="logo2">
+        </div>
+
+        <div class="line">
+            <span class="blue"></span>
+            <span class="red"></span>
+        </div>
+    </div>
+
+    <!-- Engageable text -->
+    <div class="engageable">
+        <div class="hop">
+            <h2>HOP ON A JOURNEY ACROSS THE CITY WITHIN WALLS WITH RENTRAMUROS</h2>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Image sliders -->
+    <div class="main-slider-container">
+        <!-- Popular destinations -->
+        <div class="slider-container one">
+
+            <div class="heading one">
+                <h2>Popular destinations</h2>
+            </div>
+
+            <div class="slider one">
+                
+                <button class="slide-btn one" id="prev-btn1"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
+
+                <ul>
+                
+                    <li><a href="."><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"><p>Casa la cote</p></a></li>
+                    <li><a href="."><img src="../../asset/img/6154443154988404816.jpg" alt="ewan" ></a></li>
+                    <li><a href="."><img src="../../asset/img/6154443154988404817.jpg" alt="ewan" ></a></li>
+                    <li><a href="."><img src="../../asset/img/6156791707530366599.jpg" alt="ewan" ></a></li>
+
+                    <li><a href="."><img src="../../asset/img/6154443154988404815.jpg" alt="ewan" ></a></li>
+                    <li><a href="."><img src="../../asset/img/6154443154988404816.jpg" alt="ewan" ></a></li>
+                    <li><a href="."><img src="../../asset/img/6154443154988404817.jpg" alt="ewan" ></a></li>
+                    <li><a href="."><img src="../../asset/img/6156791707530366599.jpg" alt="ewan" ></a></li>
+
+                </ul>
+
+                <button class="slide-btn two" id="next-btn1"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
+
+
+            </div>
+        </div>
+
+        <!-- Free destinations -->
+        <div class="slider-container two">
+
+            <div class="heading two">
+                <h2>Popular destinations</h2>
+            </div>
+
+            <div class="slider two">
+                
+                <button class="slide-btn one" id="prev-btn2"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
+
+                <ul>
+                
+                    <li><a href="."><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"><p>Casa la cote</p></a></li>
+                    <li><a href="."><img src="../../asset/img/6154443154988404816.jpg" alt="ewan" ></a></li>
+                    <li><a href="."><img src="../../asset/img/6154443154988404817.jpg" alt="ewan" ></a></li>
+                    <li><a href="."><img src="../../asset/img/6156791707530366599.jpg" alt="ewan" ></a></li>
+
+                    <li><a href="."><img src="../../asset/img/6154443154988404815.jpg" alt="ewan" ></a></li>
+                    <li><a href="."><img src="../../asset/img/6154443154988404816.jpg" alt="ewan" ></a></li>
+                    <li><a href="."><img src="../../asset/img/6154443154988404817.jpg" alt="ewan" ></a></li>
+                    <li><a href="."><img src="../../asset/img/6156791707530366599.jpg" alt="ewan" ></a></li>
+
+                </ul>
+
+                <button class="slide-btn two" id="next-btn2"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
+
+
+            </div>
+        </div>
+    </div>
+     
+
+
+
+
+</body>
+</html>
