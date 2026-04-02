@@ -236,11 +236,13 @@ nav .sidebar .hideOnMobile.last{
 /* Hero_sec paragraph */
 .hero  p {
     font-family: 'roboto condensed';
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 300;
     top: 14rem;
     left: 14rem;
     position: absolute;
+    width: 40%;
+    text-align: left;
 }
 
 /* Hero_sec list */
