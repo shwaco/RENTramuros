@@ -305,8 +305,6 @@ nav .sidebar .hideOnMobile.last{
 
 
 
-
-
 /* Image sliders */
 .main-slider-container {
     display: flex;
@@ -425,6 +423,42 @@ nav .sidebar .hideOnMobile.last{
     width: 3em;
     border-radius: 50%;
 }
+
+/* Packages */
+main .packages {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 1rem;
+    text-decoration: none;
+    list-style: none;
+}
+
+main .packages .package {
+    display: flex;
+    align-items: center;
+}
+
+main .packages .package ul {
+    text-decoration: none;
+    list-style: none;
+}
+
+main .packages .package img {
+    display: block;
+    aspect-ratio: 16 / 9;
+}
+
+main .packages .package {
+    background-color: rgba(227, 226, 226, 0.5)
+}
+
+/* Package 1 */
+
+/* Package 2 */
+
+/* Package 3 */
 
 
 
