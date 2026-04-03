@@ -306,11 +306,15 @@ nav .sidebar .hideOnMobile.last{
 
 
 /* Image sliders */
+.image-sliders {
+    width: fit-content;
+    margin: 3rem 2rem 3rem 25rem;
+}
+
 .main-slider-container {
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    margin: 3rem 2rem 3rem 25rem;
 }
 
 .main-slider-container .slider-container {
