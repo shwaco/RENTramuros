@@ -140,7 +140,7 @@ nav .sidebar .hideOnMobile.last{
     display: block;
     margin-bottom: 0.1rem;
     position: relative;
-    width: 100% ;
+    width: fit-content ;
     
 }
 
@@ -310,8 +310,7 @@ nav .sidebar .hideOnMobile.last{
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    padding: 1rem 3rem ;
-    margin: 0 2rem;
+    margin: 3rem 2rem 3rem 25rem;
 }
 
 .main-slider-container .slider-container {
@@ -427,6 +426,8 @@ nav .sidebar .hideOnMobile.last{
 /* Packages */
 .package_wrapper {
     width: fit-content;
+    margin-right: 2rem;
+    margin-left: 25rem;
 
 }
 
