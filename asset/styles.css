@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'roboto', arial, Helvetica, sans-serif;
     /* outline: 1px solid green !important; */
 }
 
@@ -206,7 +206,7 @@ nav .sidebar .hideOnMobile.last{
 /* Hero_sec header */
 .hero  h1 {
     font-family: "Roboto Condensed", arial;
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 500;
     font-style: italic;
     text-align: left;
@@ -244,7 +244,7 @@ nav .sidebar .hideOnMobile.last{
     font-family: 'roboto condensed';
     font-size: 1rem;
     font-weight: 300;
-    top: 14rem;
+    top: 18rem;
     left: 14rem;
     position: absolute;
     width: 40%;
@@ -254,7 +254,7 @@ nav .sidebar .hideOnMobile.last{
 /* Hero_sec list */
 .hero .list_container {
     position: absolute;
-    top: 19rem;
+    top: 21.5rem;
     left: 14rem;
     gap: 1rem;
     list-style: none;
@@ -268,6 +268,8 @@ nav .sidebar .hideOnMobile.last{
     justify-content: center;
     align-items: center;
     gap: 0.2rem;
+    font-family: 'roboto slab';
+
 }
 
 .hero .list_container li img {
@@ -281,7 +283,7 @@ nav .sidebar .hideOnMobile.last{
 .hero button {
     font-family: 'roboto condensed';
     position: absolute;
-    top: 23rem;
+    top: 24rem;
     left: 14rem;
     cursor: pointer;
     padding: 1rem;
