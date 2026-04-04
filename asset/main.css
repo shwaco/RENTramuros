@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'roboto', arial, Helvetica, sans-serif;
-    outline: 1px solid green !important;
+    /* outline: 1px solid green !important; */
 }
 
 
@@ -314,6 +314,7 @@ main {
 
 /* Aside */
 .aside {
+    border: 2px solid black;
     display: flex;
     flex-direction: column;
     gap: 3rem;
