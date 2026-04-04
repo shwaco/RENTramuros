@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'roboto', arial, Helvetica, sans-serif;
-        outline: 1px solid green !important;
+    outline: 1px solid green !important;
 }
 
 
@@ -138,12 +138,17 @@ main {
 .hero {
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center bottom;
     margin-bottom: 5rem;
     aspect-ratio: 21 / 9;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    min-height: 85vh;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding-top: 4rem;
     
 }
 
@@ -155,6 +160,9 @@ main {
     align-items: center;
     gap: 10px;
     width: 100%;
+    padding: 0 1rem;
+    position: absolute;
+    top: 4rem;
 }
 
 .hero .lines .wheel_pic {
@@ -166,54 +174,59 @@ main {
 }
 
 .hero .lines .batch {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
 }
 
 .hero .lines .batch span {
     display: block;
-    border: 10px;
+    height: 5px;
 }
 
 
 .hero .lines .batch.one .line.one {
     background: black;
-    height: 5px;
-    margin-bottom: 10px;
+    width: 100%;
 }
 
 .hero .lines .batch.one .line.two {
     background: #FFEA60;
-    height: 5px;
-    margin-left: 70px;
+    width: 70%;
+    align-self: flex-end;
 }
 
 .hero .lines .batch.two .line.one {
     background: #3700FF;
-    height: 5px;
-    margin-bottom: 10px;
+    width: 100%;
 }
 
 .hero .lines .batch.two .line.two {
     background: #FF0000;
-    height: 5px;
-    margin-right: 70px;
+    width: 70%;
+    align-self: flex-start;
 }
 
 /* Hero_sec header */
 .hero .content {
-    width: 50%;
-    margin: 0 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;    
+    position: absolute;
+    top: 7rem;
+    left: 10rem;
 }
 
 .hero .content h1 {
     font-family: "Roboto Condensed", arial;
-    font-size: 3rem;
+    font-size: 3rem;    
     font-weight: 500;
     font-style: italic;
     text-align: left;
-    width: 45%;
-    top: 7rem;
-    left: 14rem;
+    margin: 0 0 1rem 0;
+    display: block; 
 }
 
 .hero .content h1 .span {
@@ -242,23 +255,21 @@ main {
 /* Hero_sec paragraph */
 .hero .content p {
     font-family: 'roboto condensed';
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 300;
-    top: 18rem;
-    left: 14rem;
-    width: 40%;
-    text-align: left;
+    line-height: 1.5;
+    margin: 0 0 2rem 0;
 }
 
 /* Hero_sec list */
 .hero .content .list_container {
-    top: 21.5rem;
-    left: 14rem;
-    gap: 1rem;
+    display: flex;
+    gap: 2rem;
     list-style: none;
     gap: 4rem;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    margin: 0 0 2rem 0;
 }
 
 .hero .content .list_container li {
@@ -267,7 +278,6 @@ main {
     align-items: center;
     gap: 0.2rem;
     font-family: 'roboto slab';
-
 }
 
 .hero .content .list_container li img {
@@ -279,16 +289,15 @@ main {
 /* Hero_sec button */
 .hero .content button {
     font-family: 'roboto condensed';
-    top: 24rem;
-    left: 14rem;
     cursor: pointer;
-    padding: 1rem;
+    padding: 1rem 2rem;
     font-weight: 400;
     font-size: 1rem;
     background-color: #8D230F;
     color: white;
-    border-color: transparent;
+    border: 2px solid transparent;
     transition: ease-in-out 0.3s;
+    width: fit-content;
 }
 
 .hero .content button:hover {
