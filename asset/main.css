@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'roboto', arial, Helvetica, sans-serif;
-    outline: 1px solid green !important;
+        outline: 1px solid green !important;
 }
 
 
@@ -15,6 +15,11 @@ body {
 }
 
 /* Header */
+header {
+    z-index: 1000;
+    width: 100%;
+    height: fit-content;
+}
 
 /* Navigation bar */
 nav {
@@ -59,17 +64,8 @@ nav .menu-btn {
 
 #logo {
     display: block;
-    padding: 0.5rem;
     cursor: pointer;
-    fill: red;
-}
-
-nav .navbar svg:hover {
-    fill: red;
-}
-
-svg {
-    fill: red;
+    padding: 0.5rem;
 }
 
 
@@ -140,16 +136,14 @@ main {
 
 /* Hero section */
 .hero {
-    background-image: var(--bg-image);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 100vh;
-    width: 100%;
-    display: block;
     margin-bottom: 5rem;
-    width: fit-content ;
-    
+    aspect-ratio: 21 / 9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     
 }
 
@@ -159,9 +153,6 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 4rem;
-    left: 50%;
-    translate: -50% 0;
     gap: 10px;
     width: 100%;
 }
@@ -175,7 +166,7 @@ main {
 }
 
 .hero .lines .batch {
-    width: 40%;
+    width: 100%;
 }
 
 .hero .lines .batch span {
@@ -209,7 +200,12 @@ main {
 }
 
 /* Hero_sec header */
-.hero  h1 {
+.hero .content {
+    width: 50%;
+    margin: 0 25%;
+}
+
+.hero .content h1 {
     font-family: "Roboto Condensed", arial;
     font-size: 3rem;
     font-weight: 500;
@@ -220,7 +216,7 @@ main {
     left: 14rem;
 }
 
-.hero  h1 .span {
+.hero .content h1 .span {
     font-family: "Roboto Condensed", arial;
     font-weight: 400;
     font-style: italic;
@@ -235,16 +231,16 @@ main {
     -0.7px  0   0 #000;
 }
 
-.hero h1 .span.rent {
+.hero .content h1 .span.rent {
     color: #FFCC00;
 }
 
-.hero h1 .span.ramuros {
+.hero .content h1 .span.ramuros {
     color: #8D230F;
 }
 
 /* Hero_sec paragraph */
-.hero  p {
+.hero .content p {
     font-family: 'roboto condensed';
     font-size: 1rem;
     font-weight: 300;
@@ -255,7 +251,7 @@ main {
 }
 
 /* Hero_sec list */
-.hero .list_container {
+.hero .content .list_container {
     top: 21.5rem;
     left: 14rem;
     gap: 1rem;
@@ -265,7 +261,7 @@ main {
     justify-content: center;
 }
 
-.hero .list_container li {
+.hero .content .list_container li {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -274,14 +270,14 @@ main {
 
 }
 
-.hero .list_container li img {
+.hero .content .list_container li img {
     width: fit-content;
 }
 
 
 
 /* Hero_sec button */
-.hero button {
+.hero .content button {
     font-family: 'roboto condensed';
     top: 24rem;
     left: 14rem;
@@ -295,7 +291,7 @@ main {
     transition: ease-in-out 0.3s;
 }
 
-.hero button:hover {
+.hero .content button:hover {
     background-color: white;
     color: black;
     border-color: #8D230F;
