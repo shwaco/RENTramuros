@@ -303,7 +303,42 @@ main {
 
 }
 
+/* Aside */
+.aside {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;    
+}
 
+.aside .x_wrapper {
+    width:fit-content;
+    padding: 2rem 5rem;
+}
+
+.aside .feedback_wrapper {
+    width: fit-content;
+    padding: 2rem 5rem;
+    
+}
+
+.aside .upcoming_wrapper {
+    width: fit-content;
+}
+
+.aside .upcoming_wrapper ul {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+
+}
+
+.aside .upcoming_wrapper ul .event {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
 
 
 /* Image sliders */
