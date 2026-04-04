@@ -282,8 +282,6 @@ main {
     width: fit-content;
 }
 
-
-
 /* Hero_sec button */
 .hero .content button {
     font-family: 'roboto condensed';
@@ -305,21 +303,31 @@ main {
 
 }
 
+/* Mid main kuys */
+.mid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding: 0 3rem 0 3rem;
+    width: 100%
+}
+
 /* Aside */
 .aside {
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    align-items: center;    
+    align-items: center;  
+    /* width: fit-content;   */
 }
 
 .aside .x_wrapper {
-    width:fit-content;
+    width: 100%;
     padding: 2rem 5rem;
 }
 
 .aside .feedback_wrapper {
-    width: fit-content;
+    width: 100%;
     padding: 2rem 5rem;
     
 }
@@ -342,11 +350,10 @@ main {
     gap: 1rem;
 }
 
-
 /* Image sliders */
 .image-sliders {
     width: fit-content;
-    margin: 0 2rem 3rem 25rem;
+    /* margin: 0 2rem 3rem 0rem; */
 }
 
 .main-slider-container {
@@ -468,9 +475,6 @@ main {
 /* Packages */
 .package_wrapper {
     width: fit-content;
-    margin-right: 2rem;
-    margin-left: 25rem;
-
 }
 
 .package_wrapper .packages { 
