@@ -359,6 +359,13 @@ main {
     gap: 1rem;
 }
 
+/* Attractions */
+.main_attractions  .heading {
+    font-family: 'roboto slab';
+    padding-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
 /* Image sliders */
 .main-slider-container {
     display: flex;
@@ -387,13 +394,6 @@ main {
 
 .main-slider-container .slider-container .heading {
     padding-bottom: 1rem;
-}
-
-.main-slider-container .slider-container h1 {
-    font-family: 'roboto slab';
-    font-size: 1.5rem;
-
-
 }
 
 
@@ -483,6 +483,10 @@ main {
 /* Packages */
 .package_wrapper {
     width: fit-content;
+}
+
+.package_wrapper .heading.two {
+    font-family: 'roboto slab';
 }
 
 .package_wrapper .packages { 
