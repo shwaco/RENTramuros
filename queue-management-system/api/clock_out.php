@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../config.php';
 
 if (isset($_SESSION['guide_id'])) {
@@ -20,6 +19,6 @@ if (isset($_SESSION['guide_id'])) {
 session_unset();
 session_destroy();
 
-header("Location: ../../login_tour_guide.php");
+echo json_encode(['success' => true]);
 exit();
 ?>

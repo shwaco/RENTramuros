@@ -1,9 +1,8 @@
 <?php 
 require_once 'config.php';
-session_start();
 
 if (!isset($_SESSION['guide_id'])) {
-    header("Location: auth/log in/login_tour_guide.php");
+    header("Location: ../auth/log in/login_tour_guide.php");
     exit(); 
 }
 
@@ -73,7 +72,7 @@ if ($currentStatus === 'Available') {
     <nav class="navbar">
         <div class="nav-container">
             <h1 class="nav-title"><i class="fas fa-map-marked-alt mr-2"></i> Tourist Guide Dashboard</h1>
-                <button onclick="location.href='api/clock_out.php'" class="btn-clockout">
+                <button onclick="handleLogout()" class="btn-clockout">
                     <i class="fas fa-sign-out-alt mr-2"></i> Clock Out
                 </button>
             </div>

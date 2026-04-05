@@ -1,7 +1,7 @@
 Before doing this, make sure to run the queuing_system.sql after ma import yung rentramuros_database.sql sa files ni bou
 oh and running na yung XAMPP naka on na dapat yung msql and apache
 LINKS: 
-Sign up first: http://localhost/RENTRAMUROS/signup_tour_guide.php
+Sign up first: http://localhost/RENTramuros/auth/sign%20up/signup_tour_guide.php
 then log in: http://localhost/RENTramuros/login_tour_guide.php
 
 testing:

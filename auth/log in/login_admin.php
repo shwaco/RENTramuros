@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                 // Start the session since credentials are correct
                 session_start();
                 $_SESSION['email']=$email;
-                header("location: ./admin_dashboard.php"); 
+                header("location: ../../admin_dashboard.php"); 
                 exit(); // Stops script execution after redirect
 
             } else {

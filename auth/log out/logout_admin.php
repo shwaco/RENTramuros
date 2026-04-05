@@ -1,5 +1,9 @@
 <?php
 session_start();
+header('Content-Type: application/json');
+
+session_unset();
 session_destroy();
-header('location: auth/log in/login_admin.php');
+
+echo json_encode(['success' => true, 'message' => 'Admin logged out successfully']);
 ?>

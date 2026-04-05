@@ -1,5 +1,10 @@
 <?php
 session_start();
+header('Content-Type: application/json');
+require_once '../../config.php'; 
+
+session_unset();
 session_destroy();
-header('location: auth/log in/login_tourist.php');
+
+echo json_encode(['success' => true, 'message' => 'Tourist logged out']);
 ?>

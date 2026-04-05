@@ -69,5 +69,19 @@ if(!isset($_SESSION['email'])) {
 
         <div class="container mt-5">
        <a href="auth/log out/logout_admin.php" class="btn btn-primary mt-5">Logout</a></div> 
+       <script>
+        async function handleLogoutAdmin() {
+            try {
+                const response = await fetch('api/logout_admin.php', { method: 'POST' });
+                const result = await response.json();
+                
+                if (result.success) {
+                    window.location.href = "auth/log in/login_admin.php";
+                }
+            } catch (error) {
+                console.error("Logout failed:", error);
+            }
+        }
+        </script>
   </body>
 </html>

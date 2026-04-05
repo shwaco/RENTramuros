@@ -3,7 +3,7 @@ session_start();
 
 // If they try to access this page without signing up first, send them back
 if(!isset($_SESSION['temp_email'])) {
-    header("location: auth/sign up/signup_tour_guide.php");
+    header("location: ../sign up/signup_tour_guide.php");
     exit();
 }
 
@@ -12,7 +12,7 @@ $invalid_otp = 0;
 $success = 0;
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    include 'asset/connect_phpmyadmin.php';
+    include '../../asset/connect_phpmyadmin.php';
     $entered_otp = $_POST['otp'];
 
     // Check if the OTP matches the one assigned to this email
@@ -51,7 +51,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <?php
     if($success) {
         echo '<div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-        <strong>Success!</strong> Your account is verified. You can now <a href="auth/log in/login_tour_guide.php" class="alert-link">Log In</a>.
+        <strong>Success!</strong> Your account is verified. You can now <a href="../log in/login_tour_guide.php" class="alert-link">Log In</a>.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>';
     }
@@ -67,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <h2 class="text-center mb-4">Enter Verification Code</h2>
         <p class="text-center text-muted">We sent a 6-digit code to <strong><?php echo $email; ?></strong></p>
         
-        <form action="auth/otp verification/otp_verification_tour_guide.php" method="POST">
+        <form action="" method="POST">
           <div class="mb-3">
             <input type="number" class="form-control form-control-lg text-center" placeholder="123456" name="otp" required>
           </div>

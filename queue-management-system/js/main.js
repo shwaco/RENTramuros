@@ -22,7 +22,7 @@ async function loadHistory() {
         console.error("Failed to load history:", e);
     }
 }
-
+    
 // tiga mark  ng tour as completed tas binabalik yung tour guide sa queue
 async function finishTour(customerId) {
     if (!customerId) {
@@ -57,7 +57,6 @@ async function finishTour(customerId) {
 // para magrefresh yung page every 10 seconds
 function startPolling() {
     setInterval(() => {
-        // If we are currently on the "Idle/Waiting" screen, refresh to see if assigned
         if (!document.getElementById('active-tour-card')) {
             location.reload();
         }
@@ -68,3 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
     loadHistory();
     startPolling();
 });
+
+async function handleLogout() {
+    const response = await fetch('api/clock_out.php', { method: 'POST' });
+    const result = await response.json();
+    if (result.success) {
+        window.location.href = "../auth/log in/login_tour_guide.php";
+    }
+}
