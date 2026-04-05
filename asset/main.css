@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'roboto', arial, Helvetica, sans-serif;
-    /* outline: 1px solid green !important; */
+    outline: 1px solid green !important;
 }
 
 
@@ -382,8 +382,11 @@ main {
     padding-bottom: 1rem;
 }
 
-.main-slider-container .slider-container h2 {
-    font-family: 'playfair display';
+.main-slider-container .slider-container h1 {
+    font-family: 'roboto slab';
+    font-size: 1.5rem;
+
+
 }
 
 
