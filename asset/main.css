@@ -307,9 +307,10 @@ main {
 .mid {
     display: grid;
     grid-template-columns: 1fr 3fr;
-    padding: 0 5rem;
+    padding: 0 7rem;
     width: 100%;
-    gap: 1rem;
+    gap: 3rem;
+    margin-bottom: 5rem;
 }
 
 /* Aside */
@@ -479,14 +480,22 @@ main {
     grid-template-columns: repeat(3 , 1fr);
     gap: 2rem;
     list-style: none;
+
+
 }
 
 .package_wrapper .packages .package {
-    background-color: rgba(209, 209, 209, 0.5);
     display: flex;
     flex-direction: column;
     height: 100%;
+    cursor: pointer;
     border-radius: 15px;
+    overflow: hidden;
+
+
+}
+
+.package_wrapper .packages .package .image {
     overflow: hidden;
 }
 
@@ -495,6 +504,11 @@ main {
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
+    transition: ease-in-out 0.4s;
+}
+
+.package_wrapper .packages .package:hover .image img {
+    transform: scale(1.1);
 }
 
 .package_wrapper .packages .package ul {
@@ -504,6 +518,8 @@ main {
     flex-direction: column;
     flex-grow: 1;
     gap: 1rem;
+    background-color: rgba(209, 209, 209, 0.5);
+
 }
 
 .package_wrapper .packages .package .number {
