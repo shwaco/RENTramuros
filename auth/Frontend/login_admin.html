@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href:="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <title>Admin Login</title>
+    </head>
+    <body>
+        <h1 class="text-center mt-4">Login as Admin</h1>
+        <div class="container mt-5">
+            <div id="alertbox"></div>
+            <form id="LoginForm">
+                <div class="mb-3">
+                    <label for="emailInput" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="emailInput" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="passwordInput" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="passwordInput" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='signup_admin.html'">Don't have an account? Sign up</button>
+            </form>
+        </div>
+        <script>
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const email = document.getElementById('emailInput').value;
+                const password = document.getElementById('passwordInput').value;
+                const alertBox = document.getElementById('alertbox');
+
+                fetch('http://localhost/RENTramuros/auth/backend/api/login_admin_api.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                       alertBox.innerHTML = `<div class="alert alert-success" role="alert">${data.message}</div>`;
+                          setTimeout(() => {
+                             window.location.href = 'admin_dashboard.html';
+                            }, 2000);
+                    } else if (data.status === 'unverified') {
+                        alertBox.HTML = `<div class="alert alert-warning" role="alert">${data.message}</div>`;
+                    } else {
+                        alertBox.innerHTML = `<div class="alert alert-danger" role="alert">${data.message}</div>`;
+                    }
+                })
+                .catch(error => concole.error('Error:', error));
+         });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

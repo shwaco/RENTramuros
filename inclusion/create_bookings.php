@@ -1,11 +1,11 @@
 <?php
 
-use Dom\Mysql;
-
 header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
+$data = json_decode(file_get_contents("php://input"));
 
 if(!isset($data->tourist_id) || !isset($data->booking_type)){
     http_response_code(400);
@@ -13,9 +13,8 @@ if(!isset($data->tourist_id) || !isset($data->booking_type)){
     exit();
 }
 
-include_once('../connect_phpmyadmin.php');
+require_once('./connect_phpmyadmin.php');
 
-$data = json_decode(file_get_contents("php://input"));
 $tourist_id = $data->tourist_id;
 $booking_type = $data->booking_type;
 
@@ -51,20 +50,20 @@ try {
 
         $package_sql = "INSERT INTO package_bookings (reservation_id, package_id, vehicle_id, guide_id, tour_date, passenger_count) VALUES (?, ?, ?, ?, ?, ?)";
         $package_stmt = mysqli_prepare($con, $package_sql);
-        mysqli_stmt_bind_param($package_stmt, "iiiiii", $reservation_id, $package_id, $vehicle_id, $guide_id, $tour_date, $passenger_count);
+        mysqli_stmt_bind_param($package_stmt, "iiiisi", $reservation_id, $package_id, $assigned_vehicle_id, $assigned_guide_id, $tour_date, $passenger_count);
         mysqli_stmt_execute($package_stmt);
 
         mysqli_query($con, "UPDATE Vehicles SET current_status = 'unavailable' WHERE vehicle_id = $assigned_vehicle_id");
         mysqli_query($con, "UPDATE Tour_Guides SET current_status = 'unavailable', last_dispatch_time = NOW() WHERE guide_id = $assigned_guide_id");
 
-    }elseif ($booking_type === 'Attractions') {
+    } elseif ($booking_type === 'Attractions') {
         $attraction_id = $data->attraction_id;
         $visit_date = $data->visit_date;
         $ticket_quantity = $data->ticket_quantity;
 
         $attraction_sql = "INSERT INTO attraction_bookings (reservation_id, attraction_id, visit_date, ticket_quantity) VALUES (?, ?, ?, ?)";
         $attraction_stmt = mysqli_prepare($con, $attraction_sql);
-        mysqli_stmt_bind_param($attraction_stmt, "iiis", $reservation_id, $attraction_id, $visit_date, $ticket_quantity);
+        mysqli_stmt_bind_param($attraction_stmt, "iisi", $reservation_id, $attraction_id, $visit_date, $ticket_quantity);
         mysqli_stmt_execute($attraction_stmt);
         
     } else {
