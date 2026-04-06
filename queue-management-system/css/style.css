@@ -26,8 +26,13 @@ body {
     font-weight: bold; 
 }
 
+/* Container to hold both buttons side-by-side perfectly yung logout at clockout */
+.nav-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 
-/* clockout button */
 .btn-clockout { 
     background-color: #C99E10; 
     padding: 0.5rem 1rem; 
@@ -42,6 +47,22 @@ body {
 
 .btn-clockout:hover { 
     background-color: #8D230F; 
+}
+
+.btn-logout {
+    background-color: #F4F1EA;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    color: #1f2937;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1);
+}
+
+.btn-logout:hover {
+    background-color: #C99E10;
 }
 
 /* yung mga cards or boxes sa dashboard */

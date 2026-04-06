@@ -1,27 +1,19 @@
 <?php
-class Database {
-    private $host = "localhost";
-    private $db_name = "rentramuros_database"; 
-    private $username = "root";
-    private $password = "";
-    public $conn;
+session_start();
 
-    // i think ang purpose lang nito is pang connect sa db, inaattempt niya buksan yung db using this logic
-    public function getConnection() {
-        $this->conn = null;
-        try {
-            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
-            $this->conn->exec("set names utf8");
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $exception) {
-            header('Content-Type: application/json');
-            http_response_code(500);
-            echo json_encode(['success' => false, 'message' => 'Database connection failed: ' . $exception->getMessage()]);
-            exit;
-        }
-        return $this->conn;
-    }
+$host = "localhost";
+$username = "root";
+$password = "";
+$db_name = "rentramuros_database";
+
+$con = mysqli_connect($host, $username, $password, $db_name);
+
+if (!$con) {
+    header('Content-Type: applcication/json');
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Database Connection Failed: ' . mysqli_connect_error()]);
+    exit;
 }
 
-session_start();
+mysqli_set_charset($con, "utf8");
 ?>

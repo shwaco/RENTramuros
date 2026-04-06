@@ -2,7 +2,7 @@
 // FOR NOW Wala PA TONG PURPOSE 
 session_start();
 header('Content-Type: application/json');
-require_once '../config.php';
+require_once '../../asset/connect_phpmyadmin.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 $touristId = $data['customer_id'] ?? null;
@@ -13,22 +13,23 @@ if (!$touristId) {
     exit;
 }
 
-$db = new Database();
-$conn = $db->getConnection();
-
 try {
-    $conn->beginTransaction();
+    mysqli_begin_transaction($con);
 
-    $conn->prepare("UPDATE tourists SET status = 'cancelled' WHERE customer_id = ?")
-         ->execute([$touristId]);
+    $cancelTouristSql = "UPDATE tourists SET status = 'cancelled' WHERE customer_id = ?";
+    $stmtT = mysqli_prepare($con, $cancelTouristSql);
+    mysqli_stmt_bind_param($stmtT, "i", $touristId);
+    mysqli_stmt_execute($stmtT);
 
-    $conn->prepare("UPDATE tour_guides SET current_status = 'Available', current_tourist_id = NULL, became_available_at = NOW() WHERE guide_id = ?")
-         ->execute([$guideId]);
+    $updateGuideSql = "UPDATE tour_guides SET current_status = 'Available', current_tourist_id = NULL, became_available_at = NOW() WHERE guide_id = ?";
+    $stmtG = mysqli_prepare($con, $updateGuideSql);
+    mysqli_stmt_bind_param($stmtG, "i", $guideId);
+    mysqli_stmt_execute($stmtG);
 
     require_once 'dispatch.php';
     runDispatch($conn);
 
-    $conn->commit();
+    mysqli_commit($con);
     echo json_encode(['success' => true, 'message' => 'Tour Cancelled']);
 } catch (Exception $e) {
     $conn->rollBack();

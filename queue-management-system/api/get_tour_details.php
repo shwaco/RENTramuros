@@ -1,32 +1,38 @@
 <?php
+session_start(); // THIS IS THE MAGIC LINE
 header('Content-Type: application/json');
-require_once '../config.php';
+require_once '../../asset/connect_phpmyadmin.php';
 
 if (!isset($_SESSION['guide_id'])) {
-    echo json_encode(['success' => false]); exit();
+    echo json_encode(['success' => false, 'message' => 'No active session found.']); 
+    exit();
 }
-
-$guide_id = $_SESSION['guide_id'];
-$db = new Database();
-$conn = $db->getConnection();
 
 try {
     // pinasimple lang yung query sa table ng tourists
-    $query = "SELECT t.customer_id, t.first_name, t.last_name, t.queue_number, 
-              t.service_type AS vehicle_type, p.package_name,
-              GROUP_CONCAT(a.attraction_name SEPARATOR ', ') as destinations
-              FROM tour_guides tg
-              JOIN tourists t ON tg.current_tourist_id = t.customer_id
-              LEFT JOIN package_bookings pb ON pb.guide_id = tg.guide_id
-              LEFT JOIN packages p ON pb.package_id = p.package_id
-              LEFT JOIN package_itinerary pi ON p.package_id = pi.package_id
-              LEFT JOIN attractions a ON pi.attraction_id = a.attraction_id
-              WHERE tg.guide_id = ? AND tg.current_status = 'Busy'
-              GROUP BY t.customer_id";
-
-    $stmt = $conn->prepare($query);
-    $stmt->execute([$guide_id]);
-    $tour = $stmt->fetch(PDO::FETCH_ASSOC);
+    $query = "SELECT t.customer_id, t.first_name, t.last_name, t.queue_number, t.service_type 
+    AS vehicle_type, p.package_name, GROUP_CONCAT(a.attraction_name SEPARATOR ', ') 
+    as destinations 
+    FROM tour_guides tg 
+    JOIN tourists t 
+    ON tg.current_tourist_id = t.customer_id 
+    LEFT JOIN package_bookings pb 
+    ON pb.guide_id = tg.guide_id 
+    LEFT JOIN packages p 
+    ON pb.package_id = p.package_id 
+    LEFT JOIN package_itinerary pi 
+    ON p.package_id = pi.package_id 
+    LEFT JOIN attractions a 
+    ON pi.attraction_id = a.attraction_id 
+    WHERE tg.guide_id = ? 
+    AND tg.current_status = 'Busy' 
+    GROUP BY t.customer_id";
+    $stmt = mysqli_prepare($con, $query);
+    mysqli_stmt_bind_param($stmt, "i", $guide_id);
+    mysqli_stmt_execute($stmt);
+    
+    $result = mysqli_stmt_get_result($stmt);
+    $tour = mysqli_fetch_assoc($result);
 
     echo json_encode([
         'success' => true,
@@ -34,6 +40,8 @@ try {
         'data' => $tour
     ]);
 } catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    echo json_encode([
+    'success' => false,
+    'message' => $e->getMessage()]);
 }
 ?>

@@ -2,7 +2,7 @@ Before doing this, make sure to run the queuing_system.sql after ma import yung 
 oh and running na yung XAMPP naka on na dapat yung msql and apache
 LINKS: 
 Sign up first: http://localhost/RENTramuros/auth/sign%20up/signup_tour_guide.php
-then log in: http://localhost/RENTramuros/login_tour_guide.php
+then log in: http://localhost/RENTramuros/auth/log%20in/login_tour_guide.php
 
 testing:
 try creating 2 accounts first para sa tour guides then magrereflect na yun sa table ng tour_guides

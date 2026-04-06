@@ -1,6 +1,7 @@
 <?php
+session_start();
 header('Content-Type: application/json');
-require_once '../config.php'; 
+require_once '../../asset/connect_phpmyadmin.php';
 
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
@@ -8,20 +9,16 @@ if (!isset($_SESSION['guide_id'])) {
 }
 
 $guide_id = $_SESSION['guide_id'];
-$db = new Database();
-$conn = $db->getConnection();
 
 try {
     // may limit na 10 para hanggang 10 lang makikita sa dashboard for now
-    $stmt = $conn->prepare("
-        SELECT queue_number, first_name, last_name, service_type AS vehicle_type, completed_at 
-        FROM tourists 
-        WHERE guide_id = ? AND status = 'completed' 
-        ORDER BY completed_at DESC 
-        LIMIT 10
-    ");
-    $stmt->execute([$guide_id]);
-    $history = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sql = "SELECT queue_number, first_name, last_name, service_type AS vehicle_type, completed_at FROM tourists WHERE guide_id = ? AND status = 'completed' ORDER BY completed_at DESC LIMIT 10";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $guide_id);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+    $history = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     echo json_encode(['success' => true, 'history' => $history]);
 

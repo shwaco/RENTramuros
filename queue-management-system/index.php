@@ -1,5 +1,6 @@
 <?php 
-require_once 'config.php';
+session_start();
+require_once '../asset/connect_phpmyadmin.php';
 
 if (!isset($_SESSION['guide_id'])) {
     header("Location: ../auth/log in/login_tour_guide.php");
@@ -7,15 +8,14 @@ if (!isset($_SESSION['guide_id'])) {
 }
 
 $guide_id = $_SESSION['guide_id'];  
-$db = new Database();
-$conn = $db->getConnection();
 
 // taga kuha ng info ng guide
-$stmtInfo = $conn->prepare("SELECT first_name, current_status, became_available_at FROM tour_guides WHERE guide_id = ?");
-$stmtInfo->execute([$guide_id]);
-$guideInfo = $stmtInfo->fetch(PDO::FETCH_ASSOC);
+$stmtInfo = mysqli_prepare($con, "SELECT first_name, current_status, became_available_at FROM tour_guides WHERE guide_id = ?");
+mysqli_stmt_bind_param($stmtInfo, "i", $guide_id);
+mysqli_stmt_execute($stmtInfo);
+$guideInfo = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtInfo));
 
-$guideName = $guideInfo['first_name']; // Safely store the name!
+$guideName = $guideInfo['first_name'];
 $currentStatus = $guideInfo['current_status'];
 
 // taga fetch ng assigned tour
@@ -35,9 +35,10 @@ if ($currentStatus === 'Busy') {
               LEFT JOIN attractions a ON pi.attraction_id = a.attraction_id
               WHERE tg.guide_id = ? GROUP BY tg.guide_id";
 
-    $stmtTour = $conn->prepare($query);
-    $stmtTour->execute([$guide_id]);
-    $tourData = $stmtTour->fetch(PDO::FETCH_ASSOC);
+    $stmtTour = mysqli_prepare($con, $query);
+    mysqli_stmt_bind_param($stmtTour, "i", $guide_id);
+    mysqli_stmt_execute($stmtTour);
+    $tourData = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtTour));
 
     if ($tourData && !empty($tourData['customer_id'])) {
         $isAssigned = true;
@@ -47,14 +48,15 @@ if ($currentStatus === 'Busy') {
 // ito yung queue position
 $queuePosition = 0;
 if ($currentStatus === 'Available') {
-    $stmtP = $conn->prepare("
+    $stmtP = mysqli_prepare($con, "
         SELECT COUNT(*) + 1 as pos 
         FROM tour_guides 
         WHERE current_status = 'Available' 
         AND became_available_at < ?
     ");
-    $stmtP->execute([$guideInfo['became_available_at']]);
-    $result = $stmtP->fetch(PDO::FETCH_ASSOC);
+    mysqli_stmt_bind_param($stmtP, "s", $guideInfo['became_available_at']);
+    mysqli_stmt_execute($stmtP);
+    $result = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtP));
     $queuePosition = ($result && isset($result['pos'])) ? (int)$result['pos'] : 1;
 }
 ?>
@@ -72,8 +74,15 @@ if ($currentStatus === 'Available') {
     <nav class="navbar">
         <div class="nav-container">
             <h1 class="nav-title"><i class="fas fa-map-marked-alt mr-2"></i> Tourist Guide Dashboard</h1>
-                <button onclick="handleLogout()" class="btn-clockout">
-                    <i class="fas fa-sign-out-alt mr-2"></i> Clock Out
+            
+            <div class="nav-actions">
+                
+                <button onclick="handleLogoutOnly()" class="btn-logout">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                </button>
+                
+                <button onclick="handleClockOut()" class="btn-clockout">
+                    <i class="fas fa-power-off mr-2"></i> Clock Out
                 </button>
             </div>
         </div>
@@ -88,7 +97,7 @@ if ($currentStatus === 'Available') {
                     <div>
                         <div class="info-group">
                             <p class="info-label">Time and Date Assigned</p>
-                            <p class="info-val-lg"><?php echo $tourData['called_at'] ? date('F j, Y - g:i A', strtotime($tourData['called_at'])) : 'Just now'; ?></p>
+                            <?php echo $tourData['called_at'] ? date('F j, Y - g:i A', strtotime($tourData['called_at'])) : 'Just now'; ?>
                         </div>
                         <div class="info-group">
                             <p class="info-label">Tourist Info</p>
@@ -141,7 +150,7 @@ if ($currentStatus === 'Available') {
                         </tr>
                     </thead>
                     <tbody id="historyTable">
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
