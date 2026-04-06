@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-require_once '../../asset/connect_phpmyadmin.php';
+require_once('../../config/config.php');
 
 try {
     $stats = [];

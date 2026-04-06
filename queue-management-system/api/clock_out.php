@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once '../../asset/connect_phpmyadmin.php';
+require_once('../../config/config.php');
 
 if (isset($_SESSION['guide_id'])) {
     $guide_id = $_SESSION['guide_id'];

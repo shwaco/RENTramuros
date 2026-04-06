@@ -5,7 +5,7 @@ $invalid=0;
 $unverified=0;
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-    include_once('../../asset/connect_phpmyadmin.php');
+    include_once('../../config/config.php');
     $email=$_POST['email'];
     $password=$_POST['password'];
 

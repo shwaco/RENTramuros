@@ -2,7 +2,7 @@
 // FOR NOW Wala PA TONG PURPOSE 
 session_start();
 header('Content-Type: application/json');
-require_once '../../asset/connect_phpmyadmin.php';
+require_once('../../config/config.php');
 
 $data = json_decode(file_get_contents('php://input'), true);
 $touristId = $data['customer_id'] ?? null;

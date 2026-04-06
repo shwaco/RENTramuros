@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-require_once '../../asset/connect_phpmyadmin.php';
+require_once('../../config/config.php');
 
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -25,7 +25,7 @@ try {
         mysqli_stmt_bind_param($stmtT, "sssssi", $data['first_name'], $data['last_name'], $data['email'], $data['phone_number'], $data['service_type'], $guideId);
         mysqli_stmt_execute($stmtT);
         
-       $touristId = mysqli_insert_id($con);
+        $touristId = mysqli_insert_id($con);
 
         // pang update ng guide as busy and paglink ng tourist sa db
         $updateGuideSql = "UPDATE tour_guides SET current_status = 'Busy', current_tourist_id = ? WHERE guide_id = ?";

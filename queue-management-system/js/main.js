@@ -69,10 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
     startPolling();
 });
 
-// 1. SAFE EXIT: Logs out but saves their place in the queue
+// logout but nasa queue pa rin
 async function handleLogoutOnly() {
     try {
-        // Correct path based on your folder structure!
         const response = await fetch('../auth/log out/logout_tour_guide.php', { method: 'POST' }); 
         const result = await response.json();
         if (result.success) {
@@ -83,14 +82,13 @@ async function handleLogoutOnly() {
     }
 }
 
-// 2. END SHIFT: Removes them from the queue entirely
+// log out pero nireremove na rin sa queue
 async function handleClockOut() {
     if (!confirm("Are you sure you want to clock out? You will lose your current place in the queue!")) {
         return; 
     }
 
     try {
-        // API folder is right next to js folder inside queue-management-system
         const response = await fetch('api/clock_out.php', { method: 'POST' });
         const result = await response.json();
         if (result.success) {

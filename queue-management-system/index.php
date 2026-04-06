@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once '../asset/connect_phpmyadmin.php';
+require_once '../config/config.php';
 
 if (!isset($_SESSION['guide_id'])) {
     header("Location: ../auth/log in/login_tour_guide.php");

@@ -1,7 +1,7 @@
 <?php
 session_start(); // THIS IS THE MAGIC LINE
 header('Content-Type: application/json');
-require_once '../../asset/connect_phpmyadmin.php';
+require_once('../../config/config.php');
 
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'No active session found.']); 
