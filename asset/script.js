@@ -47,7 +47,7 @@ function updateButtonVisibility () {
     }
 }
 
-track.addEventListener('scroll', updateButtonVisibility);
+    track.addEventListener('scroll', updateButtonVisibility);
 
 updateButtonVisibility();
 
