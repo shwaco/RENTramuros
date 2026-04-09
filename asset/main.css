@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'roboto', arial, Helvetica, sans-serif;
-    /* outline: 1px solid green !important; */
+    outline: 1px solid green !important;
 }
 
 
@@ -376,27 +376,53 @@ main {
     position: absolute;
 } 
 
+.upcoming_container .slider_wrapper .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 50;
+    top: 50%;
+    translate: 0 -50%;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px 0.2px rgba(0, 0, 0, 0.5);
+    margin: -1rem;
+}
+
+.upcoming_container .slider_wrapper .btn img {
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+
+}
+
 .upcoming_container .slider_wrapper .btn.one {
-    top: 2rem; 
-    left: -0.7rem;
-    
+    left: -1rem;
+}
+
+.upcoming_container .slider_wrapper .btn.two {
+    right: -0.7rem;
 }
 
 .upcoming_container .slider_wrapper .event_container {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    padding: 1.5rem;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
     border-radius: 10px ;
     flex: 1 0 auto;
+    height: 100%;
 }
 
 .upcoming_container .slider_wrapper .event_container .image {
     flex-shrink: 0;
     width: 100px;
     height: 90px;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -411,18 +437,16 @@ main {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.3rem;
 }
 
 .upcoming_container .slider_wrapper .event_container .schedule_container {
     display: flex;
     align-items: center;
-    /* gap: 0.5rem; */
-    background-color: #3700FF;
+    background-color: #8D230F;
     color: white;
     width: fit-content;
     border-radius: 20px;
-    /* padding: 0 1rem; */
 }  
 
 .upcoming_container .slider_wrapper .event_container .details_container .schedule_container .frequency {
@@ -440,6 +464,8 @@ main {
 .upcoming_container .slider_wrapper .event_container .details_container .name {
     font-family: 'roboto condensed';
     text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: bold;
     white-space: nowrap;
 }
 
