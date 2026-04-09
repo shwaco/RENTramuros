@@ -306,57 +306,11 @@ main {
 /* Mid main kuys */
 .mid {
     display: grid;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr;
     padding: 0 7rem;
     width: 100%;
     gap: 3rem;
     margin-bottom: 5rem;
-}
-
-/* Aside */
-.aside {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    align-items: center;  
-}
-
-.aside .x_wrapper {
-    width: 100%;
-    padding: 2rem 5rem;
-    border: 1px solid black;
-}
-
-.aside .feedback_wrapper {
-    width: 100%;
-    padding: 2rem 5rem;
-    border: 1px solid black;
-
-    
-}
-
-.aside .upcoming_wrapper {
-    width: 100%;
-    border: 1px solid black;
-
-}
-
-.aside .upcoming_wrapper .upcoming_events {
-    margin: 1rem;
-}
-
-.aside .upcoming_wrapper ul {
-    gap: 1rem;
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-
-}
-
-.aside .upcoming_wrapper ul .event {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
 }
 
 /* Attractions */
