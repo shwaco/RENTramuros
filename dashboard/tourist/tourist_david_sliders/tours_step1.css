@@ -1,0 +1,753 @@
+
+
+body{
+    background-color: #FFFFFF;
+}
+
+.reservation-container{
+    width: 100%;
+    max-width: 1011px;
+    margin: 100px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.process-container{
+    margin-top: 30px;
+    margin-right: 25px;
+    text-align: left;
+    height: 10vh;
+    display: flex;
+    justify-content: flex-end;                
+    width: 100%;
+}
+
+/* Center the entire stepper on the page */
+.steps-container {
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    margin-bottom: 40px; /* Adjust spacing below the stepper as needed */
+}
+
+/* Arrange circles and bars horizontally and center them vertically */
+.steps {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adds space between the shapes */
+}
+
+/* Styles applied to ALL circles */
+.circle-1, .circle-2, .circle-3 {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 20px; /* You might want to lower this to 24px so it fits the 50px circle! */
+    font-weight: 500;
+    border: 1px solid #000000; 
+    box-sizing: border-box;
+    flex-shrink: 0; /* Add this! It prevents the circles from squishing */
+}
+
+/* Styles applied to ALL connecting bars */
+.progress-bar-1, .progress-bar-2 {
+    width: 80px; 
+    height: 10px; 
+    border-radius: 15px; 
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    flex-shrink: 0; /* Add this! It prevents the bars from squishing */
+}
+
+/* -------------------------------------- */
+/* ACTIVE/COMPLETED STYLES (Red)          */
+/* -------------------------------------- */
+
+/* Filled circles (1 and 2) */
+.circle-1 {
+    background-color: #8A2814; /* Your theme's red color */
+    color: #ffffff;
+}
+
+/* Filled progress bar (between 1 and 2) */
+/*.progress-bar-1 {
+    background-color: #8A2814;
+}*/
+
+/* Empty circle (3) */
+.circle-3 {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Empty progress bar (between 2 and 3) */
+.progress-bar-2 {
+    background-color: #ffffff;
+}
+
+.text-box{
+    width: 100%;
+    border-bottom: 0.5px solid #B4B1B1;
+}
+
+.time-date-container{
+    width: 100%;
+    height: 243px;
+    border-radius: 10px;
+    opacity: 1;
+    box-shadow: 0px 1px 8px 1px #00000040;
+    display: flex;
+    flex-direction: column;
+}
+
+.time-date-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 42px;
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 2%;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 30px;
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+.time-date-label{
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 30px;
+    margin-top: 30px;
+    text-align: left;
+    width: fit-content;
+}
+
+.dropdown-container{
+    margin-left: 30px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.time-dropdown{
+    width: 85px;
+    position: relative;
+}
+
+    /*margin-left: 30px;
+    margin-top: 20px;
+    width: 85px; */
+ 
+
+.time-dropdown *{
+    box-sizing: border-box;
+}
+
+
+.time-select{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    border: 0.2px solid #B4B1B1;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3;
+    /*width: auto;
+    height: 20px;*/
+}
+
+.time-selected{
+    font-family: "Roboto Condensed", sans-serif;
+    /*opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    border-width: 1px;
+    width: auto;
+    height: 50px;
+    border-radius: 20px;
+    opacity: 1;
+    border: 1px solid #B4B1B1;
+    padding: 10px 17px 10px 17px; */
+}
+
+.date-dropdown{
+    width: 18em;
+    position: relative;
+}
+
+.date-dropdown *{
+    box-sizing: border-box;
+}
+
+.date-select{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #B4B1B1;
+    border-radius: 20px;
+    padding: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.date-selected{
+    font-family: "Roboto Condensed", sans-serif;
+}
+    /*opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+    width: 314px;
+    border-radius: 20px;
+    opacity: 1;
+    border: 1px solid #B4B1B1;
+    display: flex;
+    align-items: center;
+    padding-left: 17px;
+}*/
+
+.date-caret{
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #000000;
+    transition: 0.3s;
+}
+
+.tourists-quantity-conatiner{
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+    opacity: 1;
+    box-shadow: 0px 1px 8px 1px #00000040;
+    display: flex;
+    flex-direction: column;
+}
+
+.tourists-quantity-text{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: fit-content;
+    height: 42px;
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 30px;
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+.quantity-container{
+    padding: 30px ;
+}
+
+.adults-label-container{
+    width: fit-content;
+}
+
+.adult-counter-row{
+    width: fit-content;
+    display: flex; 
+    align-items: center; /* Keeps the counter and the notice vertically aligned */
+    gap: 60px; /* Adds a nice space between the counter and the notice */
+}
+
+.adults-label {
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    text-align: left;
+    width: fit-content;
+}
+
+.adults-req-age{
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-style: italic;
+    font-weight: 200; /* Extra Light */
+    font-size: 20px;
+    line-height: 100%;
+    text-align: left; /* Removed the duplicate center alignment */
+    vertical-align: middle;
+    margin-left: 30px;
+    margin-top: 30px;
+    width: fit-content;
+}
+
+.senior-notice-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds space between the circle and the text */
+}
+
+.notice-circle{
+    display: flex;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 50%;
+    border: 1px solid #d3d3d3;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.notice-circle:hover{
+    background: #8A2814;
+    color: #FFFFFF;
+}
+
+.senior-notice-text{
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 20px;
+    text-align: left;
+    width: fit-content;
+}
+
+/* 1. The Main Wrapper */
+.adult-quantity-counter {
+    display: flex;
+    align-items: center;
+    width: 350px; /* You can adjust this to fit your exact layout */
+    height: 60px; 
+    border: 1px solid #B4B1B1; /* A light gray border for the top and bottom */
+    border-radius: 6px;
+    
+    /* THE MAGIC TRICK: This forces the red buttons inside to clip 
+       their sharp edges and match the rounded corners of this container! */
+    overflow: hidden; 
+    margin-top: 25px;
+}
+
+/* 2. The Plus and Minus Buttons */
+.adult-quantity-counter .minus,
+.adult-quantity-counter .plus {
+    background-color: #8A2814; /* The dark brick-red color from your image */
+    color: #FFFFFF;
+    border: none; /* Removes default ugly button borders */
+    width: 60px; /* The exact width of the red blocks */
+    height: 100%; /* Forces buttons to be as tall as the container */
+    font-size: 32px; /* Makes the + and - symbols nice and large */
+    cursor: pointer;
+    
+    /* Perfectly centers the + and - inside the red blocks */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+/* Add a tiny hover effect so users know they can click it */
+.adult-quantity-counter button:hover {
+    background-color: #7A2311; 
+}
+
+/* 3. The Number in the Middle */
+.adult-count {
+    flex: 1; /* Tells the middle section to expand and take up all remaining space */
+    background-color: #FFFFFF;
+    color: #000000;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    
+    /* Centers the number itself */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.children-label-container{
+    width: fit-content;
+    margin-top: 20px;
+}
+
+.children-label {
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    text-align: left;
+    width: fit-content;
+}
+
+.children-req-age{
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 30px;
+    margin-top: 30px;
+    text-align: left;
+    width: fit-content;
+}
+
+
+/* 1. The Main Wrapper */
+.children-quantity-counter {
+    display: flex;
+    align-items: center;
+    width: 350px; /* You can adjust this to fit your exact layout */
+    height: 60px; 
+    border: 1px solid #B4B1B1; /* A light gray border for the top and bottom */
+    border-radius: 6px;
+    
+    /* THE MAGIC TRICK: This forces the red buttons inside to clip 
+       their sharp edges and match the rounded corners of this container! */
+    overflow: hidden; 
+    margin-top: 25px;
+}
+
+/* 2. The Plus and Minus Buttons */
+.children-quantity-counter .minus,
+.children-quantity-counter .plus {
+    background-color: #8A2814; /* The dark brick-red color from your image */
+    color: #FFFFFF;
+    border: none; /* Removes default ugly button borders */
+    width: 60px; /* The exact width of the red blocks */
+    height: 100%; /* Forces buttons to be as tall as the container */
+    font-size: 32px; /* Makes the + and - symbols nice and large */
+    cursor: pointer;
+    
+    /* Perfectly centers the + and - inside the red blocks */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+/* Add a tiny hover effect so users know they can click it */
+.children-quantity-counter button:hover {
+    background-color: #7A2311; 
+}
+
+/* 3. The Number in the Middle */
+.children-count {
+    flex: 1; /* Tells the middle section to expand and take up all remaining space */
+    background-color: #FFFFFF;
+    color: #000000;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    
+    /* Centers the number itself */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.infants-label-container{
+    width: fit-content;
+    margin-top: 20px;
+}
+
+.infants-label {
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    text-align: left;
+    width: fit-content;
+}
+
+.infants-req-age{
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 30px;
+    margin-top: 30px;
+    text-align: left;
+    width: fit-content;
+}
+
+
+/* 1. The Main Wrapper */
+.infants-quantity-counter {
+    display: flex;
+    align-items: center;
+    width: 350px; /* You can adjust this to fit your exact layout */
+    height: 60px; 
+    border: 1px solid #B4B1B1; /* A light gray border for the top and bottom */
+    border-radius: 6px;
+    
+    /* THE MAGIC TRICK: This forces the red buttons inside to clip 
+       their sharp edges and match the rounded corners of this container! */
+    overflow: hidden; 
+    margin-top: 25px;
+}
+
+/* 2. The Plus and Minus Buttons */
+.infants-quantity-counter .minus,
+.infants-quantity-counter .plus {
+    background-color: #8A2814; /* The dark brick-red color from your image */
+    color: #FFFFFF;
+    border: none; /* Removes default ugly button borders */
+    width: 60px; /* The exact width of the red blocks */
+    height: 100%; /* Forces buttons to be as tall as the container */
+    font-size: 32px; /* Makes the + and - symbols nice and large */
+    cursor: pointer;
+    
+    /* Perfectly centers the + and - inside the red blocks */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+/* Add a tiny hover effect so users know they can click it */
+.infants-quantity-counter button:hover {
+    background-color: #7A2311; 
+}
+
+/* 3. The Number in the Middle */
+.infants-count {
+    flex: 1; /* Tells the middle section to expand and take up all remaining space */
+    background-color: #FFFFFF;
+    color: #000000;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    
+    /* Centers the number itself */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.package-confirm-container{
+    width: 100%;
+    height: 144px;
+    border-radius: 10px;
+    opacity: 1;
+    box-shadow: 0px 1px 8px 1px #00000040;
+    display: flex;
+    flex-direction: column;
+}
+
+.availing-package-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 42px;
+    opacity: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 30px;
+    margin-top: 9px;
+    margin-bottom: 9px;
+}
+
+.confirming-package-button-container{
+    margin-top: 30px;
+    padding: 0 30px;
+}
+
+.no-package{
+    font-family: "Roboto Condensed", sans-serif;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s, padding 0.3s, color 0.3s;
+}
+
+
+.no-package:hover{
+    background-color: #8A2814;
+    color: white;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3);
+    padding: 8px 40px;
+}
+
+.yes-package{
+    font-family: "Roboto Condensed", sans-serif;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s, padding 0.3s, color 0.3s;
+}
+
+.yes-package:hover{
+    background-color: #8A2814;
+    color: white;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3);
+    padding: 8px 40px;
+}
+
+.prev-next-container{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 60px;
+}
+
+/* Update your existing next-button to use Flexbox so the text and arrow align perfectly */
+.next-button {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adds space between NEXT and the arrow */
+    padding: 10px 20px;
+    font-size: 25px;
+    font-weight: 900;
+    color: #8A2814;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+}
+
+/* This injects the arrow character directly via CSS */
+.next-button::after {
+    content: '\276F'; /* This is the CSS Unicode for the heavy chevron ❯ */
+    font-size: 26px; /* Slightly smaller than the text looks better */
+    transition: transform 0.3s ease; /* Prepares it for a smooth hover animation */
+}
+
+/* Your existing hover state */
+.next-button:hover {
+    color: #ffffff;
+    background-color: #8A2814;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* OPTIONAL PRO-TIP: Make the arrow slide to the right on hover! */
+.next-button:hover::after {
+    transform: translateX(4px);
+}
+
+
+
+
+
+
+
+/* --- NEW SLIDER CSS --- */
+.slider-viewport {
+    width: 100%;
+    /* This HIDES the steps that are pushed out of the frame */
+    overflow: hidden; 
+    padding: 10px 0; 
+}
+
+.slider-track {
+    display: flex;
+    width: 300%; /* 300% because there are exactly 3 steps */
+    /* This creates the smooth, gliding animation! */
+    transition: transform 0.5s ease-in-out; 
+}
+
+.slide-step {
+    width: 33.333%; /* Each step takes up exactly 1/3rd of the 300% track */
+    flex-shrink: 0;
+    /* Adds the same 25px gap you used in your reservation-container */
+    display: flex; 
+    flex-direction: column;
+    gap: 25px; 
+    padding: 0 10px; 
+    box-sizing: border-box;
+}
+
+
+.step-1, .step-2-packages, .step-2-custom, .step-3 {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+/* Keeps the selected YES or NO button highlighted */
+.active-selection {
+    background-color: #8A2814 !important;
+    color: white !important;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3) !important;
+}
