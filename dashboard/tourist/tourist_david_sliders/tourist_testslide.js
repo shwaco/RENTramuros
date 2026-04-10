@@ -1,59 +1,59 @@
 let currentStep = 1;
 
-        function updateForm() {
-            // 1. SLIDE THE CONTAINERS
-            const track = document.getElementById('sliderTrack');
-            // Calculates how far left to push the track: 0%, -33.333%, or -66.666%
-            const translation = (currentStep - 1) * -33.333; 
-            track.style.transform = `translateX(${translation}%)`;
+function updateForm() {
+    // 1. SLIDE THE CONTAINERS
+    const track = document.getElementById('sliderTrack');
+    // Calculates how far left to push the track: 0%, -33.333%, or -66.666%
+    const translation = (currentStep - 1) * -33.333; 
+    track.style.transform = `translateX(${translation}%)`;
 
-            // 2. RESET ALL TOP CIRCLES TO WHITE (INACTIVE)
-            document.querySelector('.circle-1').style.backgroundColor = '#ffffff';
-            document.querySelector('.circle-1').style.color = '#000000';
-            document.querySelector('.progress-bar-1').style.backgroundColor = '#ffffff';
-            
-            document.querySelector('.circle-2').style.backgroundColor = '#ffffff';
-            document.querySelector('.circle-2').style.color = '#000000';
-            document.querySelector('.progress-bar-2').style.backgroundColor = '#ffffff';
-            
-            document.querySelector('.circle-3').style.backgroundColor = '#ffffff';
-            document.querySelector('.circle-3').style.color = '#000000';
+    // 2. RESET ALL TOP CIRCLES TO WHITE (INACTIVE)
+    document.querySelector('.circle-1').style.backgroundColor = '#ffffff';
+    document.querySelector('.circle-1').style.color = '#000000';
+    document.querySelector('.progress-bar-1').style.backgroundColor = '#ffffff';
+    
+    document.querySelector('.circle-2').style.backgroundColor = '#ffffff';
+    document.querySelector('.circle-2').style.color = '#000000';
+    document.querySelector('.progress-bar-2').style.backgroundColor = '#ffffff';
+    
+    document.querySelector('.circle-3').style.backgroundColor = '#ffffff';
+    document.querySelector('.circle-3').style.color = '#000000';
 
-            // 3. COLOR THE ACTIVE STEPS RED
-            if (currentStep >= 1) {
-                document.querySelector('.circle-1').style.backgroundColor = '#8A2814';
-                document.querySelector('.circle-1').style.color = '#ffffff';
-            }
-            if (currentStep >= 2) {
-                document.querySelector('.progress-bar-1').style.backgroundColor = '#8A2814';
-                document.querySelector('.circle-2').style.backgroundColor = '#8A2814';
-                document.querySelector('.circle-2').style.color = '#ffffff';
-            }
-            if (currentStep >= 3) {
-                document.querySelector('.progress-bar-2').style.backgroundColor = '#8A2814';
-                document.querySelector('.circle-3').style.backgroundColor = '#8A2814';
-                document.querySelector('.circle-3').style.color = '#ffffff';
-            }
-        }
+    // 3. COLOR THE ACTIVE STEPS RED
+    if (currentStep >= 1) {
+        document.querySelector('.circle-1').style.backgroundColor = '#8A2814';
+        document.querySelector('.circle-1').style.color = '#ffffff';
+    }
+    if (currentStep >= 2) {
+        document.querySelector('.progress-bar-1').style.backgroundColor = '#8A2814';
+        document.querySelector('.circle-2').style.backgroundColor = '#8A2814';
+        document.querySelector('.circle-2').style.color = '#ffffff';
+    }
+    if (currentStep >= 3) {
+        document.querySelector('.progress-bar-2').style.backgroundColor = '#8A2814';
+        document.querySelector('.circle-3').style.backgroundColor = '#8A2814';
+        document.querySelector('.circle-3').style.color = '#ffffff';
+    }
+}
 
-        function nextStep() {
-            if (currentStep < 3) {
-                currentStep++;
-                updateForm();
-                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scrolls back to top on next
-            }
-        }
+function nextStep() {
+    if (currentStep < 3) {
+        currentStep++;
+        updateForm();
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Scrolls back to top on next
+    }
+}
 
-        function prevStep() {
-            if (currentStep > 1) {
-                currentStep--;
-                updateForm();
-                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scrolls back to top on prev
-            }
-        }
-        
-        // Run once immediately when the page loads so Step 1 is colored red!
-        updateForm(); 
+function prevStep() {
+    if (currentStep > 1) {
+        currentStep--;
+        updateForm();
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Scrolls back to top on prev
+    }
+}
+
+// Run once immediately when the page loads so Step 1 is colored red!
+updateForm(); 
 
 
 // 1. Add a variable at the top to remember their choice
