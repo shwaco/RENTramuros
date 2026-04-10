@@ -1,100 +1,4 @@
 
-
-body{
-    background-color: #FFFFFF;
-}
-
-.reservation-container{
-    width: 100%;
-    max-width: 1011px;
-    margin: 100px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-}
-
-.process-container{
-    margin-top: 30px;
-    margin-right: 25px;
-    text-align: left;
-    height: 10vh;
-    display: flex;
-    justify-content: flex-end;                
-    width: 100%;
-}
-
-/* Center the entire stepper on the page */
-.steps-container {
-    display: flex;
-    justify-content: center;
-    width: 600px;
-    margin-bottom: 40px; /* Adjust spacing below the stepper as needed */
-}
-
-/* Arrange circles and bars horizontally and center them vertically */
-.steps {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Adds space between the shapes */
-}
-
-/* Styles applied to ALL circles */
-.circle-1, .circle-2, .circle-3 {
-    width: 50px; 
-    height: 50px;
-    border-radius: 50%; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Roboto Condensed", sans-serif;
-    font-size: 20px; /* You might want to lower this to 24px so it fits the 50px circle! */
-    font-weight: 500;
-    border: 1px solid #000000; 
-    box-sizing: border-box;
-    flex-shrink: 0; /* Add this! It prevents the circles from squishing */
-}
-
-/* Styles applied to ALL connecting bars */
-.progress-bar-1, .progress-bar-2 {
-    width: 80px; 
-    height: 10px; 
-    border-radius: 15px; 
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    flex-shrink: 0; /* Add this! It prevents the bars from squishing */
-}
-
-/* -------------------------------------- */
-/* ACTIVE/COMPLETED STYLES (Red)          */
-/* -------------------------------------- */
-
-/* Filled circles (1 and 2) */
-.circle-1, .circle-2 {
-    background-color: #8A2814; /* Your theme's red color */
-    color: #ffffff;
-}
-
-/* Filled progress bar (between 1 and 2) */
-.progress-bar-1 {
-    background-color: #8A2814;
-}
-
-/* -------------------------------------- */
-/* INACTIVE/UPCOMING STYLES (White)       */
-/* -------------------------------------- */
-
-/* Empty circle (3) */
-.circle-3 {
-    background-color: #ffffff;
-    color: #000000;
-}
-
-/* Empty progress bar (between 2 and 3) */
-.progress-bar-2 {
-    background-color: #ffffff;
-}
-
 .text-box{
     width: 100%;
     border-bottom: 0.5px solid #B4B1B1;
@@ -102,10 +6,10 @@ body{
 
 .attractions-container{
     width: 100%;
-    height: 362px;
+    height: 335px;
     border-radius: 10px;
     opacity: 1;
-    box-shadow: 0px 1px 8px 1px #00000040;
+    box-shadow: 0px 1px 4px 1px #00000040;
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
@@ -133,8 +37,9 @@ body{
 .attractions-options-container{
     padding: 37px 40px;
     display: flex;
-    gap: 30px;
+    gap: 20px;
     flex-wrap: wrap;
+    justify-content: center; 
 }
 
 .attraction-layer-1, .attraction-layer-2{
@@ -144,8 +49,8 @@ body{
 
 .attraction-1, .attraction-2, .attraction-3,  .attraction-4, .attraction-5,
 .attraction-6, .attraction-7, .attraction-8,  .attraction-9, .attraction-10{
-    width: 168px;
-    height: 97px;
+    width: 120px;
+    height: 88px;
     /* Optional: Add overflow: hidden and a border-radius if you want rounded corners */
     overflow: hidden;
     cursor: pointer;
