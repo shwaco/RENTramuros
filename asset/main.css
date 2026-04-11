@@ -373,23 +373,21 @@ main {
 }
 
 .upcoming_container .slider_wrapper .btn {
-    position: absolute;
-} 
-
-.upcoming_container .slider_wrapper .btn {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     z-index: 50;
     top: 50%;
-    translate: 0 -50%;
+    translate: 0 0;
     cursor: pointer;
     background-color: white;
     border: none;
     border-radius: 50%;
     box-shadow: 0 1px 2px 0.2px rgba(0, 0, 0, 0.5);
-    margin: -1rem;
+    margin: -1.25rem;
+    max-height: 4em;
+    max-width: 4em;
 }
 
 .upcoming_container .slider_wrapper .btn img {
@@ -400,11 +398,11 @@ main {
 }
 
 .upcoming_container .slider_wrapper .btn.one {
-    left: -1rem;
+    left: 0;
 }
 
 .upcoming_container .slider_wrapper .btn.two {
-    right: -0.7rem;
+    right: 0;
 }
 
 .upcoming_container .slider_wrapper .event_container {
@@ -644,6 +642,15 @@ main {
     background-color: white;
 
 }
+
+.package_wrapper .packages .package ul span {
+    color: black;
+}
+
+.package_wrapper .packages a {
+    text-decoration: none;
+}
+
 
 .package_wrapper .packages .package .number {
     font-weight: bold;
