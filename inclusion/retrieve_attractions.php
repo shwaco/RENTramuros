@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: GET');
 
-require_once './connect_phpmyadmin.php';
+require_once '../asset/connect_phpmyadmin.php';
 
 $sql = "SELECT attraction_id, attraction_name, entrance_fee, operating_hours FROM Attractions";
 $result = mysqli_query($con, $sql);

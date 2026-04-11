@@ -13,7 +13,7 @@ if(!isset($data->tourist_id) || !isset($data->booking_type)){
     exit();
 }
 
-require_once('./connect_phpmyadmin.php');
+require_once('../asset/connect_phpmyadmin.php');
 
 $tourist_id = $data->tourist_id;
 $booking_type = $data->booking_type;
