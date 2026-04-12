@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rentramuros | Calendar Component</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="DESIGN2.css">
+</head>
+<body>
+
+    <div class="calendar-card">
+        <div class="calendar-header">
+            <button class="nav-arrow">&lt;</button>
+            <h3 class="current-month">March 2026</h3>
+            <button class="nav-arrow">&gt;</button>
+        </div>
+
+        <div class="weekday-labels">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+
+        <div class="calendar-grid">
+            <div class="calendar-day" data-date="March 16">
+                <span class="day-number">16</span>
+                <span class="day-snippet">22,541</span>
+                <div class="day-tooltip">
+                    <p class="tooltip-header">Depart on Mar 16</p>
+                    <div class="tooltip-beak"></div>
+                </div>
+            </div>
+
+            <div class="calendar-day selected" data-date="March 17">
+                <span class="day-number">17</span>
+                <div class="day-tooltip">
+                    <p class="tooltip-header">Depart on Mar 17</p>
+                    <div class="tooltip-beak"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="FUNC2.js"></script>
+</body>
+</html>
