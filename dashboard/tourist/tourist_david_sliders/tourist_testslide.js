@@ -108,3 +108,67 @@ function nextStep() {
         window.scrollTo({ top: 0, behavior: 'smooth' }); 
     }
 }
+
+
+// time selection
+document.addEventListener("DOMContentLoaded", () => {
+    const hourCol = document.getElementById("hour-column");
+    const minCol = document.getElementById("minute-column");
+    const timeSelectBtn = document.getElementById("time-select-btn");
+    const timeMenu = document.getElementById("time-menu");
+    const timeDisplay = document.getElementById("time-display");
+    const confirmBtn = document.getElementById("confirm-time-btn");
+
+    let selectedHour = "06";
+    let selectedMinute = "00";
+    let selectedAmPm = "AM";
+
+    // Generate Hours (01 to 12)
+    for (let i = 1; i <= 12; i++) {
+        let val = i < 10 ? "0" + i : i.toString();
+        let div = document.createElement("div");
+        div.className = `time-option hour-option ${val === selectedHour ? 'selected' : ''}`;
+        div.innerText = val;
+        div.dataset.val = val;
+        div.dataset.type = "hour";
+        hourCol.appendChild(div);
+    }
+
+    // Generate Minutes (00 to 59)
+    for (let i = 0; i <= 59; i++) {
+        let val = i < 10 ? "0" + i : i.toString();
+        let div = document.createElement("div");
+        div.className = `time-option minute-option ${val === selectedMinute ? 'selected' : ''}`;
+        div.innerText = val;
+        div.dataset.val = val;
+        div.dataset.type = "minute";
+        minCol.appendChild(div);
+    }
+
+    // Handle Clicks
+    timeMenu.addEventListener("click", (e) => {
+        if (e.target.classList.contains("time-option")) {
+            let type = e.target.dataset.type;
+            let val = e.target.dataset.val;
+
+            let siblings = e.target.parentElement.querySelectorAll('.time-option');
+            siblings.forEach(el => el.classList.remove("selected"));
+            e.target.classList.add("selected");
+
+            if (type === "hour") selectedHour = val;
+            if (type === "minute") selectedMinute = val;
+            if (type === "ampm") selectedAmPm = val;
+        }
+    });
+
+    // Toggle Menu
+    timeSelectBtn.addEventListener("click", () => {
+        timeMenu.classList.toggle("show");
+    });
+
+    // Confirm Button
+    confirmBtn.addEventListener("click", () => {
+        timeDisplay.innerText = `${selectedHour}:${selectedMinute} ${selectedAmPm}`;
+        timeMenu.classList.remove("show");
+    });
+});

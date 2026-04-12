@@ -43,43 +43,41 @@
         <div class="slide-step">
         <div class="step-1">
         <div class="time-date-container">
-            <div class="text-box"><span class="time-date-text">When will this journey be?</span>
-            </div>  
-                <span class="time-date-label">TIME & DATE</span>
-            <div class="dropdown-container">
-            <div class="time-dropdown">
-            <div class="time-select">
-                <span class="time-selected">18:00</span>
-                <!--<div class="time-caret"></div>
+    
+    <div class="text-box">
+        <span class="time-date-text">When will this journey be?</span>
+    </div>  
+    <span class="time-date-label">TIME & DATE</span>
+    
+    <div class="dropdown-container">
+        
+        <div class="time-dropdown">
+            <div class="time-select" id="time-select-btn">
+                <span class="time-selected" id="time-display">06:00 PM</span>
             </div>
-            <ul class="time">
-                <li>07:00</li>
-                <li>08:00</li>
-                <li>09:00</li>
-                <li>10:00</li>
-                <li>11:00</li>
-                <li>12:00</li>
-                <li>13:00</li>
-                <li>14:00</li>
-                <li>15:00</li>
-                <li>16:00</li>
-                <li>18:00</li>
-                <li>17:00</li>
-                <li>19:00</li>
-                <li>20:00</li>
-                <li>21:00</li>
-                <li>22:00</li>
-            </ul>-->
-        </div>
-        </div>
+            
+            <div class="time-selection" id="time-menu">
+                <div class="time-columns">
+                    <div class="scroll-column" id="hour-column"></div>
+                    <div class="time-colon">:</div>
+                    <div class="scroll-column" id="minute-column"></div>
+                    <div class="ampm-column">
+                        <div class="time-option ampm-option selected" data-type="ampm" data-val="AM">AM</div>
+                        <div class="time-option ampm-option" data-type="ampm" data-val="PM">PM</div>
+                    </div>
+                </div>
+                <button type="button" class="time-confirm-btn" id="confirm-time-btn">Confirm</button>
+            </div>
+        </div> 
         <div class="date-dropdown">
             <div class="date-select">
                 <span class="date-selected">April 29, 2026</span>
                 <div class="date-caret"></div>
             </div>
         </div>
+        </div> 
     </div>
-    </div>
+
 
 
     <div class="tourists-quantity-conatiner">
@@ -135,10 +133,10 @@
         <button class="yes-package" id="btn-yes" onclick="selectPackageOption(true)">YES</button>
     </div>
     </div>
-    </div>
 
         <div class="prev-next-container" style="justify-content: flex-end;">
                 <button class="next-button" onclick="nextStep()">NEXT</button>
+        </div>
         </div>
     </div>
 
