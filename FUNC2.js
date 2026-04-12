@@ -35,10 +35,8 @@ function renderCalendar() {
 
         dayCell.innerHTML = `
             <span class="day-number">${i}</span>
-            <span class="day-snippet">${dayInfo.price}</span>
             <div class="day-tooltip">
                 <p class="tooltip-header">${monthNames[month]} ${i}, ${year}</p>
-                <p class="tooltip-detail">${dayInfo.event}</p>
                 <div class="tooltip-beak"></div>
             </div>
         `;
