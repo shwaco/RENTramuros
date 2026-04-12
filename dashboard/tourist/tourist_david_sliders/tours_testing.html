@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="tours_step2_packages.css">
 <link rel="stylesheet" href="tours_step2_custom.css">
 <link rel="stylesheet" href="tours_step3.css">
+<link rel="stylesheet" href="DESIGN2.css">
 
 </head>
 <body>
@@ -69,12 +70,31 @@
                 <button type="button" class="time-confirm-btn" id="confirm-time-btn">Confirm</button>
             </div>
         </div> 
-        <div class="date-dropdown">
-            <div class="date-select">
-                <span class="date-selected">April 29, 2026</span>
+
+        <div class="date-dropdown"> <!--mark ian's calendar-->
+            <div class="date-select" id="date-select-btn">
+                <span class="date-selected" id="date-display">April 29, 2026</span>
                 <div class="date-caret"></div>
             </div>
+            
+            <div class="calendar-popup" id="calendar-popup">
+                <div class="calendar-card">
+                    <div class="calendar-header">
+                        <button class="nav-arrow">&lt;</button>
+                        <h3 class="current-month">March 2026</h3>
+                        <button class="nav-arrow">&gt;</button>
+                    </div>
+
+                    <div class="weekday-labels">
+                        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                    </div>
+
+                    <div class="calendar-grid">
+                        </div>
+                </div>
+            </div>
         </div>
+
         </div> 
     </div>
 
@@ -304,5 +324,6 @@
     </div>
 
     <script src="tourist_testslide.js"></script>
+    <script src="FUNC2.js"></script>
 </body>
 </html>

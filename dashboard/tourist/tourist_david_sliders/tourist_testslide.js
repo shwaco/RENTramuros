@@ -172,3 +172,41 @@ document.addEventListener("DOMContentLoaded", () => {
         timeMenu.classList.remove("show");
     });
 });
+
+
+// --- DATE CALENDAR POPUP LOGIC ---
+document.addEventListener("DOMContentLoaded", () => {
+    const dateSelectBtn = document.getElementById("date-select-btn");
+    const calendarPopup = document.getElementById("calendar-popup");
+    const dateDisplay = document.getElementById("date-display");
+
+    // 1. Toggle calendar visibility when the date button is clicked
+    dateSelectBtn.addEventListener("click", () => {
+        calendarPopup.classList.toggle("show");
+    });
+
+    // 2. Update the button text when a date is picked
+    calendarPopup.addEventListener("click", (e) => {
+        // Find the closest calendar-day element that was clicked
+        const dayCell = e.target.closest('.calendar-day');
+        
+        if (dayCell) {
+            // Grab the day number from the clicked cell
+            const dayNumber = dayCell.querySelector('.day-number').innerText;
+            // Grab the current month and year from the calendar header
+            const currentMonthYear = document.querySelector('.current-month').innerText;
+            
+            // Split "March 2026" into "March" and "2026" to format the text nicely
+            const [month, year] = currentMonthYear.split(' ');
+            
+            // Update the display text to match the format: Month DD, YYYY
+            dateDisplay.innerText = `${month} ${dayNumber}, ${year}`;
+            
+            // Automatically hide the calendar popup after 150ms 
+            // (The tiny delay lets the user see the red selection circle first!)
+            setTimeout(() => {
+                 calendarPopup.classList.remove("show");
+            }, 150); 
+        }
+    });
+});
