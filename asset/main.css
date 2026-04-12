@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'roboto', arial, Helvetica, sans-serif;
-    /* outline: 1px solid green !important; */
+    outline: 1px solid green !important;
 }
 
 
@@ -81,7 +81,7 @@ nav button {
     color: white;
     background-color: #8D230F;
     padding: 0.7em 2em ;
-    border-radius: 12px;
+    border-radius: 20px;
     cursor: pointer;
     border: transparent;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
@@ -414,6 +414,7 @@ main {
     border-radius: 10px ;
     flex: 1 0 auto;
     height: 100%;
+    background-color: white;
 }
 
 .upcoming_container .slider_wrapper .event_container .image {
@@ -553,7 +554,7 @@ main {
     left: 4%;
     font-weight: 800;
     font-size: 1.7em;
-    font-family: 'playfair display';
+    font-family: 'roboto flex';
     text-shadow: 3px 3px 0.5px rgba(0, 0, 0, 0.5);
     z-index: 500;
     text-decoration-thickness: 1px;
