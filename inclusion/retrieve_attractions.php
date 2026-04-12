@@ -5,17 +5,30 @@ header('Access-Control-Allow-Methods: GET');
 
 require_once '../asset/connect_phpmyadmin.php';
 
-$sql = "SELECT attraction_id, attraction_name, entrance_fee, operating_hours FROM Attractions";
-$result = mysqli_query($con, $sql);
+$fetch_sql = "SELECT attraction_id, attraction_name, description, entrance_fee, operating_hours, image_file FROM Attractions";
+$result = mysqli_query($con, $fetch_sql);
 
-$attractions_array = array();
-if ($result && mysqli_num_rows($result) > 0) {
-
+if ($result) {
+    $attractions_array = array();
     while ($row = mysqli_fetch_assoc($result)) {
-        array_push($attractions_array, $row);
+        $attractions = array(
+            "attraction_id" => $row['attraction_id'],
+            "attraction_name" => $row['attraction_name'],
+            "description" => $row['description'],
+            "entrance_fee" => $row['entrance_fee'],
+            "operating_hours" => $row['operating_hours'],
+            "image_file" => $row['image_file']
+        );
+
+        array_push($attractions_array, $attractions);
     }
+
+    if (count($attractions_array) > 0) {
         echo json_encode(["status" => "success", "data" => $attractions_array]);
     } else {
-        echo json_encode(["status" => "success", "message" => "No attractions found", "data" => []]);
+        echo json_encode(["status" => "error", "message" => "No attractions found."]);
     }
+} else {
+    echo json_encode(["status" => "error", "message" => "Failed to retrieve attractions."]);
+}
 ?>

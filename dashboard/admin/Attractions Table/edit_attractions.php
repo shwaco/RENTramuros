@@ -1,43 +1,68 @@
 <?php
-include_once('../connect_phpmyadmin.php');  
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json; charset=UTF-8');
+header('Access-Control-Allow-Methods: PATCH');
 
-$id = $_GET['id'];
+require_once '../../../asset/connect_phpmyadmin.php';
 
-$result = mysqli_query($conn,"SELECT * FROM Attractions WHERE attraction_id=$id");
-$row = mysqli_fetch_assoc($result);
-
-if(isset($_POST['update'])){
-
-$name = $_POST['attraction_name'];
-$fee = $_POST['entrance_fee'];
-$hours = $_POST['operating_hours'];
-
-$query = "UPDATE Attractions 
-          SET attraction_name='$name',
-              entrance_fee='$fee',
-              operating_hours='$hours'
-          WHERE attraction_id=$id";
-
-mysqli_query($conn,$query);
-
-header("Location: index.php");
-
+if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
+    echo json_encode(["status" => "error", "message" => "Invalid request method."]);
+    exit();
 }
-?>
 
-<h2>Edit Attraction</h2>
+$data = json_decode(file_get_contents("php://input"));
 
-<form method="POST">
+if (empty($data->attraction_id)) {
+    echo json_encode(["status" => "error", "message" => "Missing Attraction ID."]);
+    exit();
+}
 
-Name:
-<input type="text" name="attraction_name" value="<?php echo $row['attraction_name']; ?>"><br><br>
+$attraction_id = $data->attraction_id;
 
-Entrance Fee:
-<input type="number" step="0.01" name="entrance_fee" value="<?php echo $row['entrance_fee']; ?>"><br><br>
+$update_fields = [];
+$params_array = [];
 
-Operating Hours:
-<input type="text" name="operating_hours" value="<?php echo $row['operating_hours']; ?>"><br><br>
+if(isset($data->attraction_name)) {
+    $update_fields[] = "attraction_name = ?";
+    $params_array[] = $data->attraction_name;
+}
 
-<button type="submit" name="update">Update</button>
+if(isset($data->description)) {
+    $update_fields[] = "description = ?";
+    $params_array[] = $data->description;
+}
 
-</form>
+if(isset($data->entrance_fee)) {
+    $update_fields[] = "entrance_fee = ?";
+    $params_array[] = $data->entrance_fee;
+}
+
+if(isset($data->operating_hours)) {
+    $update_fields[] = "operating_hours = ?";
+    $params_array[] = $data->operating_hours;
+}
+
+if(isset($data->image_file)) {
+    $update_fields[] = "image_file = ?";
+    $params_array[] = $data->image_file;
+}
+
+if(empty($update_fields)) {
+    echo json_encode(["status" => "error", "message" => "No fields to update."]);
+    exit();
+}
+
+$update_sql = "UPDATE Attractions SET " . implode(", ", $update_fields) . " WHERE attraction_id = ?";
+$params_array[] = $attraction_id;
+
+$update_stmt = mysqli_prepare($con, $update_sql);
+
+if(mysqli_stmt_execute($update_stmt, $params_array)) {
+    if(mysqli_stmt_affected_rows($update_stmt) > 0) {
+        echo json_encode(["status" => "success", "message" => "Attraction updated successfully."]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "No attraction found with the provided ID or no changes made."]);
+    }
+} else {
+    echo json_encode(["status" => "error", "message" => "Failed to update attraction."]);
+}

@@ -1,35 +1,30 @@
 <?php
-include_once('../connect_phpmyadmin.php');
 
-if(isset($_POST['submit'])){
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json; charset=UTF-8');
+header('Access-ControlAllow-Method: POST');
 
-$name = $_POST['attraction_name'];
-$fee = $_POST['entrance_fee'];
-$hours = $_POST['operating_hours'];
+require_once '../../../asset/connect_phpmyadmin.php';
 
-$query = "INSERT INTO Attractions(attraction_name, entrance_fee, VALUES('$name','$fee','$hours')";
-
-mysqli_query($conn,$query);
-
-header("Location: index.php");
-
+$data = json_decode(file_get_contents("php://input"));
+if(empty($data->attraction_name) || empty($data->description) || empty($data->entrance_fee) || empty($data->operating_hours) || empty($data->image_file)) {
+    echo json_encode(["status" => "error", "message" => "Missing required fields."]);
+    exit();
 }
 
+$attraction_name = $data->attraction_name;
+$description = $data->description;
+$entrance_fee = $data->entrance_fee;
+$operating_hours = $data->operating_hours;
+$image_file = $data->image_file;
+
+$insert_sql = "INSERT INTO Attractions (attraction_name, description, entrance_fee, operating_hours, image_file) VALUES (?, ?, ?, ?, ?)";
+$insert_stmt = mysqli_prepare($con, $insert_sql);
+mysqli_stmt_bind_param($insert_stmt, "sssss", $attraction_name, $description, $entrance_fee, $operating_hours, $image_file);
+
+if(mysqli_stmt_execute($insert_stmt)) {
+    echo json_encode(["status" => "success", "message" => "Attraction added successfully."]);
+} else {
+    echo json_encode(["status" => "error", "message" => "Failed to add attraction."]);
+}
 ?>
-
-<h2>Add Attraction</h2>
-
-<form method="POST">
-
-Name:
-<input type="text" name="attraction_name" required><br><br>
-
-Entrance Fee:
-<input type="number" step="0.01" name="entrance_fee" required><br><br>
-
-Operating Hours:
-<input type="text" name="operating_hours"><br><br>
-
-<button type="submit" name="submit">Add</button>
-
-</form>
