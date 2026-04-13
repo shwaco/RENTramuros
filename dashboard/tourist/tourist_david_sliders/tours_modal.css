@@ -1,0 +1,64 @@
+/* --- MODAL OVERLAY --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dim the background */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px); /* Subtle blur for modern look */
+}
+
+/* Show the modal when this class is added via JS */
+.modal-overlay.show {
+    display: flex;
+}
+
+/* --- THE RECEIPT CONTAINER --- */
+.receipt-container {
+    background: #ffffff;
+    padding: 0 2rem 2.5rem 2rem;
+    border-radius: 4px;
+    width: 95%;
+    max-width: 500px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.accept-btn:hover {
+    background-color: #059669 !important;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #000000;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    transition: color 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+    color: #dc2626;
+}
+
+/* Style for empty states */
+.no-itinerary-text {
+    font-style: italic;
+    color: #6b7280;
+    grid-column: span 3;
+}

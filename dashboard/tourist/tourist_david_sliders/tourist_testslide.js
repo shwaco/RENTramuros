@@ -1,3 +1,27 @@
+// --- MASTER RESERVATION DATA RECORD ---
+// This is exactly what your backend developer will send to the database!
+// --- MASTER RESERVATION DATA RECORD ---
+let reservationData = {
+    wantsPackage: null, 
+    selectedPackage: null, 
+    selectedVehicle: null,
+    customAttractions: [], 
+    tourists: {
+        adults: 2,
+        children: 0,
+        infants: 0
+    },
+    includesSeniors: false,
+    
+    // NEW: Added contact info storage
+    contactInfo: {
+        name: "",
+        email: "",
+        phone: ""
+    }
+};
+
+// --- SLIDER PROGRESSION LOGIC ---
 let currentStep = 1;
 
 function updateForm() {
@@ -37,10 +61,39 @@ function updateForm() {
 }
 
 function nextStep() {
+    // If they are on Step 1, run our validations
+    if (currentStep === 1) {
+        
+        // 1. ADULT VALIDATION: Must have at least 1 adult
+        if (reservationData.tourists.adults === 0) {
+            alert("You must have at least 1 adult to proceed with the journey.");
+            return; // Stops the slider from moving!
+        }
+
+        // 2. PACKAGE VALIDATION: Must pick YES or NO
+        if (reservationData.wantsPackage === null) {
+            alert("Please select YES or NO for the package before continuing.");
+            return; // Stops the slider from moving!
+        }
+
+        // They passed both checks! Let's arrange Step 2 before we slide to it.
+        const pkgDiv = document.getElementById('step2Packages');
+        const customDiv = document.getElementById('step2Custom');
+
+        if (reservationData.wantsPackage === true) {
+            pkgDiv.style.display = 'flex';
+            customDiv.style.display = 'none';
+        } else {
+            pkgDiv.style.display = 'none';
+            customDiv.style.display = 'flex';
+        }
+    }
+
+    // Normal sliding logic (applies to moving from Step 1->2 and Step 2->3)
     if (currentStep < 3) {
         currentStep++;
         updateForm();
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // Scrolls back to top on next
+        window.scrollTo({ top: 0, behavior: 'smooth' }); 
     }
 }
 
@@ -56,61 +109,8 @@ function prevStep() {
 updateForm(); 
 
 
-// 1. Add a variable at the top to remember their choice
-let isPackageSelected = null; 
 
-// 2. This function ONLY highlights the button they clicked
-function selectPackageOption(wantsPackage) {
-    isPackageSelected = wantsPackage; // Save their choice
-
-    // Get the buttons
-    const btnYes = document.getElementById('btn-yes');
-    const btnNo = document.getElementById('btn-no');
-
-    // Remove the red highlight from both buttons
-    btnYes.classList.remove('active-selection');
-    btnNo.classList.remove('active-selection');
-
-    // Add the red highlight to the one they just clicked
-    if (wantsPackage === true) {
-        btnYes.classList.add('active-selection');
-    } else {
-        btnNo.classList.add('active-selection');
-    }
-}
-
-// 3. Update nextStep to check their answer BEFORE sliding
-function nextStep() {
-    // If they are on Step 1, make sure they picked Yes or No
-    if (currentStep === 1) {
-        if (isPackageSelected === null) {
-            alert("Please select YES or NO for the package before continuing.");
-            return; // Stops the slider from moving!
-        }
-
-        // They made a choice. Let's arrange Step 2 before we slide to it.
-        const pkgDiv = document.getElementById('step2Packages');
-        const customDiv = document.getElementById('step2Custom');
-
-        if (isPackageSelected === true) {
-            pkgDiv.style.display = 'flex';
-            customDiv.style.display = 'none';
-        } else {
-            pkgDiv.style.display = 'none';
-            customDiv.style.display = 'flex';
-        }
-    }
-
-    // Normal sliding logic
-    if (currentStep < 3) {
-        currentStep++;
-        updateForm();
-        window.scrollTo({ top: 0, behavior: 'smooth' }); 
-    }
-}
-
-
-// time selection
+// --- STEP 1: TIME SELECTION LOGIC ---
 document.addEventListener("DOMContentLoaded", () => {
     const hourCol = document.getElementById("hour-column");
     const minCol = document.getElementById("minute-column");
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
         minCol.appendChild(div);
     }
 
-    // Handle Clicks
+    // Handle Clicks inside Time Menu
     timeMenu.addEventListener("click", (e) => {
         if (e.target.classList.contains("time-option")) {
             let type = e.target.dataset.type;
@@ -161,8 +161,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Toggle Menu
+    // Toggle Time Menu (and close Calendar if open)
     timeSelectBtn.addEventListener("click", () => {
+        const calendarPopup = document.getElementById("calendar-popup");
+        if(calendarPopup) calendarPopup.classList.remove("show"); // Close calendar
         timeMenu.classList.toggle("show");
     });
 
@@ -173,15 +175,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-// --- DATE CALENDAR POPUP LOGIC ---
+// --- STEP 1: DATE CALENDAR POPUP LOGIC ---
 document.addEventListener("DOMContentLoaded", () => {
     const dateSelectBtn = document.getElementById("date-select-btn");
     const calendarPopup = document.getElementById("calendar-popup");
     const dateDisplay = document.getElementById("date-display");
+    const timeMenu = document.getElementById("time-menu");
 
-    // 1. Toggle calendar visibility when the date button is clicked
+    // 1. Toggle calendar visibility when the date button is clicked (and close time menu)
     dateSelectBtn.addEventListener("click", () => {
+        if(timeMenu) timeMenu.classList.remove("show"); // Close time menu
         calendarPopup.classList.toggle("show");
     });
 
@@ -203,10 +206,257 @@ document.addEventListener("DOMContentLoaded", () => {
             dateDisplay.innerText = `${month} ${dayNumber}, ${year}`;
             
             // Automatically hide the calendar popup after 150ms 
-            // (The tiny delay lets the user see the red selection circle first!)
             setTimeout(() => {
                  calendarPopup.classList.remove("show");
             }, 150); 
         }
     });
 });
+
+// ---tourist counter adult children infant
+
+// --- STEP 1: TOURIST COUNTER LOGIC ---
+// --- STEP 1: TOURIST COUNTER LOGIC ---
+function updateTouristCount(type, change) {
+    let currentCount = 0;
+    
+    // 1. Determine which type we are updating and get its current value
+    if (type === 'adult') {
+        currentCount = reservationData.tourists.adults;
+    } else if (type === 'child') {
+        currentCount = reservationData.tourists.children;
+    } else if (type === 'infant') {
+        currentCount = reservationData.tourists.infants;
+    }
+
+    // 2. Do the math
+    let newCount = currentCount + change;
+
+    // 3. Prevent the number from going below 0
+    if (newCount < 0) {
+        newCount = 0;
+    }
+
+    // 4. Save the new number back into the Master Record
+    if (type === 'adult') reservationData.tourists.adults = newCount;
+    if (type === 'child') reservationData.tourists.children = newCount;
+    if (type === 'infant') reservationData.tourists.infants = newCount;
+
+    // 5. Update the number on the screen visually
+    if (type === 'adult') {
+        document.getElementById('adult-count-display').innerText = newCount;
+    } else if (type === 'child') {
+        document.getElementById('child-count-display').innerText = newCount;
+    } else if (type === 'infant') {
+        document.getElementById('infant-count-display').innerText = newCount;
+    }
+
+    console.log("Current Data:", reservationData); // Logs when you click + or -
+} // <--- THIS CLOSING BRACKET WAS MISSING!
+
+
+// --- STEP 1: SENIOR CHECKBOX LOGIC ---
+// Function to toggle the senior notice
+function toggleSeniorNotice() {
+    reservationData.includesSeniors = !reservationData.includesSeniors;
+
+    const circle = document.getElementById('senior-circle');
+
+    if (reservationData.includesSeniors === true) {
+        circle.classList.add('active');
+    } else {
+        circle.classList.remove('active');
+    }
+    
+    console.log("Current Data:", reservationData); // Logs when you click the senior toggle
+}
+
+// --- STEP 1: YES/NO PACKAGE LOGIC ---
+function selectPackageOption(wantsPackage) {
+    // Save to the Master Backend Record!
+    reservationData.wantsPackage = wantsPackage; 
+
+    // Get the buttons
+    const btnYes = document.getElementById('btn-yes');
+    const btnNo = document.getElementById('btn-no');
+
+    // Remove the red highlight from both buttons
+    btnYes.classList.remove('active-selection');
+    btnNo.classList.remove('active-selection');
+
+    // Add the red highlight to the one they just clicked
+    if (wantsPackage === true) {
+        btnYes.classList.add('active-selection');
+    } else {
+        btnNo.classList.add('active-selection');
+    }
+    
+    console.log("Current Data:", reservationData); // Test it in the console!
+}
+
+
+
+// --- STEP 2: PACKAGE AND VEHICLE LOGIC (WITH UNSELECT) ---
+
+function selectPackage(packageName) {
+    // 1. If the user clicks the package that is ALREADY selected...
+    if (reservationData.selectedPackage === packageName) {
+        reservationData.selectedPackage = null; // Wipe the data
+        document.getElementById('pkg-1').classList.remove('selected-card');
+        document.getElementById('pkg-2').classList.remove('selected-card');
+        document.getElementById('pkg-3').classList.remove('selected-card');
+        console.log("Package Unselected");
+    } else {
+        // 2. Otherwise, select it like normal
+        reservationData.selectedPackage = packageName;
+        document.getElementById('pkg-1').classList.remove('selected-card');
+        document.getElementById('pkg-2').classList.remove('selected-card');
+        document.getElementById('pkg-3').classList.remove('selected-card');
+
+        if (packageName === 'Package 1') document.getElementById('pkg-1').classList.add('selected-card');
+        if (packageName === 'Package 2') document.getElementById('pkg-2').classList.add('selected-card');
+        if (packageName === 'Package 3') document.getElementById('pkg-3').classList.add('selected-card');
+    }
+    console.log("Current Data:", reservationData);
+}
+
+function selectVehicle(vehicleName) {
+    // 1. If already selected, unselect it
+    if (reservationData.selectedVehicle === vehicleName) {
+        reservationData.selectedVehicle = null;
+        const allVehicles = document.querySelectorAll('.vehicle-card');
+        allVehicles.forEach(v => v.classList.remove('selected-card'));
+        console.log("Vehicle Unselected");
+    } else {
+        // 2. Select the new one
+        reservationData.selectedVehicle = vehicleName;
+        const allVehicles = document.querySelectorAll('.vehicle-card');
+        allVehicles.forEach(v => v.classList.remove('selected-card'));
+
+        if (vehicleName === 'None') document.getElementById('veh-none').classList.add('selected-card');
+        if (vehicleName === 'Tuktuk') document.getElementById('veh-1').classList.add('selected-card');
+        if (vehicleName === 'Kalesa') document.getElementById('veh-2').classList.add('selected-card');
+        if (vehicleName === 'Tranvia') document.getElementById('veh-3').classList.add('selected-card');
+    }
+    console.log("Current Data:", reservationData);
+}
+
+// --- STEP 2 CUSTOM LOGIC (WITH UNSELECT) ---
+
+// --- STEP 2 CUSTOM LOGIC ---
+
+// RESTORED: Function to handle MULTIPLE Attractions
+function toggleAttraction(attractionName, elementId) {
+    const array = reservationData.customAttractions;
+    const index = array.indexOf(attractionName);
+    const card = document.getElementById(elementId);
+
+    if (index > -1) {
+        array.splice(index, 1);
+        card.classList.remove('selected-card');
+    } else {
+        array.push(attractionName);
+        card.classList.add('selected-card');
+    }
+    console.log("Current Attractions:", reservationData.customAttractions);
+}
+
+function selectCustomVehicle(vehicleName) {
+    if (reservationData.selectedVehicle === vehicleName) {
+        reservationData.selectedVehicle = null;
+        document.querySelectorAll('.custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
+    } else {
+        reservationData.selectedVehicle = vehicleName;
+        document.querySelectorAll('.custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
+        if (vehicleName === 'None') document.getElementById('custom-veh-none').classList.add('selected-card');
+        if (vehicleName === 'Tuktuk') document.getElementById('custom-veh-1').classList.add('selected-card');
+        if (vehicleName === 'Kalesa') document.getElementById('custom-veh-2').classList.add('selected-card');
+        if (vehicleName === 'Tranvia') document.getElementById('custom-veh-3').classList.add('selected-card');
+    }
+}
+
+/**
+ * SUBMIT LOGIC
+ * Only fires when the user clicks the final "SUBMIT" button.
+ */
+// --- MODAL LOGIC STEP 3 ---
+
+function submitReservation() {
+    // 1. Grab values from Step 3 inputs
+    const name = document.getElementById('contact-name').value.trim();
+    const email = document.getElementById('contact-email').value.trim();
+    const phone = document.getElementById('contact-phone').value.trim();
+
+    if (!name || !email || !phone) {
+        alert("Please fill out all contact details.");
+        return;
+    }
+
+    // 2. Save to data object
+    reservationData.contactInfo = { name, email, phone };
+
+    // 3. Inject data into the Modal
+    document.getElementById('modal-adults').innerText = reservationData.tourists.adults;
+    document.getElementById('modal-children').innerText = reservationData.tourists.children;
+    document.getElementById('modal-infants').innerText = reservationData.tourists.infants;
+    
+    // --- NEW: Dynamic Senior Label Logic ---
+    const adultLabel = document.getElementById('modal-adult-label');
+    if (reservationData.includesSeniors === true) {
+        adultLabel.innerText = "ADULTS & SENIORS";
+    } else {
+        adultLabel.innerText = "ADULTS";
+    }
+    // ---------------------------------------
+
+    // Package Logic
+    document.getElementById('modal-package').innerText = reservationData.wantsPackage ? (reservationData.selectedPackage || "YES") : "NO";
+    
+    // Vehicle Logic
+    document.getElementById('modal-vehicle').innerText = reservationData.selectedVehicle || "NONE";
+    
+    // Contact Info Logic
+    document.getElementById('modal-full-name').innerText = name;
+    document.getElementById('modal-email').innerText = email;
+    document.getElementById('modal-phone').innerText = phone;
+
+    // Date Logic (Grabbing from your Step 1 Display)
+    const travelDate = document.getElementById('date-display').innerText;
+    const travelTime = document.getElementById('time-display').innerText;
+    document.getElementById('modal-date-time').innerText = `${travelDate} ; ${travelTime}`;
+
+    // Itinerary/Attractions Logic
+    const itineraryList = document.getElementById('modal-itinerary-list');
+    itineraryList.innerHTML = ""; // Clear old list
+    if (reservationData.customAttractions.length > 0) {
+        reservationData.customAttractions.forEach(attr => {
+            const li = document.createElement('li');
+            li.innerText = `• ${attr}`;
+            itineraryList.appendChild(li);
+        });
+    } else {
+        itineraryList.innerHTML = "<li class='no-itinerary-text'>No custom attractions selected</li>";
+    }
+
+    // 4. SHOW THE MODAL
+    document.getElementById('confirmationModal').classList.add('show');
+}
+// Function to close modal when clicking the X
+document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('confirmationModal').classList.remove('show');
+});
+
+// Function for the final green ACCEPT button
+function confirmFinalAcceptance() {
+    alert("Thank you! Your reservation for RENTramuros has been submitted.");
+    location.reload(); // Restarts the process
+}
+
+/* BACKEND HAND-OFF (Placeholder)
+ */
+function sendDataToDatabase(data) {
+    const finalJSON = JSON.stringify(data, null, 2);
+    console.log("FINAL JSON PAYLOAD:", finalJSON);
+    
+    // In the future, this is where your 'fetch' call will live.
+}

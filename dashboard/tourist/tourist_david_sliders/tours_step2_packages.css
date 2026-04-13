@@ -42,6 +42,7 @@
 
 .package-1, .package-2, .package-3{
     width: 216.3837890625px;
+    height: 262px;
     color: #252525;
     font-family: "Roboto Condensed", sans-serif;
     padding: 10px;
@@ -56,37 +57,44 @@
 }
 
 .package-image{
-    width: 217px;
+    width: 213px;
     height: 100.2px;
     object-fit: cover;
 }
 
 .package-image img{
-    width: 217px;
+    width: 213px;
     height: 100.2px;
 }
 
-.package-details-text{
-    width: 217px;
+.package-details-text {
+    width: 100%; /* Changed from fixed 217px to fill the card */
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column; /* This forces them to stack vertically */
+    gap: 5px; /* Adds a tiny bit of breathing room between lines */
     margin-top: 10px;
+    position: relative; /* Helps with price positioning */
 }
 
-.package-label{
-    width: fit-content;
-    height: 15.37px;
+.package-label {
+    display: block;
+    width: 100%;
+    font-weight: 400; /* Makes "Package 1" bold */
+    font-size: 16px;
+}
+.package-1-inclusion, .package-2-inclusion, .package-3-inclusion {
+    display: block;
+    width: 100%;
+    font-size: 16px; /* Slightly smaller for the list of places */
+    color: #313131; /* Professional grey for secondary info */
+    line-height: 1.2;
 }
 
-.package-1-inclusion, .package-2-inclusion, .package-3-inclusion{
-    width:fit-content;
-    height: 30px;
-    margin-top: 5px;
-}
-
-.package-1-price, .package-2-price, .package-3-price{
-    margin-top: 90px;
-    margin-left: 148px;
+.package-1-price, .package-2-price, .package-3-price {
+    align-self: flex-end; /* Pushes the price to the right */
+    margin-top: 80px; /* Adjusted from 90px to fit the new stacked layout */
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .select-vehicle-packages-conatiner{
@@ -99,6 +107,13 @@
     flex-direction: column;
 }
 
+.selected-card {
+    border: 2px solid #8A2814 !important; /* Thick red border */
+    transform: translateY(-5px);          /* Lifts the card up slightly */
+    box-shadow: 0 5px 15px rgba(138, 40, 20, 0.3) !important; /* Red tinted shadow */
+}
+
+/* selecting vehicle */
 .select-vehicle-text{
     display: flex;
     justify-content: center;
@@ -155,6 +170,13 @@
     background-color: #8A2814;
     color: white;
     border-color: #8A2814;
+}
+
+/* 2. The special "Clicked" state ONLY for the NONE vehicle box */
+.no-vehicle.selected-card {
+    background-color: #8A2814 !important; /* Fills the background red */
+    color: #FFFFFF !important;            /* Turns the text white */
+    border-color: #8A2814 !important;
 }
 
 

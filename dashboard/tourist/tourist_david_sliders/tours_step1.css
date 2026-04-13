@@ -1,4 +1,6 @@
-
+*{
+    border: 1px solid red;
+}
 
 body{
     background-color: #FFFFFF;
@@ -27,9 +29,9 @@ body{
 /* Center the entire stepper on the page */
 .steps-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     width: 600px;
-    margin-bottom: 40px; /* Adjust spacing below the stepper as needed */
+    margin-top: 40px; /* Adjust spacing below the stepper as needed */
 }
 
 /* Arrange circles and bars horizontally and center them vertically */
@@ -314,30 +316,37 @@ body{
     width: fit-content;
 }
 
-.senior-notice-container {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Adds space between the circle and the text */
-}
+    .senior-notice-container {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Adds space between the circle and the text */
+    }
 
-.notice-circle{
-    display: flex;
-    align-items: center;
-    height: 30px;
-    width: 30px;
-    font-size: 18px;
-    font-weight: 500;
-    border-radius: 50%;
-    border: 1px solid #d3d3d3;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-}
+    .notice-circle{
+        display: flex;
+        align-items: center;
+        height: 30px;
+        width: 30px;
+        font-size: 18px;
+        font-weight: 500;
+        border-radius: 50%;
+        border: 1px solid #d3d3d3;
+        cursor: pointer;
+        transition: background 0.3s, color 0.3s;
+    }
 
-.notice-circle:hover{
-    background: #8A2814;
-    color: #FFFFFF;
-}
+    .notice-circle:hover{
+        background: #8A2814;
+        color: #FFFFFF;
+    }
+
+    /* Keeps it red when selected, exactly like the hover state */
+    .notice-circle.active {
+        background: #8A2814;
+        color: #FFFFFF;
+        border-color: #8A2814; /* Makes the border blend in with the background */
+    }
 
 .senior-notice-text{
     opacity: 1;
