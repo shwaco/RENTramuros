@@ -1,52 +1,52 @@
 <?php
-
 $login=0;
 $invalid=0;
 $unverified=0;
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-    include_once('../../config/config.php');
-    $email=$_POST['email'];
-    $password=$_POST['password'];
+    require_once('../../config/config.php'); 
+    
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    $sql="select * from `tour_guides` where email='$email'";
-    $result=mysqli_query($con, $sql);
+    // SECURE PREPARED STATEMENT
+    $stmt = mysqli_prepare($con, "SELECT * FROM `tour_guides` WHERE email = ?");
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
     if($result) {
         $num=mysqli_num_rows($result);
         if($num>0) {
             $row=mysqli_fetch_assoc($result);
             
-            // Check BOTH password and role against the database
             if(password_verify($password, $row['password_hash'])) {
-
               if($row['is_verified']==1) {
 
-              if ($row['current_status'] === 'Offline') {
-                    $g_id = $row['guide_id'];
-                    $update_sql = "UPDATE `tour_guides` SET current_status = 'Available', became_available_at = NOW() WHERE guide_id = '$g_id'";
-                    mysqli_query($con, $update_sql);
-              }
-                
-                // Start the session since credentials are correct
-                session_start();
-                $_SESSION['email']=$email;
-                $_SESSION['guide_id']=$row['guide_id'];
-                header("location: ../../queue-management-system/index.php");
-                exit(); // Stops script execution after redirect
+                  if ($row['current_status'] === 'Offline') {
+                        $g_id = $row['guide_id'];
+                        // Secure update statement
+                        $update_stmt = mysqli_prepare($con, "UPDATE `tour_guides` SET current_status = 'Idle', became_available_at = NOW() WHERE guide_id = ?");
+                        mysqli_stmt_bind_param($update_stmt, "i", $g_id);
+                        mysqli_stmt_execute($update_stmt);
+                  }
+                    
+                  session_start();
+                  $_SESSION['email']=$email;
+                  $_SESSION['guide_id']=$row['guide_id'];
+                  header("location: ../../queue-management-system/index.php");
+                  exit(); 
 
+              } else {
+                  $unverified=1;
+              }
             } else {
-                // Password was wrong, OR the role typed didn't match their actual DB role
-                $unverified=1;
-            }
+                $invalid=1;
+            } 
         } else {
-            // No user found with that email
             $invalid=1;
-        } 
-      } else {
-      $invalid=1;
+        }
     }
-  }
 }
 ?>
 

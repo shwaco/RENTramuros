@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RENTramuros Receipt Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Roboto+Serif:wght@400;500;700&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .receipt-container {
+            background: #ffffff;
+            padding: 0 2rem 2.5rem 2rem;
+            border-radius: 4px;
+            width: 95%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .accept-btn:hover {
+            background-color: #059669 !important;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #000000;
+            font-style: normal;
+            line-height: 1;
+            padding: 0;
+            margin: 0;
+            transition: color 0.2s ease-in-out; 
+        }
+
+        .close-btn:hover {
+            color: #dc2626; 
+        }
+    </style>
+</head>
+<body>
+
+    <article class="receipt-container" aria-labelledby="receipt-id">
+        
+        <header style="display: flex; justify-content: space-between; align-items: center; width: 100%; border-bottom: 1px solid #e5e7eb; padding-top: 1rem; padding-bottom: 1rem;">
+            <h2 id="receipt-id" style="background-color: #000000; color: #ffffff; font-family: 'Roboto Condensed', sans-serif; font-size: 1.3rem; font-weight: 700; padding: 0.2rem 0.8rem; border-radius: 4px; display: inline-flex; justify-content: center; align-items: center; margin: 0;">
+                20
+            </h2>
+            <button aria-label="Close Receipt" class="close-btn">&times;</button>
+        </header>
+
+        <time datetime="2026-04-11T01:39" style="display: block; text-align: right; font-size: 0.8rem; color: #000000; margin-top: 1.5rem; margin-bottom: 2rem; font-family: 'Roboto Condensed', sans-serif; font-weight: 700;">
+            April 11, 2026 ; 01:39 AM
+        </time>
+
+        <section aria-labelledby="tourist-heading">
+            <h3 id="tourist-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; color:#000000; font-family: 'Roboto Condensed', sans-serif;">TOURIST</h3>
+
+            <dl style="margin: 0; padding: 0;">
+                <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem; padding-left: 1.25rem;">
+                    <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">ADULTS & SENIORS</dt>
+                    <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(18 years old and above)</dd>
+                    <dd style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">4</dd>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem; padding-left: 1.25rem;">
+                    <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">CHILDREN</dt>
+                    <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(2 to 17 years old)</dd>
+                    <dd style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">2</dd>
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:1.5rem; font-size:0.85rem; padding-left: 1.25rem;">
+                    <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">INFANTS</dt>
+                    <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(under 2 years old)</dd>
+                    <dd style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">1</dd>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.85rem;">
+                    <dt style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">PACKAGE</dt>
+                    <dd style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">NO</dd>
+                </div>
+            </dl>
+        </section>
+
+        <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;" aria-hidden="true">
+
+        <section aria-labelledby="itinerary-heading">
+            <h3 id="itinerary-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; font-family: 'Roboto Condensed', sans-serif; color: #000000;">ITINERARY</h3>
+
+            <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; font-size: 0.8rem; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0 0 1.5rem 0;">
+                <li style="margin: 0;">No itineraries listed</li>
+            </ul>
+
+            <dl style="margin: 0; padding: 0;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; font-size: 0.85rem;">
+                    <dt style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">VEHICLE</dt>
+                    <dd style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-transform: uppercase; text-align: center; margin: 0;">PREMIUM KALESA</dd>
+                    <dd style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-align: right; font-weight: bold; margin: 0;">2</dd>
+                </div>
+            </dl>
+        </section>
+
+        <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;" aria-hidden="true">
+
+        <section aria-labelledby="contact-heading">
+            <h3 id="contact-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; font-family: 'Roboto Condensed', sans-serif; color: #000000;">CONTACT INFORMATION</h3>
+            
+            <address style="font-style: normal; margin: 0; padding: 0;">
+                <dl style="margin: 0; padding: 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
+                        <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">FULL NAME:</dt>
+                        <dd style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">Juan Dela Cruz</dd>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
+                        <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">EMAIL ADDRESS:</dt>
+                        <dd style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">juan.delacruz@email.com</dd>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 0.85rem;">
+                        <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">PHONE NUMBER:</dt>
+                        <dd style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">09189876543</dd>
+                    </div>
+                </dl>
+            </address>
+        </section>
+
+        <footer style="display: flex; justify-content: flex-end; margin-top: 2rem;">
+            <button class="accept-btn" aria-label="Accept Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 2px; cursor: pointer; transition: background-color 0.2s;">
+                ACCEPT
+            </button>
+        </footer>
+    </article>
+
+</body>
+</html>

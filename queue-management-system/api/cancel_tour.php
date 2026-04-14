@@ -1,38 +1,51 @@
 <?php
-// FOR NOW Wala PA TONG PURPOSE 
 session_start();
+
+// API para icancel ang current tourist assignment
+// sineset nito ang tourist pabalik sa active queue aandt nirereset ung guide status
+require_once '../../config/config.php'; 
+
 header('Content-Type: application/json');
-require_once('../../config/config.php');
 
+// tiga check if user is logged in
+if (!isset($_SESSION['guide_id'])) {
+    echo json_encode(['success' => false, 'error' => 'Not logged in.']);
+    exit;
+}
+
+$guide_id = $_SESSION['guide_id'];
+
+// tiga kuha ng JSON from the front-end request.
 $data = json_decode(file_get_contents('php://input'), true);
-$touristId = $data['customer_id'] ?? null;
-$guideId = $_SESSION['guide_id'] ?? 1;
+$customer_id = $data['customer_id'] ?? null;
 
-if (!$touristId) {
-    echo json_encode(['success' => false, 'message' => 'Missing tourist ID']);
+if (!$customer_id) {
+    echo json_encode(['success' => false, 'error' => 'No tourist ID provided.']);
     exit;
 }
 
 try {
     mysqli_begin_transaction($con);
 
-    $cancelTouristSql = "UPDATE tourists SET status = 'cancelled' WHERE customer_id = ?";
-    $stmtT = mysqli_prepare($con, $cancelTouristSql);
-    mysqli_stmt_bind_param($stmtT, "i", $touristId);
-    mysqli_stmt_execute($stmtT);
+    //  tiga balik sa active queue and tiga tanggal ng tour guide assignment and called_at na oras
+    $stmt1 = mysqli_prepare($con, "UPDATE tourists SET status = 'active', guide_id = NULL, called_at = NULL WHERE customer_id = ?");
+    mysqli_stmt_bind_param($stmt1, "i", $customer_id);
+    if (!mysqli_stmt_execute($stmt1)) {
+        throw new Exception("Failed to update tourist.");
+    }
 
-    $updateGuideSql = "UPDATE tour_guides SET current_status = 'Available', current_tourist_id = NULL, became_available_at = NOW() WHERE guide_id = ?";
-    $stmtG = mysqli_prepare($con, $updateGuideSql);
-    mysqli_stmt_bind_param($stmtG, "i", $guideId);
-    mysqli_stmt_execute($stmtG);
-
-    require_once 'dispatch.php';
-    runDispatch($conn);
+    // makes the guide available again by resetting their status and current tourist assignment
+    $stmt2 = mysqli_prepare($con, "UPDATE tour_guides SET current_status = 'Available', current_tourist_id = NULL, became_available_at = CURRENT_TIMESTAMP WHERE guide_id = ?");
+    mysqli_stmt_bind_param($stmt2, "i", $guide_id);
+    if (!mysqli_stmt_execute($stmt2)) {
+         throw new Exception("Failed to update guide status.");
+    }
 
     mysqli_commit($con);
-    echo json_encode(['success' => true, 'message' => 'Tour Cancelled']);
+    echo json_encode(['success' => true]);
+
 } catch (Exception $e) {
-    $conn->rollBack();
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    mysqli_rollback($con);
+    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
 }
 ?>

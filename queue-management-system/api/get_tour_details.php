@@ -1,15 +1,20 @@
 <?php
-session_start(); // THIS IS THE MAGIC LINE
+session_start();
 header('Content-Type: application/json');
 require_once('../../config/config.php');
 
+// API para kunin yung current na nakaassign na tourist ng guide
+// ginagamot to para ipakita ang active tour details kapag Busy ang guide
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'No active session found.']); 
     exit();
 }
 
+$guide_id = $_SESSION['guide_id'];
+
 try {
-    // pinasimple lang yung query sa table ng tourists
+    // query para kunin ang tourist data na nakaassign sa current guide.
+    // kasama na here yung package at itinerary na gagamitin sa dashboard.
     $query = "SELECT t.customer_id, t.first_name, t.last_name, t.queue_number, t.service_type 
     AS vehicle_type, p.package_name, GROUP_CONCAT(a.attraction_name SEPARATOR ', ') 
     as destinations 

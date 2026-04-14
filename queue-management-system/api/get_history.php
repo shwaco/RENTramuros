@@ -3,6 +3,8 @@ session_start();
 header('Content-Type: application/json');
 require_once('../../config/config.php');
 
+// API para kuhanin ang completed tour history ng guide.
+// sinesend nito yung list ng past tours para sa history tab
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();
@@ -11,8 +13,30 @@ if (!isset($_SESSION['guide_id'])) {
 $guide_id = $_SESSION['guide_id'];
 
 try {
-    // may limit na 10 para hanggang 10 lang makikita sa dashboard for now
-    $sql = "SELECT queue_number, first_name, last_name, service_type AS vehicle_type, completed_at FROM tourists WHERE guide_id = ? AND status = 'completed' ORDER BY completed_at DESC LIMIT 10";
+    $sql = "SELECT 
+                t.customer_id,
+                t.first_name,
+                t.last_name,
+                t.email,
+                t.phone_number,
+                t.service_type AS vehicle_type,
+                t.vehicle_count,
+                t.adult_count,
+                t.children_count,
+                t.infant_count,
+                t.completed_at,
+                t.called_at,
+                p.package_name,
+                GROUP_CONCAT(DISTINCT a.attraction_name SEPARATOR ', ') AS destinations
+            FROM tourists t
+            LEFT JOIN packages p ON t.package_id = p.package_id
+            LEFT JOIN package_itinerary pi ON p.package_id = pi.package_id
+            LEFT JOIN attractions a ON pi.attraction_id = a.attraction_id
+            WHERE t.status = 'completed'
+                AND t.guide_id = ?
+            GROUP BY t.customer_id
+            ORDER BY t.completed_at DESC";
+
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($stmt, "i", $guide_id);
     mysqli_stmt_execute($stmt);

@@ -1,4 +1,4 @@
-Before doing this, make sure to run the queuing_system.sql after ma import yung rentramuros_database.sql sa files ni bou
+Before doing this, make sure to run the queuing_system.sql after ma import yung rentramuros_database.sql (these are both under the "database" folder)
 oh and running na yung XAMPP naka on na dapat yung msql and apache
 LINKS: 
 Sign up first: http://localhost/RENTramuros/auth/sign%20up/signup_tour_guide.php
@@ -29,6 +29,24 @@ tas click Go ignore niyo lang yung warning afterwards
 
 then balik kayo tour_guide (again manual pa siyang ineedit sa db kasi wala pa yung functions ng tourists) 
 edit niyo yung nauna sa queue 
-palitan niyo yung current_status ng "busy"
+palitan niyo yung current_status ng "Busy"
 then iassign niyo siya sa available na tourist sa "current_tourist_id"
-then refresh or reload niyo lang yung page nung dashboard magrereflect na yun
+then refresh or reload niyo lang yung page nung dashboard magrereflect na yun but nagrrefresh naman siya automatically every 10 seconds
+
+
+For deleting the active tourists
+DELETE FROM `tourists` WHERE `status` IN ('waiting', 'active');
+
+For inserting data sa tourists
+INSERT INTO `tourists` 
+(`first_name`, `last_name`, `email`, `phone_number`, `service_type`, `vehicle_count`, `status`, `adult_count`, `children_count`, `infant_count`, `destinations`) 
+VALUES 
+('Juan', 'Dela Cruz', 'juan.delacruz1211@gmail.com', '09171234567', 'Premium Kalesa', 2, 'waiting', 3, 2, 0, 'Fort Santiago, Manila Cathedral, Baluarte de San Diego, Casa Manila'),
+
+('Maria', 'Clara', 'mclara18871121@yahoo.com', '09189876543', 'Standard Kalesa', 1, 'waiting', 2, 0, 1, 'Plaza Roma, San Agustin Church, Rizal Shrine'),
+
+('Andres', 'Bonifacio', 'supremo.andres1211@outlook.com', '09191122334', 'Walking Tour', 0, 'waiting', 5, 0, 0, 'Baluarte de San Andres, Puerta Real Gardens, Postigo Gate, Intramuros Walls'),
+
+('Leonor', 'Rivera', 'leonor.rivera1211@icloud.com', '09204445566', 'Bambike Ecotour', 4, 'waiting', 4, 0, 0, 'Plaza San Luis Complex, Silahis Art Center, Destileria Limtuaco Museum');
+
+yeahhh tekaaa i forgottt pero ang purpose alng kasi nito is magiinject siya ng data sa table wala pala yung hoverrr 
