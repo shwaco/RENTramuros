@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     exit();
 }
 
-require_once '../../../asset/connect_phpmyadmin.php';
+require_once '../../../asset/config.php';
 
 $data = json_decode(file_get_contents("php://input"));
 

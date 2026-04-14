@@ -52,3 +52,41 @@ function updateButtonVisibility () {
 updateButtonVisibility();
 
 });
+
+// retrieve attractions
+async function loadPopularAttractions() {
+    try {
+        const response = await fetch('../../inclusions/attractions/retrieve_attractions.php'); 
+        
+        const result = await response.json();
+
+        if (result.status === "success") {
+            
+            const attractionsArray = result.data; 
+            
+            const sliderList = document.getElementById('popular-attractions-list');
+            
+            attractionsArray.forEach(attraction => {
+                
+                const cardHTML = `
+                    <li>
+                        <a href="#" rel="noopener noreferrer">
+                            <img src="../../asset/img/${attraction.image_file}" alt="${attraction.attraction_name} Image">
+                            <p>${attraction.attraction_name}</p>
+                        </a>
+                    </li>
+                `;
+                
+                sliderList.insertAdjacentHTML('beforeend', cardHTML);
+            });
+            
+        } else {
+            console.error("Backend Error:", result.message); 
+        }
+
+    } catch (error) {
+        console.error("Network Failure:", error);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadPopularAttractions);
