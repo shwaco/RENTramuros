@@ -59,7 +59,7 @@ function updateButtonVisibility (track, prevBtn, nextBtn) {
 // retrieve attractions
 async function loadPopularAttractions() {
     try {
-        const response = await fetch('../../inclusions/attractions/retrieve_attractions.php'); 
+        const response = await fetch('/RENTramuros/backend/attractions/retrieve_attractions.php'); 
         
         const result = await response.json();
 
