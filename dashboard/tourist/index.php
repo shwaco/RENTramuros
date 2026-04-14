@@ -172,8 +172,7 @@
                         
                     <button class="slide-btn one" id="prev-btn1"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
-                    <ul id="popular-attractions-list">
-                    </ul>
+                    <ul id="popular-attractions-list"></ul>
 
                     <button class="slide-btn two" id="next-btn1"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
                 </div>

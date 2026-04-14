@@ -21,7 +21,7 @@ const nextBtn = slider.querySelector('.slide-btn.two');
 
 
 function getScrollAmount() {
-    const itemWidth = track.querySelector('li').clientWidth;
+    const itemWidth = track.querySelector('li')?.clientWidth || 0;
     const gap = 16;
     return itemWidth + gap;
 }
@@ -34,24 +34,27 @@ prevBtn.addEventListener('click', () => {
     track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth'})
 })
 
-function updateButtonVisibility () {
-    if (track.scrollLeft <= 10) {
+    track.addEventListener('scroll', () => {updateButtonVisibility(track, prevBtn, nextBtn);
+    });
+
+    updateButtonVisibility(track, prevBtn, nextBtn);
+
+});
+
+function updateButtonVisibility (track, prevBtn, nextBtn) {
+    if (track.scrollLeft <= 0   ) {
         prevBtn.style.display = 'none';
     } else {
         prevBtn.style.display = 'flex';
     }
-    if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 5) {
-        nextBtn.style.display = 'none';
-    } else {
-        nextBtn.style.display = 'flex';
+    if (track.scrollWidth > 0) {
+        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 5) {
+            nextBtn.style.display = 'none';
+        } else {
+            nextBtn.style.display = 'flex';
+        }
     }
 }
-
-    track.addEventListener('scroll', updateButtonVisibility);
-
-updateButtonVisibility();
-
-});
 
 // retrieve attractions
 async function loadPopularAttractions() {
@@ -78,7 +81,13 @@ async function loadPopularAttractions() {
                 `;
                 
                 sliderList.insertAdjacentHTML('beforeend', cardHTML);
-            });
+            }); 
+
+            const sliderContainer = sliderList.closest('.slider');
+            const prevBtn = sliderContainer.querySelector('.slide-btn.one');
+            const nextBtn = sliderContainer.querySelector('.slide-btn.two');
+            
+            updateButtonVisibility(sliderList, prevBtn, nextBtn);
             
         } else {
             console.error("Backend Error:", result.message); 
@@ -87,6 +96,8 @@ async function loadPopularAttractions() {
     } catch (error) {
         console.error("Network Failure:", error);
     }
+
 }
 
 document.addEventListener('DOMContentLoaded', loadPopularAttractions);
+
