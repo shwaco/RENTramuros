@@ -191,6 +191,7 @@
     
     /* Optional: Add a smooth transition so the border fades in nicely */
     transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
 }
 
 /* Corrected selector and image sizing */
@@ -208,6 +209,49 @@
     border: 1px solid #8A2814;
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.vehicle-overlay {
+    position: absolute;
+    bottom: 8px; /* Floats it slightly above the bottom edge */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Pushes name to left, capacity to right */
+    align-items: flex-end; 
+    padding: 0 2px;
+    box-sizing: border-box;
+    pointer-events: none; /* CRITICAL: Allows user to click "through" the text to select the image */
+}
+
+.vehicle-name {
+    font-family: "Roboto Condensed", sans-serif;
+    color: #ffffff;
+    font-size: 28px; /* Huge text */
+    font-weight: 900;
+    line-height: 1;
+    text-shadow: 
+        -1px -1px 0 #000,  
+         0   -1px 0 #000,
+         1px -1px 0 #000,
+         1px  0   0 #000,
+         1px  1px 0 #000,
+         0    1px 0 #000,
+        -1px  1px 0 #000,
+        -1px  0   0 #000;
+}
+
+.vehicle-capacity {
+    font-family: "Roboto Condensed", sans-serif;
+    background-color: #8A2814; /* Matches your theme red */
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 12px; /* Creates the pill shape */
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 4px; /* Nudges it up so it aligns nicely with the large text */
+    margin-right: 17px;
 }
 
 .prev-next-container {
