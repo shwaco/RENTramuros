@@ -242,7 +242,7 @@ if ($currentStatus === 'Available') {
                             <!-- if number 1 sa queue, lalabas ang selection timer para piliin ang next tourist -->
                             <div style="background-color: #fee2e2; color: #dc2626; padding: 0.5rem 1.25rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; border: 1px solid #f87171; font-family: 'Roboto', sans-serif; white-space: nowrap; flex-shrink: 0;" aria-live="polite">
                                 <i class="far fa-clock"></i>
-                                <span>Select Tourist: <span style="font-family: 'Roboto Serif', serif;"><span id="selection-timer">60</span>s</span></span>
+                                <span>Select Tourist: <span style="font-family: 'Roboto Serif', serif;"><span id="selection-timer">30</span>s</span></span>
                             </div>
                         <?php endif; ?>
                     </header>

@@ -12,7 +12,7 @@ $invalid_otp = 0;
 $success = 0;
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    include '../../asset/connect_phpmyadmin.php';
+    include '../../config/config.php';
     $entered_otp = $_POST['otp'];
 
     // Check if the OTP matches the one assigned to this email

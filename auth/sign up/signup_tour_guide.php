@@ -13,7 +13,7 @@ $success=0;
 $email_address_error=0;
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-   include_once('../../asset/connect_phpmyadmin.php');
+    include_once('../../config/config.php');
     $email=$_POST['email'];
     $password=$_POST['password'];
     $first_name=$_POST['first_name'];

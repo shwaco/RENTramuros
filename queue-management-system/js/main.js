@@ -172,7 +172,7 @@ async function initWaitingLobby() {
 
 // timer na magc-countdown kapag nasa unahan na ng queue yung tour guide, at kapag na-expire yung time, mare-refresh yung page para bumalik sa lobby view at mawala sa unahan ng queue
 function startClaimTimer() {
-    let timeLeft = 60;
+    let timeLeft = 30;
     const timerDisplay = document.getElementById('selection-timer');
     
     if (claimTimerInterval) clearInterval(claimTimerInterval);
