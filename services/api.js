@@ -17,7 +17,7 @@ async function getPopularAttractions() {
 }
 
 // retrieve recommended attractions
-async function getRecommendedAttractions {
+async function getRecommendedAttractions() {
     try {
         const response = await fetch('/RENTramuros/backend/attractions/PHPFILE');
 
