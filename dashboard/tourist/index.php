@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../asset/main.css">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="../../asset/main.css?v=<?php echo filemtime('../../asset/main.css'); ?>">
+    <link rel="stylesheet" href="./index.css?v=<?php echo filemtime('../../asset/script.js'); ?>">
 
-    <script src="../../asset/script.js" defer></script>
+    <script type="module" src="../../asset/script.js?v=<?php echo filemtime('../../asset/script.js'); ?>" defer></script>
 
 </head>
 <body>
@@ -34,7 +34,7 @@
             <ul class="navbar">
                 <li><img src="../../asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo"></li>
 
-                <li class="hideOnMobile"><a href="#"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
+                <li class="hideOnMobile"><a href="#" id="maps"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
                 <li class="hideOnMobile"><a href="#"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
                 <li class="hideOnMobile"><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li class="hideOnMobile last"><a href="#">About</a></li>
@@ -90,7 +90,7 @@
 
                 <div class="title_wrapper">
                     <div class="title">
-                        <div class="upcoming">Upcoming Events</div>
+                        <div class="upcoming"><p>Upcoming Events</p></div>
                         <div class="v_calendar"><a href="." rel="noopener noreferrer">(View Calendar)</a></div>    
                     </div>
 
@@ -172,19 +172,7 @@
                         
                     <button class="slide-btn one" id="prev-btn1"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
-                    <ul>
-                            
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"><p>Casa la cote</p></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404816.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404817.jpg" alt="ewan" ></a></li>
-                        <li><a href="."  rel="noopener noreferrer"><img src="../../asset/img/6156791707530366599.jpg" alt="ewan" ></a></li>
-
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404816.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404817.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6156791707530366599.jpg" alt="ewan" ></a></li>
-
-                    </ul>
+                    <ul id="pop-attractions-list"></ul>
 
                     <button class="slide-btn two" id="next-btn1"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
                 </div>
@@ -195,25 +183,13 @@
             <!-- Recommended attractions -->
             <div class="slider-container two">
 
-                <div class="heading two">Recommended Attractions
-                </div>
+                <div class="heading two">Recommended Attractions</div>
 
                 <div class="slider two">
                         
                     <button class="slide-btn one" id="prev-btn2"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
-                    <ul>
-                        
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"><p>Casa la cote</p></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404816.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404817.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6156791707530366599.jpg" alt="ewan" ></a></li>
-
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404816.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404817.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6156791707530366599.jpg" alt="ewan" ></a></li>
-
+                    <ul id="reco-attractions-list">
                     </ul>
 
                     <button class="slide-btn two" id="next-btn2"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
