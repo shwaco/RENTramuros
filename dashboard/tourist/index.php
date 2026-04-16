@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../asset/main.css">
+    <link rel="stylesheet" href="../../asset/main.css?v=<?php echo filemtime('../../asset/main.css'); ?>">
     <link rel="stylesheet" href="./index.css">
 
     <script src="../../asset/script.js?v=<?php echo filemtime('../../asset/script.js'); ?>" defer></script>
@@ -90,7 +90,7 @@
 
                 <div class="title_wrapper">
                     <div class="title">
-                        <div class="upcoming">Upcoming Events</div>
+                        <div class="upcoming"><p>Upcoming Events</p></div>
                         <div class="v_calendar"><a href="." rel="noopener noreferrer">(View Calendar)</a></div>    
                     </div>
 
