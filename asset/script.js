@@ -1,3 +1,5 @@
+import { getPopularAttractions, getRecommendedAttractions } from "../services/api.js";
+
 // Sidebar
 function showSidebar() {
     const sidebar = document.querySelector('.sidebar')
@@ -56,48 +58,39 @@ function updateButtonVisibility (track, prevBtn, nextBtn) {
     }
 }
 
-// retrieve attractions
-async function loadPopularAttractions() {
-    try {
-        const response = await fetch('/RENTramuros/backend/attractions/retrieve_attractions.php'); 
+// retrieve popular and recommended attractions
+
+function populateSliders(attractionsData, attractionsList) {
+    attractionsData.forEach(attraction => {
         
-        const result = await response.json();
+        const cardHTML = `
+            <li>
+                <a href="#" rel="noopener noreferrer">
+                    <img src="../../asset/img/${attraction.image_file}" alt="${attraction.attraction_name} Image">
+                    <p>${attraction.attraction_name}</p>
+                </a>
+            </li>
+        `;
+        
+        attractionsList.insertAdjacentHTML('beforeend', cardHTML);
+    }); 
 
-        if (result.status === "success") {
-            
-            const attractionsArray = result.data; 
-            
-            const sliderList = document.getElementById('popular-attractions-list');
-            
-            attractionsArray.forEach(attraction => {
-                
-                const cardHTML = `
-                    <li>
-                        <a href="#" rel="noopener noreferrer">
-                            <img src="../../asset/img/${attraction.image_file}" alt="${attraction.attraction_name} Image">
-                            <p>${attraction.attraction_name}</p>
-                        </a>
-                    </li>
-                `;
-                
-                sliderList.insertAdjacentHTML('beforeend', cardHTML);
-            }); 
+    const sliderContainer = attractionsList.closest('.slider');
+    const prevBtn = sliderContainer.querySelector('.slide-btn.one');
+    const nextBtn = sliderContainer.querySelector('.slide-btn.two');
 
-            const sliderContainer = sliderList.closest('.slider');
-            const prevBtn = sliderContainer.querySelector('.slide-btn.one');
-            const nextBtn = sliderContainer.querySelector('.slide-btn.two');
-            
-            updateButtonVisibility(sliderList, prevBtn, nextBtn);
-            
-        } else {
-            console.error("Backend Error:", result.message); 
-        }
-
-    } catch (error) {
-        console.error("Network Failure:", error);
-    }
-
+    updateButtonVisibility(attractionsList, prevBtn, nextBtn);
 }
 
-document.addEventListener('DOMContentLoaded', loadPopularAttractions);
+async function buildSlider() {
+    const popAttractions = await getPopularAttractions();
+    const popAttractionsList = document.getElementById('pop-attractions-list');
 
+    const recoAttractions = await getRecommendedAttractions();
+    const recoAttractionsList = document.getElementById('reco-attractions-list');
+
+    populateSliders(popAttractions, popAttractionsList);
+    populateSliders(recoAttractions, recoAttractionsList);
+}
+
+document.addEventListener('DOMContentLoaded', buildSlider);

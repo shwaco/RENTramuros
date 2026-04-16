@@ -1,5 +1,5 @@
 // retrieve popular attractions 
-async function getPopularAttractions() {
+export async function getPopularAttractions() {
     try {
         const response = await fetch('/RENTramuros/backend/attractions/retrieve_attractions.php');
 
@@ -17,14 +17,14 @@ async function getPopularAttractions() {
 }
 
 // retrieve recommended attractions
-async function getRecommendedAttractions() {
+export async function getRecommendedAttractions() {
     try {
-        const response = await fetch('/RENTramuros/backend/attractions/PHPFILE');
+        const response = await fetch('/RENTramuros/backend/attractions/retrieve_attractions.php');
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`)
         } else {
-            const result = response.json();
+            const result = await response.json();
             return result.data || [];
         }
 
@@ -34,4 +34,3 @@ async function getRecommendedAttractions() {
     }
 } 
 
-document.addEventListener('DOMContentLoaded', getPopularAttractions);

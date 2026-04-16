@@ -10,11 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../../asset/main.css?v=<?php echo filemtime('../../asset/main.css'); ?>">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./index.css?v=<?php echo filemtime('../../asset/script.js'); ?>">
 
-    <script src="../../asset/script.js?v=<?php echo filemtime('../../asset/script.js'); ?>" defer></script>
-
-    <script src="../../services/api.js?v=<?php echo filemtime('../../services/api.js'); ?>" defer></script>
+    <script type="module" src="../../asset/script.js?v=<?php echo filemtime('../../asset/script.js'); ?>" defer></script>
 
 </head>
 <body>
@@ -174,7 +172,7 @@
                         
                     <button class="slide-btn one" id="prev-btn1"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
-                    <ul id="popular-attractions-list"></ul>
+                    <ul id="pop-attractions-list"></ul>
 
                     <button class="slide-btn two" id="next-btn1"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
                 </div>
@@ -185,25 +183,13 @@
             <!-- Recommended attractions -->
             <div class="slider-container two">
 
-                <div class="heading two">Recommended Attractions
-                </div>
+                <div class="heading two">Recommended Attractions</div>
 
                 <div class="slider two">
                         
                     <button class="slide-btn one" id="prev-btn2"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
-                    <ul>
-                        
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"><p>Casa la cote</p></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404816.jpg" alt="ewan" ><p></p></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404817.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6156791707530366599.jpg" alt="ewan" ></a></li>
-
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404816.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6154443154988404817.jpg" alt="ewan" ></a></li>
-                        <li><a href="." rel="noopener noreferrer"><img src="../../asset/img/6156791707530366599.jpg" alt="ewan" ></a></li>
-
+                    <ul id="reco-attractions-list">
                     </ul>
 
                     <button class="slide-btn two" id="next-btn2"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
