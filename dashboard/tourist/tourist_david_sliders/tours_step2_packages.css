@@ -185,7 +185,7 @@
     width: 205px;
     height: 118px;
     /* Optional: Add overflow: hidden and a border-radius if you want rounded corners */
-    overflow: hidden;
+    overflow: visible;
     cursor: pointer;
     border: 1px solid transparent; 
     
@@ -245,13 +245,26 @@
     font-family: "Roboto Condensed", sans-serif;
     background-color: #8A2814; /* Matches your theme red */
     color: #ffffff;
-    font-size: 9px;
+    font-size: 8.5px;
     font-weight: 700;
     padding: 3px 8px;
     border-radius: 12px; /* Creates the pill shape */
     box-shadow: 0px 2px 4px rgba(0,0,0,0.5);
     margin-bottom: 4px; /* Nudges it up so it aligns nicely with the large text */
-    margin-right: 17px;
+    margin-right: px;
+}
+
+.vehicle-3-capacity{
+    font-family: "Roboto Condensed", sans-serif;
+    background-color: #8A2814; /* Matches your theme red */
+    color: #ffffff;
+    font-size: 8.5px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 12px; /* Creates the pill shape */
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.5);
+    margin-bottom: 4px; /* Nudges it up so it aligns nicely with the large text */
+    margin-right: 1px;
 }
 
 .prev-next-container {
@@ -329,4 +342,80 @@
 /* Make the left arrow slide to the left on hover! */
 .prev-button:hover::before {
     transform: translateX(-4px);
+}
+
+
+/*vehicle counter*/
+
+/* --- VEHICLE QUANTITY COUNTER --- */
+
+.vehicle-counter {
+    position: absolute;
+    top: -40px; /* Pushes it above the image border like your design */
+    left: 50%;
+    transform: translateX(-50%); /* Perfectly centers it */
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    
+    /* Hidden by default! */
+    display: none; 
+    align-items: center;
+    padding: 5px 3px;
+    gap: 20px;
+    z-index: 10;
+}
+
+/* MAGIC: This makes the counter appear ONLY when the card is selected */
+.selected-card .vehicle-counter {
+    display: flex;
+}
+
+.veh-plus {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    line-height: 1;
+    padding-bottom: 1px; /* Visual tweak to center the +/- symbol perfectly */
+    transition: transform 0.1s;
+}
+
+.veh-minus{
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    line-height: 1;
+    padding-bottom: 3px; /* Visual tweak to center the +/- symbol perfectly */
+    transition: transform 0.1s;
+}
+
+.veh-minus:active, .veh-plus:active {
+    transform: scale(0.9); /* Tiny click animation */
+}
+
+.veh-count {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000;
+    min-width: 70px;
+    text-align: center;
 }

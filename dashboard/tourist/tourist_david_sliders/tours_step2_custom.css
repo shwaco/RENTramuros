@@ -82,7 +82,8 @@
     box-shadow: 0 5px 15px rgba(138, 40, 20, 0.3) !important; 
 }
 
-.custom-select-vehicle-conatiner{
+/* --- CUSTOM VEHICLE CONTAINER --- */
+.custom-select-vehicle-conatiner {
     width: 100%;
     height: 269px;
     border-radius: 10px;
@@ -92,7 +93,7 @@
     flex-direction: column;
 }
 
-.custom-select-vehicle-text{
+.custom-select-vehicle-text {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,50 +101,39 @@
     height: 42px;
     opacity: 1;
     font-family: "Roboto Condensed", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 700;
     font-size: 20px;
     line-height: 100%;
     letter-spacing: 2%;
     text-align: center;
-    vertical-align: middle;
     margin-left: 30px;
     margin-top: 9px;
     margin-bottom: 9px;
 }
 
-.custom-vehicle-container{
+.custom-vehicle-container {
     padding: 45px 86px;
     display: flex;
-    gap: 30px
+    gap: 30px;
 }
 
+/* --- NONE BUTTON --- */
 .custom-no-vehicle {
-    /* 1. Match the exact size of the vehicle images */
     width: 205px;
     height: 118px;
-    
-    /* 2. Center the text perfectly */
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    /* 3. Add the border */
-    border: 2px solid #8A2814; /* You can change this hex code to match your theme */
-    box-sizing: border-box; /* Ensures the border doesn't make the box wider than 205px */
-    
-    /* Optional: Make it look clickable and match your fonts */
+    border: 2px solid #8A2814;
+    box-sizing: border-box;
     cursor: pointer;
     font-family: "Roboto Condensed", sans-serif;
     font-size: 20px;
     font-weight: 700;
     color: #000000;
-    
-    /* Optional: Match the hover transition from your other buttons */
     transition: background-color 0.3s, color 0.3s;
 }
 
-/* Optional hover effect so the user knows it's selectable */
 .custom-no-vehicle:hover {
     background-color: #8A2814;
     color: white;
@@ -156,35 +146,38 @@
     border-color: #8A2814 !important;
 }
 
-/* Keep your container sizing as-is */
+/* --- VEHICLE IMAGE CARDS --- */
 .custom-vehicle-1, .custom-vehicle-2, .custom-vehicle-3 {
     width: 205px;
     height: 118px;
-    /* Optional: Add overflow: hidden and a border-radius if you want rounded corners */
-    overflow: hidden;
     cursor: pointer;
     border: 1px solid transparent; 
-    
-    /* Optional: Add a smooth transition so the border fades in nicely */
     transition: transform 0.2s, box-shadow 0.2s;
+    
+    /* CRITICAL FOR POPUP COUNTER TO WORK */
+    position: relative; 
+    overflow: visible; 
 }
 
-/* Corrected selector and image sizing */
 .custom-vehicle-1 img, 
 .custom-vehicle-2 img, 
 .custom-vehicle-3 img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* This is the magic property that prevents stretching */
-    object-position: center; /* Ensures the middle of the image stays in view */
+    object-fit: cover; 
+    object-position: center; 
     transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 8px; /* Matches reference rounding */
 }
 
-.custom-vehicle-1:hover, .custom-vehicle-2:hover, .custom-vehicle-3:hover{
+.custom-vehicle-1:hover, .custom-vehicle-2:hover, .custom-vehicle-3:hover {
     border: 1px solid #8A2814;
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
+
+/* --- VEHICLE OVERLAY TEXT --- */
+
 
 .prev-next-container {
     display: flex;

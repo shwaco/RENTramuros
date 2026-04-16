@@ -5,6 +5,7 @@ let reservationData = {
     wantsPackage: null, 
     selectedPackage: null, 
     selectedVehicle: null,
+    vehicleQuantity: 0, // === ALREADY ADDED: Tracks how many vehicles ===
     customAttractions: [], 
     tourists: {
         adults: 2,
@@ -107,8 +108,6 @@ function prevStep() {
 
 // Run once immediately when the page loads so Step 1 is colored red!
 updateForm(); 
-
-
 
 // --- STEP 1: TIME SELECTION LOGIC ---
 document.addEventListener("DOMContentLoaded", () => {
@@ -213,9 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// ---tourist counter adult children infant
-
-// --- STEP 1: TOURIST COUNTER LOGIC ---
 // --- STEP 1: TOURIST COUNTER LOGIC ---
 function updateTouristCount(type, change) {
     let currentCount = 0;
@@ -251,12 +247,10 @@ function updateTouristCount(type, change) {
         document.getElementById('infant-count-display').innerText = newCount;
     }
 
-    console.log("Current Data:", reservationData); // Logs when you click + or -
-} // <--- THIS CLOSING BRACKET WAS MISSING!
-
+    console.log("Current Data:", reservationData); 
+}
 
 // --- STEP 1: SENIOR CHECKBOX LOGIC ---
-// Function to toggle the senior notice
 function toggleSeniorNotice() {
     reservationData.includesSeniors = !reservationData.includesSeniors;
 
@@ -268,46 +262,37 @@ function toggleSeniorNotice() {
         circle.classList.remove('active');
     }
     
-    console.log("Current Data:", reservationData); // Logs when you click the senior toggle
+    console.log("Current Data:", reservationData); 
 }
 
 // --- STEP 1: YES/NO PACKAGE LOGIC ---
 function selectPackageOption(wantsPackage) {
-    // Save to the Master Backend Record!
     reservationData.wantsPackage = wantsPackage; 
 
-    // Get the buttons
     const btnYes = document.getElementById('btn-yes');
     const btnNo = document.getElementById('btn-no');
 
-    // Remove the red highlight from both buttons
     btnYes.classList.remove('active-selection');
     btnNo.classList.remove('active-selection');
 
-    // Add the red highlight to the one they just clicked
     if (wantsPackage === true) {
         btnYes.classList.add('active-selection');
     } else {
         btnNo.classList.add('active-selection');
     }
     
-    console.log("Current Data:", reservationData); // Test it in the console!
+    console.log("Current Data:", reservationData); 
 }
-
-
 
 // --- STEP 2: PACKAGE AND VEHICLE LOGIC (WITH UNSELECT) ---
 
 function selectPackage(packageName) {
-    // 1. If the user clicks the package that is ALREADY selected...
     if (reservationData.selectedPackage === packageName) {
-        reservationData.selectedPackage = null; // Wipe the data
+        reservationData.selectedPackage = null; 
         document.getElementById('pkg-1').classList.remove('selected-card');
         document.getElementById('pkg-2').classList.remove('selected-card');
         document.getElementById('pkg-3').classList.remove('selected-card');
-        console.log("Package Unselected");
     } else {
-        // 2. Otherwise, select it like normal
         reservationData.selectedPackage = packageName;
         document.getElementById('pkg-1').classList.remove('selected-card');
         document.getElementById('pkg-2').classList.remove('selected-card');
@@ -321,15 +306,23 @@ function selectPackage(packageName) {
 }
 
 function selectVehicle(vehicleName) {
-    // 1. If already selected, unselect it
     if (reservationData.selectedVehicle === vehicleName) {
         reservationData.selectedVehicle = null;
+        
+        // === NEW ADDITION: Reset quantity to 0 when UNSELECTED ===
+        reservationData.vehicleQuantity = 0;
+        // =========================================================
+
         const allVehicles = document.querySelectorAll('.vehicle-card');
         allVehicles.forEach(v => v.classList.remove('selected-card'));
-        console.log("Vehicle Unselected");
     } else {
-        // 2. Select the new one
         reservationData.selectedVehicle = vehicleName;
+        
+        // === NEW ADDITION: Set quantity to 1 when a new vehicle is SELECTED ===
+        reservationData.vehicleQuantity = 1;
+        document.querySelectorAll('.veh-count').forEach(el => el.innerText = '1');
+        // ======================================================================
+
         const allVehicles = document.querySelectorAll('.vehicle-card');
         allVehicles.forEach(v => v.classList.remove('selected-card'));
 
@@ -341,11 +334,8 @@ function selectVehicle(vehicleName) {
     console.log("Current Data:", reservationData);
 }
 
-// --- STEP 2 CUSTOM LOGIC (WITH UNSELECT) ---
-
 // --- STEP 2 CUSTOM LOGIC ---
 
-// RESTORED: Function to handle MULTIPLE Attractions
 function toggleAttraction(attractionName, elementId) {
     const array = reservationData.customAttractions;
     const index = array.indexOf(attractionName);
@@ -364,21 +354,53 @@ function toggleAttraction(attractionName, elementId) {
 function selectCustomVehicle(vehicleName) {
     if (reservationData.selectedVehicle === vehicleName) {
         reservationData.selectedVehicle = null;
+        
+        // === NEW ADDITION: Reset quantity to 0 when UNSELECTED ===
+        reservationData.vehicleQuantity = 0;
+        // =========================================================
+
         document.querySelectorAll('.custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
     } else {
         reservationData.selectedVehicle = vehicleName;
+        
+        // === NEW ADDITION: Set quantity to 1 when a new vehicle is SELECTED ===
+        reservationData.vehicleQuantity = 1;
+        document.querySelectorAll('.veh-count').forEach(el => el.innerText = '1');
+        // ======================================================================
+
         document.querySelectorAll('.custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
         if (vehicleName === 'None') document.getElementById('custom-veh-none').classList.add('selected-card');
         if (vehicleName === 'Tuktuk') document.getElementById('custom-veh-1').classList.add('selected-card');
         if (vehicleName === 'Kalesa') document.getElementById('custom-veh-2').classList.add('selected-card');
         if (vehicleName === 'Tranvia') document.getElementById('custom-veh-3').classList.add('selected-card');
     }
+    console.log("Current Data:", reservationData);
 }
 
-/**
- * SUBMIT LOGIC
- * Only fires when the user clicks the final "SUBMIT" button.
- */
+// === NEW ADDITION: BRAND NEW FUNCTION TO HANDLE THE +/- BUTTONS ON VEHICLES ===
+function updateVehicleCount(change, event) {
+    // This stops the click from "falling through" and unselecting the main vehicle card!
+    event.stopPropagation(); 
+
+    let newCount = reservationData.vehicleQuantity + change;
+
+    // Prevent them from going below 1 (if the vehicle is selected, they must have at least 1)
+    if (newCount < 1) {
+        newCount = 1;
+    }
+
+    reservationData.vehicleQuantity = newCount;
+
+    // Find the counter on the screen and update the number
+    const activeCard = event.target.closest('.vehicle-card') || event.target.closest('.custom-vehicle-card');
+    if (activeCard) {
+        activeCard.querySelector('.veh-count').innerText = newCount;
+    }
+
+    console.log("Vehicle Quantity updated:", reservationData.vehicleQuantity);
+}
+// ===============================================================================
+
 // --- MODAL LOGIC STEP 3 ---
 
 function submitReservation() {
@@ -400,14 +422,13 @@ function submitReservation() {
     document.getElementById('modal-children').innerText = reservationData.tourists.children;
     document.getElementById('modal-infants').innerText = reservationData.tourists.infants;
     
-    // --- NEW: Dynamic Senior Label Logic ---
+    // Dynamic Senior Label Logic
     const adultLabel = document.getElementById('modal-adult-label');
     if (reservationData.includesSeniors === true) {
         adultLabel.innerText = "ADULTS & SENIORS";
     } else {
         adultLabel.innerText = "ADULTS";
     }
-    // ---------------------------------------
 
     // Package Logic
     document.getElementById('modal-package').innerText = reservationData.wantsPackage ? (reservationData.selectedPackage || "YES") : "NO";
@@ -420,7 +441,7 @@ function submitReservation() {
     document.getElementById('modal-email').innerText = email;
     document.getElementById('modal-phone').innerText = phone;
 
-    // Date Logic (Grabbing from your Step 1 Display)
+    // Date Logic
     const travelDate = document.getElementById('date-display').innerText;
     const travelTime = document.getElementById('time-display').innerText;
     document.getElementById('modal-date-time').innerText = `${travelDate} ; ${travelTime}`;
@@ -440,7 +461,33 @@ function submitReservation() {
 
     // 4. SHOW THE MODAL
     document.getElementById('confirmationModal').classList.add('show');
+
+    // ... existing modal logic ...
+
+    // Package Logic
+    document.getElementById('modal-package').innerText = reservationData.wantsPackage ? (reservationData.selectedPackage || "YES") : "NO";
+    
+    // --- UPDATED: Vehicle Logic ---
+    const vehicleDisplay = document.getElementById('modal-vehicle');
+    const vehicleQuantityDisplay = document.getElementById('modal-vehicle-quantity');
+    
+    if (reservationData.selectedVehicle && reservationData.selectedVehicle !== 'None') {
+        vehicleDisplay.innerText = reservationData.selectedVehicle;
+        // Inject the quantity number!
+        vehicleQuantityDisplay.innerText = reservationData.vehicleQuantity; 
+    } else {
+        vehicleDisplay.innerText = "NONE";
+        // Hide the quantity if they picked NONE
+        vehicleQuantityDisplay.innerText = ""; 
+    }
+    // ------------------------------
+    
+    // Contact Info Logic
+    document.getElementById('modal-full-name').innerText = name;
+// ... rest of your modal logic ...
+
 }
+
 // Function to close modal when clicking the X
 document.getElementById('closeModal').addEventListener('click', () => {
     document.getElementById('confirmationModal').classList.remove('show');
@@ -449,14 +496,11 @@ document.getElementById('closeModal').addEventListener('click', () => {
 // Function for the final green ACCEPT button
 function confirmFinalAcceptance() {
     alert("Thank you! Your reservation for RENTramuros has been submitted.");
-    location.reload(); // Restarts the process
+    location.reload(); 
 }
 
-/* BACKEND HAND-OFF (Placeholder)
- */
+/* BACKEND HAND-OFF (Placeholder) */
 function sendDataToDatabase(data) {
     const finalJSON = JSON.stringify(data, null, 2);
     console.log("FINAL JSON PAYLOAD:", finalJSON);
-    
-    // In the future, this is where your 'fetch' call will live.
 }

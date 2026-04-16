@@ -10,13 +10,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="tours_step1.css">
-<link rel="stylesheet" href="tours_step2_packages.css">
-<link rel="stylesheet" href="tours_step2_custom.css">
-<link rel="stylesheet" href="tours_step3.css">
-<link rel="stylesheet" href="DESIGN2.css">
-<link rel="stylesheet" href="tours_modal.css">
-
+    <link rel="stylesheet" href="tours_step1.css">
+    <link rel="stylesheet" href="tours_step2_packages.css">
+    <link rel="stylesheet" href="tours_step2_custom.css">
+    <link rel="stylesheet" href="tours_step3.css">
+    <link rel="stylesheet" href="DESIGN2.css">
+    <link rel="stylesheet" href="tours_modal.css">
 </head>
 <body>
     <div class="reservation-container">
@@ -129,6 +128,7 @@
                 </div>
 
                 <div class="slide-step">
+                    
                     <div class="step-2-packages" id="step2Packages">
                         <div class="packages-container">
                             <div class="text-box"><span class="packages-text">Choose a package to experience</span></div>  
@@ -147,14 +147,20 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="select-vehicle-packages-conatiner">
                             <div class="text-box"><span class="select-vehicle-text">Choose a vehicle to ride</span></div>
-                                <div class="vehicle-container">
+                            <div class="vehicle-container">
                                 <div class="no-vehicle vehicle-card" id="veh-none" onclick="selectVehicle('None')">
                                     <span class="none-text">NONE</span>
                                 </div>
 
                                 <div class="vehicle-1 vehicle-card" id="veh-1" onclick="selectVehicle('Tuktuk')">
+                                    <div class="vehicle-counter">
+                                        <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
+                                        <span class="veh-count">1</span>
+                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
+                                    </div>
                                     <img src="https://dummyimage.com/hd1080">
                                     <div class="vehicle-overlay">
                                         <span class="vehicle-name">Tuktuk</span>
@@ -163,6 +169,11 @@
                                 </div>
 
                                 <div class="vehicle-2 vehicle-card" id="veh-2" onclick="selectVehicle('Kalesa')">
+                                    <div class="vehicle-counter">
+                                        <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
+                                        <span class="veh-count">1</span>
+                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
+                                    </div>
                                     <img src="https://dummyimage.com/hd1080">
                                     <div class="vehicle-overlay">
                                         <span class="vehicle-name">Kalesa</span>
@@ -171,10 +182,15 @@
                                 </div>
 
                                 <div class="vehicle-3 vehicle-card" id="veh-3" onclick="selectVehicle('Tranvia')">
+                                    <div class="vehicle-counter">
+                                        <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
+                                        <span class="veh-count">1</span>
+                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
+                                    </div>
                                     <img src="https://dummyimage.com/hd1080">
                                     <div class="vehicle-overlay">
                                         <span class="vehicle-name">Tranvia</span>
-                                        <span class="vehicle-capacity">Capacity: 10+</span>
+                                        <span class="vehicle-capacity">Capacity: 12-20</span>
                                     </div>
                                 </div>
                             </div>
@@ -201,16 +217,58 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="custom-select-vehicle-conatiner">
-                            <div class="text-box"><span class="custom-select-vehicle-text">Choose a vehicle to ride</span></div>
-                            <div class="custom-vehicle-container">
-                                <div class="custom-no-vehicle custom-vehicle-card" id="custom-veh-none" onclick="selectCustomVehicle('None')"><span class="none-text">NONE</span></div>
-                                <div class="custom-vehicle-1 custom-vehicle-card" id="custom-veh-1" onclick="selectCustomVehicle('Tuktuk')"><img src="https://dummyimage.com/hd1080"></div>
-                                <div class="custom-vehicle-2 custom-vehicle-card" id="custom-veh-2" onclick="selectCustomVehicle('Kalesa')"><img src="https://dummyimage.com/hd1080"></div>
-                                <div class="custom-vehicle-3 custom-vehicle-card" id="custom-veh-3" onclick="selectCustomVehicle('Tranvia')"><img src="https://dummyimage.com/hd1080"></div>
+                            <div class="text-box">
+                                <span class="custom-select-vehicle-text">Choose a vehicle to ride</span>
+                            </div> <div class="custom-vehicle-container">
+                                
+                                <div class="custom-no-vehicle custom-vehicle-card" id="custom-veh-none" onclick="selectCustomVehicle('None')">
+                                    <span class="none-text">NONE</span>
+                                </div>
+
+                                <div class="custom-vehicle-1 custom-vehicle-card" id="custom-veh-1" onclick="selectCustomVehicle('Tuktuk')">
+                                    <div class="vehicle-counter"> <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
+                                        <span class="veh-count">1</span>
+                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
+                                    </div>
+                                    <img src="https://dummyimage.com/hd1080">
+                                    <div class="vehicle-overlay">
+                                        <span class="vehicle-name">Tuktuk</span>
+                                        <span class="vehicle-capacity">Capacity: 3-4</span>
+                                    </div>
+                                </div>
+
+                                <div class="custom-vehicle-2 custom-vehicle-card" id="custom-veh-2" onclick="selectCustomVehicle('Kalesa')">
+                                    <div class="vehicle-counter">
+                                        <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
+                                        <span class="veh-count">1</span>
+                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
+                                    </div>
+                                    <img src="https://dummyimage.com/hd1080">
+                                    <div class="vehicle-overlay">
+                                        <span class="vehicle-name">Kalesa</span>
+                                        <span class="vehicle-capacity">Capacity: 2-4</span>
+                                    </div>
+                                </div>
+
+                                <div class="custom-vehicle-3 custom-vehicle-card" id="custom-veh-3" onclick="selectCustomVehicle('Tranvia')">
+                                    <div class="vehicle-counter">
+                                        <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
+                                        <span class="veh-count">1</span>
+                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
+                                    </div>
+                                    <img src="https://dummyimage.com/hd1080">
+                                    <div class="vehicle-overlay">
+                                        <span class="vehicle-name">Tranvia</span>
+                                        <span class="vehicle-3-capacity">Capacity: 12-20</span>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
+
                     <div class="prev-next-container">
                         <button class="prev-button" onclick="prevStep()">PREVIOUS</button>
                         <button class="next-button" onclick="nextStep()">NEXT</button>
@@ -247,86 +305,85 @@
         </div> 
     </div>
     
-        <div class="modal-overlay" id="confirmationModal">
-            <article class="receipt-container" aria-labelledby="receipt-id">
-                <header style="display: flex; justify-content: right; align-items: right; width: 100%; border-bottom: 1px solid #e5e7eb; padding-top: 1rem; padding-bottom: 1rem;">
-                    <button aria-label="Close Receipt" class="close-btn" id="closeModal">&times;</button>
-                </header>
+    <div class="modal-overlay" id="confirmationModal">
+        <article class="receipt-container" aria-labelledby="receipt-id">
+            <header style="display: flex; justify-content: right; align-items: right; width: 100%; border-bottom: 1px solid #e5e7eb; padding-top: 1rem; padding-bottom: 1rem;">
+                <button aria-label="Close Receipt" class="close-btn" id="closeModal">&times;</button>
+            </header>
 
+            <time id="modal-date-time" style="display: block; text-align: right; font-size: 0.8rem; color: #000000; margin-top: 1.5rem; margin-bottom: 2rem; font-family: 'Roboto Condensed', sans-serif; font-weight: 700;">
+            </time>
 
-                <time id="modal-date-time" style="display: block; text-align: right; font-size: 0.8rem; color: #000000; margin-top: 1.5rem; margin-bottom: 2rem; font-family: 'Roboto Condensed', sans-serif; font-weight: 700;">
-                    </time>
+            <section aria-labelledby="tourist-heading">
+                <h3 id="tourist-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; color:#000000; font-family: 'Roboto Condensed', sans-serif;">TOURIST</h3>
+                <dl style="margin: 0; padding: 0;">
+                    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem; padding-left: 1.25rem;">
+                        <dt id="modal-adult-label" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">ADULTS</dt>
+                        <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(18 years old and above)</dd>
+                        <dd id="modal-adults" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">0</dd>
+                    </div>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem; padding-left: 1.25rem;">
+                        <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">CHILDREN</dt>
+                        <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(2 to 17 years old)</dd>
+                        <dd id="modal-children" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">0</dd>
+                    </div>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:1.5rem; font-size:0.85rem; padding-left: 1.25rem;">
+                        <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">INFANTS</dt>
+                        <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(under 2 years old)</dd>
+                        <dd id="modal-infants" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">0</dd>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.85rem;">
+                        <dt style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">PACKAGE</dt>
+                        <dd id="modal-package" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">NONE</dd>
+                    </div>
+                </dl>
+            </section>
 
-                <section aria-labelledby="tourist-heading">
-                    <h3 id="tourist-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; color:#000000; font-family: 'Roboto Condensed', sans-serif;">TOURIST</h3>
+            <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;" aria-hidden="true">
+
+            <section aria-labelledby="itinerary-heading">
+                <h3 id="itinerary-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; font-family: 'Roboto Condensed', sans-serif; color: #000000;">ITINERARY</h3>
+                <ul id="modal-itinerary-list" style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; font-size: 0.8rem; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0 0 1.5rem 0;">
+                </ul>
+                <dl style="margin: 0; padding: 0;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; font-size: 0.85rem;">
+                        <dt style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">VEHICLE</dt>
+                        <dd id="modal-vehicle" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-transform: uppercase; text-align: center; margin: 0;">NONE</dd>
+                        <dd id="modal-vehicle-quantity" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-align: right; font-weight: bold; margin: 0;"></dd>
+                    </div>
+                </dl>
+            </section>
+
+            <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;" aria-hidden="true">
+
+            <section aria-labelledby="contact-heading">
+                <h3 id="contact-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; font-family: 'Roboto Condensed', sans-serif; color: #000000;">CONTACT INFORMATION</h3>
+                <address style="font-style: normal; margin: 0; padding: 0;">
                     <dl style="margin: 0; padding: 0;">
-                        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem; padding-left: 1.25rem;">
-                            <dt id="modal-adult-label" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">ADULTS</dt> <!--id="modal-adult-label" added for noticing senior-->
-                            <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(18 years old and above)</dd>
-                            <dd id="modal-adults" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">0</dd>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
+                            <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">FULL NAME:</dt>
+                            <dd id="modal-full-name" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">---</dd>
                         </div>
-                        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem; padding-left: 1.25rem;">
-                            <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">CHILDREN</dt>
-                            <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(2 to 17 years old)</dd>
-                            <dd id="modal-children" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">0</dd>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
+                            <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">EMAIL ADDRESS:</dt>
+                            <dd id="modal-email" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">---</dd>
                         </div>
-                        <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:1.5rem; font-size:0.85rem; padding-left: 1.25rem;">
-                            <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">INFANTS</dt>
-                            <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(under 2 years old)</dd>
-                            <dd id="modal-infants" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">0</dd>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.85rem;">
-                            <dt style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">PACKAGE</dt>
-                            <dd id="modal-package" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">NONE</dd>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 0.85rem;">
+                            <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">PHONE NUMBER:</dt>
+                            <dd id="modal-phone" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">---</dd>
                         </div>
                     </dl>
-                </section>
+                </address>
+            </section>
 
-                <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;" aria-hidden="true">
+            <footer style="display: flex; justify-content: flex-end; margin-top: 2rem;">
+                <button class="accept-btn" onclick="confirmFinalAcceptance()" aria-label="Accept Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 2px; cursor: pointer; transition: background-color 0.2s;">
+                    ACCEPT
+                </button>
+            </footer>
+        </article>
+    </div>
 
-                <section aria-labelledby="itinerary-heading">
-                    <h3 id="itinerary-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; font-family: 'Roboto Condensed', sans-serif; color: #000000;">ITINERARY</h3>
-                    <ul id="modal-itinerary-list" style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; font-size: 0.8rem; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0 0 1.5rem 0;">
-                        </ul>
-                    <dl style="margin: 0; padding: 0;">
-                        <div style="display: grid; grid-template-columns: 1.5fr 1fr; align-items: center; font-size: 0.85rem;">
-                            <dt style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">VEHICLE</dt>
-                            <dd id="modal-vehicle" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-transform: uppercase; text-align: right; margin: 0;">NONE</dd>
-                        </div>
-                    </dl>
-                </section>
-
-                <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;" aria-hidden="true">
-
-                <section aria-labelledby="contact-heading">
-                    <h3 id="contact-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; font-family: 'Roboto Condensed', sans-serif; color: #000000;">CONTACT INFORMATION</h3>
-                    <address style="font-style: normal; margin: 0; padding: 0;">
-                        <dl style="margin: 0; padding: 0;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
-                                <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">FULL NAME:</dt>
-                                <dd id="modal-full-name" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">---</dd>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
-                                <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">EMAIL ADDRESS:</dt>
-                                <dd id="modal-email" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">---</dd>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 0.85rem;">
-                                <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">PHONE NUMBER:</dt>
-                                <dd id="modal-phone" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">---</dd>
-                            </div>
-                        </dl>
-                    </address>
-                </section>
-
-                <footer style="display: flex; justify-content: flex-end; margin-top: 2rem;">
-                    <button class="accept-btn" onclick="confirmFinalAcceptance()" aria-label="Accept Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 2px; cursor: pointer; transition: background-color 0.2s;">
-                        ACCEPT
-                    </button>
-                </footer>
-            </article>
-        </div>
-
-    
     <script src="tourist_testslide.js"></script>
     <script src="FUNC2.js"></script>
 </body>
