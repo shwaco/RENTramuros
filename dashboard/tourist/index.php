@@ -14,6 +14,8 @@
 
     <script src="../../asset/script.js?v=<?php echo filemtime('../../asset/script.js'); ?>" defer></script>
 
+    <script src="../../services/api.js?v=<?php echo filemtime('../../services/api.js'); ?>" defer></script>
+
 </head>
 <body>
     
