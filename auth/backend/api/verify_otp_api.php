@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: POST');
 
-require_once '../../../asset/connect_phpmyadmin.php';
+require_once '../../../asset/config.php';
 
 $data = json_decode(file_get_contents("php://input"));
 if(!isset($data->email) || !isset($data->otp)) {

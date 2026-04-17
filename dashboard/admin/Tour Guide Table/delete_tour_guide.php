@@ -4,7 +4,12 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Method: DELETE');
 
-require_once '../../../asset/connect_phpmyadmin.php';
+require_once '../../../asset/config.php';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
+    echo json_encode(["status" => "error", "message" => "Invalid request method."]);
+    exit();
+}
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -16,7 +21,7 @@ if(empty($data->guide_id)) {
 $guide_id = $data->guide_id;
 
 $delete_sql = "DELETE FROM tour_guides WHERE guide_id = ?";
-$delete_stmt = $conn->prepare($delete_sql);
+$delete_stmt = mysqli_prepare($con, $delete_sql);
 mysqli_stmt_bind_param($delete_stmt, "i", $guide_id);
 
 if(mysqli_stmt_execute($delete_stmt)) {

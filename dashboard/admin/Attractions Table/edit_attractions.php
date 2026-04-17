@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: PATCH');
 
-require_once '../../../asset/connect_phpmyadmin.php';
+require_once '../../../asset/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
     echo json_encode(["status" => "error", "message" => "Invalid request method."]);
@@ -66,3 +66,5 @@ if(mysqli_stmt_execute($update_stmt, $params_array)) {
 } else {
     echo json_encode(["status" => "error", "message" => "Failed to update attraction."]);
 }
+
+?>

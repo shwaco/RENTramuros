@@ -5,6 +5,14 @@ header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
+require_once '../asset/config.php';
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(["status" => "error", "message" => "Method Not Allowed. Use POST."]);
+    exit();
+}
+
 $data = json_decode(file_get_contents("php://input"));
 
 if(!isset($data->tourist_id) || !isset($data->booking_type)){
@@ -12,8 +20,6 @@ if(!isset($data->tourist_id) || !isset($data->booking_type)){
     echo json_encode(["status" => "error", "message" => "Missing Tourist ID or Booking Type"]);
     exit();
 }
-
-require_once('../asset/connect_phpmyadmin.php');
 
 $tourist_id = $data->tourist_id;
 $booking_type = $data->booking_type;

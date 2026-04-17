@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 
-require_once '../asset/connect_phpmyadmin.php';
+require_once '../asset/config.php';
 
 $sql = "SELECT guide_id, first_name, last_name, email, current_status, last_dispatch_time FROM tour_guides ORDER BY guide_id";
 $result = mysqli_query($con, $sql);

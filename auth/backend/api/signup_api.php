@@ -5,7 +5,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-require_once '../../../asset/connect_phpmyadmin.php';
+require_once '../../../asset/config.php';
 require_once '../config/mailer_config.php';
 
 $data = json_decode(file_get_contents("php://input"));
