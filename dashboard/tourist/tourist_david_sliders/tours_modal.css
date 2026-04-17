@@ -5,20 +5,20 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Dim the background */
+    background-color: rgba(0, 0, 0, 0.5);
     display: none; /* Hidden by default */
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    backdrop-filter: blur(3px); /* Subtle blur for modern look */
+    backdrop-filter: blur(3px);
 }
 
-/* Show the modal when this class is added via JS */
+
 .modal-overlay.show {
     display: flex;
 }
 
-/* --- THE RECEIPT CONTAINER --- */
+
 .receipt-container {
     background: #ffffff;
     padding: 0 2rem 25px 2rem;
@@ -56,7 +56,6 @@
     color: #777777;
 }
 
-/* Style for empty states */
 .no-itinerary-text {
     font-style: italic;
     color: #6b7280;

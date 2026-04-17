@@ -189,7 +189,7 @@
                                     <img src="https://dummyimage.com/hd1080">
                                     <div class="vehicle-overlay">
                                         <span class="vehicle-name">Tranvia</span>
-                                        <span class="vehicle-capacity">Capacity: 12-20</span>
+                                        <span class="vehicle-3-capacity">Capacity: 12-20</span>
                                     </div>
                                 </div>
                             </div>
@@ -289,7 +289,7 @@
                                 </div>
                                 <div class="phone-container">
                                     <div class="phone-label-container"><span class="phone-label">PHONE NUMBER</span></div>
-                                    <input type="text" id="contact-phone" class="phone-input" placeholder="Enter your phone number" maxlength="11">
+                                    <input type="tel" id="contact-phone" class="phone-input" placeholder="Enter your phone number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                 </div>
                             </div>
                         </div>

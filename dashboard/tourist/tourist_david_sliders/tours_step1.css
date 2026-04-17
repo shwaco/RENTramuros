@@ -5,7 +5,7 @@ body{
 .reservation-container{
     width: 100%;
     max-width: 1011px;
-    margin: 100px auto;
+    margin: 10vh auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,69 +22,54 @@ body{
     width: 100%;
 }
 
-/* Center the entire stepper on the page */
+/* progress bar at the top */
 .steps-container {
     display: flex;
     justify-content: flex-end;
-    width: 600px;
-    margin-top: 40px; /* Adjust spacing below the stepper as needed */
+    max-width: 600px;
+    margin-top: 4vh;
 }
 
-/* Arrange circles and bars horizontally and center them vertically */
 .steps {
     display: flex;
     align-items: center;
     gap: 15px; /* Adds space between the shapes */
 }
 
-/* Styles applied to ALL circles */
 .circle-1, .circle-2, .circle-3 {
-    width: 35px; 
-    height: 35px;
+    width: 2.25rem; 
+    height: 2.25rem;
     border-radius: 50%; 
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: "Roboto Condensed", sans-serif;
-    font-size: 15px; /* You might want to lower this to 24px so it fits the 50px circle! */
+    font-size: 1rem; 
     font-weight: 500;
     border: 1px solid #000000; 
     box-sizing: border-box;
     flex-shrink: 0; /* Add this! It prevents the circles from squishing */
 }
 
-/* Styles applied to ALL connecting bars */
 .progress-bar-1, .progress-bar-2 {
     width: 80px; 
-    height: 10px; 
+    height: 0.6rem; 
     border-radius: 15px; 
     border: 1px solid #000000;
     box-sizing: border-box;
     flex-shrink: 0; /* Add this! It prevents the bars from squishing */
 }
 
-/* -------------------------------------- */
-/* ACTIVE/COMPLETED STYLES (Red)          */
-/* -------------------------------------- */
-
-/* Filled circles (1 and 2) */
 .circle-1 {
     background-color: #8A2814; /* Your theme's red color */
     color: #ffffff;
 }
 
-/* Filled progress bar (between 1 and 2) */
-/*.progress-bar-1 {
-    background-color: #8A2814;
-}*/
-
-/* Empty circle (3) */
 .circle-3 {
     background-color: #ffffff;
     color: #000000;
 }
 
-/* Empty progress bar (between 2 and 3) */
 .progress-bar-2 {
     background-color: #ffffff;
 }
@@ -94,6 +79,7 @@ body{
     border-bottom: 0.5px solid #B4B1B1;
 }
 
+/* time and date section */
 .time-date-container {
     width: 100%;
     min-height: 200px; /* Changed from height to min-height */
@@ -104,7 +90,7 @@ body{
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease-in-out; /* Makes the expansion smooth */
-    padding-bottom: 20px; /* Adds a little breathing room at the bottom when expanded */
+    padding-bottom: 1rem; /* Adds a little breathing room at the bottom when expanded */
 }
 
 .time-date-text{
@@ -117,7 +103,7 @@ body{
     font-family: "Roboto Condensed", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 100%;
     letter-spacing: 2%;
     text-align: center;
@@ -131,7 +117,7 @@ body{
     opacity: 1;
     font-family: "Roboto Condensed", sans-serif;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 1rem;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -144,10 +130,10 @@ body{
 
 .dropdown-container {
     margin-left: 30px;
-    margin-top: 20px;
+    margin-top: 1.25rem;
     display: flex;
     align-items: flex-start; /* Changed to flex-start to keep 'Time' at the top */
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .time-dropdown {
@@ -156,15 +142,9 @@ body{
     margin-top: 0px; /* Adjust this by 1 or 2px if the buttons look unlevel */
 }
 
-    /*margin-left: 30px;
-    margin-top: 20px;
-    width: 85px; */
- 
-
 .time-dropdown *{
     box-sizing: border-box;
 }
-
 
 .time-select{
     display: flex;
@@ -175,14 +155,12 @@ body{
     border-radius: 20px;
     cursor: pointer;
     transition: background 0.3;
-    /*width: auto;
-    height: 20px;*/
 }
 
 .time-selected{
     font-family: "Roboto Condensed", sans-serif;
     white-space: nowrap;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .date-dropdown {
@@ -221,26 +199,10 @@ body{
 
 .date-selected{
     font-family: "Roboto Condensed", sans-serif;
+    font-size: 1rem;
 }
-    /*opacity: 1;
-    font-family: "Roboto Condensed", sans-serif;
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    text-align: center;
-    vertical-align: middle;
-    height: 50px;
-    width: 314px;
-    border-radius: 20px;
-    opacity: 1;
-    border: 1px solid #B4B1B1;
-    display: flex;
-    align-items: center;
-    padding-left: 17px;
-}*/
 
-
+/* tourist quantity container */
 .tourists-quantity-conatiner{
     width: 100%;
     height: 425px;
@@ -260,7 +222,7 @@ body{
     opacity: 1;
     font-family: "Roboto Condensed", sans-serif;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -282,14 +244,14 @@ body{
     width: fit-content;
     display: flex; 
     align-items: center; /* Keeps the counter and the notice vertically aligned */
-    gap: 60px; /* Adds a nice space between the counter and the notice */
+    gap: 3.5rem; /* Adds a nice space between the counter and the notice */
 }
 
 .adults-label {
     opacity: 1;
     font-family: "Roboto Condensed", sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -303,7 +265,7 @@ body{
     font-family: "Roboto Condensed", sans-serif;
     font-style: italic;
     font-weight: 200; /* Extra Light */
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 100%;
     text-align: left; /* Removed the duplicate center alignment */
     vertical-align: middle;
@@ -313,7 +275,7 @@ body{
 }
 
     .senior-notice-container {
-        margin-top: 20px;
+        margin-top: 1.5rem;
         display: flex;
         align-items: center;
         gap: 10px; /* Adds space between the circle and the text */
@@ -322,9 +284,9 @@ body{
     .notice-circle{
         display: flex;
         align-items: center;
-        height: 30px;
-        width: 30px;
-        font-size: 18px;
+        height: 20px;
+        width: 20px;
+        font-size: 1rem;
         font-weight: 500;
         border-radius: 50%;
         border: 1px solid #d3d3d3;
@@ -337,11 +299,10 @@ body{
         color: #FFFFFF;
     }
 
-    /* Keeps it red when selected, exactly like the hover state */
     .notice-circle.active {
         background: #8A2814;
         color: #FFFFFF;
-        border-color: #8A2814; /* Makes the border blend in with the background */
+        border-color: #8A2814;
     }
 
 .senior-notice-text{
@@ -349,63 +310,52 @@ body{
     font-family: "Roboto Condensed", sans-serif;
     font-style: italic;
     font-weight: 300;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
     vertical-align: middle;
-    margin-left: 20px;
+    margin-left: 1rem;
     text-align: left;
     width: fit-content;
 }
 
-/* 1. The Main Wrapper */
 .adult-quantity-counter {
     display: flex;
     align-items: center;
-    width: 270px; /* You can adjust this to fit your exact layout */
-    height: 40px; 
-    border: 1px solid #B4B1B1; /* A light gray border for the top and bottom */
+    width: 270px;
+    height: 2.5rem; 
+    border: 1px solid #B4B1B1;
     border-radius: 6px;
-    
-    /* THE MAGIC TRICK: This forces the red buttons inside to clip 
-       their sharp edges and match the rounded corners of this container! */
     overflow: hidden; 
-    margin-top: 25px;
+    margin-top: 1.5rem;
 }
 
-/* 2. The Plus and Minus Buttons */
 .adult-quantity-counter .minus,
 .adult-quantity-counter .plus {
-    background-color: #8A2814; /* The dark brick-red color from your image */
+    background-color: #8A2814;
     color: #FFFFFF;
-    border: none; /* Removes default ugly button borders */
-    width: 40px; /* The exact width of the red blocks */
-    height: 100%; /* Forces buttons to be as tall as the container */
-    font-size: 25px; /* Makes the + and - symbols nice and large */
+    border: none;
+    width: 40px;
+    height: 100%;
+    font-size: 1.5rem;
     cursor: pointer;
-    
-    /* Perfectly centers the + and - inside the red blocks */
     display: flex; 
     justify-content: center;
     align-items: center;
 }
 
-/* Add a tiny hover effect so users know they can click it */
 .adult-quantity-counter button:hover {
     background-color: #7A2311; 
 }
 
-/* 3. The Number in the Middle */
 .adult-count {
-    flex: 1; /* Tells the middle section to expand and take up all remaining space */
+    flex: 1;
     background-color: #FFFFFF;
     color: #000000;
     font-family: "Roboto Condensed", sans-serif;
-    font-size: 22px;
+    font-size: 1rem;
     font-weight: 400;
-    
-    /* Centers the number itself */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -421,7 +371,7 @@ body{
     opacity: 1;
     font-family: "Roboto Condensed", sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -435,7 +385,7 @@ body{
     font-family: "Roboto Condensed", sans-serif;
     font-style: italic;
     font-weight: 300;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -446,54 +396,42 @@ body{
     width: fit-content;
 }
 
-
-/* 1. The Main Wrapper */
 .children-quantity-counter {
     display: flex;
     align-items: center;
-    width: 270px; /* You can adjust this to fit your exact layout */
-    height: 40px; 
-    border: 1px solid #B4B1B1; /* A light gray border for the top and bottom */
+    width: 270px;
+    height: 2.5rem; 
+    border: 1px solid #B4B1B1;
     border-radius: 6px;
-    
-    /* THE MAGIC TRICK: This forces the red buttons inside to clip 
-       their sharp edges and match the rounded corners of this container! */
     overflow: hidden; 
-    margin-top: 25px;
+    margin-top: 1.5rem;
 }
 
-/* 2. The Plus and Minus Buttons */
 .children-quantity-counter .minus,
 .children-quantity-counter .plus {
-    background-color: #8A2814; /* The dark brick-red color from your image */
+    background-color: #8A2814;
     color: #FFFFFF;
-    border: none; /* Removes default ugly button borders */
-    width: 40px; /* The exact width of the red blocks */
-    height: 100%; /* Forces buttons to be as tall as the container */
-    font-size: 25px; /* Makes the + and - symbols nice and large */
+    border: none;
+    width: 40px;
+    height: 100%;
+    font-size: 1.5rem;
     cursor: pointer;
-    
-    /* Perfectly centers the + and - inside the red blocks */
     display: flex; 
     justify-content: center;
     align-items: center;
 }
 
-/* Add a tiny hover effect so users know they can click it */
 .children-quantity-counter button:hover {
     background-color: #7A2311; 
 }
 
-/* 3. The Number in the Middle */
 .children-count {
-    flex: 1; /* Tells the middle section to expand and take up all remaining space */
+    flex: 1; 
     background-color: #FFFFFF;
     color: #000000;
     font-family: "Roboto Condensed", sans-serif;
-    font-size: 22px;
+    font-size: 1rem;
     font-weight: 400;
-    
-    /* Centers the number itself */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -509,7 +447,7 @@ body{
     opacity: 1;
     font-family: "Roboto Condensed", sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -523,7 +461,7 @@ body{
     font-family: "Roboto Condensed", sans-serif;
     font-style: italic;
     font-weight: 300;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -534,54 +472,43 @@ body{
     width: fit-content;
 }
 
-
-/* 1. The Main Wrapper */
 .infants-quantity-counter {
     display: flex;
     align-items: center;
-    width: 270px; /* You can adjust this to fit your exact layout */
-    height: 40px; 
-    border: 1px solid #B4B1B1; /* A light gray border for the top and bottom */
+    width: 270px;
+    height: 2.5rem; 
+    border: 1px solid #B4B1B1;
     border-radius: 6px;
-    
-    /* THE MAGIC TRICK: This forces the red buttons inside to clip 
-       their sharp edges and match the rounded corners of this container! */
     overflow: hidden; 
-    margin-top: 25px;
+    margin-top: 1.5rem;
 }
 
-/* 2. The Plus and Minus Buttons */
 .infants-quantity-counter .minus,
 .infants-quantity-counter .plus {
-    background-color: #8A2814; /* The dark brick-red color from your image */
+    background-color: #8A2814;
     color: #FFFFFF;
-    border: none; /* Removes default ugly button borders */
-    width: 40px; /* The exact width of the red blocks */
-    height: 100%; /* Forces buttons to be as tall as the container */
-    font-size: 25px; /* Makes the + and - symbols nice and large */
+    border: none;
+    width: 40px;
+    height: 100%;
+    font-size: 1.5rem;
     cursor: pointer;
-    
-    /* Perfectly centers the + and - inside the red blocks */
     display: flex; 
     justify-content: center;
     align-items: center;
 }
 
-/* Add a tiny hover effect so users know they can click it */
 .infants-quantity-counter button:hover {
     background-color: #7A2311; 
 }
 
-/* 3. The Number in the Middle */
+
 .infants-count {
-    flex: 1; /* Tells the middle section to expand and take up all remaining space */
+    flex: 1;
     background-color: #FFFFFF;
     color: #000000;
     font-family: "Roboto Condensed", sans-serif;
-    font-size: 22px;
+    font-size: 1rem;
     font-weight: 400;
-    
-    /* Centers the number itself */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -607,7 +534,7 @@ body{
     opacity: 1;
     font-family: "Roboto Condensed", sans-serif;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 1rem;
     line-height: 100%;
     letter-spacing: 0%;
     text-align: center;
@@ -625,7 +552,7 @@ body{
 .no-package{
     font-family: "Roboto Condensed", sans-serif;
     padding: 8px 16px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     color: rgb(0, 0, 0);
     background-color: #ffffff;
@@ -641,13 +568,12 @@ body{
     background-color: #8A2814;
     color: white;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3);
-    padding: 8px 40px;
 }
 
 .yes-package{
     font-family: "Roboto Condensed", sans-serif;
     padding: 8px 16px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     color: rgb(0, 0, 0);
     background-color: #ffffff;
@@ -662,7 +588,6 @@ body{
     background-color: #8A2814;
     color: white;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.3);
-    padding: 8px 40px;
 }
 
 .prev-next-container{
@@ -672,13 +597,12 @@ body{
     height: 60px;
 }
 
-/* Update your existing next-button to use Flexbox so the text and arrow align perfectly */
 .next-button {
     display: flex;
     align-items: center;
-    gap: 8px; /* Adds space between NEXT and the arrow */
+    gap: 0.5rem;
     padding: 10px 20px;
-    font-size: 25px;
+    font-size: 1.5rem;
     font-weight: 900;
     color: #8A2814;
     background-color: #ffffff;
@@ -688,32 +612,22 @@ body{
     transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
-/* This injects the arrow character directly via CSS */
 .next-button::after {
-    content: '\276F'; /* This is the CSS Unicode for the heavy chevron ❯ */
-    font-size: 26px; /* Slightly smaller than the text looks better */
-    transition: transform 0.3s ease; /* Prepares it for a smooth hover animation */
+    content: '\276F';
+    font-size: 26px;
+    transition: transform 0.3s ease;
 }
 
-/* Your existing hover state */
 .next-button:hover {
-    color: #ffffff;
-    background-color: #8A2814;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #8A2814;
 }
 
-/* OPTIONAL PRO-TIP: Make the arrow slide to the right on hover! */
 .next-button:hover::after {
     transform: translateX(4px);
 }
 
 
-
-
-
-
-
-/* --- NEW SLIDER CSS --- */
+/* --- SLIDER CSS --- */
 .slider-viewport {
     width: 100%;
     /* This HIDES the steps that are pushed out of the frame */
@@ -723,15 +637,13 @@ body{
 
 .slider-track {
     display: flex;
-    width: 300%; /* 300% because there are exactly 3 steps */
-    /* This creates the smooth, gliding animation! */
+    width: 300%;
     transition: transform 0.5s ease-in-out; 
 }
 
 .slide-step {
-    width: 33.333%; /* Each step takes up exactly 1/3rd of the 300% track */
+    width: 33.333%;
     flex-shrink: 0;
-    /* Adds the same 25px gap you used in your reservation-container */
     display: flex; 
     flex-direction: column;
     gap: 25px; 
@@ -747,7 +659,6 @@ body{
     width: 100%;
 }
 
-/* Keeps the selected YES or NO button highlighted */
 .active-selection {
     background-color: #8A2814 !important;
     color: white !important;
@@ -820,9 +731,9 @@ body{
     cursor: pointer;
     font-family: "Roboto Condensed", sans-serif;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 1rem;
     transition: background 0.3s;
-    margin-top: 3px; /* Added a tiny bit of space above it just in case! */
+    margin-top: 3px;
 }
 
 .time-confirm-btn:hover {
@@ -833,10 +744,10 @@ body{
 
 /* --- CALENDAR POPUP STYLES --- */
 .calendar-popup {
-    position: relative; /* Changed from absolute so it pushes the container out */
-    margin-top: 15px;   /* Adds space between the button and the calendar */
+    position: relative;
+    margin-top: 15px;   
     width: 100%;
-    display: none;      /* Keep hidden by default */
+    display: none;
 }
 
 /* JavaScript will add this class to make it appear */
