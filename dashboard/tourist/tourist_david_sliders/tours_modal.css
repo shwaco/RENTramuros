@@ -21,7 +21,7 @@
 /* --- THE RECEIPT CONTAINER --- */
 .receipt-container {
     background: #ffffff;
-    padding: 0 2rem 2.5rem 2rem;
+    padding: 0 2rem 25px 2rem;
     border-radius: 4px;
     width: 95%;
     max-width: 500px;
@@ -53,7 +53,7 @@
 }
 
 .close-btn:hover {
-    color: #dc2626;
+    color: #777777;
 }
 
 /* Style for empty states */

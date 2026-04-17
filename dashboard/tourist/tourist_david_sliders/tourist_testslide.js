@@ -181,13 +181,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const dateDisplay = document.getElementById("date-display");
     const timeMenu = document.getElementById("time-menu");
 
-    // 1. Toggle calendar visibility when the date button is clicked (and close time menu)
     dateSelectBtn.addEventListener("click", () => {
         if(timeMenu) timeMenu.classList.remove("show"); // Close time menu
         calendarPopup.classList.toggle("show");
     });
 
-    // 2. Update the button text when a date is picked
     calendarPopup.addEventListener("click", (e) => {
         // Find the closest calendar-day element that was clicked
         const dayCell = e.target.closest('.calendar-day');
@@ -216,7 +214,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function updateTouristCount(type, change) {
     let currentCount = 0;
     
-    // 1. Determine which type we are updating and get its current value
     if (type === 'adult') {
         currentCount = reservationData.tourists.adults;
     } else if (type === 'child') {
@@ -225,20 +222,16 @@ function updateTouristCount(type, change) {
         currentCount = reservationData.tourists.infants;
     }
 
-    // 2. Do the math
     let newCount = currentCount + change;
 
-    // 3. Prevent the number from going below 0
     if (newCount < 0) {
         newCount = 0;
     }
 
-    // 4. Save the new number back into the Master Record
     if (type === 'adult') reservationData.tourists.adults = newCount;
     if (type === 'child') reservationData.tourists.children = newCount;
     if (type === 'infant') reservationData.tourists.infants = newCount;
 
-    // 5. Update the number on the screen visually
     if (type === 'adult') {
         document.getElementById('adult-count-display').innerText = newCount;
     } else if (type === 'child') {
@@ -321,7 +314,6 @@ function selectVehicle(vehicleName) {
         // === NEW ADDITION: Set quantity to 1 when a new vehicle is SELECTED ===
         reservationData.vehicleQuantity = 1;
         document.querySelectorAll('.veh-count').forEach(el => el.innerText = '1');
-        // ======================================================================
 
         const allVehicles = document.querySelectorAll('.vehicle-card');
         allVehicles.forEach(v => v.classList.remove('selected-card'));
@@ -357,7 +349,6 @@ function selectCustomVehicle(vehicleName) {
         
         // === NEW ADDITION: Reset quantity to 0 when UNSELECTED ===
         reservationData.vehicleQuantity = 0;
-        // =========================================================
 
         document.querySelectorAll('.custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
     } else {
@@ -366,7 +357,6 @@ function selectCustomVehicle(vehicleName) {
         // === NEW ADDITION: Set quantity to 1 when a new vehicle is SELECTED ===
         reservationData.vehicleQuantity = 1;
         document.querySelectorAll('.veh-count').forEach(el => el.innerText = '1');
-        // ======================================================================
 
         document.querySelectorAll('.custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
         if (vehicleName === 'None') document.getElementById('custom-veh-none').classList.add('selected-card');
@@ -379,7 +369,6 @@ function selectCustomVehicle(vehicleName) {
 
 // === NEW ADDITION: BRAND NEW FUNCTION TO HANDLE THE +/- BUTTONS ON VEHICLES ===
 function updateVehicleCount(change, event) {
-    // This stops the click from "falling through" and unselecting the main vehicle card!
     event.stopPropagation(); 
 
     let newCount = reservationData.vehicleQuantity + change;
@@ -399,8 +388,6 @@ function updateVehicleCount(change, event) {
 
     console.log("Vehicle Quantity updated:", reservationData.vehicleQuantity);
 }
-// ===============================================================================
-
 // --- MODAL LOGIC STEP 3 ---
 
 function submitReservation() {
