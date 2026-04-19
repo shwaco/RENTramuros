@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2026 at 05:38 PM
+-- Generation Time: Apr 19, 2026 at 08:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -54,6 +54,20 @@ CREATE TABLE `attraction_bookings` (
   `attraction_id` int(11) DEFAULT NULL,
   `visit_date` date NOT NULL,
   `ticket_quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images`
+--
+
+CREATE TABLE `images` (
+  `image_id` int(11) NOT NULL,
+  `image_main` varchar(255) NOT NULL,
+  `image_sub` varchar(255) NOT NULL,
+  `image_mini1` varchar(255) NOT NULL,
+  `image_mini2` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -237,8 +251,8 @@ INSERT INTO `tour_guides` (`guide_id`, `first_name`, `last_name`, `email`, `pass
 CREATE TABLE `upcoming_events` (
   `event_id` int(11) NOT NULL,
   `event_name` varchar(100) NOT NULL,
-  `event_date` date NOT NULL DEFAULT current_timestamp(),
-  `event_time` time NOT NULL DEFAULT current_timestamp(),
+  `event_date` date DEFAULT current_timestamp(),
+  `event_time` time DEFAULT current_timestamp(),
   `location` varchar(255) NOT NULL,
   `image_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -290,6 +304,12 @@ ALTER TABLE `attraction_bookings`
   ADD PRIMARY KEY (`attraction_booking_id`),
   ADD KEY `reservation_id` (`reservation_id`),
   ADD KEY `attraction_id` (`attraction_id`);
+
+--
+-- Indexes for table `images`
+--
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`image_id`);
 
 --
 -- Indexes for table `invoices`
@@ -393,6 +413,12 @@ ALTER TABLE `admins`
 --
 ALTER TABLE `attraction_bookings`
   MODIFY `attraction_booking_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `images`
+--
+ALTER TABLE `images`
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `invoices`
