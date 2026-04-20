@@ -357,3 +357,20 @@ function updateVehicleCount(change, event) {
 
     console.log("Vehicle Quantity updated:", reservationData.vehicleQuantity);
 }
+
+// ------------- STEP 3 LOGIC ------------- 
+
+function submitReservation() {
+    const name = document.getElementById('contact-name').value.trim();
+    const email = document.getElementById('contact-email').value.trim();
+    const phone = document.getElementById('contact-phone').value.trim();
+
+    if (!name || !email || !phone) {
+        alert("Please fill out all contact details.");
+        return; 
+    }
+
+    reservationData.contactInfo = { name, email, phone };
+
+    buildAndShowModal();
+}
