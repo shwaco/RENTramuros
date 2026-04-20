@@ -59,14 +59,14 @@
                                 </div> 
                                 <div class="date-dropdown">
                                     <div class="date-select" id="date-select-btn">
-                                        <span class="date-selected" id="date-display">April 29, 2026</span>
+                                        <span class="date-selected" id="date-display">April 21, 2026</span>
                                         <div class="date-caret"></div>
                                     </div>
                                     <div class="calendar-popup" id="calendar-popup">
                                         <div class="calendar-card">
                                             <div class="calendar-header">
                                                 <button class="nav-arrow">&lt;</button>
-                                                <h3 class="current-month">March 2026</h3>
+                                                <h3 class="current-month">April 2026</h3>
                                                 <button class="nav-arrow">&gt;</button>
                                             </div>
                                             <div class="weekday-labels">

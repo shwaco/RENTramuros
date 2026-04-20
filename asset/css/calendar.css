@@ -153,3 +153,16 @@ body {
     border-right: 6px solid transparent;
     border-top: 6px solid var(--grey);
 }
+
+/* --- DATE RESTRICTION GREY OUT --- */
+.calendar-day.disabled-day {
+    color: #B4B1B1; 
+    background-color: #f9f9f9;
+    cursor: not-allowed; 
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.calendar-day.disabled-day .day-tooltip {
+    display: none !important; 
+}

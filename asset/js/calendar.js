@@ -1,23 +1,14 @@
-// NEW: Wraps everything so it waits for the HTML to load first!
+// -------- CALENDAR LOGIC ---------
 document.addEventListener("DOMContentLoaded", () => {
-    
-    // We also make sure to specifically select the nav arrows INSIDE the calendar 
-    // so it doesn't accidentally click the "NEXT" button of your main form!
     const monthDisplay = document.querySelector('.current-month');
     const calendarGrid = document.querySelector('.calendar-grid');
     const prevBtn = document.querySelectorAll('.calendar-header .nav-arrow')[0];
     const nextBtn = document.querySelectorAll('.calendar-header .nav-arrow')[1];
 
-    let currentDate = new Date(2026, 2, 1); 
+    let currentDate = new Date(2026, 3, 21); // April 2026
+    const minDate = new Date(2026, 3, 21); // April 20, 2026 limitation
 
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-    const rentramurosData = {
-        "2026-03-16": { price: "22,541", event: "Fort Santiago Heritage Walk" },
-        "2026-03-17": { price: "15,200", event: "Bambike Sunset Tour" },
-        "2026-03-25": { price: "18,000", event: "San Agustin Museum Entry" },
-        "2026-04-05": { price: "25,000", event: "Intramuros Night Gala" }
-    };
 
     function renderCalendar() {
         calendarGrid.innerHTML = '';
@@ -36,9 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const dayCell = document.createElement('div');
             dayCell.classList.add('calendar-day');
 
-            const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-            const dayInfo = rentramurosData[dateKey] || { price: "---", event: "Available for booking" };
-
+            const cellDate = new Date(year, month, i);
+            
             dayCell.innerHTML = `
                 <span class="day-number">${i}</span>
                 <div class="day-tooltip">
@@ -47,21 +37,27 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
 
-            dayCell.addEventListener('click', () => {
-                document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
-                dayCell.classList.add('selected');
-            });
-
+            if (cellDate < minDate) {
+                dayCell.classList.add('disabled-day');
+            } else {
+                dayCell.addEventListener('click', () => {
+                    document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+                    dayCell.classList.add('selected');
+                    document.getElementById('date-display').innerText = `${monthNames[month]} ${i}, ${year}`;
+                });
+            }
             calendarGrid.appendChild(dayCell);
         }
     }
 
-    prevBtn.addEventListener('click', () => {
+    prevBtn.addEventListener('click', (e) => {
+        e.preventDefault(); 
         currentDate.setMonth(currentDate.getMonth() - 1);
         renderCalendar();
     });
 
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener('click', (e) => {
+        e.preventDefault(); 
         currentDate.setMonth(currentDate.getMonth() + 1);
         renderCalendar();
     });
