@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: GET');
 
 require_once '../config.php';
 
-$fetch_sql = "SELECT attraction_id, attraction_name, description, entrance_fee, operating_hours, image_file FROM Attractions";
+$fetch_sql = "SELECT attraction_id, attraction_name, description, entrance_fee, operating_hours, image_file FROM attractions";
 $result = mysqli_query($con, $fetch_sql);
 
 if ($result) {
