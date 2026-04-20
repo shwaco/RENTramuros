@@ -10,9 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="tours_steps.css">
-    <link rel="stylesheet" href="DESIGN2.css">
-    <link rel="stylesheet" href="tours_modal.css">
+    <link rel="stylesheet" href="../../asset/css/tours_steps.css">
+    <link rel="stylesheet" href="../../asset/css/calendar.css">
+    <link rel="stylesheet" href="../../asset/css/receipt.css">
+
+    <script src="../../asset/js/calendar.js"></script>
+    <script src="../../asset/js/receipt.js"></script>
+    <script src="../../"></script>
 </head>
 <body>
     <div class="reservation-container">
@@ -381,8 +385,5 @@
         </article>
     </div>
 
-    <script src="tourist_testslide.js"></script>
-    <script src="FUNC2.js"></script>
-    <script src="receipt_modal js"></script>
 </body>
 </html>

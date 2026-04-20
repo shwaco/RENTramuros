@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="../../asset/main.css?v=<?php echo filemtime('../../asset/main.css'); ?>">
     <link rel="stylesheet" href="./index.css?v=<?php echo filemtime('../../asset/script.js'); ?>">
-
     <script type="module" src="../../asset/script.js?v=<?php echo filemtime('../../asset/script.js'); ?>" defer></script>
 
 </head>
@@ -25,7 +24,7 @@
             <ul class="sidebar">
                 <li onclick=hideSidebar()><a href="#"><img src="../../asset/img/close_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="close-button" width="auto" height="30"></a></li>
                 <li><a href="#"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
-                <li><a href="#"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+                <li><a href="/tours.php"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
                 <li><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li><a href="#">About</a></li>
             </ul>
