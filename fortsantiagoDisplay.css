@@ -142,7 +142,7 @@ body{
     font-weight: 600;           
     color: #333;                
 }
-.overview-container {
+.description-container {
     width: 100%; 
     /* DELETE max-width from here */
     margin-top: 10px;
@@ -151,11 +151,11 @@ body{
     align-items: flex-start;
 }
 
-.overview-text {
+.description-text {
     flex: 7; /* Takes up roughly 70% of the container */
 }
 
-.fort-santiago-overview {
+.fort-santiago-description {
     display: block; /* CRITICAL: Forces the inline span to act like a paragraph box */
     text-align: justify;;
     color: #333; /* Pure black #000 can be a bit harsh; #333 is easier on eyes */
