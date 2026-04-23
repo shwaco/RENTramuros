@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextBtn = document.querySelectorAll('.calendar-header .nav-arrow')[1];
 
     let currentDate = new Date(2026, 3, 21); // April 2026
-    const minDate = new Date(2026, 3, 21); // April 20, 2026 limitation
+    const minDate = new Date(2026, 3, 24); // April 20, 2026 limitation
 
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
