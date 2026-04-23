@@ -551,8 +551,8 @@ body{
 }
 
 .confirming-package-button-container{
-    margin-block-start: 2rem; /* was margin-top: 30px; */
-    padding-block: 0; /* was padding: 0 30px; */
+    margin-block-start: 2rem;
+    padding-block: 0;
     padding-inline: 2rem;
 }
 
@@ -639,7 +639,7 @@ body{
     width: 100%;
     /* This HIDES the steps that are pushed out of the frame */
     overflow: hidden; 
-    padding-block: 0.5rem; /* was padding: 10px 0; */
+    padding-block: 0.5rem;
     padding-inline: 0; 
 }
 
@@ -716,7 +716,7 @@ body{
 }
 
 .time-option {
-    padding-block: 0.375em; /* was padding: 6px 12px; */
+    padding-block: 0.375em;
     padding-inline: 0.75em;
     border-radius: 5px;
     cursor: pointer;
@@ -904,8 +904,8 @@ body{
     letter-spacing: 2%;
     text-align: center;
     vertical-align: middle;
-    margin-inline-start: 1.875rem; /* was margin-left: 30px */
-    margin-block-start: 0.5625rem; /* was margin-top: 9px */
+    margin-inline-start: 1.875rem;
+    margin-block-start: 0.5625rem;
     margin-block-end: 0.5625rem;
 }
 
@@ -1046,7 +1046,7 @@ body{
     display: flex;
     align-items: center;
     gap: 8px;
-    padding-block: 0.625rem; /* was padding top/bottom: 10px */
+    padding-block: 0.625rem;
     padding-inline: 1.25rem;
     font-size: 25px;
     font-weight: 900;
@@ -1151,7 +1151,7 @@ body{
     color: #ffffff;
     border: none;
     border-radius: 50%;
-    width: 1.5625rem; /* was 25px */
+    width: 1.5625rem;
     height: 1.5625rem;
     font-size: 1rem;
     font-weight: bold;
@@ -1210,13 +1210,13 @@ body{
     letter-spacing: 0%;
     text-align: center;
     vertical-align: middle;
-    margin-inline-start: 1.875rem; /* was margin-left: 30px */
-    margin-block-start: 0.5625rem; /* was margin-top: 9px */
+    margin-inline-start: 1.875rem;
+    margin-block-start: 0.5625rem; 
     margin-block-end: 0.5625rem;
 }
 
 .attractions-options-container{
-    padding-block: 2.3125rem; /* was padding top/bottom: 37px */
+    padding-block: 2.3125rem;
     padding-inline: 2.5rem;
     display: flex;
     gap: 1rem;
@@ -1291,8 +1291,8 @@ body{
     line-height: 100%;
     letter-spacing: 2%;
     text-align: center;
-    margin-inline-start: 2rem; /* Was already 2rem */
-    margin-block-start: 0.5625rem; /* was margin-top: 9px */
+    margin-inline-start: 2rem;
+    margin-block-start: 0.5625rem;
     margin-block-end: 0.5625rem;
 }
 
@@ -1491,9 +1491,9 @@ body{
 .submit-button {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* was 8px */
-    padding-block: 0.625rem; /* was padding top/bottom: 10px */
-    padding-inline: 3.125rem; /* was padding left/right: 50px */
+    gap: 0.5rem;
+    padding-block: 0.625rem;
+    padding-inline: 3.125rem;
     font-size: 1.5625rem;
     font-weight: 700;
     color: #ffffff;
@@ -1513,9 +1513,9 @@ body{
 .prev-button {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* was 8px */
-    padding-block: 0.625rem; /* was padding top/bottom: 10px */
-    padding-inline: 1.25rem; /* was padding left/right: 20px */
+    gap: 0.5rem;
+    padding-block: 0.625rem;
+    padding-inline: 1.25rem;
     font-size: 1.5rem; 
     font-weight: 400;
     color: #000000;
