@@ -3,9 +3,9 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: GET');
 
-require_once '../config.php';
+require_once '../config/config.php';
 
-$fetch_sql = "SELECT attraction_id, attraction_name, description, entrance_fee, operating_hours, image_file FROM Attractions";
+$fetch_sql = "SELECT attraction_id, attraction_name, description, entrance_fee, operating_hours, image_file FROM attractions";
 $result = mysqli_query($con, $fetch_sql);
 
 if ($result) {

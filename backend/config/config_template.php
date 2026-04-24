@@ -1,8 +1,8 @@
 <?php
     $HOSTNAME = 'localhost';
-    $USERNAME = 'root';
-    $PASSWORD = '';
-    $DATABASE_NAME = 'rentramuros';
+    $USERNAME = 'fill_your_username';
+    $PASSWORD = 'fill_your_password (if any)';
+    $DATABASE_NAME = 'fill_your_database';
 
     $con = mysqli_connect($HOSTNAME, $USERNAME, $PASSWORD, $DATABASE_NAME);
     if(!$con) {
