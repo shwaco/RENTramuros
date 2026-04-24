@@ -40,7 +40,7 @@
                     </div>
                 `;
 
-                if (cellDate < today) {
+                if (cellDate <= today) {
                     dayCell.classList.add('disabled-day');
                 } else {
                     dayCell.addEventListener('click', () => {

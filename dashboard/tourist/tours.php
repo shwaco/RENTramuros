@@ -59,7 +59,7 @@
                                 </div> 
                                 <div class="date-dropdown">
                                     <div class="date-select" id="date-select-btn">
-                                        <span class="date-selected" id="date-display">April 21, 2026</span>
+                                        <span class="date-selected" id="date-display">April 25, 2026</span>
                                         <div class="date-caret"></div>
                                     </div>
                                     <div class="calendar-popup" id="calendar-popup">
@@ -283,7 +283,7 @@
                             <div class="info-content-container">
                                 <div class="full-name-container">
                                     <div class="full-name-label-container"><span class="full-name-label">FULL NAME</span></div>
-                                    <input type="text" id="contact-name" class="full-name-input" placeholder="First Name, M.I., Last Name">
+                                    <input type="text" id="contact-name" class="full-name-input" placeholder="First Name, M.I., Last Name" oninput="this.value = this.value.replace(/[^a-zA-Z .\-]/g, '').toUpperCase()">
                                 </div>
                                 <div class="email-container">
                                     <div class="email-label-container"><span class="email-label">EMAIL ADDRESS</span></div>
@@ -291,7 +291,10 @@
                                 </div>
                                 <div class="phone-container">
                                     <div class="phone-label-container"><span class="phone-label">PHONE NUMBER</span></div>
-                                    <input type="tel" id="contact-phone" class="phone-input" placeholder="Enter your phone number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                    <input type="tel" id="contact-phone" class="phone-input" placeholder="Enter your phone number" maxlength="11" 
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                                        onfocus="if(this.value === '') this.value = '09';" 
+                                        onblur="if(this.value === '09') this.value = '';">
                                 </div>
                             </div>
                         </div>
