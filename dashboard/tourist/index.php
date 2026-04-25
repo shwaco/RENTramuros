@@ -34,7 +34,7 @@
                 <li><img src="../../asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo"></li>
 
                 <li class="hideOnMobile"><a href="#" id="maps"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
-                <li class="hideOnMobile"><a href="tours.php"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+                <li class="hideOnMobile"><a href="tours.php" rel="noreferrer noopener" target="_blank"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
                 <li class="hideOnMobile"><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li class="hideOnMobile last"><a href="#">About</a></li>
                 <li><button type="button">Log in</button></li>
@@ -102,7 +102,7 @@
                     <button class="btn one" id="prev-btn"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
                     <div class="event_container">
-                        <div class="image"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"></div>
+                        <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
                         <div class="details_container">
                             <div class="schedule_container">
@@ -120,7 +120,7 @@
                     </div>
 
                     <div class="event_container">
-                        <div class="image"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"></div>
+                        <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
                         <div class="details_container">
                             <div class="schedule_container">
@@ -138,7 +138,7 @@
                     </div>
 
                     <div class="event_container">
-                        <div class="image"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"></div>
+                        <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
                         <div class="details_container">
                             <div class="schedule_container">

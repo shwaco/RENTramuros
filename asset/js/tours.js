@@ -80,6 +80,28 @@ function nextStep() {
         }
     }
 
+    if (currentStep === 2) {
+        
+        // 1. Check Packages/Attractions
+        if (reservationData.wantsPackage === true) {
+            if (reservationData.selectedPackage === null) {
+                alert("Please choose a package to experience before proceeding.");
+                return;
+            }
+        } else if (reservationData.wantsPackage === false) {
+            if (reservationData.customAttractions.length === 0) {
+                alert("Please choose at least one attraction to experience before proceeding.");
+                return; 
+            }
+        }
+
+        // 2. Check Vehicles
+        if (reservationData.selectedVehicle === null) {
+            alert("Please choose a vehicle to ride (or select NONE) before proceeding.");
+            return;
+        }
+    }
+
     if (currentStep < 3) {
         currentStep++;
         updateForm();
@@ -254,7 +276,7 @@ function selectPackageOption(wantsPackage) {
     console.log("Current Data:", reservationData); 
 }
 
-// --- STEP 2: PACKAGE AND VEHICLE LOGIC (WITH UNSELECT) ---
+// --- STEP 2: PACKAGE AND VEHICLE LOGIC ---
 
 function selectPackage(packageName) {
     if (reservationData.selectedPackage === packageName) {
@@ -356,4 +378,28 @@ function updateVehicleCount(change, event) {
     }
 
     console.log("Vehicle Quantity updated:", reservationData.vehicleQuantity);
+}
+
+// ------------- STEP 3 LOGIC ------------- 
+
+function submitReservation() {
+    const name = document.getElementById('contact-name').value.trim();
+    const email = document.getElementById('contact-email').value.trim();
+    const phone = document.getElementById('contact-phone').value.trim();
+
+    if (!name || !email || !phone) {
+        alert("Please fill out all contact details.");
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.com$/i;
+    
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address (e.g., yourname@email.com).");
+        return;
+    }
+
+    reservationData.contactInfo = { name, email, phone };
+
+    buildAndShowModal();
 }
