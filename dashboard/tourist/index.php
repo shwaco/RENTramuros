@@ -102,7 +102,7 @@
                     <button class="btn one" id="prev-btn"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
                     <div class="event_container">
-                        <div class="image"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"></div>
+                        <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
                         <div class="details_container">
                             <div class="schedule_container">
@@ -120,7 +120,7 @@
                     </div>
 
                     <div class="event_container">
-                        <div class="image"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"></div>
+                        <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
                         <div class="details_container">
                             <div class="schedule_container">
@@ -138,7 +138,7 @@
                     </div>
 
                     <div class="event_container">
-                        <div class="image"><img src="../../asset/img/6154443154988404815.jpg" alt="ewan"></div>
+                        <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
                         <div class="details_container">
                             <div class="schedule_container">
