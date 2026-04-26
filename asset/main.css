@@ -306,7 +306,7 @@ main {
 /* Mid main kuys */
 .mid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     padding: 0 7rem;
     width: 100%;
     gap: 3rem;
@@ -319,6 +319,7 @@ main {
     flex-direction: column;
     gap: 1rem;
     width: 100%;
+    /* overflow-x: hidden; */
 }
 
 .upcoming_container .title_wrapper {
@@ -364,15 +365,113 @@ main {
 }
 
 /* Sliding */
-.upcoming_container .slider_wrapper {
-    display: flex;
-    position: relative;
-    gap: 1rem;
+.upcoming_container .slider {
+    display: block; 
+    position: relative; 
     width: 100%;
-    align-items: center;
 }
 
-.upcoming_container .slider_wrapper .btn {
+#upcoming_events_list {
+    position: relative;
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.upcoming_container .slider ul li {
+    flex: 1 0 auto;
+    width: calc((100% - 2rem) / 3);
+}
+
+.upcoming_container .slider ul .event_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 10px ;
+    height: 100%;
+    background-color: white;
+}
+
+.upcoming_container  .event_container .image {
+    flex-shrink: 0;
+    width: 100px;
+    height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.upcoming_container .slider .event_container .image img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.upcoming_container .slider .event_container .details_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.upcoming_container .slider .event_container .schedule_container {
+    display: flex;
+    align-items: center;
+    background-color: #8D230F;
+    color: white;
+    width: fit-content;
+    border-radius: 20px;
+}  
+
+.upcoming_container .slider .event_container .details_container .schedule_container .frequency {
+    font-family: 'roboto condensed';
+    padding: 0.2rem 0.6rem;
+    border-right: 1px solid white;
+}
+
+.upcoming_container .slider .event_container .details_container .schedule_container .time {
+    font-family: 'roboto condensed';
+    padding: 0.2rem 1rem;
+    white-space: nowrap;
+}
+
+.upcoming_container .slider .event_container .details_container .name {
+    font-family: 'roboto condensed';
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.upcoming_container .slider 
+.event_container .details_container .loc_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.upcoming_container .slider 
+.event_container .details_container .loc_wrapper img {
+    display: block;
+    height: 18px;
+    width: auto;
+}
+
+.upcoming_container .slider 
+.event_container .details_container .loc_wrapper .loc {
+    font-family: 'roboto condensed';
+    font-size: 1rem;
+}
+
+.upcoming_container .slider .slide-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -390,102 +489,19 @@ main {
     max-width: 4em;
 }
 
-.upcoming_container .slider_wrapper .btn img {
+.upcoming_container .slider .slide-btn img {
     height: 3em;
     width: 3em;
     border-radius: 50%;
 
 }
 
-.upcoming_container .slider_wrapper .btn.one {
+.upcoming_container .slider .slide-btn.one {
     left: 0;
 }
 
-.upcoming_container .slider_wrapper .btn.two {
+.upcoming_container .slider .slide-btn.two {
     right: 0;
-}
-
-.upcoming_container .slider_wrapper .event_container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.5rem;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
-    border-radius: 10px ;
-    flex: 1 0 auto;
-    height: 100%;
-    background-color: white;
-}
-
-.upcoming_container .slider_wrapper .event_container .image {
-    flex-shrink: 0;
-    width: 100px;
-    height: 90px;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.upcoming_container .slider_wrapper .event_container .image img {
-    display: block;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-}
-
-.upcoming_container .slider_wrapper .event_container .details_container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.3rem;
-}
-
-.upcoming_container .slider_wrapper .event_container .schedule_container {
-    display: flex;
-    align-items: center;
-    background-color: #8D230F;
-    color: white;
-    width: fit-content;
-    border-radius: 20px;
-}  
-
-.upcoming_container .slider_wrapper .event_container .details_container .schedule_container .frequency {
-    font-family: 'roboto condensed';
-    padding: 0.2rem 0.6rem;
-    border-right: 1px solid white;
-}
-
-.upcoming_container .slider_wrapper .event_container .details_container .schedule_container .time {
-    font-family: 'roboto condensed';
-    padding: 0.2rem 1rem;
-    white-space: nowrap;
-}
-
-.upcoming_container .slider_wrapper .event_container .details_container .name {
-    font-family: 'roboto condensed';
-    text-transform: uppercase;
-    font-size: 1.1rem;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.upcoming_container .slider_wrapper 
-.event_container .details_container .loc_wrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-}
-
-.upcoming_container .slider_wrapper 
-.event_container .details_container .loc_wrapper img {
-    display: block;
-    height: 18px;
-    width: auto;
-}
-
-.upcoming_container .slider_wrapper 
-.event_container .details_container .loc_wrapper .loc {
-    font-family: 'roboto condensed';
-    font-size: 1rem;
 }
 
 /* Pop & Reco attractions */
