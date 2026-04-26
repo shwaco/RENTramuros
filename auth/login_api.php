@@ -16,7 +16,6 @@ if(!isset($data->email) || !isset($data->password_hash)) {
 $email = $data->email;
 $password_hash = $data->password_hash;
 
-// 1. Check Admins
 $admin_sql = "SELECT * FROM admins WHERE email = ?";
 $stmt = $con->prepare($admin_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
@@ -33,7 +32,6 @@ if ($row = mysqli_fetch_assoc($result)) {
     exit();
 }
 
-// 2. Check Tour Guides
 $guide_sql = "SELECT * FROM tour_guides WHERE email = ?";
 $stmt = $con->prepare($guide_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
@@ -58,7 +56,6 @@ if ($row = mysqli_fetch_assoc($result)) {
     exit();
 }
 
-// 3. Check Tourists
 $tourist_sql = "SELECT * FROM tourists WHERE email = ?";
 $stmt = $con->prepare($tourist_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);

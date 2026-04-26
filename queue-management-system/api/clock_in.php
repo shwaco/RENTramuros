@@ -11,7 +11,8 @@ if (!isset($_SESSION['guide_id'])) {
 $guide_id = $_SESSION['guide_id'];
 
 try {
-    // ise-set status yung as 'Clocked In' at irerecord yung timestamp para ma-track kung kelan nag-clock in ang guide. tong timestamp na ito ay gagamitin para i-prioritize yung mga guides sa queue 
+    // ise-set yung status as 'Clocked In' at irerecord yung timestamp para ma-track kung kelan nag-clock in ang guide —
+    // yung timestamp na ito ang gagamitin para i-prioritize sila sa queue pagdating ng time
     $sql = "UPDATE tour_guides SET current_status = 'Clocked In', became_available_at = NOW() WHERE guide_id = ?";
     $stmt = $con->prepare($sql);
     mysqli_stmt_bind_param($stmt, "i", $guide_id);

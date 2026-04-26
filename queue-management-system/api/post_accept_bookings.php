@@ -3,8 +3,8 @@ session_start();
 header('Content-Type: application/json');
 require_once('../../config/config.php');
 
-// API para i-accept ng guide ang selected tourist.
-// Sineset dito ang tourist status sa serving at ang guide status sa On tour.
+// API para i-accept ng guide yung selected tourist —
+// ise-set dito yung tourist status sa serving at yung guide status sa On Tour
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']); exit();
 }
@@ -16,7 +16,7 @@ $guide_id = $_SESSION['guide_id'];
 try {
     mysqli_begin_transaction($con);
 
-    // tiga check if available pa ung tourist para maiwasan ang double-claim
+    // tiga-check muna kung available pa yung tourist para maiwasan ang double-claim ng dalawang guide
     $stmtC = mysqli_prepare($con, "SELECT status FROM tourists WHERE customer_id = ? FOR UPDATE");
     mysqli_stmt_bind_param($stmtC, "i", $customer_id);
     mysqli_stmt_execute($stmtC);
@@ -27,12 +27,12 @@ try {
         throw new Exception("Another guide already claimed this tourist!");
     }
 
-    // tiga update ng tourist record para maging serving yung status ng tourist and mailink sa current guide.
+    // ina-update yung tourist record — ise-set yung status niya sa serving
     $stmtT = mysqli_prepare($con, "UPDATE tourists SET status = 'serving', called_at = NOW(), guide_id = ? WHERE customer_id = ?");
     mysqli_stmt_bind_param($stmtT, "ii", $guide_id, $customer_id);
     mysqli_stmt_execute($stmtT);
 
-    // tiga update ng status ng guide as "On tour" and para malink sa current tourist
+    // ina-update din yung guide status sa "On Tour" at ililinkto sa current tourist
     $stmtG = mysqli_prepare($con, "UPDATE tour_guides SET current_status = 'On Tour', current_tourist_id = ? WHERE guide_id = ?");
     mysqli_stmt_bind_param($stmtG, "ii", $customer_id, $guide_id);
     mysqli_stmt_execute($stmtG);

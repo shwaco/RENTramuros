@@ -3,8 +3,8 @@ session_start();
 header('Content-Type: application/json');
 require_once('../../config/config.php');
 
-// API para kuhanin ang completed tour history ng guide
-// sinesend dito ang list ng past tours para sa history tab ng dashboard
+// API para kunin yung completed tour history ng guide —
+// yung list ng past tours niya ang isinisend dito para sa history tab ng dashboard
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();
@@ -13,7 +13,7 @@ if (!isset($_SESSION['guide_id'])) {
 $guide_id = $_SESSION['guide_id'];
 
 try {
-    // tiga kuha ng lahat ng completed tours ng guide with tourist at package details
+    // tiga-kuha ng lahat ng completed tours ng guide kasama na yung tourist at package details
     $sql = "SELECT 
                 t.customer_id,
                 t.first_name,

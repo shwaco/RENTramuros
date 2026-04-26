@@ -1,0 +1,77 @@
+/* styles ng overlay at content para sa receipt modal at tourist details popup */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.receipt-modal-content {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* common button styles at pill badges para sa status indicators */
+.btn-minimal-primary {
+    background-color: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+    padding: 1rem 3.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.btn-minimal-primary:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.accept-tour-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    background-color: #109620;
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 3.5rem;
+    font-size: 1.1rem;
+    font-weight: 900;
+    font-family: 'Roboto Condensed', sans-serif;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.accept-tour-btn:hover { background-color: #059669; }
+.accept-tour-btn:active { transform: scale(0.98); }
+
+.status-pill {
+    padding: 0.4rem 1.25rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.status-pill.offline  { background-color: #f3f4f6; color: #6b7280; border: 1px solid #d1d5db; }
+.status-pill.waiting  { background-color: #000000; color: #ffffff; }
+.status-pill.active-tour { background-color: #059669; color: #ffffff; }

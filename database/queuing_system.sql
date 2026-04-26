@@ -1,3 +1,4 @@
+-- 1. Update tourists table with queue and booking columns
 ALTER TABLE `tourists` 
 ADD COLUMN `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP AFTER `customer_id`,
 ADD COLUMN `service_type` VARCHAR(50) DEFAULT 'Standard Kalesa' AFTER `is_verified`,
@@ -11,6 +12,10 @@ ADD COLUMN `infant_count` INT(11) DEFAULT 0 AFTER `children_count`,
 ADD COLUMN `package_id` INT(11) DEFAULT NULL AFTER `infant_count`,
 ADD COLUMN `vehicle_count` INT(11) DEFAULT 0 AFTER `package_id`,
 ADD COLUMN `destinations` TEXT DEFAULT NULL AFTER `vehicle_count`;
+
+ALTER TABLE `tour_guides`
+DROP COLUMN `otp`,
+DROP COLUMN `is_verified`;
 
 ALTER TABLE `tour_guides` 
 ADD COLUMN `became_available_at` DATETIME DEFAULT CURRENT_TIMESTAMP AFTER `last_dispatch_time`,

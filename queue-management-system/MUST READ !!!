@@ -9,17 +9,17 @@ http://localhost/tourguide-logics/auth/login.html
 So ganito, insert ka muna ng account sa db, paste mo tong sql na to:
 
 INSERT INTO `tour_guides` 
-(`first_name`, `last_name`, `email`, `password_hash`, `is_verified`, `current_status`) 
+(`first_name`, `last_name`, `email`, `password_hash`, `current_status`) 
 VALUES 
-('Juan', 'Dela Cruz', 'juan.guide@gmail.com', '$2a$12$isHmTjPr3u0zBPNrORVTCO.rmMj9dbZB/y/IUyM4DPu5J2PguWaIK', 1, 'Offline');
+('Juan', 'Dela Cruz', 'juan.guide@gmail.com', '$2a$12$isHmTjPr3u0zBPNrORVTCO.rmMj9dbZB/y/IUyM4DPu5J2PguWaIK', 'Offline');
 
 Account 1: 
 user: juan.guide@gmail.com
 pass: password123
 
-(`first_name`, `last_name`, `email`, `password_hash`, `is_verified`, `current_status`) 
+(`first_name`, `last_name`, `email`, `password_hash`, `current_status`) 
 VALUES 
-('Maria', 'Santos', 'maria.guide@gmail.com', '$2a$12$isHmTjPr3u0zBPNrORVTCO.rmMj9dbZB/y/IUyM4DPu5J2PguWaIK', 1, 'Offline');
+('Maria', 'Santos', 'maria.guide@gmail.com', '$2a$12$isHmTjPr3u0zBPNrORVTCO.rmMj9dbZB/y/IUyM4DPu5J2PguWaIK', 'Offline');
 
 Account 2:
 user: maria.guide@gmail.com
