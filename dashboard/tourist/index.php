@@ -210,6 +210,42 @@
                                 </div>
                             </div>
                         </li>
+                        <li><div class="event_container">
+                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">January 29</div>
+                                        <div class="time">4PM - 12AM</div>
+                                    </div>
+                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
+
+                                    <div class="loc_wrapper">
+                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+
+                                        <div class="loc">Pasig River Esplanade</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><div class="event_container">
+                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">January 29</div>
+                                        <div class="time">4PM - 12AM</div>
+                                    </div>
+                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
+
+                                    <div class="loc_wrapper">
+                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+
+                                        <div class="loc">Pasig River Esplanade</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
 
                         
                     </ul>
