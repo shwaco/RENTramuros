@@ -49,12 +49,13 @@ function updateButtonVisibility (track, prevBtn, nextBtn) {
     } else {
         prevBtn.style.display = 'flex';
     }
-    if (track.scrollWidth > 0) {
-        if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 5) {
-            nextBtn.style.display = 'none';
-        } else {
-            nextBtn.style.display = 'flex';
-        }
+
+    let maxScrollableWidth = track.scrollWidth - track.clientWidth;
+
+    if (maxScrollableWidth <= track.scrollLeft) {
+        nextBtn.style.display = 'none';
+    } else {
+        nextBtn.style.display = 'flex';
     }
 }
 

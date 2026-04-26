@@ -97,65 +97,160 @@
                 </div>
 
                 <!-- Sliding -->
-                <div class="slider_wrapper">
+                <div class="slider">
                     
-                    <button class="btn one" id="prev-btn"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
+                    <button class="slide-btn one" id="prev-btn"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
-                    <div class="event_container">
-                        <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+                    <ul id="upcoming_events_list">
+                        <li><div class="event_container">
+                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
-                        <div class="details_container">
-                            <div class="schedule_container">
-                                <div class="frequency">January 29</div>
-                                <div class="time">4PM - 12AM</div>
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">January 29</div>
+                                        <div class="time">4PM - 12AM</div>
+                                    </div>
+                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
+
+                                    <div class="loc_wrapper">
+                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+
+                                        <div class="loc">Pasig River Esplanade</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
+                        </li>
+                        <li><div class="event_container">
+                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
-                            <div class="loc_wrapper">
-                                <img src="../../asset/img/location_icon.svg" alt="ewan">
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">January 29</div>
+                                        <div class="time">4PM - 12AM</div>
+                                    </div>
+                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
-                                <div class="loc">Pasig River Esplanade</div>
+                                    <div class="loc_wrapper">
+                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+
+                                        <div class="loc">Pasig River Esplanade</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                        <li><div class="event_container">
+                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
-                    <div class="event_container">
-                        <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">January 29</div>
+                                        <div class="time">4PM - 12AM</div>
+                                    </div>
+                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
-                        <div class="details_container">
-                            <div class="schedule_container">
-                                <div class="frequency">Daily</div>
-                                <div class="time">4PM - 12AM</div>
+                                    <div class="loc_wrapper">
+                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+
+                                        <div class="loc">Pasig River Esplanade</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
+                        </li>
+                        <li><div class="event_container">
+                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
-                            <div class="loc_wrapper">
-                                <img src="../../asset/img/location_icon.svg" alt="ewan">
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">January 29</div>
+                                        <div class="time">4PM - 12AM</div>
+                                    </div>
+                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
-                                <div class="loc">Pasig River Esplanade</div>
+                                    <div class="loc_wrapper">
+                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+
+                                        <div class="loc">Pasig River Esplanade</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                        <li><div class="event_container">
+                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
-                    <div class="event_container">
-                        <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">January 29</div>
+                                        <div class="time">4PM - 12AM</div>
+                                    </div>
+                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
-                        <div class="details_container">
-                            <div class="schedule_container">
-                                <div class="frequency">Daily</div>
-                                <div class="time">4PM - 12AM</div>
+                                    <div class="loc_wrapper">
+                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+
+                                        <div class="loc">Pasig River Esplanade</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
+                        </li>
+                        <li><div class="event_container">
+                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
-                            <div class="loc_wrapper">
-                                <img src="../../asset/img/location_icon.svg" alt="ewan">
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">January 29</div>
+                                        <div class="time">4PM - 12AM</div>
+                                    </div>
+                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
-                                <div class="loc">Pasig River Esplanade</div>
+                                    <div class="loc_wrapper">
+                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+
+                                        <div class="loc">Pasig River Esplanade</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                        <li><div class="event_container">
+                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
-                    <button class="btn two" id="next-btn"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">January 29</div>
+                                        <div class="time">4PM - 12AM</div>
+                                    </div>
+                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
+
+                                    <div class="loc_wrapper">
+                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+
+                                        <div class="loc">Pasig River Esplanade</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li><div class="event_container">
+                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">January 29</div>
+                                        <div class="time">4PM - 12AM</div>
+                                    </div>
+                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
+
+                                    <div class="loc_wrapper">
+                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+
+                                        <div class="loc">Pasig River Esplanade</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        
+                    </ul>
+
+                    <button class="slide-btn two" id="next-btn"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
 
                 </div>
             </div>
