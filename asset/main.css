@@ -366,7 +366,7 @@ main {
 
 /* Sliding */
 .upcoming_container .slider {
-    display: block; 
+    display: flex; 
     position: relative; 
     width: 100%;
 }
@@ -380,12 +380,12 @@ main {
     overflow-x: hidden;
     scroll-snap-type: x mandatory;
     width: 100%;
-    padding: 0.5rem;
 }
 
 .upcoming_container .slider ul li {
     flex: 1 0 auto;
     width: calc((100% - 2rem) / 3);
+    scroll-snap-align: start;
 }
 
 .upcoming_container .slider ul .event_container {
