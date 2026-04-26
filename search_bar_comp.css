@@ -1,6 +1,6 @@
 * {
     font-family: "Roboto Condensed", sans-serif;
-    box-sizing: border-box; /* Good practice to keep paddings from breaking your widths */
+    box-sizing: border-box;
     /* border: 1px solid red; */
 }
 
@@ -17,7 +17,7 @@
     position: relative;
 }
 
-/* --- THE SEARCH BAR (INPUT + BUTTON) --- */
+/* THE SEARCH BAR */
 .search-bar {
     display: flex;
     align-items: center;
@@ -29,7 +29,7 @@
 
 /* --- TEXT INPUT --- */
 .search-input {
-    flex: 1; /* Tells the input box to stretch and take up all available space */
+    flex: 1;
     border: none;
     padding: 1.25rem 1.5rem;
     font-size: 1rem;
@@ -37,13 +37,11 @@
 }
 
 .search-input:focus {
-    /* What it looks like when the user clicks inside to type (removes standard blue outline usually) */
     outline: none; 
 }
 
-/* --- BUTTON & ICON --- */
+/* --- SEARCHBUTTON --- */
 .search-button {
-    /* Your button styles (background color, padding, removing default borders) */
     background-color: #702C1F; /* Matched to the brownish-red in your image */
     border: none;
     padding: 0 1.5rem;
@@ -51,17 +49,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    align-self: stretch; /* Forces the button to grow to the exact height of the input box */
+    align-self: stretch;
     transition: background-color 0.2s ease;
 }
 
 .search-button:hover {
-    /* What happens when the mouse hovers over the button */
-    background-color: #552115; /* Slightly darker when hovered */
+    background-color: #552115;
 }
 
 .search-button img {
-    /* Controls the size of your SVG icon so it isn't massive */
     width: 30px;
     height: 30px;
     /* PRO-TIP: If the SVG you downloaded from Icons8 is black, this line forces it to become perfectly white! */
@@ -73,11 +69,11 @@
 /* --- DROPDOWN MAIN BOX --- */
 .search-dropdown-wrapper {
     position: absolute;
-    top: 100%; /* Pushes it exactly below the search bar */
+    top: 100%;
     left: 0;
     width: 100%;
-    margin-top: 0.5rem; /* A tiny gap between the bar and the dropdown */
-    z-index: 1000; /* Forces it to hover over everything else on the page */
+    margin-top: 0.5rem;
+    z-index: 1000;
     
     display: none;
 }
@@ -93,10 +89,10 @@
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Space between the History section and Attractions section */
+    gap: 1.5rem;
 }
 
-/* --- SECTION LABELS --- */
+/* --- LABELS --- */
 .search-history-label,
 .intramuros-attractions-label {
     font-size: 1.125rem;
@@ -109,28 +105,27 @@
 /* --- SEARCH HISTORY PILLS --- */
 .search-history-lists {
     display: flex;
-    flex-wrap: wrap; /* Allows pills to drop to the next line if there are too many */
+    flex-wrap: wrap;
     gap: 0.5rem;
 }
 
 .history-pill {
-    background-color: #F0F2F5; /* Light gray */
+    background-color: #F0F2F5;
     color: #333333;
     padding: 0.5rem 1rem;
-    border-radius: 20px; /* Makes them pill-shaped */
+    border-radius: 20px;
     font-size: 0.875rem;
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
 
 .history-pill:hover {
-    background-color: #E4E6E9; /* Slightly darker gray on hover */
+    background-color: #E4E6E9;
 }
 
 /* --- ATTRACTIONS GRID --- */
 .intramuros-attractions-lists {
     display: grid;
-    /* This creates exactly 6 equal columns just like your reference image! */
     grid-template-columns: repeat(5, 1fr); 
     gap: 0.75rem;
 }
@@ -138,21 +133,21 @@
 .attraction-card{
     position: relative;
     border-radius: 8px;
-    overflow: hidden; /* Keeps the image perfectly inside the rounded corners */
-    aspect-ratio: 4 / 3; /* Forces standard rectangle boxes */
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .attraction-card:hover{
-    transform: translateY(-3px); /* Little hover jump */
+    transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .attraction-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Stops images from getting stretched/squished */
+    object-fit: cover;
     display: block;
 }
 
@@ -162,15 +157,13 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 1.5rem 0.25rem 0.5rem; /* Extra padding on top for the gradient */
-    
-    /* Creates a dark shadow at the bottom of the image so white text is always readable */
+    padding: 1.5rem 0.25rem 0.5rem;
+    /* Creates a dark shadow so white text is always readable */
     background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); 
-    
     color: #FFFFFF;
     font-size: 0.875rem;
     font-weight: 700;
     text-align: center;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    pointer-events: none; /* Stops the text from interfering with clicks */
+    pointer-events: none;
 }

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "fort-santiago",
+    "name": "Fort Santiago",
+    "image": "fort-santaigo-1.jpeg"
+  },
+  {
+    "id": "san-agustin",
+    "name": "San Agustin Church",
+    "image": "fort-santaigo-1.jpeg"
+  },
+  {
+    "id": "casa-manila",
+    "name": "Casa Manila",
+    "image": "fort-santaigo-1.jpeg"
+  },
+  {
+    "id": "baluarte-de-san-diego",
+    "name": "Baluarte de San Diego",
+    "image": "fort-santaigo-1.jpeg"
+  },
+  {
+    "id": "museo-de-intramuros",
+    "name": "Museo de Intramuros",
+    "image": "fort-santaigo-1.jpeg"
+  },
+  {
+    "id": "manila-cathedral",
+    "name": "Manila Cathedral",
+    "image": "fort-santaigo-1.jpeg"
+  },
+  {
+    "id": "palacio-del-gobernador",
+    "name": "Palacio del Gobernador",
+    "image": "fort-santaigo-1.jpeg"
+  },
+  {
+    "id": "silahis-art-artifacts",
+    "name": "Silahis Art & Artifacts",
+    "image": "fort-santaigo-1.jpeg"
+  },
+  {
+    "id": "bambike",
+    "name": "Bambike",
+    "image": "fort-santaigo-1.jpeg"
+  },
+  {
+    "id": "puerta-real-garden",
+    "name": "Puerta Real Garden",
+    "image": "fort-santaigo-1.jpeg"
+  }
+]
