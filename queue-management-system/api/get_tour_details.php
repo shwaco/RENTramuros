@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once('../../config/config.php');
+require_once('../../config.php/config.php');
 
 // API para kunin yung current na nakaassign na tourist ng guide
 // ginagamot to para ipakita ang active tour details kapag Busy ang guide

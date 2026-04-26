@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 // EXACT FIX: Pointing to the correct config folder!
-require_once '../config/config.php';
+require_once '../config.php/config.php';
 
 $data = json_decode(file_get_contents("php://input"));
 if(!isset($data->email) || !isset($data->password_hash)) {
@@ -35,7 +35,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 
 // 2. Check Tour Guides
 $guide_sql = "SELECT * FROM tour_guides WHERE email = ?";
-$stmt = $con->prepare($guide_sql);
+$stmt = $con->prepare("UPDATE tour_guides SET status = 'Online' WHERE id = ?");
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);

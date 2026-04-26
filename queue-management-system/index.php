@@ -1,7 +1,7 @@
 <?php 
 // simulan ang session at i-require ang database config
 session_start();
-require_once '../config/config.php';
+require_once '../config.php/config.php';
 
 // tiga-check kung may active session ang guide, kung wala i-redirect sa login
 if (!isset($_SESSION['guide_id'])) {

@@ -5,8 +5,8 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-require_once '../config/config.php';
-require_once '../config/mailer_config.php';
+require_once '../config.php/config.php';
+require_once '../config.php/mailer_config.php';
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -34,11 +34,11 @@ if (mysqli_num_rows($result) > 0) {
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 $otp = rand(100000, 999999);
-$expiry_time = date("Y-m-d H:i:s", strtotime("+15 minutes"));
+$is_verified = 0;
 
-$sql = "INSERT INTO tourists (first_name, last_name, email, password_hash, phone_number) VALUES (?, ?, ?, ?, ?)";
+$sql = "INSERT INTO tourists (first_name, last_name, email, password_hash, phone_number, otp, is_verified) VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmt = $con->prepare($sql);
-mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $email, $hashed_password, $phone);
+mysqli_stmt_bind_param($stmt, "sssssi", $firstname, $lastname, $email, $hashed_password, $phone, $otp, $is_verified);
 if (mysqli_stmt_execute($stmt)) {
 
     try {
