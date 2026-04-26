@@ -29,12 +29,12 @@ TESTING THE GUIDES
 
 Log in pareho sa magkaibang window (or pwede namang naka incognito lang yung isa).
 
-Kapag nag-login kayo, mapapansin niyo "Offline" pa ang status.
+Kapag nag-login kayo, mapapansin niyo "Online" pa ang status.
 
-Click "Clock In" (magiging 'Idle' status niyo).
+Click "Clock In" (magiging 'Clocked in' status niyo).
 
-Then click "Join Queue" (magiging 'Available' status niyo and papasok na kayo sa pila).
-Ang unang pumindot ng Join Queue ang magiging Queuing #1 kasi naka-base na ito sa became_available_at timestamp sa system natin!
+Then click "Join Queue" (magiging 'Queueing status niyo and papasok na kayo sa pila).
+Ang unang pumindot ng Join Queue ang magiging Queuing #1 kasi naka-base na ito sa became_available_at timestamp sa system
 
 ADDING DUMMY TOURISTS:
 
