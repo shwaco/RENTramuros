@@ -1,9 +1,19 @@
 <?php
+// session_start();
+
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: PATCH');
 
 require_once '../../../asset/config.php';
+
+// if($_SESSION['admin_id'] ?? null) {
+//     // Admin is logged in, proceed with the request
+// } else {
+//     http_response_code(401);
+//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
+//     exit();
+// }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
     echo json_encode(["status" => "error", "message" => "Invalid request method."]);
@@ -32,19 +42,34 @@ if(isset($data->description)) {
     $params_array[] = $data->description;
 }
 
-if(isset($data->entrance_fee)) {
-    $update_fields[] = "entrance_fee = ?";
-    $params_array[] = $data->entrance_fee;
+if(isset($data->fee)) {
+    $update_fields[] = "fee = ?";
+    $params_array[] = $data->fee;
 }
 
-if(isset($data->operating_hours)) {
-    $update_fields[] = "operating_hours = ?";
-    $params_array[] = $data->operating_hours;
+if(isset($data->schedule)) {
+    $update_fields[] = "schedule = ?";
+    $params_array[] = $data->schedule;
 }
 
-if(isset($data->image_file)) {
-    $update_fields[] = "image_file = ?";
-    $params_array[] = $data->image_file;
+if(isset($data->main_img)) {
+    $update_fields[] = "main_img = ?";
+    $params_array[] = $data->main_img;
+}
+
+if(isset($data->mini_one_img)) {
+    $update_fields[] = "mini_one_img = ?";
+    $params_array[] = $data->mini_one_img;
+}
+
+if(isset($data->mini_two_img)) {
+    $update_fields[] = "mini_two_img = ?";
+    $params_array[] = $data->mini_two_img;
+}
+
+if(isset($data->rec_img)) {
+    $update_fields[] = "rec_img = ?";
+    $params_array[] = $data->rec_img;
 }
 
 if(empty($update_fields)) {

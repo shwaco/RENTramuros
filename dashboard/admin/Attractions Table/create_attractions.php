@@ -3,7 +3,6 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-ControlAllow-Method: POST');
-
 require_once '../../../asset/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
