@@ -1,0 +1,75 @@
+<?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type');
+
+// EXACT FIX: Pointing to the correct config folder!
+require_once '../config/config.php';
+
+$data = json_decode(file_get_contents("php://input"));
+if(!isset($data->email) || !isset($data->password_hash)) {
+    echo json_encode(["status" => "error", "message" => "Please Enter email or password."]);
+    exit();
+}
+
+$email = $data->email;
+$password_hash = $data->password_hash;
+
+// 1. Check Admins
+$admin_sql = "SELECT * FROM admins WHERE email = ?";
+$stmt = $con->prepare($admin_sql);
+mysqli_stmt_bind_param($stmt, "s", $email);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    if (!password_verify($password_hash, $row['password_hash'])) {
+        echo json_encode(["status" => "error", "message" => "Invalid password."]);
+        exit();
+    }
+    $_SESSION['admin_id'] = $row['admin_id'];
+    echo json_encode(["status" => "success", "message" => "Login Successful as Admin!", "role" => "admin", "admin_id" => $row['admin_id']]);
+    exit();
+}
+
+// 2. Check Tour Guides
+$guide_sql = "SELECT * FROM tour_guides WHERE email = ?";
+$stmt = $con->prepare($guide_sql);
+mysqli_stmt_bind_param($stmt, "s", $email);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    if (!password_verify($password_hash, $row['password_hash'])) {
+        echo json_encode(["status" => "error", "message" => "Invalid password."]);
+        exit();
+    }
+    $_SESSION['guide_id'] = $row['guide_id'];
+    echo json_encode(["status" => "success", "message" => "Login Successful as Tour Guide!", "role" => "guide", "guide_id" => $row['guide_id']]);
+    exit();
+}
+
+// 3. Check Tourists
+$tourist_sql = "SELECT * FROM tourists WHERE email = ?";
+$stmt = $con->prepare($tourist_sql);
+mysqli_stmt_bind_param($stmt, "s", $email);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    if (!password_verify($password_hash, $row['password_hash'])) {
+        echo json_encode(["status" => "error", "message" => "Invalid password."]);
+        exit();
+    }
+    if ($row['is_verified'] == 0) {
+        echo json_encode(["status" => "error", "message" => "Account not verified. Please check your email for the OTP to verify your account."]);
+        exit();
+    }
+    $_SESSION['tourist_id'] = $row['tourist_id'];
+    echo json_encode(["status" => "success", "message" => "Login Successful as Tourist!", "role" => "tourist", "tourist_id" => $row['tourist_id']]);
+    exit();
+} 
+
+echo json_encode(["status" => "error", "message" => "Email not found. Please sign up first."]);
+?>
