@@ -379,11 +379,9 @@ function viewTouristDetails(id) {
     const name = parts[0] ? parts[0].trim() : '';
     const fee = parts[1] ? parseInt(parts[1], 10) : 0;
     
-    // If the fee is greater than 0, show the green price!
     if (fee > 0) {
         return `<span>${name}&nbsp;&nbsp;<span style="color: #16a34a; font-weight: 400; font-style: italic; font-size: 0.8rem;">₱${fee}</span></span>`;
     } else {
-        // If it's free, just show the name
         return `<span>${name}</span>`;
     }
 }).join('');

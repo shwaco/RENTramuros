@@ -2,7 +2,6 @@
 session_start();
 header('Content-Type: application/json');
 
-// FIX: Corrected config path!
 require_once('../../config/config.php');
 
 if (!isset($_SESSION['guide_id'])) {
@@ -13,7 +12,7 @@ if (!isset($_SESSION['guide_id'])) {
 $guide_id = $_SESSION['guide_id'];
 
 try {
-    // Check if they are On Tour first to prevent clocking out during a tour
+    // tiga-check muna kung On Tour pa yung guide para iwas clock out habang may tour
     $check_sql = "SELECT current_status FROM tour_guides WHERE guide_id = ?";
     $check_stmt = mysqli_prepare($con, $check_sql);
     mysqli_stmt_bind_param($check_stmt, "i", $guide_id);
@@ -25,7 +24,7 @@ try {
         exit();
     }
 
-    // Set to 'Online' so they go back to the black Clock In button state
+    // ise-set status to 'Online' para bumalik sila sa state ng dashboard where they have to clock in ulit
     $sql = "UPDATE tour_guides SET current_status = 'Online', current_tourist_id = NULL WHERE guide_id = ?";
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($stmt, "i", $guide_id);

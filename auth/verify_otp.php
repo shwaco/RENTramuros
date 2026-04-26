@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: POST');
 
-require_once '../config.php/config.php';
+require_once '../config/config.php';
 
 $data = json_decode(file_get_contents("php://input"));
 if(!isset($data->email) || !isset($data->otp)) {
@@ -28,41 +28,23 @@ if ($row = mysqli_fetch_assoc($result)) {
         exit();
     }
 
-    $update_sql = "UPDATE tourists SET is_verified = 1, otp = 0 WHERE customer_id = ?";
-    $update_stmt = $con->prepare($update_sql);
-    mysqli_stmt_bind_param($update_stmt, "i", $row['customer_id']);
-    if (mysqli_stmt_execute($update_stmt)){
-        echo json_encode(["status" => "success", "message" => "OTP verified successfully! You can now login."]);
-    } else {
-        echo json_encode(["status" => "error", "message" => "Error updating OTP status."]);
-    }
-    exit();
-}
-
-// Check if it's a tour guide account
-$sql = "SELECT guide_id, otp FROM tour_guides WHERE email = ?";
-$stmt = $con->prepare($sql);
-mysqli_stmt_bind_param($stmt, "s", $email);
-mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
-
-if ($row = mysqli_fetch_assoc($result)) {
-    if ($row['otp'] != $otp) {
-        echo json_encode(["status" => "error", "message" => "Invalid OTP."]);
+    $current_time = date("Y-m-d H:i:s");
+    if ($current_time > $row['otp_expiry']) {
+        echo json_encode(["status" => "error", "message" => "OTP has expired."]);
         exit();
     }
 
-    $update_sql = "UPDATE tour_guides SET is_verified = 1, otp = 0 WHERE guide_id = ?";
+    $update_sql = "UPDATE tourists SET otp_code = NULL, otp_expiry = NULL WHERE tourists_id = ?";
     $update_stmt = $con->prepare($update_sql);
-    mysqli_stmt_bind_param($update_stmt, "i", $row['guide_id']);
-    if (mysqli_stmt_execute($update_stmt)){
-        echo json_encode(["status" => "success", "message" => "OTP verified successfully! You can now login."]);
+    mysqli_stmt_bind_param($update_stmt, "i", $row['tourists_id']);
+    if  (mysqli_stmt_execute($update_stmt)){
+        echo json_encode(["status" => "success", "message" => "OTP verified successfully!"]);
     } else {
         echo json_encode(["status" => "error", "message" => "Error updating OTP status."]);
     }
+} else {
+    echo json_encode(["status" => "error", "message" => "Email not found."]);
     exit();
 }
-
-echo json_encode(["status" => "error", "message" => "Email not found."]);
 
 ?>

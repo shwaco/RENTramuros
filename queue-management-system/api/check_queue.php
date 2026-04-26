@@ -17,7 +17,7 @@ if (!isset($_SESSION['guide_id'])) {
 $guide_id = $_SESSION['guide_id'];
 
 try {
-    // Since the browser pings this file every 1.5 seconds, inaaupdate nito yung database to prove this guide is online.
+    // dahil piniping ng browser to, ina-update nito yung database to prove na online pa yung guide
     $heartbeat_sql = "UPDATE tour_guides SET last_active_at = NOW() WHERE guide_id = ?";
     $stmtH = mysqli_prepare($con, $heartbeat_sql);
     mysqli_stmt_bind_param($stmtH, "i", $guide_id);

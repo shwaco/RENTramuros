@@ -1,10 +1,10 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once('../../config.php/config.php');
+require_once('../../config/config.php');
 
 // API para kunin yung current na nakaassign na tourist ng guide
-// ginagamot to para ipakita ang active tour details kapag Busy ang guide
+// ginagamot to para ipakita ang active tour details kapag On Tour ang guide
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'No active session found.']); 
     exit();
@@ -30,7 +30,7 @@ try {
     LEFT JOIN attractions a 
     ON pi.attraction_id = a.attraction_id 
     WHERE tg.guide_id = ? 
-    AND tg.current_status = 'Busy' 
+    AND tg.current_status = 'On Tour' 
     GROUP BY t.customer_id";
     $stmt = mysqli_prepare($con, $query);
     mysqli_stmt_bind_param($stmt, "i", $guide_id);

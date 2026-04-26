@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 require_once('../../config/config.php');
 
 // cinocall tong api na to if namiss yung turn ng guide sa queue
-// ito ay nag-update lang ng became_available_at timestamp para mapush ang guide sa pinakabagong position ng queue
+// naguupdate lang to ng became_available_at timestamp para mapush yung guide sa pinakabagong position ng queue
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();

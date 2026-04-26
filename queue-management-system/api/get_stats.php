@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once('../../config.php/config.php');
+require_once('../../config/config.php');
 
 // API para kunin yung daily statistics ng queue at tours
 // ginagamit to sa dashboard cards para makita agad yung current state ng queue, tourists, etc...
@@ -13,19 +13,19 @@ if (!isset($_SESSION['guide_id'])) {
 try {
     $stats = [];
     
-    // counter ng waiting tourists for today
+    // counter ng waiting tourists
     $resultW = mysqli_query($con, "SELECT COUNT(*) as count FROM tourists WHERE status = 'waiting' AND DATE(created_at) = CURDATE()");
     $stats['waiting'] = mysqli_fetch_assoc($resultW)['count'];
     
-    // counter ng serving tourists for today
+    // counter ng serving tourists 
     $resultS = mysqli_query($con, "SELECT COUNT(*) as count FROM tourists WHERE status = 'serving' AND DATE(created_at) = CURDATE()");
     $stats['serving'] = mysqli_fetch_assoc($resultS)['count'];
     
-    // counter ng completed tours for today
+    // counter ng completed tours 
     $resultC = mysqli_query($con, "SELECT COUNT(*) as count FROM tourists WHERE status = 'completed' AND DATE(created_at) = CURDATE()");
     $stats['completed'] = mysqli_fetch_assoc($resultC)['count'];
     
-    // counter ng total tourists for today
+    // counter ng total tourists 
     $resultT = mysqli_query($con, "SELECT COUNT(*) as count FROM tourists WHERE DATE(created_at) = CURDATE()");
     $stats['today_total'] = mysqli_fetch_assoc($resultT)['count'];
     

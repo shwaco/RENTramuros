@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once('../../config.php/config.php');
+require_once('../../config/config.php');
 
 // API para kuhanin ang completed tour history ng guide
 // sinesend dito ang list ng past tours para sa history tab ng dashboard

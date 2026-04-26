@@ -1,5 +1,4 @@
 <?php 
-// simulan ang session at i-require ang database config
 session_start();
 require_once '../config/config.php';
 
@@ -22,11 +21,8 @@ $currentStatus = $guideInfo['current_status'];
 $isAssigned = false;
 $tourData = null;
 
-// kung Busy ang guide, kunin ang details ng current tourist na naka-assign
+// kung On tour ang guide, kinukuha nito yung details ng current tourist na naka-assign
 if ($currentStatus === 'On Tour') {
-    // FIX #8: removed t.total_amount — that column does not exist in the tourists table
-    // FIX #12: COALESCE falls back to t.destinations for walk-in tourists who have no
-    //          package/attractions join — their itinerary was previously always blank
     $query = "SELECT t.first_name, t.last_name, t.email, t.phone_number, t.customer_id,
               t.service_type AS vehicle_type, p.package_name,
               COALESCE(
@@ -54,7 +50,7 @@ if ($currentStatus === 'On Tour') {
 }
 
 $queuePosition = 0;
-// kung Available ang guide, tiga-calculate ng position nito sa queue
+// if  Queuing yung guide, kinakalculate nito yung positionniya sa queue gamit yung became_available_at timestamp at guide_id bilang tie breaker para sa mga guides na nag-join ng queue ng sabay. Ang logic nito ay:
 if ($currentStatus === 'Queuing') {
     $stmtP = mysqli_prepare($con, "SELECT COUNT(*) + 1 as pos FROM tour_guides WHERE current_status = 'Queuing' AND (became_available_at < ? OR (became_available_at = ? AND guide_id < ?))");
     mysqli_stmt_bind_param($stmtP, "ssi", $guideInfo['became_available_at'], $guideInfo['became_available_at'], $guide_id);

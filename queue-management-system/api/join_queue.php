@@ -11,7 +11,7 @@ if (!isset($_SESSION['guide_id'])) {
 $guide_id = $_SESSION['guide_id'];
 
 try {
-    // Set to 'Queuing' (keep the original clock in time)
+    // ise-set status as 'Queuing' (ikkeep lang yung original na clock in time)
     $sql = "UPDATE tour_guides SET current_status = 'Queuing' WHERE guide_id = ?";
     $stmt = $con->prepare($sql);
     mysqli_stmt_bind_param($stmt, "i", $guide_id);

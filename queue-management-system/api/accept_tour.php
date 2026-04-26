@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 require_once('../../config/config.php');
 
 // API para i-accept ng guide ang selected tourist.
-// Sineset dito ang tourist status sa serving at ang guide status sa Busy.
+// Sineset dito ang tourist status sa serving at ang guide status sa On tour.
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']); exit();
 }
@@ -32,7 +32,7 @@ try {
     mysqli_stmt_bind_param($stmtT, "ii", $guide_id, $customer_id);
     mysqli_stmt_execute($stmtT);
 
-    // tiga update ng status ng guide as "busy" and para malink sa current tourist
+    // tiga update ng status ng guide as "On tour" and para malink sa current tourist
     $stmtG = mysqli_prepare($con, "UPDATE tour_guides SET current_status = 'On Tour', current_tourist_id = ? WHERE guide_id = ?");
     mysqli_stmt_bind_param($stmtG, "ii", $customer_id, $guide_id);
     mysqli_stmt_execute($stmtG);
