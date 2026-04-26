@@ -1,52 +1,65 @@
-Before doing this, make sure to run the queuing_system.sql AFTER na ma-import yung rentramuros_database.sql (these are both under the "database" folder).
-Note: Make sure updated yung queuing_system.sql
-Oh, and make sure running na yung XAMPP (naka-ON na dapat yung MySQL and Apache).
+REQUIREMENTS BEFORE MAGSIMULA
+  - XAMPP (kailangan naka-ON yung Apache at MySQL)
+  - Browser (Chrome or Firefox, okay na kahit alin)
+  - PHPMyAdmin access: http://localhost/phpmyadmin
 
-!!!! HINDI PA MAAYOS YUNG AUTH NITO FOR NOW !!!!
+ I-SETUP MUNA YUNG DATABASE
 
-http://localhost/tourguide-logics/auth/login.html
+- sa phpmyadmin
 
-So ganito, insert ka muna ng account sa db, paste mo tong sql na to:
+- Gumawa ng bagong database:
+     - Database name: rentramuros_database
+     - Click "Create"
 
+- I-import yung base database (ito munabago yung isa):
+     - Click "Import" tab sa itaas
+     - I-upload yung: database/rentramuros_database.sql
+     - Click "Import"
+
+- I-import yung queuing system schema (ITO YUNG PANGALAWA):
+     - Click "Import" ulit 
+     - I-upload yung: database/queuing_system.sql
+     - Click "Go" / "Import"
+     - or run mo na lang yung sql pwede rin
+
+mag insert ng tour guide accounts sa phpmyadmin since wala tayong sign up
+
+Pumunta sa PHPMyAdmin, piliin yung rentramuros_database, then click "SQL" tab.
+I-paste mo yung mga ito:
+
+-- GUIDE ACCOUNT 1
 INSERT INTO `tour_guides` 
 (`first_name`, `last_name`, `email`, `password_hash`, `current_status`) 
 VALUES 
-('Juan', 'Dela Cruz', 'juan.guide@gmail.com', '$2a$12$isHmTjPr3u0zBPNrORVTCO.rmMj9dbZB/y/IUyM4DPu5J2PguWaIK', 'Offline');
+('Nesto', 'Arevalo', 'arevaloernesto@gmail.com', '$2a$12$isHmTjPr3u0zBPNrORVTCO.rmMj9dbZB/y/IUyM4DPu5J2PguWaIK', 'Offline');
 
-Account 1: 
-user: juan.guide@gmail.com
-pass: password123
-
+-- GUIDE ACCOUNT 2
+INSERT INTO `tour_guides` 
 (`first_name`, `last_name`, `email`, `password_hash`, `current_status`) 
 VALUES 
-('Maria', 'Santos', 'maria.guide@gmail.com', '$2a$12$isHmTjPr3u0zBPNrORVTCO.rmMj9dbZB/y/IUyM4DPu5J2PguWaIK', 'Offline');
+('Lence', 'Jalimao', 'lenceybou@gmail.com', '$2a$12$isHmTjPr3u0zBPNrORVTCO.rmMj9dbZB/y/IUyM4DPu5J2PguWaIK', 'Offline');
 
-Account 2:
-user: maria.guide@gmail.com
-pass: password123
+Credentials:
+  Account 1 — user: arevaloernesto@gmail.com    | pass: password123
+  Account 2 — user: lenceybou@gmail.com   | pass: password123
 
-TESTING THE GUIDES
+Login page:
+  http://localhost/tourguide-logics/auth/login.html
 
-Log in pareho sa magkaibang window (or pwede namang naka incognito lang yung isa).
+- testing ng queuing system
 
-Kapag nag-login kayo, mapapansin niyo "Online" pa ang status.
+- open lang yung login page sa dalawang magkaibang browser windows
+   (o yung isa sa normal window, yung isa sa Incognito/Private)
 
-Click "Clock In" (magiging 'Clocked in' status niyo).
+- mag-login ng magkaibang guide sa bawat window
 
-Then click "Join Queue" (magiging 'Queueing status niyo and papasok na kayo sa pila).
-Ang unang pumindot ng Join Queue ang magiging Queuing #1 kasi naka-base na ito sa became_available_at timestamp sa system
 
-ADDING DUMMY TOURISTS:
-
-SQL
+- Para may tourists na makita sa lobby, nag iinsert na lang ako for now ng tourist sa table ng tourist, gamit tong sql na to
 
 INSERT INTO `tourists` 
 (`first_name`, `last_name`, `email`, `phone_number`, `service_type`, `vehicle_count`, `status`, `adult_count`, `children_count`, `infant_count`, `destinations`) 
 VALUES 
-('Juan', 'Dela Cruz', 'juan.delacruz1211@gmail.com', '09171234567', 'Standard Kalesa', 1, 'waiting', 3, 2, 0, 'Fort Santiago|75, Manila Cathedral|0, Baluarte de San Diego|75, Casa Manila|75'),
-
-('Maria', 'Clara', 'mclara18871121@yahoo.com', '09189876543', 'Tranvia', 1, 'waiting', 2, 0, 1, 'San Agustin Church|200, Rizal Shrine|0'),
-
-('Andres', 'Bonifacio', 'supremo.andres1211@outlook.com', '09191122334', 'Bambike', 5, 'waiting', 5, 0, 0, 'Baluarte de San Diego|75, Puerta Real|0, Puerta Del Parian|0'),
-
-('Leonor', 'Rivera', 'leonor.rivera1211@icloud.com', '09204445566', 'NONE', 0, 'waiting', 4, 0, 0, 'Silahis Art & Artifacts Inc|0, Museo de Intramuros|200');
+('David', 'Contreras', 'davidcontreras@gmail.com', '09171234567', 'Standard Kalesa', 1, 'waiting', 3, 2, 0, 'Fort Santiago|75, Manila Cathedral|0, Baluarte de San Diego|75, Casa Manila|75'),
+('Lee', 'Tuangco', 'leetuangco@yahoo.com', '09189876543', 'Tranvia', 1, 'waiting', 2, 0, 1, 'San Agustin Church|200, Rizal Shrine|0'),
+('Ian', 'Culcul', 'ianculcul@outlook.com', '09191122334', 'Bambike', 5, 'waiting', 5, 0, 0, 'Baluarte de San Diego|75, Puerta Real|0, Puerta Del Parian|0'),
+('Kenneth', 'Cadayona', 'keyelcadayona@icloud.com', '09204445566', 'NONE', 0, 'waiting', 4, 0, 0, 'Silahis Art & Artifacts Inc|0, Museo de Intramuros|200');
