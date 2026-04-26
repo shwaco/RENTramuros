@@ -261,23 +261,21 @@ function viewHistoryReceipt(index) {
 
     const destinationsString = tour.destinations || 'No itineraries listed';
     const destinationsHTML = destinationsString.split(',').map(dest => {
-    if (dest.trim() === 'No destinations listed' || dest.trim() === 'No itineraries listed') {
-        return `<span>${dest.trim()}</span>`;
-    }
-    
-    // Split the string into Name and Fee using the '|' delimiter
-    const parts = dest.split('|');
-    const name = parts[0] ? parts[0].trim() : '';
-    const fee = parts[1] ? parseInt(parts[1], 10) : 0;
-    
-    // If the fee is greater than 0, show the green price!
-    if (fee > 0) {
-        return `<span>${name}&nbsp;&nbsp;<span style="color: #16a34a; font-weight: 600; font-style: italic; font-size: 0.8rem;">₱${fee}</span></span>`;
-    } else {
-        // If it's free, just show the name
-        return `<span>${name}</span>`;
-    }
-}).join('');
+        if (dest.trim() === 'No destinations listed' || dest.trim() === 'No itineraries listed') {
+            return `<span>${dest.trim()}</span>`;
+        }
+        
+        // tiga-split ng string sa Name at Fee gamit ang '|' delimiter (kung meron man)
+        const parts = dest.split('|');
+        const name = parts[0] ? parts[0].trim() : '';
+        const fee = parts.length > 1 && parts[1] ? parseInt(parts[1], 10) : 0;
+        
+        if (fee > 0) {
+            return `<span>${name}&nbsp;&nbsp;<span style="color: #16a34a; font-weight: 600; font-style: italic; font-size: 0.8rem;">₱${fee}</span></span>`;
+        } else {
+            return `<span>${name}</span>`;
+        }
+    }).join('');
 
     modalBody.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin: 0 -2rem; padding: 1.5rem 2rem 1rem 2rem; border-bottom: 1px solid #e5e7eb;">

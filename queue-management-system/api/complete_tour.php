@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 require_once('../../config/config.php');
 
 // API para imark ang current tour bilang completed
-// nirereset nito ang guide state pabalik sa Available at ise-set ang tourist sa completed
+// nirereset nito ang guide state pabalik sa Queuing at ise-set ang tourist sa completed
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();
@@ -17,8 +17,8 @@ $customer_id = isset($data['customer_id']) ? $data['customer_id'] : null;
 try {
     mysqli_begin_transaction($con);
 
-    // tapos na yung tour so gawing Available ulit yung guide at iclear yung current tourist assignment nila para makapasok sa queue ulit
-    $updateGuideSql = "UPDATE tour_guides SET current_status = 'Available', current_tourist_id = NULL, became_available_at = NOW() WHERE guide_id = ?";
+    // tapos na yung tour so gawing Queuing ulit yung guide at iclear yung current tourist assignment nila para makapasok sa queue ulit
+    $updateGuideSql = "UPDATE tour_guides SET current_status = 'Queuing', current_tourist_id = NULL, became_available_at = NOW() WHERE guide_id = ?";
     $stmtG = mysqli_prepare($con, $updateGuideSql);
     mysqli_stmt_bind_param($stmtG, "i", $guide_id);
     if (!mysqli_stmt_execute($stmtG)) {
