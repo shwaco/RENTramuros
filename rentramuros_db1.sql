@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2026 at 08:37 AM
+-- Generation Time: Apr 26, 2026 at 08:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -96,7 +96,16 @@ CREATE TABLE `booking_history` (
 --
 
 INSERT INTO `booking_history` (`booking_request_id`, `tourist_id`, `booking_type`, `status`, `booking_time`, `booking_date`, `adults_and_seniors`, `children`, `infants`, `contact_info_id`, `vehicle_id`, `number_of_vehicle`, `guide_id`) VALUES
-(1, 1, '', 'Pending', '15:22:38', '2026-04-25', 3, 2, 0, 1, 2, 1, NULL);
+(1, 1, 'Package', 'Done', '15:22:38', '2026-04-25', 3, 2, 0, 1, 2, 1, NULL),
+(3, 1, 'Package', 'Cancel', '15:38:52', '2026-04-26', 2, 1, 0, 11, NULL, 0, NULL),
+(4, 1, 'Attraction', 'PENDING', '15:42:45', '2026-04-26', 2, 1, 0, 12, NULL, 0, NULL),
+(7, 1, 'Attraction', 'PENDING', '15:57:15', '2026-04-26', 2, 1, 0, 13, NULL, 0, NULL),
+(8, 1, 'Attraction', 'PENDING', '16:02:24', '2026-04-26', 2, 1, 0, 14, NULL, 0, NULL),
+(9, 1, 'Attraction', 'Pending', '17:20:57', '2026-04-26', 2, 1, 0, 15, NULL, 0, NULL),
+(10, 1, 'Attraction', 'Pending', '17:59:02', '2026-04-26', 2, 1, 1, 16, NULL, 0, NULL),
+(11, 1, 'Package', 'Pending', '22:49:31', '2026-04-26', 4, 0, 0, 17, NULL, 1, NULL),
+(12, 1, 'Package', 'Pending', '22:51:13', '2026-04-26', 4, 0, 0, 18, 1, 1, NULL),
+(13, 1, 'Package', 'Pending', '22:52:44', '2026-04-26', 4, 0, 0, 19, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -117,7 +126,16 @@ CREATE TABLE `contact_information` (
 
 INSERT INTO `contact_information` (`contact_info_id`, `full_name`, `email_address`, `phone_number`) VALUES
 (1, 'Lence Jericho Jalimao', 'lencejeri95@gmail.com', '09082970380'),
-(2, 'David Lloyd Contreras', 'davidlloydcontreras@gmail.com', '09081314196');
+(2, 'David Lloyd Contreras', 'davidlloydcontreras@gmail.com', '09081314196'),
+(11, 'Lence Jericho Jalimao', 'lence@example.com', '09123456789'),
+(12, 'Styles Bou', 'misskonasiya101@example.com', '09220086212'),
+(13, 'Spider Milez', 'lambe@example.com', '09221186121'),
+(14, 'Spider Milez', 'lambe@example.com', '09221186121'),
+(15, 'Spider Mondragon', 'lambing@example.com', '09343486121'),
+(16, 'Spider Mondragon', 'lambing@example.com', '09343486121'),
+(17, 'Jinalimao Contreras', 'arawdavid123@example.com', '09123456787'),
+(18, 'Jinalimao Contreras', 'arawdavid123@example.com', '09123456787'),
+(19, 'Jinalimao Contreras', 'arawdavid123@example.com', '09123456787');
 
 -- --------------------------------------------------------
 
@@ -142,8 +160,17 @@ CREATE TABLE `packages` (
   `package_id` int(11) NOT NULL,
   `package_name` varchar(150) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `price_per_person` decimal(10,2) NOT NULL
+  `price` decimal(10,2) NOT NULL,
+  `image_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `packages`
+--
+
+INSERT INTO `packages` (`package_id`, `package_name`, `description`, `price`, `image_file`) VALUES
+(1, 'Hero\'s Trail', '- Fort Santiago entrance ticket \r\n- Rizal Shrine \r\n- Rizal\'s Bagumbayan Light and Sound Museum', 676.67, 'asset/img/6154443154988404815.jpg'),
+(2, 'Cultural Combo', ' - Casa Manila\r\n - Barbara\'s Heritage Restaurant\r\n - Silahis Center ', 767.67, 'asset/img/6154443154988404815.jpg');
 
 -- --------------------------------------------------------
 
@@ -266,17 +293,18 @@ INSERT INTO `upcoming_events` (`event_id`, `event_name`, `event_date`, `event_ti
 CREATE TABLE `vehicles` (
   `vehicle_id` int(11) NOT NULL,
   `vehicle_type` varchar(50) NOT NULL,
-  `passenger_capacity` int(11) NOT NULL
+  `passenger_capacity` int(11) NOT NULL,
+  `image_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vehicles`
 --
 
-INSERT INTO `vehicles` (`vehicle_id`, `vehicle_type`, `passenger_capacity`) VALUES
-(1, 'TukTuk', 5),
-(2, 'Kalesa', 6),
-(3, 'Tranvia', 20);
+INSERT INTO `vehicles` (`vehicle_id`, `vehicle_type`, `passenger_capacity`, `image_file`) VALUES
+(1, 'TukTuk', 5, 'asset/img/TukTuk.jpg'),
+(2, 'Kalesa', 6, 'asset/img/Kalesa.jpg'),
+(3, 'Tranvia', 20, 'asset/img/Tranvia.jpg');
 
 --
 -- Indexes for dumped tables
@@ -395,13 +423,13 @@ ALTER TABLE `attractions`
 -- AUTO_INCREMENT for table `booking_history`
 --
 ALTER TABLE `booking_history`
-  MODIFY `booking_request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `booking_request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `contact_information`
 --
 ALTER TABLE `contact_information`
-  MODIFY `contact_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `contact_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `invoices`
@@ -413,7 +441,7 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `package_itinerary`
