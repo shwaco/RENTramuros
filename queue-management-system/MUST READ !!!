@@ -4,6 +4,8 @@ Oh, and make sure running na yung XAMPP (naka-ON na dapat yung MySQL and Apache)
 
 !!!! HINDI PA MAAYOS YUNG AUTH NITO FOR NOW !!!!
 
+http://localhost/tourguide-logics/auth/login.html
+
 So ganito, insert ka muna ng account sa db, paste mo tong sql na to:
 
 INSERT INTO `tour_guides` 

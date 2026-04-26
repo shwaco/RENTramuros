@@ -21,29 +21,6 @@ function closeDynamicModal() {
     document.getElementById('dynamic-confirm-overlay').style.display = 'none';
 }
 
-// global variable para sa attraction fees na hinahanap from API
-let attractionFeesDB = {}; 
-
-// Function to fetch data mula sa mga API hereee
-async function loadAttractionsData() {
-    try {
-        // tiga-fetch from exact API endpoint
-        const response = await fetch('../api/retrieve_attractions.php');
-        const result = await response.json();
-        
-        if (result.status === 'success') {
-            // tiga convert ng array into lookup dictionary: { "Fort Santiago": 75, "Casa Manila": 75 }
-            result.data.forEach(item => {
-                const name = item.attraction_name.trim();
-                const fee = parseFloat(item.entrance_fee);
-                attractionFeesDB[name] = fee;
-            });
-        }
-    } catch (error) {
-        console.error("Failed to load attractions from API:", error);
-    }
-}
-
 // global state ng guide dashboard at queue lobby
 let waitingTourists = [];
 let historyTours = [];
@@ -540,7 +517,6 @@ async function executeClockOut() {
 
 // tiga generate ng lahat ng initialization functions kapag nag-load yung page
 document.addEventListener('DOMContentLoaded', () => {
-    loadAttractionsData();
     loadHistory();
     initWaitingLobby(); 
     startPolling();
