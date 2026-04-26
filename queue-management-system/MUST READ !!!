@@ -1,6 +1,5 @@
 REQUIREMENTS BEFORE MAGSIMULA
   - XAMPP (kailangan naka-ON yung Apache at MySQL)
-  - Browser (Chrome or Firefox, okay na kahit alin)
   - PHPMyAdmin access: http://localhost/phpmyadmin
 
  I-SETUP MUNA YUNG DATABASE
@@ -24,8 +23,8 @@ REQUIREMENTS BEFORE MAGSIMULA
 
 mag insert ng tour guide accounts sa phpmyadmin since wala tayong sign up
 
-Pumunta sa PHPMyAdmin, piliin yung rentramuros_database, then click "SQL" tab.
-I-paste mo yung mga ito:
+punta ka sa PHPMyAdmin, click mo yung rentramuros_database, then click "SQL" tab
+then paste mo tong mga to para makagawa ng tour guide accounts
 
 -- GUIDE ACCOUNT 1
 INSERT INTO `tour_guides` 
