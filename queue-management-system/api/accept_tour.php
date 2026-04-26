@@ -33,7 +33,7 @@ try {
     mysqli_stmt_execute($stmtT);
 
     // tiga update ng status ng guide as "busy" and para malink sa current tourist
-    $stmtG = mysqli_prepare($con, "UPDATE tour_guides SET current_status = 'Busy', current_tourist_id = ? WHERE guide_id = ?");
+    $stmtG = mysqli_prepare($con, "UPDATE tour_guides SET current_status = 'On Tour', current_tourist_id = ? WHERE guide_id = ?");
     mysqli_stmt_bind_param($stmtG, "ii", $customer_id, $guide_id);
     mysqli_stmt_execute($stmtG);
 

@@ -108,14 +108,14 @@ async function clockIn() {
 // regular polling para i-check sa server kung may updates sa queue position
 function startPolling() {
     setInterval(async () => {
-        // kung Busy yung guide, walang reason mag-poll para sa position
-        if (typeof CURRENT_GUIDE_STATUS !== 'undefined' && CURRENT_GUIDE_STATUS === 'Busy') return; 
+        // kung On Tour yung guide, walang reason mag-poll para sa position
+        if (typeof CURRENT_GUIDE_STATUS !== 'undefined' && CURRENT_GUIDE_STATUS === 'On Tour') return; 
 
         try {
             const response = await fetch('api/check_queue.php');
             const data = await response.json();
             
-            if (data.success && data.status === 'Available') {
+            if (data.success && data.status === 'Queuing') {
                 // kung nag-change ang position sa queue, mag-reload ng page
                 if (currentQueuePosition !== null && currentQueuePosition !== data.position) {
                     window.location.reload();
@@ -533,9 +533,8 @@ async function executeClockOut() {
         const result = await response.json();
         
         if (result.success) {
-            window.location.href = "../auth/login.html"; 
+            window.location.reload(); 
         } else {
-            // pinapakita ung backend lock message kung may active tour pa
             alert(result.message);
         }
     } catch (error) {

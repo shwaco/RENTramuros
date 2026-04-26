@@ -1,7 +1,7 @@
 <?php 
 // simulan ang session at i-require ang database config
 session_start();
-require_once '../config.php/config.php';
+require_once '../config/config.php';
 
 // tiga-check kung may active session ang guide, kung wala i-redirect sa login
 if (!isset($_SESSION['guide_id'])) {
@@ -23,7 +23,7 @@ $isAssigned = false;
 $tourData = null;
 
 // kung Busy ang guide, kunin ang details ng current tourist na naka-assign
-if ($currentStatus === 'Busy') {
+if ($currentStatus === 'On Tour') {
     // FIX #8: removed t.total_amount — that column does not exist in the tourists table
     // FIX #12: COALESCE falls back to t.destinations for walk-in tourists who have no
     //          package/attractions join — their itinerary was previously always blank
@@ -55,9 +55,8 @@ if ($currentStatus === 'Busy') {
 
 $queuePosition = 0;
 // kung Available ang guide, tiga-calculate ng position nito sa queue
-if ($currentStatus === 'Available') {
-    // tiga-count kung ilan ang guides na nangunguna sa queue (based sa became_available_at timestamp)
-    $stmtP = mysqli_prepare($con, "SELECT COUNT(*) + 1 as pos FROM tour_guides WHERE current_status = 'Available' AND (became_available_at < ? OR (became_available_at = ? AND guide_id < ?))");
+if ($currentStatus === 'Queuing') {
+    $stmtP = mysqli_prepare($con, "SELECT COUNT(*) + 1 as pos FROM tour_guides WHERE current_status = 'Queuing' AND (became_available_at < ? OR (became_available_at = ? AND guide_id < ?))");
     mysqli_stmt_bind_param($stmtP, "ssi", $guideInfo['became_available_at'], $guideInfo['became_available_at'], $guide_id);
     mysqli_stmt_execute($stmtP);
     $result = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtP));
@@ -104,7 +103,7 @@ if ($currentStatus === 'Available') {
                         </div>
                         <hr class="dropdown-divider">
                         
-                        <?php if ($currentStatus !== 'Busy'): ?>
+                        <?php if ($currentStatus === 'Clocked In' || $currentStatus === 'Queuing'): ?>
                             <button onclick="handleClockOut()" class="dropdown-item" role="menuitem">
                                 <i class="fas fa-power-off"></i> Clock Out
                             </button>
@@ -226,7 +225,7 @@ if ($currentStatus === 'Available') {
                     </article>
                 </div> 
 
-            <?php elseif ($currentStatus === 'Idle' || $currentStatus === 'Offline'): ?>
+            <?php elseif ($currentStatus === 'Online' || $currentStatus === 'Clocked In'): ?>
                 <section class="tourist-selection-container" aria-label="Tourist Selection Area" style="margin-top: 3rem;">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; width: 100%; margin-bottom: 1.5rem;">
                         <i class="fas fa-user-friends" style="font-size: 1.25rem; color: #000;"></i>
@@ -240,7 +239,7 @@ if ($currentStatus === 'Available') {
                 <article class="minimal-state-wrapper">
                   
                     <div style="display: flex; gap: 1rem; justify-content: center; align-items: center;">
-                        <?php if ($currentStatus === 'Offline'): ?>
+                        <?php if ($currentStatus === 'Online'): ?>
                             <button onclick="clockIn()" class="btn-minimal-primary" style="background-color: #000000; border-color: #000000; color: #ffffff;">Clock In</button>
                             <button class="btn-minimal-primary" style="opacity: 0.4; cursor: not-allowed;" disabled>Join Queue</button>
                         <?php else: ?>
@@ -252,14 +251,14 @@ if ($currentStatus === 'Available') {
                     </div>
                 </article>
 
-            <?php elseif ($currentStatus === 'Available'): ?>
+            <?php elseif ($currentStatus === 'Queuing'): ?>
                 <article class="queue-layout-wrapper">
                   <header style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: -0.5rem; margin-bottom: 0.5rem;">
                         <h2 class="queue-status-header" style="margin: 0; font-family: 'Roboto', sans-serif; font-weight: 900;">
                             STATUS: <span class="text-green" style="font-family: 'Roboto Serif', serif; font-weight: 400;">Queuing #<?php echo $queuePosition; ?></span>
                         </h2>
                         
-                        <?php if ($currentStatus === 'Available' && $queuePosition === 1): ?>
+                        <?php if ($currentStatus === 'Queuing' && $queuePosition === 1): ?>
                             <div style="background-color: #fee2e2; color: #dc2626; padding: 0.5rem 1.25rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; border: 1px solid #f87171; font-family: 'Roboto', sans-serif; white-space: nowrap; flex-shrink: 0;" aria-live="polite">
                                 <i class="far fa-clock"></i>
                                 <span>Select Tourist: <span style="font-family: 'Roboto Serif', serif;"><span id="selection-timer">15</span>s</span></span>
@@ -375,7 +374,7 @@ if ($currentStatus === 'Available') {
     </div>
 
    <script>
-        const IS_QUEUE_NUMBER_ONE = <?php echo ($currentStatus === 'Available' && $queuePosition === 1) ? 'true' : 'false'; ?>;
+        const IS_QUEUE_NUMBER_ONE = <?php echo ($currentStatus === 'Queuing' && $queuePosition === 1) ? 'true' : 'false'; ?>;
         const CURRENT_GUIDE_STATUS = "<?php echo $currentStatus; ?>";
         const queuePosition = <?php echo $queuePosition; ?>;
     </script>

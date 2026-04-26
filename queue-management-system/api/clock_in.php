@@ -11,9 +11,9 @@ if (!isset($_SESSION['guide_id'])) {
 $guide_id = $_SESSION['guide_id'];
 
 try {
-    // This officially records their timestamp and sets them to 'Idle' (Ready to join queue)
-    $sql = "UPDATE tour_guides SET current_status = 'Idle', became_available_at = NOW() WHERE guide_id = ?";
-    $stmt = mysqli_prepare($con, $sql);
+    // Set to 'Clocked In' and record the timestamp
+    $sql = "UPDATE tour_guides SET current_status = 'Clocked In', became_available_at = NOW() WHERE guide_id = ?";
+    $stmt = $con->prepare($sql);
     mysqli_stmt_bind_param($stmt, "i", $guide_id);
     mysqli_stmt_execute($stmt);
 

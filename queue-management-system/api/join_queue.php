@@ -11,9 +11,9 @@ if (!isset($_SESSION['guide_id'])) {
 $guide_id = $_SESSION['guide_id'];
 
 try {
-    // ise-set lang yung status as Available, hindi inaupdate ung became_available_at para ma-preserve ung original clock in time
-    $sql = "UPDATE tour_guides SET current_status = 'Available' WHERE guide_id = ?";
-    $stmt = mysqli_prepare($con, $sql);
+    // Set to 'Queuing' (keep the original clock in time)
+    $sql = "UPDATE tour_guides SET current_status = 'Queuing' WHERE guide_id = ?";
+    $stmt = $con->prepare($sql);
     mysqli_stmt_bind_param($stmt, "i", $guide_id);
     mysqli_stmt_execute($stmt);
 

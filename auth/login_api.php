@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 // EXACT FIX: Pointing to the correct config folder!
-require_once '../config.php/config.php';
+require_once '../config/config.php';
 
 $data = json_decode(file_get_contents("php://input"));
 if(!isset($data->email) || !isset($data->password_hash)) {
@@ -35,7 +35,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 
 // 2. Check Tour Guides
 $guide_sql = "SELECT * FROM tour_guides WHERE email = ?";
-$stmt = $con->prepare("UPDATE tour_guides SET status = 'Online' WHERE id = ?");
+$stmt = $con->prepare($guide_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
@@ -45,7 +45,15 @@ if ($row = mysqli_fetch_assoc($result)) {
         echo json_encode(["status" => "error", "message" => "Invalid password."]);
         exit();
     }
+    
     $_SESSION['guide_id'] = $row['guide_id'];
+    
+    // UPDATE STATUS TO ONLINE ONLY IF THEY WERE OFFLINE
+    // This preserves 'Queuing', 'Clocked In', or 'On Tour' statuses!
+    $update_stmt = $con->prepare("UPDATE tour_guides SET current_status = 'Online' WHERE guide_id = ? AND current_status = 'Offline'");
+    mysqli_stmt_bind_param($update_stmt, "i", $row['guide_id']);
+    mysqli_stmt_execute($update_stmt);
+
     echo json_encode(["status" => "success", "message" => "Login Successful as Tour Guide!", "role" => "guide", "guide_id" => $row['guide_id']]);
     exit();
 }

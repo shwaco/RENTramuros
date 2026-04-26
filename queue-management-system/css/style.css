@@ -54,7 +54,7 @@
     font-weight: 400;
 }
 
-/* Container styles para sa main dashboard sections at wrapper cards */
+/* container styles para sa main dashboard sections at wrapper cards */
 .content-wrapper {
     flex-grow: 1;
     display: flex;
@@ -102,7 +102,7 @@
     text-align: center;
 }
 
-/* styles para sa top navigation, logo, and links ng dashboard */
+/* styles para sa top navigation, logo, at links ng dashboard */
 .top-nav {
     display: flex;
     justify-content: space-between;
@@ -112,7 +112,7 @@
     background-color: #ffffff;
 }
 
-/* logo group and top navigation layout */
+/* layout para sa logo group at top navigation */
 .brand-container {
     display: flex;
     align-items: center;
@@ -148,7 +148,7 @@
     font-size: 20px;
 }
 
-/* dropdown menu for guide actions like clock out and logout. */
+/* dropdown menu para sa guide actions tulad ng clock out at logout */
 .profile-dropdown-container {
     position: relative;
     margin-left: 1rem;
@@ -200,7 +200,7 @@
 
 .profile-dropdown-menu.show { display: flex; }
 
-/* header inside dropdown with avatar and guide info */
+/* header sa loob ng dropdown na may avatar at guide info */
 .dropdown-header {
     display: flex;
     align-items: center;
@@ -266,7 +266,7 @@
 .dropdown-item.text-danger i { color: #fca5a5; }
 .dropdown-item.text-danger:hover { background-color: #fef2f2; color: #b91c1c; }
 
-/* pto ang card at box layout ng tour queue at tourist selection lobby */
+/* eto ang card at box layout ng tour queue at tourist selection lobby */
 .tourist-selection-container {
     width: 95%;
     max-width: 1000px;             
@@ -306,7 +306,7 @@
 
 .t-block:hover { border-color: #000000; }
 
-/* number and summary area ng bawat tourist block */
+/* number at summary area ng bawat tourist block */
 .t-block-left {
     padding: 0.5rem 1rem;
     font-size: 1.5rem;
@@ -329,7 +329,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-/* overlay and content styles para sa receipt modal at tourist details popup */
+/* styles ng overlay at content para sa receipt modal at tourist details popup */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -378,7 +378,7 @@
     color: #000;
 }
 
-/* common button style and pill badges for status indicators */
+/* common button style at pill badges para sa status indicators */
 .btn-minimal-primary {
     background-color: #000000;
     color: #ffffff;
@@ -429,7 +429,7 @@
 .status-pill.waiting { background-color: #000000; color: #ffffff; }
 .status-pill.active-tour { background-color: #059669; color: #ffffff; }
 
-/* Footer layout para sa contact/support/logo info sa ibaba ng page */
+/* footer layout para sa contact/support/logo info sa ibaba ng page */
 .bottom-footer {
     background-color: #e5e5e5; 
     border-top: 3px solid #000000; 
@@ -531,4 +531,3 @@
     border-top: none;
     margin-top: 0;
 }
-
