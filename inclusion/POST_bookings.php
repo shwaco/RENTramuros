@@ -32,11 +32,13 @@ if(!isset($data->tourist_id)){
 }
 
 $tourist_id = $data->tourist_id;
+$booking_type = $data->booking_type;
 $status = $data->status ?? "Pending";
+$date_of_request = $data->booking_date;
+$time_of_request = $data->booking_time;
 $adults_and_seniors = $data->adults_and_seniors ?? 0;
 $children = $data->children ?? 0;
 $infants = $data->infants ?? 0;
-$booking_type = $data->booking_type;
 $number_of_vehicle = $data->number_of_vehicle ?? 0;
 
 $assigned_vehicle_id = $data->vehicle_id ?? null;
@@ -45,53 +47,52 @@ $contact_info_id = $data->contact_info_id ?? null;
 
 $package_id = $data->package_id ?? null;
 
-$request_attraction = $data->request_attractions ?? [];
+$attraction_id = $data->attraction_id ?? [];
 
-$full_name = $data->full_name ?? null;
+$first_name = $data->first_name ?? null;
+$last_name = $data->last_name ?? null;
 $email_address = $data->email ?? null;
 $phone_number = $data->phone_number ?? null;
 
 mysqli_begin_transaction($con);
 
 try{
-    if ($full_name && $email_address && $phone_number) {
-    $contact_insert_sql = "INSERT INTO contact_information (full_name, email_address, phone_number) VALUES (?, ?, ?)";
+    if ($first_name && $last_name && $email_address && $phone_number) {
+    $contact_insert_sql = "INSERT INTO contact_information (first_name, last_name, email_address, phone_number) VALUES (?, ?, ?, ?)";
     $contact_insert_stmt = mysqli_prepare($con, $contact_insert_sql);
-    mysqli_stmt_bind_param($contact_insert_stmt, "sss", $full_name, $email_address, $phone_number);
+    mysqli_stmt_bind_param($contact_insert_stmt, "ssss", $first_name, $last_name, $email_address, $phone_number);
 
     if(!mysqli_stmt_execute($contact_insert_stmt)) {
         throw new Exception("Failed to insert contact information.");
         }
         $contact_info_id = mysqli_insert_id($con);
     }
-    $booking_insert_sql = "INSERT INTO booking_history (tourist_id, status, adults_and_seniors, children, infants, booking_type, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $booking_insert_stmt = mysqli_prepare($con, $booking_insert_sql);
-    mysqli_stmt_bind_param($booking_insert_stmt, "isiiisiiii", $tourist_id, $status, $adults_and_seniors, $children, $infants, $booking_type, $contact_info_id, $number_of_vehicle, $assigned_vehicle_id, $assigned_guide_id);
+    if($booking_type === 'Package') {
+        $booking_insert_sql = "INSERT INTO booking_history (tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, package_id, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $booking_insert_stmt = mysqli_prepare($con, $booking_insert_sql);
+        mysqli_stmt_bind_param($booking_insert_stmt, "isssiiisiiiii", $tourist_id, $status, $time_of_request, $date_of_request, $adults_and_seniors, $children, $infants, $booking_type, $package_id, $contact_info_id, $number_of_vehicle, $assigned_vehicle_id, $assigned_guide_id);
+    } else if ($booking_type === 'Attractions') {
+        $booking_insert_sql = "INSERT INTO booking_history (tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $booking_insert_stmt = mysqli_prepare($con, $booking_insert_sql);
+        mysqli_stmt_bind_param($booking_insert_stmt, "isssiiisiiii", $tourist_id, $status, $time_of_request, $date_of_request, $adults_and_seniors, $children, $infants, $booking_type, $contact_info_id, $number_of_vehicle, $assigned_vehicle_id, $assigned_guide_id);
+    } else {
+        throw new Exception("Invalid booking type.");
+    }
 
     if(!mysqli_stmt_execute($booking_insert_stmt)) {
         throw new Exception("Failed to create booking request.");
     }
     $booking_request_id = mysqli_insert_id($con);
 
-    if (!empty($request_attraction) && is_array($request_attraction)) {
+    if($booking_type === 'Attractions' && !empty($attraction_id) && is_array($attraction_id)) {
         $attraction_insert_sql = "INSERT INTO request_attractions (booking_request_id, attraction_id) VALUES (?, ?)";
         $attraction_insert_stmt = mysqli_prepare($con, $attraction_insert_sql);
 
-        foreach ($request_attraction as $single_attraction_id) {
+        foreach ($attraction_id as $single_attraction_id) {
             mysqli_stmt_bind_param($attraction_insert_stmt, "ii", $booking_request_id, $single_attraction_id);
             if(!mysqli_stmt_execute($attraction_insert_stmt)) {
                 throw new Exception("Failed to associate attractions with booking request.");
             }
-        }
-    }
-
-    if($booking_type === "Package") {
-        $package_insert_sql = "INSERT INTO booking_history (package_id) VALUES (?)";
-        $package_insert_stmt = mysqli_prepare($con, $package_insert_sql);
-        mysqli_stmt_bind_param($package_insert_stmt, "i", $booking_request_id);
-
-        if(!mysqli_stmt_execute($package_insert_stmt)) {
-            throw new Exception("Failed to create package booking.");
         }
     }
 
