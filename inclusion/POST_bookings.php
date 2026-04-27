@@ -43,6 +43,8 @@ $assigned_vehicle_id = $data->vehicle_id ?? null;
 $assigned_guide_id = null;
 $contact_info_id = $data->contact_info_id ?? null;
 
+$package_id = $data->package_id ?? null;
+
 $request_attraction = $data->request_attractions ?? [];
 
 $full_name = $data->full_name ?? null;
@@ -82,6 +84,17 @@ try{
             }
         }
     }
+
+    if($booking_type === "Package") {
+        $package_insert_sql = "INSERT INTO booking_history (package_id) VALUES (?)";
+        $package_insert_stmt = mysqli_prepare($con, $package_insert_sql);
+        mysqli_stmt_bind_param($package_insert_stmt, "i", $booking_request_id);
+
+        if(!mysqli_stmt_execute($package_insert_stmt)) {
+            throw new Exception("Failed to create package booking.");
+        }
+    }
+
     mysqli_commit($con);
     http_response_code(201);
     echo json_encode(["status" => "success", "message" => "Booking request created successfully."]);
