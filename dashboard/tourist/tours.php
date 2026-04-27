@@ -186,21 +186,29 @@
                         <div class="contact-info-container">
                             <div class="text-box"><span class="contact-info-text">Provide your contact information</span></div>
                             <div class="info-content-container">
-                                <div class="full-name-container">
-                                    <div class="full-name-label-container"><span class="full-name-label">FULL NAME</span></div>
-                                    <input type="text" id="contact-name" class="full-name-input" placeholder="First Name, M.I., Last Name" oninput="this.value = this.value.replace(/[^a-zA-Z .\-]/g, '').toUpperCase()">
-                                </div>
-                                <div class="email-container">
-                                    <div class="email-label-container"><span class="email-label">EMAIL ADDRESS</span></div>
-                                    <input type="text" id="contact-email" class="email-input" placeholder="Enter your email address">
-                                </div>
-                                <div class="phone-container">
-                                    <div class="phone-label-container"><span class="phone-label">PHONE NUMBER</span></div>
-                                    <input type="tel" id="contact-phone" class="phone-input" placeholder="Enter your phone number" maxlength="11" 
-                                        oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
-                                        onfocus="if(this.value === '') this.value = '09';" 
-                                        onblur="if(this.value === '09') this.value = '';">
-                                </div>
+                                
+                                    <div class="first-name-container">
+                                        <div class="full-name-label-container"><span class="full-name-label">FIRST NAME</span></div>
+                                        <input type="text" id="contact-first-name" class="name-input" placeholder="Enter your first name" oninput="this.value = this.value.replace(/[^a-zA-Z .\-]/g, '').toUpperCase()">
+                                    </div>
+                                    
+                                    <div class="last-name-container">
+                                        <div class="full-name-label-container"><span class="full-name-label">LAST NAME</span></div>
+                                        <input type="text" id="contact-last-name" class="name-input" placeholder="Enter your last name" oninput="this.value = this.value.replace(/[^a-zA-Z .\-]/g, '').toUpperCase()">
+                                    </div>
+                                
+                                    <div class="email-container">
+                                        <div class="email-label-container"><span class="email-label">EMAIL ADDRESS</span></div>
+                                        <input type="text" id="contact-email" class="email-input" placeholder="Enter your email address">
+                                    </div>
+
+                                    <div class="phone-container">
+                                        <div class="phone-label-container"><span class="phone-label">PHONE NUMBER</span></div>
+                                        <input type="tel" id="contact-phone" class="phone-input" placeholder="Enter your phone number" maxlength="11" 
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                                            onfocus="if(this.value === '') this.value = '09';" 
+                                            onblur="if(this.value === '09') this.value = '';">
+                                    </div>
                             </div>
                         </div>
                         <div class="prev-next-container">

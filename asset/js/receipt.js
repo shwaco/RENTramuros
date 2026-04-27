@@ -62,7 +62,8 @@ function buildAndShowModal() {
     }
 
     // 5. CONTACT INFO
-    document.getElementById('modal-full-name').innerText = reservationData.contactInfo.name;
+    document.getElementById('modal-full-name').innerText = `${reservationData.contactInfo.firstName} ${reservationData.contactInfo.lastName}`;
+    
     document.getElementById('modal-email').innerText = reservationData.contactInfo.email;
     document.getElementById('modal-phone').innerText = reservationData.contactInfo.phone;
 

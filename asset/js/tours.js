@@ -14,7 +14,8 @@ let reservationData = {
     
 
     contactInfo: {
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         phone: ""
     }
@@ -364,11 +365,14 @@ function updateVehicleCount(change, event) {
 // ------------- STEP 3 LOGIC ------------- 
 
 function submitReservation() {
-    const name = document.getElementById('contact-name').value.trim();
+    // Grab the new separate IDs
+    const firstName = document.getElementById('contact-first-name').value.trim();
+    const lastName = document.getElementById('contact-last-name').value.trim();
     const email = document.getElementById('contact-email').value.trim();
     const phone = document.getElementById('contact-phone').value.trim();
 
-    if (!name || !email || !phone) {
+    // Check all 4
+    if (!firstName || !lastName || !email || !phone) {
         alert("Please fill out all contact details.");
         return;
     }
@@ -380,7 +384,8 @@ function submitReservation() {
         return;
     }
 
-    reservationData.contactInfo = { name, email, phone };
+    // Save them to the brain
+    reservationData.contactInfo = { firstName, lastName, email, phone };
 
     buildAndShowModal();
 }
