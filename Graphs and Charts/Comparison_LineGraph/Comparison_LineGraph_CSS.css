@@ -1,0 +1,74 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fcfcfc;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    margin: 0;
+}
+
+.chart-dashboard {
+    background: white;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 850px;
+}
+
+.chart-title {
+    text-align: center;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.canvas-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #444; 
+    margin-bottom: 30px;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 50px; 
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.legend-box {
+    width: 24px;
+    height: 24px;
+    border-radius: 2px;
+    display: inline-block; 
+}
+
+.packages-box {
+    background-color: #ef1d38; 
+}
+
+.custom-box {
+    background-color: #5c2e0e; 
+}
+
+.legend-label {
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: 500;
+}
+

@@ -1,0 +1,76 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fcfcfc;
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    margin: 0;
+}
+
+.chart-dashboard {
+    background: white;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 850px;
+}
+
+.chart-title {
+    text-align: center;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.canvas-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.divider {
+    height: 1px;
+    background-color: #444;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.chart-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+    padding: 0 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0;
+    transition: none;
+    cursor: default;
+    pointer-events: none; 
+}
+
+.legend-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px; 
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+.legend-label {
+    font-size: 0.85rem;
+    color: #444;
+    font-weight: 500;
+}
