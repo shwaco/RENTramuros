@@ -53,3 +53,27 @@ export async function fetchToursData() {
         return null;
     }
 }
+
+
+export async function submitBookingRequest(payload) {
+    try {
+        // IMPORTANT: Replace with your coworker's actual backend endpoint
+        const response = await fetch('YOUR_BACKEND_ENDPOINT_HERE', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            return true; // Success!
+        } else {
+            console.error("Database responded with an error status:", response.status);
+            return false; // Failed!
+        }
+    } catch (error) {
+        console.error("Network Error (Server might be unreachable):", error);
+        return false; // Failed!
+    }
+}

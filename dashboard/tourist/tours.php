@@ -17,7 +17,11 @@
     <script src="../../asset/js/calendar.js?v=<?php echo filemtime('../../asset/js/calendar.js'); ?>" defer></script>
     <script src="../../asset/js/receipt.js?v=<?php echo filemtime('../../asset/js/receipt.js'); ?>" defer></script>
 
-    <script type="module"> import { fetchToursData } from '../../services/api.js'; window.fetchToursData = fetchToursData;</script>
+    <script type="module"> 
+        import { fetchToursData, submitBookingRequest } from '../../services/api.js'; 
+        window.fetchToursData = fetchToursData;
+        window.submitBookingRequest = submitBookingRequest; /* NEW: Exposes the POST API */
+    </script>
     <script src="../../asset/js/tours.js?v=<?php echo filemtime('../../asset/js/tours.js'); ?>" defer></script>
 </head>
 <body>
@@ -191,7 +195,7 @@
                                         <div class="full-name-label-container"><span class="full-name-label">FIRST NAME</span></div>
                                         <input type="text" id="contact-first-name" class="name-input" placeholder="Enter your first name" oninput="this.value = this.value.replace(/[^a-zA-Z .\-]/g, '').toUpperCase()">
                                     </div>
-                                    
+
                                     <div class="last-name-container">
                                         <div class="full-name-label-container"><span class="full-name-label">LAST NAME</span></div>
                                         <input type="text" id="contact-last-name" class="name-input" placeholder="Enter your last name" oninput="this.value = this.value.replace(/[^a-zA-Z .\-]/g, '').toUpperCase()">

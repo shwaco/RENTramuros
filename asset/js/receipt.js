@@ -77,12 +77,58 @@ document.getElementById('closeModal').addEventListener('click', () => {
 });
 
 function confirmFinalAcceptance() {
-    alert("Thank you! Your reservation for RENTramuros has been submitted.");
-    location.reload(); 
+    // UX feedback
+    const acceptBtn = document.querySelector('.accept-btn');
+    acceptBtn.innerText = "PROCESSING...";
+    acceptBtn.disabled = true;
+    
+    sendDataToDatabase();
 }
 
-/* BACKEND HAND-OFF (Placeholder) */
-function sendDataToDatabase(data) {
-    const finalJSON = JSON.stringify(data, null, 2);
-    console.log("FINAL JSON PAYLOAD:", finalJSON);
-}   
+/* BACKEND API HAND-OFF */
+async function sendDataToDatabase() {
+    // 1. Clean up "None" selections so the database gets a clean NULL
+    let cleanVehicleId = reservationData.selectedVehicleId;
+    if (cleanVehicleId === 'veh-none' || cleanVehicleId === 'custom-veh-none') {
+        cleanVehicleId = null;
+    } else if (cleanVehicleId && cleanVehicleId.startsWith('custom-')) { // <-- Typo fixed right here!
+        cleanVehicleId = cleanVehicleId.replace('custom-', ''); 
+    }
+
+    // 2. Format the payload exactly to your coworker's schema design
+    const dbPayload = {
+        booking_history: {
+            type_of_booking: reservationData.wantsPackage ? "Package" : "Custom",
+            time: document.getElementById('time-display').innerText,
+            date: document.getElementById('date-display').innerText,
+            adults_and_senior: reservationData.tourists.adults, 
+            children: reservationData.tourists.children,
+            infants: reservationData.tourists.infants,
+            package_id: reservationData.wantsPackage ? reservationData.selectedPackageId : null,
+            vehicle_id: cleanVehicleId,
+            number_of_vehicle: reservationData.vehicleQuantity
+        },
+        contact_information: {
+            first_name: reservationData.contactInfo.firstName,
+            last_name: reservationData.contactInfo.lastName,
+            email_address: reservationData.contactInfo.email,
+            phone_number: reservationData.contactInfo.phone
+        },
+        request_attractions: reservationData.wantsPackage ? [] : reservationData.customAttractionIds
+    };
+
+    console.log("SENDING EXACT PAYLOAD TO API:", JSON.stringify(dbPayload, null, 2));
+
+    // 3. Call the API function from our separated file
+    const isSuccess = await window.submitBookingRequest(dbPayload);
+
+    // 4. Handle the UI based on the API response
+    if (isSuccess) {
+        alert("Thank you! Your reservation for RENTramuros has been submitted.");
+        location.reload(); 
+    } else {
+        alert("Server unreachable or database error. Check console (F12) to view the payload.");
+        document.querySelector('.accept-btn').innerText = "ACCEPT";
+        document.querySelector('.accept-btn').disabled = false;
+    }
+}

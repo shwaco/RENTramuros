@@ -2,9 +2,12 @@
 let reservationData = {
     wantsPackage: null, 
     selectedPackage: null, 
+    selectedPackageId: null, // NEW: Tracks package_id
     selectedVehicle: null,
+    selectedVehicleId: null, // NEW: Tracks vehicle_id
     vehicleQuantity: 0,
     customAttractions: [], 
+    customAttractionIds: [], // NEW: Tracks array for REQUEST_ATTRACTIONS junction table
     tourists: {
         adults: 2,
         children: 0,
@@ -12,7 +15,6 @@ let reservationData = {
     },
     includesSeniors: false,
     
-
     contactInfo: {
         firstName: "",
         lastName: "",
@@ -284,63 +286,68 @@ function selectPackageOption(wantsPackage) {
 function selectPackage(packageId, packageName) {
     if (reservationData.selectedPackage === packageName) {
         reservationData.selectedPackage = null; 
+        reservationData.selectedPackageId = null; // Clear ID
         document.querySelectorAll('.package-options-container > div').forEach(p => p.classList.remove('selected-card'));
     } else {
         reservationData.selectedPackage = packageName;
+        reservationData.selectedPackageId = packageId; // Save ID
         document.querySelectorAll('.package-options-container > div').forEach(p => p.classList.remove('selected-card'));
         document.getElementById(packageId).classList.add('selected-card');
     }
-    console.log("Current Data:", reservationData);
 }
 
 // --- VEHICLE LOGIC ---
 function selectVehicle(vehicleId, vehicleName) {
     if (reservationData.selectedVehicle === vehicleName) {
         reservationData.selectedVehicle = null;
+        reservationData.selectedVehicleId = null; // Clear ID
         reservationData.vehicleQuantity = 0;
         document.querySelectorAll('#dynamic-package-vehicles .vehicle-card').forEach(v => v.classList.remove('selected-card'));
     } else {
         reservationData.selectedVehicle = vehicleName;
+        reservationData.selectedVehicleId = vehicleId; // Save ID
         reservationData.vehicleQuantity = 1;
         document.querySelectorAll('#dynamic-package-vehicles .veh-count').forEach(el => el.innerText = '1');
 
         document.querySelectorAll('#dynamic-package-vehicles .vehicle-card').forEach(v => v.classList.remove('selected-card'));
         document.getElementById(vehicleId).classList.add('selected-card');
     }
-    console.log("Current Data:", reservationData);
 }
 
 function selectCustomVehicle(vehicleId, vehicleName) {
     if (reservationData.selectedVehicle === vehicleName) {
         reservationData.selectedVehicle = null;
+        reservationData.selectedVehicleId = null; // Clear ID
         reservationData.vehicleQuantity = 0;
         document.querySelectorAll('#dynamic-custom-vehicles .custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
     } else {
         reservationData.selectedVehicle = vehicleName;
+        reservationData.selectedVehicleId = vehicleId; // Save ID
         reservationData.vehicleQuantity = 1;
         document.querySelectorAll('#dynamic-custom-vehicles .veh-count').forEach(el => el.innerText = '1');
 
         document.querySelectorAll('#dynamic-custom-vehicles .custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
         document.getElementById(vehicleId).classList.add('selected-card');
     }
-    console.log("Current Data:", reservationData);
 }
 
 // --- STEP 2 CUSTOM LOGIC ---
-
-function toggleAttraction(attractionName, elementId) {
+// UPDATED FOR THE JUNCTION TABLE
+ function toggleAttraction(attractionName, elementId) {
     const array = reservationData.customAttractions;
+    const idArray = reservationData.customAttractionIds; // Connects to the new ID array
     const index = array.indexOf(attractionName);
     const card = document.getElementById(elementId);
 
     if (index > -1) {
         array.splice(index, 1);
+        idArray.splice(index, 1); // Remove ID if unselected
         card.classList.remove('selected-card');
     } else {
         array.push(attractionName);
+        idArray.push(elementId); // Add ID if selected
         card.classList.add('selected-card');
     }
-    console.log("Current Attractions:", reservationData.customAttractions);
 }
 
 function updateVehicleCount(change, event) {
@@ -476,15 +483,18 @@ function renderAttractions(attractions) {
     let layer2Html = '';
 
     attractions.forEach((attr, index) => {
-        // 1. Grab the fee from your new JSON! (Defaults to 0 if it's free)
+        // 1. Grab the fee from your JSON
         const fee = attr.fee || 0;
         
-        // 2. Build the exact string your colleague's receipt parser is expecting
+        // 2. Build the string
         const dataString = `${attr.name} | ${fee}`;
 
-        // 3. Pass dataString into toggleAttraction instead of just the name!
+        // THE FIX: This finds any apostrophes in names like "Rizal's" and safely escapes them!
+        const safeDataString = dataString.replace(/'/g, "\\'");
+
+        // 3. Pass safeDataString into toggleAttraction
         const cardHtml = `
-        <div class="attraction-${index + 1} attraction-card" id="${attr.id}" onclick="toggleAttraction('${dataString}', '${attr.id}')">
+        <div class="attraction-${index + 1} attraction-card" id="${attr.id}" onclick="toggleAttraction('${safeDataString}', '${attr.id}')">
             <img src="${attr.image}" alt="${attr.name}">
         </div>`;
 
