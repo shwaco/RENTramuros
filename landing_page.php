@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tourist Dashboard</title>
+    <title>Landing Page</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../asset/main.css?v=<?php echo filemtime('../../asset/main.css'); ?>">
-    <link rel="stylesheet" href="../../asset/css/index.css?v=<?php echo filemtime('../../asset/css/index.css'); ?>">
-    <script type="module" src="../../asset/script.js?v=<?php echo filemtime('../../asset/script.js'); ?>" defer></script>
+    <link rel="stylesheet" href="asset/main.css?v=<?php echo filemtime('asset/main.css'); ?>">
+    <link rel="stylesheet" href="asset/css/index.css?v=<?php echo filemtime('asset/css/index.css'); ?>">
+    <script type="module" src="asset/script.js?v=<?php echo filemtime('asset/script.js'); ?>" defer></script>
 
 </head>
 <body>
@@ -23,22 +23,21 @@
             <!-- Sidebar -->
             <ul class="sidebar">
                 <li onclick=hideSidebar()><a href="#"><img src="../../asset/img/close_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="close-button" width="auto" height="30"></a></li>
-                <li><a href="#"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
-                <li><a href="#"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
-                <li><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                <li><a href="#"><img src="asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
+                <li><a href="#"><img src="asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+                <li><a href="#"><img src="asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li><a href="#">About</a></li>
             </ul>
 
             <!-- Navigation bar -->
             <ul class="navbar">
-                <li><img src="../../asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo"></li>
-
-                <li class="hideOnMobile"><a href="#" id="maps"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
-                <li class="hideOnMobile"><a href="tours.php" rel="noreferrer noopener" target="_blank"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
-                <li class="hideOnMobile"><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                <li><img src="asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo"></li>
+                <li class="hideOnMobile"><a href="#" id="maps"><img src="asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
+                <li class="hideOnMobile"><a href="dashboard/tourist/tours.php" rel="noreferrer noopener" target="_blank"><img src="asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+                <li class="hideOnMobile"><a href="#"><img src="asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li class="hideOnMobile last"><a href="#">About</a></li>
                 <li><button type="button">Log in</button></li>
-                <li onclick=showSidebar() class="menu-btn"><a href="#"><img src="../../asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
+                <li onclick=showSidebar() class="menu-btn"><a href="#"><img src="asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
             </ul>
         </nav>
 
@@ -56,7 +55,7 @@
                     <span class="line two"></span>
                 </div>
 
-                <div class="wheel_pic"><img src="../../asset/img/CARTWHEEL_ICON.svg" alt="wheel_pic" id="cartwheel" height="20"></div>
+                <div class="wheel_pic"><img src="asset/img/CARTWHEEL_ICON.svg" alt="wheel_pic" id="cartwheel" height="20"></div>
 
                 <div class="batch two">
                     <span class="line one"></span>
@@ -72,9 +71,9 @@
                 <p>Where history, culture, and seamless booking intertwine. Experience an effortless <br>and prepared journey for using the all-in-one platform for your Intramuros travel and tour needs.</p>
 
                 <ul class="list_container">
-                    <li><img src="../../asset/img/CARTWHEEL_ICON.svg" height="15">Navigate easily</li>
-                    <li><img src="../../asset/img/CARTWHEEL_ICON.svg" height="15">Travel with few clicks</li>
-                    <li><img src="../../asset/img/CARTWHEEL_ICON.svg" height="15">Hassle-free</li>
+                    <li><img src="asset/img/CARTWHEEL_ICON.svg" height="15">Navigate easily</li>
+                    <li><img src="asset/img/CARTWHEEL_ICON.svg" height="15">Travel with few clicks</li>
+                    <li><img src="asset/img/CARTWHEEL_ICON.svg" height="15">Hassle-free</li>
                 </ul>
 
                 <button type="button">START YOUR JOURNEY</button>
@@ -99,11 +98,11 @@
                 <!-- Sliding -->
                 <div class="slider">
                     
-                    <button class="slide-btn one" id="prev-btn"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
+                    <button class="slide-btn one" id="prev-btn"><img src="asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
                     <ul id="upcoming_events_list">
                         <li><div class="event_container">
-                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+                                <div class="image"><img src="asset/img/la_costa.jpg" alt="ewan"></div>
 
                                 <div class="details_container">
                                     <div class="schedule_container">
@@ -113,7 +112,7 @@
                                     <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
                                     <div class="loc_wrapper">
-                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+                                        <img src="asset/img/location_icon.svg" alt="ewan">
 
                                         <div class="loc">Pasig River Esplanade</div>
                                     </div>
@@ -121,7 +120,7 @@
                             </div>
                         </li>
                         <li><div class="event_container">
-                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+                                <div class="image"><img src="asset/img/la_costa.jpg" alt="ewan"></div>
 
                                 <div class="details_container">
                                     <div class="schedule_container">
@@ -131,7 +130,7 @@
                                     <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
                                     <div class="loc_wrapper">
-                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+                                        <img src="asset/img/location_icon.svg" alt="ewan">
 
                                         <div class="loc">Pasig River Esplanade</div>
                                     </div>
@@ -139,7 +138,7 @@
                             </div>
                         </li>
                         <li><div class="event_container">
-                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+                                <div class="image"><img src="asset/img/la_costa.jpg" alt="ewan"></div>
 
                                 <div class="details_container">
                                     <div class="schedule_container">
@@ -149,7 +148,7 @@
                                     <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
                                     <div class="loc_wrapper">
-                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+                                        <img src="asset/img/location_icon.svg" alt="ewan">
 
                                         <div class="loc">Pasig River Esplanade</div>
                                     </div>
@@ -157,7 +156,7 @@
                             </div>
                         </li>
                         <li><div class="event_container">
-                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+                                <div class="image"><img src="asset/img/la_costa.jpg" alt="ewan"></div>
 
                                 <div class="details_container">
                                     <div class="schedule_container">
@@ -167,7 +166,7 @@
                                     <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
                                     <div class="loc_wrapper">
-                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+                                        <img src="asset/img/location_icon.svg" alt="ewan">
 
                                         <div class="loc">Pasig River Esplanade</div>
                                     </div>
@@ -175,7 +174,7 @@
                             </div>
                         </li>
                         <li><div class="event_container">
-                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+                                <div class="image"><img src="asset/img/la_costa.jpg" alt="ewan"></div>
 
                                 <div class="details_container">
                                     <div class="schedule_container">
@@ -185,7 +184,7 @@
                                     <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
                                     <div class="loc_wrapper">
-                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+                                        <img src="asset/img/location_icon.svg" alt="ewan">
 
                                         <div class="loc">Pasig River Esplanade</div>
                                     </div>
@@ -193,7 +192,7 @@
                             </div>
                         </li>
                         <li><div class="event_container">
-                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
+                                <div class="image"><img src="asset/img/la_costa.jpg" alt="ewan"></div>
 
                                 <div class="details_container">
                                     <div class="schedule_container">
@@ -210,47 +209,12 @@
                                 </div>
                             </div>
                         </li>
-                        <li><div class="event_container">
-                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
 
-                                <div class="details_container">
-                                    <div class="schedule_container">
-                                        <div class="frequency">January 29</div>
-                                        <div class="time">4PM - 12AM</div>
-                                    </div>
-                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
-
-                                    <div class="loc_wrapper">
-                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
-
-                                        <div class="loc">Pasig River Esplanade</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li><div class="event_container">
-                                <div class="image"><img src="../../asset/img/la_costa.jpg" alt="ewan"></div>
-
-                                <div class="details_container">
-                                    <div class="schedule_container">
-                                        <div class="frequency">January 29</div>
-                                        <div class="time">4PM - 12AM</div>
-                                    </div>
-                                    <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
-
-                                    <div class="loc_wrapper">
-                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
-
-                                        <div class="loc">Pasig River Esplanade</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
 
                         
                     </ul>
 
-                    <button class="slide-btn two" id="next-btn"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
+                    <button class="slide-btn two" id="next-btn"><img src="asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
 
                 </div>
             </div>
@@ -264,11 +228,11 @@
 
                 <div class="slider one">
                         
-                    <button class="slide-btn one" id="prev-btn1"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
+                    <button class="slide-btn one" id="prev-btn1"><img src="asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
                     <ul id="pop-attractions-list"></ul>
 
-                    <button class="slide-btn two" id="next-btn1"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
+                    <button class="slide-btn two" id="next-btn1"><img src="asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
                 </div>
 
             </div>
@@ -281,12 +245,12 @@
 
                 <div class="slider two">
                         
-                    <button class="slide-btn one" id="prev-btn2"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
+                    <button class="slide-btn one" id="prev-btn2"><img src="asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
                     <ul id="reco-attractions-list">
                     </ul>
 
-                    <button class="slide-btn two" id="next-btn2"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
+                    <button class="slide-btn two" id="next-btn2"><img src="asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
 
 
                 </div>
@@ -302,7 +266,7 @@
                     <li>
                         <a href="." rel="noopener noreferrer"><div class="package one">
 
-                            <div class="image"><img src="../../asset/img/6154443154988404815.jpg" alt="package_picture" width="auto" height="150"></div>
+                            <div class="image"><img src="asset/img/6154443154988404815.jpg" alt="package_picture" width="auto" height="150"></div>
 
                             <ul>
                                 <li><div class="number"><span>Package 1</span></div></li>
@@ -319,7 +283,7 @@
                     <li>
                         <a href="." rel="noopener noreferrer"><div class="package two">
 
-                            <div class="image"><img src="../../asset/img/6154443154988404816.jpg" alt="package_picture" width="auto" height="150"></div>
+                            <div class="image"><img src="asset/img/6154443154988404816.jpg" alt="package_picture" width="auto" height="150"></div>
 
                             <ul>
                                 <li><div class="number"><span>Package 2</span></div></li>
@@ -335,7 +299,7 @@
                     <li>
                         <a href="." rel="noopener noreferrer"><div class="package three">
 
-                            <div class="image"><img src="../../asset/img/6154443154988404816.jpg" alt="package_picture" width="auto" height="150"></div>
+                            <div class="image"><img src="asset/img/6154443154988404816.jpg" alt="package_picture" width="auto" height="150"></div>
 
                             <ul>
                                 <li><div class="number"><span>Package 3</span></div></li>
@@ -351,7 +315,7 @@
                     <li>
                         <a href="." rel="noopener noreferrer"><div class="package four">
 
-                            <div class="image"><img src="../../asset/img/6154443154988404816.jpg" alt="package_picture" width="auto" height="150"></div>
+                            <div class="image"><img src="asset/img/6154443154988404816.jpg" alt="package_picture" width="auto" height="150"></div>
 
                             <ul>
                                 <li><div class="number"><span>Package 4</span></div></li>
