@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2026 at 09:47 AM
+-- Generation Time: Apr 26, 2026 at 08:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -50,34 +50,92 @@ INSERT INTO `admins` (`admin_id`, `first_name`, `last_name`, `email`, `password_
 
 CREATE TABLE `attractions` (
   `attraction_id` int(11) NOT NULL,
-  `attraction_name` varchar(100) NOT NULL,
-  `description` text NOT NULL,
-  `entrance_fee` decimal(10,2) NOT NULL,
-  `operating_hours` varchar(100) DEFAULT NULL,
-  `image_file` varchar(255) NOT NULL
+  `attraction_type` varchar(50) DEFAULT NULL,
+  `attraction_name` varchar(100) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `schedule` varchar(50) DEFAULT NULL,
+  `fee` decimal(5,2) DEFAULT NULL,
+  `main_img` varchar(255) DEFAULT NULL,
+  `mini_one_img` varchar(255) DEFAULT NULL,
+  `mini_two_img` varchar(255) DEFAULT NULL,
+  `rec_img` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `attractions`
 --
 
-INSERT INTO `attractions` (`attraction_id`, `attraction_name`, `description`, `entrance_fee`, `operating_hours`, `image_file`) VALUES
-(1, 'Fort Santiago', 'A historic citadel built by Spanish navigator Miguel López de Legazpi.', 6767.00, '7:00 AM - 7:00 PM', 'asset/img/6156791707530366599.jpg'),
-(2, 'Casa Manila', 'a colonial lifestyle museum in Intramuros, Manila, showcasing the19th-century, upper-class Filipino lifestyle through a meticulously designed bahay na bato reproduction. Located in the Plaza San Luis Complex, it features antique furniture, capiz windows, and a central courtyard, offering a glimpse into Spanish-era luxury. ', 6767.00, '8:00 AM - 8:00 PM', 'asset/img/6154443154988404817.jpg');
+INSERT INTO `attractions` (`attraction_id`, `attraction_type`, `attraction_name`, `description`, `schedule`, `fee`, `main_img`, `mini_one_img`, `mini_two_img`, `rec_img`) VALUES
+(1, 'Recommended', 'Fort Santiago', 'A historic citadel built by Spanish navigator Miguel López de Legazpi.', '7:00 AM - 7:00 PM', 100.00, 'asset/img/6156791707530366599.jpg', 'asset/img/6156791707530366599.jpg', 'asset/img/6156791707530366599.jpg', 'asset/img/6156791707530366599.jpg'),
+(2, 'Popular', 'Casa Manila', 'a colonial lifestyle museum in Intramuros, Manila, showcasing the19th-century, upper-class Filipino lifestyle through a meticulously designed bahay na bato reproduction. Located in the Plaza San Luis Complex, it features antique furniture, capiz windows, and a central courtyard, offering a glimpse into Spanish-era luxury. ', '8:00 AM - 8:00 PM', 100.00, 'asset/img/6154443154988404817.jpg', 'asset/img/6154443154988404817.jpg', 'asset/img/6154443154988404817.jpg', 'asset/img/6154443154988404817.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `attraction_bookings`
+-- Table structure for table `booking_history`
 --
 
-CREATE TABLE `attraction_bookings` (
-  `attraction_booking_id` int(11) NOT NULL,
-  `reservation_id` int(11) DEFAULT NULL,
-  `attraction_id` int(11) DEFAULT NULL,
-  `visit_date` date NOT NULL,
-  `ticket_quantity` int(11) NOT NULL
+CREATE TABLE `booking_history` (
+  `booking_request_id` int(11) NOT NULL,
+  `tourist_id` int(11) DEFAULT NULL,
+  `booking_type` varchar(50) NOT NULL,
+  `status` varchar(50) DEFAULT 'Pending',
+  `booking_time` time DEFAULT current_timestamp(),
+  `booking_date` date DEFAULT current_timestamp(),
+  `adults_and_seniors` int(50) DEFAULT NULL,
+  `children` int(50) DEFAULT NULL,
+  `infants` int(50) DEFAULT NULL,
+  `contact_info_id` int(11) DEFAULT NULL,
+  `vehicle_id` int(11) DEFAULT NULL,
+  `number_of_vehicle` int(11) DEFAULT NULL,
+  `guide_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `booking_history`
+--
+
+INSERT INTO `booking_history` (`booking_request_id`, `tourist_id`, `booking_type`, `status`, `booking_time`, `booking_date`, `adults_and_seniors`, `children`, `infants`, `contact_info_id`, `vehicle_id`, `number_of_vehicle`, `guide_id`) VALUES
+(1, 1, 'Package', 'Done', '15:22:38', '2026-04-25', 3, 2, 0, 1, 2, 1, NULL),
+(3, 1, 'Package', 'Cancel', '15:38:52', '2026-04-26', 2, 1, 0, 11, NULL, 0, NULL),
+(4, 1, 'Attraction', 'PENDING', '15:42:45', '2026-04-26', 2, 1, 0, 12, NULL, 0, NULL),
+(7, 1, 'Attraction', 'PENDING', '15:57:15', '2026-04-26', 2, 1, 0, 13, NULL, 0, NULL),
+(8, 1, 'Attraction', 'PENDING', '16:02:24', '2026-04-26', 2, 1, 0, 14, NULL, 0, NULL),
+(9, 1, 'Attraction', 'Pending', '17:20:57', '2026-04-26', 2, 1, 0, 15, NULL, 0, NULL),
+(10, 1, 'Attraction', 'Pending', '17:59:02', '2026-04-26', 2, 1, 1, 16, NULL, 0, NULL),
+(11, 1, 'Package', 'Pending', '22:49:31', '2026-04-26', 4, 0, 0, 17, NULL, 1, NULL),
+(12, 1, 'Package', 'Pending', '22:51:13', '2026-04-26', 4, 0, 0, 18, 1, 1, NULL),
+(13, 1, 'Package', 'Pending', '22:52:44', '2026-04-26', 4, 0, 0, 19, 1, 1, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_information`
+--
+
+CREATE TABLE `contact_information` (
+  `contact_info_id` int(11) NOT NULL,
+  `full_name` varchar(100) DEFAULT NULL,
+  `email_address` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact_information`
+--
+
+INSERT INTO `contact_information` (`contact_info_id`, `full_name`, `email_address`, `phone_number`) VALUES
+(1, 'Lence Jericho Jalimao', 'lencejeri95@gmail.com', '09082970380'),
+(2, 'David Lloyd Contreras', 'davidlloydcontreras@gmail.com', '09081314196'),
+(11, 'Lence Jericho Jalimao', 'lence@example.com', '09123456789'),
+(12, 'Styles Bou', 'misskonasiya101@example.com', '09220086212'),
+(13, 'Spider Milez', 'lambe@example.com', '09221186121'),
+(14, 'Spider Milez', 'lambe@example.com', '09221186121'),
+(15, 'Spider Mondragon', 'lambing@example.com', '09343486121'),
+(16, 'Spider Mondragon', 'lambing@example.com', '09343486121'),
+(17, 'Jinalimao Contreras', 'arawdavid123@example.com', '09123456787'),
+(18, 'Jinalimao Contreras', 'arawdavid123@example.com', '09123456787'),
+(19, 'Jinalimao Contreras', 'arawdavid123@example.com', '09123456787');
 
 -- --------------------------------------------------------
 
@@ -102,24 +160,17 @@ CREATE TABLE `packages` (
   `package_id` int(11) NOT NULL,
   `package_name` varchar(150) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `price_per_person` decimal(10,2) NOT NULL
+  `price` decimal(10,2) NOT NULL,
+  `image_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `package_bookings`
+-- Dumping data for table `packages`
 --
 
-CREATE TABLE `package_bookings` (
-  `package_booking_id` int(11) NOT NULL,
-  `reservation_id` int(11) DEFAULT NULL,
-  `package_id` int(11) DEFAULT NULL,
-  `vehicle_id` int(11) DEFAULT NULL,
-  `guide_id` int(11) DEFAULT NULL,
-  `tour_date` date NOT NULL,
-  `passenger_count` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `packages` (`package_id`, `package_name`, `description`, `price`, `image_file`) VALUES
+(1, 'Hero\'s Trail', '- Fort Santiago entrance ticket \r\n- Rizal Shrine \r\n- Rizal\'s Bagumbayan Light and Sound Museum', 676.67, 'asset/img/6154443154988404815.jpg'),
+(2, 'Cultural Combo', ' - Casa Manila\r\n - Barbara\'s Heritage Restaurant\r\n - Silahis Center ', 767.67, 'asset/img/6154443154988404815.jpg');
 
 -- --------------------------------------------------------
 
@@ -154,16 +205,12 @@ CREATE TABLE `payments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservations`
+-- Table structure for table `request_attractions`
 --
 
-CREATE TABLE `reservations` (
-  `reservation_id` int(11) NOT NULL,
-  `tourist_id` int(11) DEFAULT NULL,
-  `booking_date` datetime NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `booking_type` varchar(50) NOT NULL,
-  `created_by_admin_id` int(11) DEFAULT NULL
+CREATE TABLE `request_attractions` (
+  `booking_request_id` int(11) NOT NULL,
+  `attraction_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -217,6 +264,29 @@ INSERT INTO `tour_guides` (`guide_id`, `first_name`, `last_name`, `email`, `pass
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `upcoming_events`
+--
+
+CREATE TABLE `upcoming_events` (
+  `event_id` int(11) NOT NULL,
+  `event_name` varchar(100) NOT NULL,
+  `event_date` date DEFAULT current_timestamp(),
+  `event_time` time DEFAULT current_timestamp(),
+  `location` varchar(255) NOT NULL,
+  `image_file` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `upcoming_events`
+--
+
+INSERT INTO `upcoming_events` (`event_id`, `event_name`, `event_date`, `event_time`, `location`, `image_file`) VALUES
+(1, 'Summer Festival', '2026-04-25', '08:00:00', 'Plaza Moriones, Fort Santiago', 'asset/img/2026-Intramuros-Summer-Festival.png'),
+(2, 'Summer Festival', '2026-04-25', '08:00:00', 'Plaza Moriones, Fort Santiago', 'asset/img/2026-Intramuros-Summer-Festival.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `vehicles`
 --
 
@@ -224,24 +294,17 @@ CREATE TABLE `vehicles` (
   `vehicle_id` int(11) NOT NULL,
   `vehicle_type` varchar(50) NOT NULL,
   `passenger_capacity` int(11) NOT NULL,
-  `current_status` varchar(20) DEFAULT 'Available',
-  `last_dispatch_time` datetime DEFAULT current_timestamp()
+  `image_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `vehicles`
 --
 
-INSERT INTO `vehicles` (`vehicle_id`, `vehicle_type`, `passenger_capacity`, `current_status`, `last_dispatch_time`) VALUES
-(1, 'E-Tricycle', 6, 'Available', '2026-03-24 02:11:17'),
-(2, 'E-Tricycle', 6, 'Available', '2026-03-24 02:11:24'),
-(3, 'E-Tricycle', 6, 'Available', '2026-03-24 02:11:30'),
-(4, 'Kalesa', 6, 'Available', '2026-03-24 02:11:36'),
-(5, 'Kalesa', 6, 'Available', '2026-03-24 02:11:42'),
-(6, 'Kalesa', 6, 'Available', '2026-03-24 02:11:47'),
-(7, 'Tranvia', 20, 'Available', '2026-03-24 02:11:53'),
-(8, 'Tranvia', 20, 'Available', '2026-03-24 02:11:58'),
-(9, 'Tranvia', 20, 'Available', '2026-03-24 02:12:03');
+INSERT INTO `vehicles` (`vehicle_id`, `vehicle_type`, `passenger_capacity`, `image_file`) VALUES
+(1, 'TukTuk', 5, 'asset/img/TukTuk.jpg'),
+(2, 'Kalesa', 6, 'asset/img/Kalesa.jpg'),
+(3, 'Tranvia', 20, 'asset/img/Tranvia.jpg');
 
 --
 -- Indexes for dumped tables
@@ -261,12 +324,20 @@ ALTER TABLE `attractions`
   ADD PRIMARY KEY (`attraction_id`);
 
 --
--- Indexes for table `attraction_bookings`
+-- Indexes for table `booking_history`
 --
-ALTER TABLE `attraction_bookings`
-  ADD PRIMARY KEY (`attraction_booking_id`),
-  ADD KEY `reservation_id` (`reservation_id`),
-  ADD KEY `attraction_id` (`attraction_id`);
+ALTER TABLE `booking_history`
+  ADD PRIMARY KEY (`booking_request_id`),
+  ADD KEY `tourist_id` (`tourist_id`),
+  ADD KEY `contact_info_id` (`contact_info_id`),
+  ADD KEY `vehicle_id` (`vehicle_id`),
+  ADD KEY `fk_guide` (`guide_id`);
+
+--
+-- Indexes for table `contact_information`
+--
+ALTER TABLE `contact_information`
+  ADD PRIMARY KEY (`contact_info_id`);
 
 --
 -- Indexes for table `invoices`
@@ -280,16 +351,6 @@ ALTER TABLE `invoices`
 --
 ALTER TABLE `packages`
   ADD PRIMARY KEY (`package_id`);
-
---
--- Indexes for table `package_bookings`
---
-ALTER TABLE `package_bookings`
-  ADD PRIMARY KEY (`package_booking_id`),
-  ADD KEY `reservation_id` (`reservation_id`),
-  ADD KEY `package_id` (`package_id`),
-  ADD KEY `vehicle_id` (`vehicle_id`),
-  ADD KEY `guide_id` (`guide_id`);
 
 --
 -- Indexes for table `package_itinerary`
@@ -310,12 +371,11 @@ ALTER TABLE `payments`
   ADD KEY `tourist_id` (`tourist_id`) USING BTREE;
 
 --
--- Indexes for table `reservations`
+-- Indexes for table `request_attractions`
 --
-ALTER TABLE `reservations`
-  ADD PRIMARY KEY (`reservation_id`),
-  ADD KEY `created_by_admin_id` (`created_by_admin_id`),
-  ADD KEY `tourist_id` (`tourist_id`) USING BTREE;
+ALTER TABLE `request_attractions`
+  ADD PRIMARY KEY (`booking_request_id`,`attraction_id`),
+  ADD KEY `attraction_id` (`attraction_id`);
 
 --
 -- Indexes for table `tourists`
@@ -330,6 +390,12 @@ ALTER TABLE `tourists`
 ALTER TABLE `tour_guides`
   ADD PRIMARY KEY (`guide_id`),
   ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `upcoming_events`
+--
+ALTER TABLE `upcoming_events`
+  ADD PRIMARY KEY (`event_id`);
 
 --
 -- Indexes for table `vehicles`
@@ -354,10 +420,16 @@ ALTER TABLE `attractions`
   MODIFY `attraction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `attraction_bookings`
+-- AUTO_INCREMENT for table `booking_history`
 --
-ALTER TABLE `attraction_bookings`
-  MODIFY `attraction_booking_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `booking_history`
+  MODIFY `booking_request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `contact_information`
+--
+ALTER TABLE `contact_information`
+  MODIFY `contact_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `invoices`
@@ -369,13 +441,7 @@ ALTER TABLE `invoices`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `package_bookings`
---
-ALTER TABLE `package_bookings`
-  MODIFY `package_booking_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `package_itinerary`
@@ -390,12 +456,6 @@ ALTER TABLE `payments`
   MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `reservations`
---
-ALTER TABLE `reservations`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `tourists`
 --
 ALTER TABLE `tourists`
@@ -408,21 +468,29 @@ ALTER TABLE `tour_guides`
   MODIFY `guide_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `upcoming_events`
+--
+ALTER TABLE `upcoming_events`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `attraction_bookings`
+-- Constraints for table `booking_history`
 --
-ALTER TABLE `attraction_bookings`
-  ADD CONSTRAINT `attraction_bookings_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`reservation_id`),
-  ADD CONSTRAINT `attraction_bookings_ibfk_2` FOREIGN KEY (`attraction_id`) REFERENCES `attractions` (`attraction_id`);
+ALTER TABLE `booking_history`
+  ADD CONSTRAINT `booking_history_ibfk_1` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`tourist_id`),
+  ADD CONSTRAINT `booking_history_ibfk_2` FOREIGN KEY (`contact_info_id`) REFERENCES `contact_information` (`contact_info_id`),
+  ADD CONSTRAINT `booking_history_ibfk_3` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`vehicle_id`),
+  ADD CONSTRAINT `fk_guide` FOREIGN KEY (`guide_id`) REFERENCES `tour_guides` (`guide_id`);
 
 --
 -- Constraints for table `invoices`
@@ -431,20 +499,11 @@ ALTER TABLE `invoices`
   ADD CONSTRAINT `invoices_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`reservation_id`);
 
 --
--- Constraints for table `package_bookings`
---
-ALTER TABLE `package_bookings`
-  ADD CONSTRAINT `package_bookings_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`reservation_id`),
-  ADD CONSTRAINT `package_bookings_ibfk_2` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`),
-  ADD CONSTRAINT `package_bookings_ibfk_3` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`vehicle_id`),
-  ADD CONSTRAINT `package_bookings_ibfk_4` FOREIGN KEY (`guide_id`) REFERENCES `tour_guides` (`guide_id`);
-
---
 -- Constraints for table `package_itinerary`
 --
 ALTER TABLE `package_itinerary`
   ADD CONSTRAINT `package_itinerary_ibfk_1` FOREIGN KEY (`package_id`) REFERENCES `packages` (`package_id`),
-  ADD CONSTRAINT `package_itinerary_ibfk_2` FOREIGN KEY (`attraction_id`) REFERENCES `attractions` (`attraction_id`);
+  ADD CONSTRAINT `package_itinerary_ibfk_2` FOREIGN KEY (`attraction_id`) REFERENCES `popular_attractions` (`attraction_id`);
 
 --
 -- Constraints for table `payments`
@@ -456,11 +515,11 @@ ALTER TABLE `payments`
   ADD CONSTRAINT `payments_ibfk_4` FOREIGN KEY (`linked_payment_id`) REFERENCES `payments` (`payment_id`);
 
 --
--- Constraints for table `reservations`
+-- Constraints for table `request_attractions`
 --
-ALTER TABLE `reservations`
-  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`tourist_id`) REFERENCES `tourists` (`tourist_id`),
-  ADD CONSTRAINT `reservations_ibfk_2` FOREIGN KEY (`created_by_admin_id`) REFERENCES `admins` (`admin_id`);
+ALTER TABLE `request_attractions`
+  ADD CONSTRAINT `request_attractions_ibfk_1` FOREIGN KEY (`booking_request_id`) REFERENCES `booking_history` (`booking_request_id`),
+  ADD CONSTRAINT `request_attractions_ibfk_2` FOREIGN KEY (`attraction_id`) REFERENCES `attractions` (`attraction_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
