@@ -261,9 +261,8 @@
             <section class="package_wrapper">
                 <div class="heading three">Packages u cannot miss</div>
 
-                <ul class="packages">
+                <ul class="packages" id="package_list">
 
-                    <!-- Package 1 -->
                     <li>
                         <a href="." rel="noopener noreferrer"><div class="package one">
 
@@ -278,57 +277,6 @@
                             </ul>
                         </div></a>
                     </li>
-
-                    
-                    <!-- Package 2 -->
-                    <li>
-                        <a href="." rel="noopener noreferrer"><div class="package two">
-
-                            <div class="image"><img src="asset/img/6154443154988404816.jpg" alt="package_picture" width="auto" height="150"></div>
-
-                            <ul>
-                                <li><div class="number"><span>Package 2</span></div></li>
-
-                                <li><div class="attractions"><span>Casa la cote + Puerto berde + Juju on the beat + No merk + No dihh + no bruhhhhhhhhhhhhhhhhh + No shi + no ssssssssssssssssssssssssssssssssssssssssssssssssss</span></div></li>
-
-                                <li><div class="price"><span>₱67,6767</span></div></li>
-                            </ul>
-                        </div></a>
-                    </li>
-                        
-                    <!-- Package 3 -->
-                    <li>
-                        <a href="." rel="noopener noreferrer"><div class="package three">
-
-                            <div class="image"><img src="asset/img/6154443154988404816.jpg" alt="package_picture" width="auto" height="150"></div>
-
-                            <ul>
-                                <li><div class="number"><span>Package 3</span></div></li>
-
-                                <li><div class="attractions"><span>Casa la cote + Puerto berde + Juju on the beat + No merk + No dihh + no bruhhhhhhhhhhhhhhhhh + No shi + no ssssssssssssssssssssssssssssssssssssssssssssssssss</span></div></li>
-
-                                <li><div class="price"><span>₱67,6767</span></div></li>
-                            </ul>
-                        </div></a>
-                    </li>
-
-                    <!-- Package 4 -->
-                    <li>
-                        <a href="." rel="noopener noreferrer"><div class="package four">
-
-                            <div class="image"><img src="asset/img/6154443154988404816.jpg" alt="package_picture" width="auto" height="150"></div>
-
-                            <ul>
-                                <li><div class="number"><span>Package 4</span></div></li>
-
-                                <li><div class="attractions"><span>Casa la cote + Puerto berde + Juju on the beat + No merk + No dihh + no bruhhhhhhhhhhhhhhhhh + No shi + no ssssssssssssssssssssssssssssssssssssssssssssssssss</span></div></li>
-
-                                <li><div class="price"><span>₱67,6767</span></div></li>
-                            </ul>
-                        </div></a>
-                    </li>
-                
-
 
                 </ul>
             </section>            
