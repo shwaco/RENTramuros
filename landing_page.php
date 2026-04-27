@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="asset/main.css?v=<?php echo filemtime('asset/main.css'); ?>">
     <link rel="stylesheet" href="asset/css/index.css?v=<?php echo filemtime('asset/css/index.css'); ?>">
     <script type="module" src="asset/script.js?v=<?php echo filemtime('asset/script.js'); ?>" defer></script>
+    <script type="module" src="asset/js/dynamic_ui.js?v=<?php echo filemtime('asset/js/dynamic_ui.js'); ?>" defer></script>
 
 </head>
 <body>
@@ -22,7 +23,7 @@
 
             <!-- Sidebar -->
             <ul class="sidebar">
-                <li onclick=hideSidebar()><a href="#"><img src="../../asset/img/close_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="close-button" width="auto" height="30"></a></li>
+                <li onclick=hideSidebar()><a href="#" id="hideSidebar"><img src="asset/img/close_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="close-button" width="auto" height="30"></a></li>
                 <li><a href="#"><img src="asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
                 <li><a href="#"><img src="asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
                 <li><a href="#"><img src="asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
@@ -37,7 +38,7 @@
                 <li class="hideOnMobile"><a href="#"><img src="asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li class="hideOnMobile last"><a href="#">About</a></li>
                 <li><button type="button">Log in</button></li>
-                <li onclick=showSidebar() class="menu-btn"><a href="#"><img src="asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
+                <li onclick=showSidebar() class="menu-btn"><a href="#" id="showSidebar"><img src="asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
             </ul>
         </nav>
 
@@ -202,7 +203,7 @@
                                     <div class="name">PASIG RIVER ESPLANADE BAZAAR</div>
 
                                     <div class="loc_wrapper">
-                                        <img src="../../asset/img/location_icon.svg" alt="ewan">
+                                        <img src="asset/img/location_icon.svg" alt="ewan">
 
                                         <div class="loc">Pasig River Esplanade</div>
                                     </div>
@@ -266,7 +267,7 @@
                     <li>
                         <a href="." rel="noopener noreferrer"><div class="package one">
 
-                            <div class="image"><img src="asset/img/6154443154988404815.jpg" alt="package_picture" width="auto" height="150"></div>
+                            <div class="image"><img src="asset/img/la_costa.jpg" alt="package_picture" width="auto" height="150"></div>
 
                             <ul>
                                 <li><div class="number"><span>Package 1</span></div></li>
