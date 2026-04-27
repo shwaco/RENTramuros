@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// --- STEP 1: DATE CALENDAR POPUP LOGIC ---
+// --- DATE CALENDAR POPUP LOGIC ---
 document.addEventListener("DOMContentLoaded", () => {
     const dateSelectBtn = document.getElementById("date-select-btn");
     const calendarPopup = document.getElementById("calendar-popup");
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// --- STEP 1: TOURIST COUNTER LOGIC ---
+// --- TOURIST COUNTER LOGIC ---
 function updateTouristCount(type, change) {
     let currentCount = 0;
     
@@ -242,7 +242,7 @@ function updateTouristCount(type, change) {
     console.log("Current Data:", reservationData); 
 }
 
-// --- STEP 1: SENIOR CHECKBOX LOGIC ---
+// --- SENIOR CHECKBOX LOGIC ---
 function toggleSeniorNotice() {
     reservationData.includesSeniors = !reservationData.includesSeniors;
 
@@ -257,67 +257,70 @@ function toggleSeniorNotice() {
     console.log("Current Data:", reservationData); 
 }
 
-// --- STEP 1: YES/NO PACKAGE LOGIC ---
-function selectPackageOption(wantsPackage) {
-    reservationData.wantsPackage = wantsPackage; 
+// --- STEP 2: PACKAGE AND VEHICLE LOGIC ---
 
+// --- YES/NO PACKAGE BUTTON LOGIC ---
+function selectPackageOption(wantsPackage) {
+    reservationData.wantsPackage = wantsPackage;
+    
     const btnYes = document.getElementById('btn-yes');
     const btnNo = document.getElementById('btn-no');
-
+    
     btnYes.classList.remove('active-selection');
     btnNo.classList.remove('active-selection');
 
-    if (wantsPackage === true) {
+    if (wantsPackage) {
         btnYes.classList.add('active-selection');
     } else {
         btnNo.classList.add('active-selection');
     }
     
-    console.log("Current Data:", reservationData); 
+    console.log("Current Data:", reservationData);
 }
 
-// --- STEP 2: PACKAGE AND VEHICLE LOGIC ---
-
-function selectPackage(packageName) {
+// --- FULLY DYNAMIC SELECTION LOGIC ---
+// --- PACKAGE LOGIC ---
+function selectPackage(packageId, packageName) {
     if (reservationData.selectedPackage === packageName) {
         reservationData.selectedPackage = null; 
-        document.getElementById('pkg-1').classList.remove('selected-card');
-        document.getElementById('pkg-2').classList.remove('selected-card');
-        document.getElementById('pkg-3').classList.remove('selected-card');
+        document.querySelectorAll('.package-options-container > div').forEach(p => p.classList.remove('selected-card'));
     } else {
         reservationData.selectedPackage = packageName;
-        document.getElementById('pkg-1').classList.remove('selected-card');
-        document.getElementById('pkg-2').classList.remove('selected-card');
-        document.getElementById('pkg-3').classList.remove('selected-card');
-
-        if (packageName === 'Package 1') document.getElementById('pkg-1').classList.add('selected-card');
-        if (packageName === 'Package 2') document.getElementById('pkg-2').classList.add('selected-card');
-        if (packageName === 'Package 3') document.getElementById('pkg-3').classList.add('selected-card');
+        document.querySelectorAll('.package-options-container > div').forEach(p => p.classList.remove('selected-card'));
+        document.getElementById(packageId).classList.add('selected-card');
     }
     console.log("Current Data:", reservationData);
 }
 
-function selectVehicle(vehicleName) {
+// --- VEHICLE LOGIC ---
+function selectVehicle(vehicleId, vehicleName) {
     if (reservationData.selectedVehicle === vehicleName) {
         reservationData.selectedVehicle = null;
-        
         reservationData.vehicleQuantity = 0;
-
-        const allVehicles = document.querySelectorAll('.vehicle-card');
-        allVehicles.forEach(v => v.classList.remove('selected-card'));
+        document.querySelectorAll('#dynamic-package-vehicles .vehicle-card').forEach(v => v.classList.remove('selected-card'));
     } else {
         reservationData.selectedVehicle = vehicleName;
-        
         reservationData.vehicleQuantity = 1;
-        document.querySelectorAll('.veh-count').forEach(el => el.innerText = '1');
+        document.querySelectorAll('#dynamic-package-vehicles .veh-count').forEach(el => el.innerText = '1');
 
-        const allVehicles = document.querySelectorAll('.vehicle-card');
-        allVehicles.forEach(v => v.classList.remove('selected-card'));
+        document.querySelectorAll('#dynamic-package-vehicles .vehicle-card').forEach(v => v.classList.remove('selected-card'));
+        document.getElementById(vehicleId).classList.add('selected-card');
+    }
+    console.log("Current Data:", reservationData);
+}
 
-        if (vehicleName === 'None') document.getElementById('veh-none').classList.add('selected-card');
-        if (vehicleName === 'Tuktuk') document.getElementById('veh-1').classList.add('selected-card');
-        if (vehicleName === 'Kalesa') document.getElementById('veh-2').classList.add('selected-card');
-        if (vehicleName === 'Tranvia') document.getElementById('veh-3').classList.add('selected-card');
+function selectCustomVehicle(vehicleId, vehicleName) {
+    if (reservationData.selectedVehicle === vehicleName) {
+        reservationData.selectedVehicle = null;
+        reservationData.vehicleQuantity = 0;
+        document.querySelectorAll('#dynamic-custom-vehicles .custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
+    } else {
+        reservationData.selectedVehicle = vehicleName;
+        reservationData.vehicleQuantity = 1;
+        document.querySelectorAll('#dynamic-custom-vehicles .veh-count').forEach(el => el.innerText = '1');
+
+        document.querySelectorAll('#dynamic-custom-vehicles .custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
+        document.getElementById(vehicleId).classList.add('selected-card');
     }
     console.log("Current Data:", reservationData);
 }
@@ -337,28 +340,6 @@ function toggleAttraction(attractionName, elementId) {
         card.classList.add('selected-card');
     }
     console.log("Current Attractions:", reservationData.customAttractions);
-}
-
-function selectCustomVehicle(vehicleName) {
-    if (reservationData.selectedVehicle === vehicleName) {
-        reservationData.selectedVehicle = null;
-        
-        reservationData.vehicleQuantity = 0;
-
-        document.querySelectorAll('.custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
-    } else {
-        reservationData.selectedVehicle = vehicleName;
-        
-        reservationData.vehicleQuantity = 1;
-        document.querySelectorAll('.veh-count').forEach(el => el.innerText = '1');
-
-        document.querySelectorAll('.custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
-        if (vehicleName === 'None') document.getElementById('custom-veh-none').classList.add('selected-card');
-        if (vehicleName === 'Tuktuk') document.getElementById('custom-veh-1').classList.add('selected-card');
-        if (vehicleName === 'Kalesa') document.getElementById('custom-veh-2').classList.add('selected-card');
-        if (vehicleName === 'Tranvia') document.getElementById('custom-veh-3').classList.add('selected-card');
-    }
-    console.log("Current Data:", reservationData);
 }
 
 function updateVehicleCount(change, event) {
@@ -403,3 +384,115 @@ function submitReservation() {
 
     buildAndShowModal();
 }
+
+// --- DYNAMIC RENDERER LOGIC ---
+
+async function initDynamicTours() {
+    // Calls the function from tours-api.js
+    const data = await fetchToursData();
+    
+    if (data) {
+        renderPackages(data.packages);
+        renderVehicles(data.vehicles);
+        renderAttractions(data.attractions);
+    }
+}
+
+function renderPackages(packages) {
+    const container = document.getElementById('dynamic-packages');
+    let html = '';
+
+    packages.forEach((pkg, index) => {
+        // Now passes both ID and Name to selectPackage
+        html += `
+        <div class="package-${index + 1}" id="${pkg.id}" onclick="selectPackage('${pkg.id}', '${pkg.name}')">
+            <div class="package-image"><img src="${pkg.image}" alt="${pkg.name}"></div>
+            <div class="package-details-text">
+                <span class="package-label">${pkg.name}</span>
+                <span class="package-${index + 1}-inclusion">${pkg.inclusions}</span>
+                <span class="package-${index + 1}-price">${pkg.price}</span>
+            </div>
+        </div>`;
+    });
+
+    container.innerHTML = html;
+}
+
+function renderVehicles(vehicles) {
+    const pkgVehiclesContainer = document.getElementById('dynamic-package-vehicles');
+    const customVehiclesContainer = document.getElementById('dynamic-custom-vehicles');
+
+    let pkgHtml = '';
+    let customHtml = '';
+
+    vehicles.forEach((veh, index) => {
+        const capacityClass = (index === 2) ? 'vehicle-3-capacity' : 'vehicle-capacity';
+
+        // Regular Package Vehicles - added veh.id
+        pkgHtml += `
+        <div class="vehicle-${index + 1} vehicle-card" id="${veh.id}" onclick="selectVehicle('${veh.id}', '${veh.name}')">
+            <div class="vehicle-counter">
+                <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
+                <span class="veh-count">1</span>
+                <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
+            </div>
+            <img src="${veh.image}" alt="${veh.name}">
+            <div class="vehicle-overlay">
+                <span class="vehicle-name">${veh.name}</span>
+                <span class="${capacityClass}">${veh.capacity}</span>
+            </div>
+        </div>`;
+
+        // Custom Vehicles - added custom-${veh.id}
+        customHtml += `
+        <div class="custom-vehicle-${index + 1} custom-vehicle-card" id="custom-${veh.id}" onclick="selectCustomVehicle('custom-${veh.id}', '${veh.name}')">
+            <div class="vehicle-counter">
+                <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
+                <span class="veh-count">1</span>
+                <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
+            </div>
+            <img src="${veh.image}" alt="${veh.name}">
+            <div class="vehicle-overlay">
+                <span class="vehicle-name">${veh.name}</span>
+                <span class="${capacityClass}">${veh.capacity}</span>
+            </div>
+        </div>`;
+    });
+
+    pkgVehiclesContainer.innerHTML += pkgHtml;
+    customVehiclesContainer.innerHTML += customHtml;
+}
+
+function renderAttractions(attractions) {
+    const layer1 = document.getElementById('dynamic-attractions-layer-1');
+    const layer2 = document.getElementById('dynamic-attractions-layer-2');
+
+    let layer1Html = '';
+    let layer2Html = '';
+
+    attractions.forEach((attr, index) => {
+        // 1. Grab the fee from your new JSON! (Defaults to 0 if it's free)
+        const fee = attr.fee || 0;
+        
+        // 2. Build the exact string your colleague's receipt parser is expecting
+        const dataString = `${attr.name} | ${fee}`;
+
+        // 3. Pass dataString into toggleAttraction instead of just the name!
+        const cardHtml = `
+        <div class="attraction-${index + 1} attraction-card" id="${attr.id}" onclick="toggleAttraction('${dataString}', '${attr.id}')">
+            <img src="${attr.image}" alt="${attr.name}">
+        </div>`;
+
+        if (index < 5) {
+            layer1Html += cardHtml;
+        } else {
+            layer2Html += cardHtml;
+        }
+    });
+
+    layer1.innerHTML = layer1Html;
+    layer2.innerHTML = layer2Html;
+}
+
+// Fire it up when the DOM loads
+document.addEventListener('DOMContentLoaded', initDynamicTours);

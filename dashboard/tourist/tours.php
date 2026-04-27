@@ -16,6 +16,8 @@
 
     <script src="../../asset/js/calendar.js?v=<?php echo filemtime('../../asset/js/calendar.js'); ?>" defer></script>
     <script src="../../asset/js/receipt.js?v=<?php echo filemtime('../../asset/js/receipt.js'); ?>" defer></script>
+
+    <script type="module"> import { fetchToursData } from '../../services/api.js'; window.fetchToursData = fetchToursData;</script>
     <script src="../../asset/js/tours.js?v=<?php echo filemtime('../../asset/js/tours.js'); ?>" defer></script>
 </head>
 <body>
@@ -118,8 +120,8 @@
                         <div class="package-confirm-container">
                             <div class="text-box"><span class="availing-package-text">Availing for package?</span></div>
                             <div class="confirming-package-button-container">
-                                <button class="no-package" id="btn-no" onclick="selectPackageOption(false)">NO</button>
-                                <button class="yes-package" id="btn-yes" onclick="selectPackageOption(true)">YES</button>
+                                <button type="button" class="no-package" id="btn-no" onclick="selectPackageOption(false)">NO</button>
+                                <button type="button" class="yes-package" id="btn-yes" onclick="selectPackageOption(true)">YES</button>
                             </div>
                         </div>
                         <div class="prev-next-container" style="justify-content: flex-end;">
@@ -133,68 +135,18 @@
                     <div class="step-2-packages" id="step2Packages">
                         <div class="packages-container">
                             <div class="text-box"><span class="packages-text">Choose a package to experience</span></div>  
-                            <div class="package-options-container">
-                                <div class="package-1" id="pkg-1" onclick="selectPackage('Package 1')">
-                                    <div class="package-image"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="package-details-text"><span class="package-label">Package 1</span><span class="package-1-inclusion">Casa el nognog + ...</span><span class="package-1-price">₱67,6767</span></div>
-                                </div>
-                                <div class="package-2" id="pkg-2" onclick="selectPackage('Package 2')">
-                                    <div class="package-image"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="package-details-text"><span class="package-label">Package 2</span><span class="package-2-inclusion">Casa el nognog + ...</span><span class="package-2-price">₱67,6767</span></div>
-                                </div>
-                                <div class="package-3" id="pkg-3" onclick="selectPackage('Package 3')">
-                                    <div class="package-image"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="package-details-text"><span class="package-label">Package 3</span><span class="package-3-inclusion">Casa el nognog + ...</span><span class="package-3-price">₱67,6767</span></div>
-                                </div>
+                            <div class="package-options-container" id="dynamic-packages">
+                                
                             </div>
                         </div>
                         
                         <div class="select-vehicle-packages-conatiner">
                             <div class="text-box"><span class="select-vehicle-text">Choose a vehicle to ride</span></div>
-                            <div class="vehicle-container">
-                                <div class="no-vehicle vehicle-card" id="veh-none" onclick="selectVehicle('None')">
+                            <div class="vehicle-container" id="dynamic-package-vehicles">
+                                <div class="no-vehicle vehicle-card" id="veh-none" onclick="selectVehicle('veh-none', 'None')">
                                     <span class="none-text">NONE</span>
                                 </div>
-
-                                <div class="vehicle-1 vehicle-card" id="veh-1" onclick="selectVehicle('Tuktuk')">
-                                    <div class="vehicle-counter">
-                                        <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
-                                        <span class="veh-count">1</span>
-                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
-                                    </div>
-                                    <img src="https://dummyimage.com/hd1080">
-                                    <div class="vehicle-overlay">
-                                        <span class="vehicle-name">Tuktuk</span>
-                                        <span class="vehicle-capacity">Capacity: 3-4</span>
-                                    </div>
                                 </div>
-
-                                <div class="vehicle-2 vehicle-card" id="veh-2" onclick="selectVehicle('Kalesa')">
-                                    <div class="vehicle-counter">
-                                        <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
-                                        <span class="veh-count">1</span>
-                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
-                                    </div>
-                                    <img src="https://dummyimage.com/hd1080">
-                                    <div class="vehicle-overlay">
-                                        <span class="vehicle-name">Kalesa</span>
-                                        <span class="vehicle-capacity">Capacity: 2-3</span>
-                                    </div>
-                                </div>
-
-                                <div class="vehicle-3 vehicle-card" id="veh-3" onclick="selectVehicle('Tranvia')">
-                                    <div class="vehicle-counter">
-                                        <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
-                                        <span class="veh-count">1</span>
-                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
-                                    </div>
-                                    <img src="https://dummyimage.com/hd1080">
-                                    <div class="vehicle-overlay">
-                                        <span class="vehicle-name">Tranvia</span>
-                                        <span class="vehicle-3-capacity">Capacity: 12-20</span>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -202,71 +154,24 @@
                         <div class="attractions-container">
                             <div class="text-box"><span class="attractions-text">Choose the attractions to experience</span></div>
                             <div class="attractions-options-container">
-                                <div class="attraction-layer-1">
-                                    <div class="attraction-1 attraction-card" id="attr-1" onclick="toggleAttraction('Fort Santiago', 'attr-1')"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="attraction-2 attraction-card" id="attr-2" onclick="toggleAttraction('San Agustin Church', 'attr-2')"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="attraction-3 attraction-card" id="attr-3" onclick="toggleAttraction('Casa Manila', 'attr-3')"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="attraction-4 attraction-card" id="attr-4" onclick="toggleAttraction('Baluarte de San Diego', 'attr-4')"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="attraction-5 attraction-card" id="attr-5" onclick="toggleAttraction('Museo de Intramuros', 'attr-5')"><img src="https://dummyimage.com/hd1080"></div>
-                                </div>
-                                <div class="attraction-layer-2">
-                                    <div class="attraction-6 attraction-card" id="attr-6" onclick="toggleAttraction('Manila Cathedral', 'attr-6')"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="attraction-7 attraction-card" id="attr-7" onclick="toggleAttraction('Destileria Limtuaco', 'attr-7')"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="attraction-8 attraction-card" id="attr-8" onclick="toggleAttraction('Plaza Roma', 'attr-8')"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="attraction-9 attraction-card" id="attr-9" onclick="toggleAttraction('Baluarte de Santa Barbara', 'attr-9')"><img src="https://dummyimage.com/hd1080"></div>
-                                    <div class="attraction-10 attraction-card" id="attr-10" onclick="toggleAttraction('Postigo del Palacio', 'attr-10')"><img src="https://dummyimage.com/hd1080"></div>
-                                </div>
+                                
+                                <div class="attraction-layer-1" id="dynamic-attractions-layer-1">
+                                    </div>
+                                
+                                <div class="attraction-layer-2" id="dynamic-attractions-layer-2">
+                                    </div>
                             </div>
                         </div>
                         
                         <div class="custom-select-vehicle-conatiner">
                             <div class="text-box">
                                 <span class="custom-select-vehicle-text">Choose a vehicle to ride</span>
-                            </div> <div class="custom-vehicle-container">
-                                
-                                <div class="custom-no-vehicle custom-vehicle-card" id="custom-veh-none" onclick="selectCustomVehicle('None')">
+                            </div> 
+                            <div class="custom-vehicle-container" id="dynamic-custom-vehicles">
+                                <div class="custom-no-vehicle custom-vehicle-card" id="custom-veh-none" onclick="selectCustomVehicle('custom-veh-none', 'None')">
                                     <span class="none-text">NONE</span>
                                 </div>
-
-                                <div class="custom-vehicle-1 custom-vehicle-card" id="custom-veh-1" onclick="selectCustomVehicle('Tuktuk')">
-                                    <div class="vehicle-counter"> <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
-                                        <span class="veh-count">1</span>
-                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
-                                    </div>
-                                    <img src="https://dummyimage.com/hd1080">
-                                    <div class="vehicle-overlay">
-                                        <span class="vehicle-name">Tuktuk</span>
-                                        <span class="vehicle-capacity">Capacity: 3-4</span>
-                                    </div>
                                 </div>
-
-                                <div class="custom-vehicle-2 custom-vehicle-card" id="custom-veh-2" onclick="selectCustomVehicle('Kalesa')">
-                                    <div class="vehicle-counter">
-                                        <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
-                                        <span class="veh-count">1</span>
-                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
-                                    </div>
-                                    <img src="https://dummyimage.com/hd1080">
-                                    <div class="vehicle-overlay">
-                                        <span class="vehicle-name">Kalesa</span>
-                                        <span class="vehicle-capacity">Capacity: 2-4</span>
-                                    </div>
-                                </div>
-
-                                <div class="custom-vehicle-3 custom-vehicle-card" id="custom-veh-3" onclick="selectCustomVehicle('Tranvia')">
-                                    <div class="vehicle-counter">
-                                        <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
-                                        <span class="veh-count">1</span>
-                                        <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
-                                    </div>
-                                    <img src="https://dummyimage.com/hd1080">
-                                    <div class="vehicle-overlay">
-                                        <span class="vehicle-name">Tranvia</span>
-                                        <span class="vehicle-3-capacity">Capacity: 12-20</span>
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
 
@@ -379,6 +284,13 @@
                     </dl>
                 </address>
             </section>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; margin-bottom: 1.5rem; border-top: 1px solid #e5e7eb; padding-top: 1rem;">
+                <div style="display: flex; gap: 0.75rem; align-items: center;">
+                    <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; font-size: 0.9rem;">TOTAL FEE:</span>
+                    <span id="modal-total-fee" style="font-weight: 600; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 1.1rem; font-style: italic;">₱0</span>
+                </div>
+            </div>
 
             <footer style="display: flex; justify-content: flex-end">
                 <button class="accept-btn" onclick="confirmFinalAcceptance()" aria-label="Accept Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 2px; cursor: pointer; transition: background-color 0.2s;">

@@ -1,0 +1,107 @@
+{
+  "packages": [
+    {
+      "id": "pkg-1",
+      "name": "Package 1",
+      "inclusions": "Casa el nognog + ...",
+      "price": "₱67,6767",
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "pkg-2",
+      "name": "Package 2",
+      "inclusions": "Casa el nognog + ...",
+      "price": "₱67,6767",
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "pkg-3",
+      "name": "Package 3",
+      "inclusions": "Casa el nognog + ...",
+      "price": "₱67,6767",
+      "image": "https://dummyimage.com/hd1080"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "veh-1",
+      "name": "Tuktuk",
+      "capacity": "Capacity: 3-4",
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "veh-2",
+      "name": "Kalesa",
+      "capacity": "Capacity: 2-4",
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "veh-3",
+      "name": "Tranvia",
+      "capacity": "Capacity: 12-20",
+      "image": "https://dummyimage.com/hd1080"
+    }
+  ],
+  "attractions": [
+    {
+      "id": "attr-1",
+      "name": "Fort Santiago",
+      "fee": 75,
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "attr-2",
+      "name": "San Agustin Church",
+      "fee": 0,
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "attr-3",
+      "name": "Casa Manila",
+      "fee": 75,
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "attr-4",
+      "name": "Palacio del Gobernador",
+      "fee": 0,
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "attr-5",
+      "name": "Museo de Intramuros",
+      "fee": 200,
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "attr-6",
+      "name": "Minor Basilica (Manila Cathedral)",
+      "fee": 0,
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "attr-7",
+      "name": "Bambike Rental",
+      "fee": 100,
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "attr-8",
+      "name": "Puerta del Parian",
+      "fee": 0,
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "attr-9",
+      "name": "Puerta Real",
+      "fee": 0,
+      "image": "https://dummyimage.com/hd1080"
+    },
+    {
+      "id": "attr-10",
+      "name": "Rizal's Bagumbayan Light & Sound Museum",
+      "fee": 150,
+      "image": "https://dummyimage.com/hd1080"
+    }
+  ]
+}

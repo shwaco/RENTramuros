@@ -34,3 +34,22 @@ export async function getRecommendedAttractions() {
     }
 } 
 
+// tours step 2 
+
+export async function fetchToursData() {
+    try {
+        // Since the JSON is in the same folder as the PHP file you are viewing, 
+        // the path is just the filename!
+        const response = await fetch('tours_data_step2.json');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Failed to fetch tours data:", error);
+        return null;
+    }
+}
