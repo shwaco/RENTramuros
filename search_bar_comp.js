@@ -113,15 +113,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Initialize history on load
     renderHistoryPills();
 
+    // SUBMIT LOGIC (ENTER KEY & SEARCH BUTTON)
+    function handleSearchSubmit() {
+        const searchTerm = searchInput.value.trim();
+        if (!searchTerm) return; 
+
+        let foundId = null;
+
+        allCards.forEach(card => {
+            const cardName = card.querySelector('.attraction-name').innerText;
+            if (cardName.toLowerCase() === searchTerm.toLowerCase()) {
+                foundId = card.getAttribute('data-id');
+            }
+        });
+
+        saveSearchToHistory(searchTerm);
+
+        if (foundId) {
+            window.location.href = `overview.html?id=${foundId}`;
+        } else {
+            dropdownWrapper.classList.remove("active");
+        }
+    }
+
     searchBtn.addEventListener("click", () => {
-        saveSearchToHistory(searchInput.value);
-        dropdownWrapper.classList.remove("active");
+        handleSearchSubmit();
     });
 
     searchInput.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
-            saveSearchToHistory(searchInput.value);
-            dropdownWrapper.classList.remove("active");
+            handleSearchSubmit();
         }
     });
 });
