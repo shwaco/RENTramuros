@@ -29,7 +29,7 @@ if (mysqli_num_rows($result) > 0) {
     }
     echo json_encode(["status" => "success", "data" => $packages]);
 } else {
-    echo json_encode(["status" => "success", "data" => []]);
+    echo json_encode(["status" => "error", "message" => "No packages found"]);
 }
 
 

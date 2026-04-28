@@ -1,4 +1,4 @@
-import { getPopularAttractions, getRecommendedAttractions } from "../../services/api.js";
+import { getPopularAttractions, getRecommendedAttractions, getPackages } from "../../services/api.js";
 
 // Image slider 
 const allSliders = document.querySelectorAll('.slider');
@@ -48,45 +48,53 @@ function updateButtonVisibility (track, prevBtn, nextBtn) {
     }
 }
 
-// retrieve popular and recommended attractions
+// retrieve image sliders
 
-function populateSliders(attractionsData, attractionsList) {
-    attractionsData.forEach(attraction => {
+function populateSliders(slidersData, slidersList) {
+    slidersData.forEach(sliders => {
         
         
         const cardHTML = `
             <li>
                 <a href="#" rel="noopener noreferrer">
-                    <img src="asset/img/${attraction.main_img}" alt="${attraction.attraction_name} Image">
-                    <p>${attraction.attraction_name}</p>
+                    <img src="asset/img/${sliders.main_img}" alt="${sliders.attraction_name} Image">
+                    <p>${sliders.attraction_name}</p>
                 </a>
             </li>
         `;
-
-        // const cardHTML = `<li>
-        //                 <a href="." rel="noopener noreferrer"><div class="package one">
-
-        //                     <div class="image"><img src="asset/img/la_costa.jpg" alt="package_picture" width="auto" height="150"></div>
-
-        //                     <ul>
-        //                         <li><div class="number"><span>Package 1</span></div></li>
-
-        //                         <li><div class="attractions"><span>Casa la cote + Puerto berde + Juju on the beat + No merk + No dihh + no bruhhhhhhhhhhhhhhhhh + No shi + nosssssssssssssssssssssssssssssssssssssssssssssssssssss  </span></div></li>
-
-        //                         <li><div class="price"><span>₱67,6767</span></div></li>
-        //                     </ul>
-        //                 </div></a>
-        //             </li>`
-
         
-        attractionsList.insertAdjacentHTML('beforeend', cardHTML);
+        slidersList.insertAdjacentHTML('beforeend', cardHTML);
     }); 
 
-    const sliderContainer = attractionsList.closest('.slider');
+    const sliderContainer = slidersList.closest('.slider');
     const prevBtn = sliderContainer.querySelector('.slide-btn.one');
     const nextBtn = sliderContainer.querySelector('.slide-btn.two');
 
-    updateButtonVisibility(attractionsList, prevBtn, nextBtn);
+    updateButtonVisibility(slidersList, prevBtn, nextBtn);
+}
+
+// retrieve packages
+
+function packageSlider(slidersData, slidersList) {
+    slidersData.forEach(sliders => {
+
+        const cardHTML = `<li>
+                        <a href="." rel="noopener noreferrer"><div class="package one">
+
+                            <div class="image"><img src="asset/img/${sliders.image_file}" alt="${sliders.package_name} Image" width="auto" height="150"></div>
+
+                            <ul>
+                                <li><div class="number"><span>${sliders.package_name}</span></div></li>
+
+                                <li><div class="attractions"><span>${sliders.description}</span></div></li>
+
+                                <li><div class="price"><span>₱${sliders.price}</span></div></li>
+                            </ul>
+                        </div></a>
+                    </li>`;
+
+                    slidersList.insertAdjacentHTML('beforeend',cardHTML);
+    })
 }
 
 async function buildSlider() {
@@ -96,16 +104,12 @@ async function buildSlider() {
     const recoAttractions = await getRecommendedAttractions();
     const recoAttractionsList = document.getElementById('reco-attractions-list');
 
-    // const package = await getPackages();
-    // const packageList = document.getElementById('package_list');
+    const packages = await getPackages();
+    const packageList = document.getElementById('package_list');
 
     populateSliders(popAttractions, popAttractionsList);
     populateSliders(recoAttractions, recoAttractionsList);
-    // populateSliders(package, packageList);
+    packageSlider(packages, packageList);
 }
 
 document.addEventListener('DOMContentLoaded', buildSlider);
-
-
-// retrieve packages
-

@@ -23,7 +23,7 @@ export async function getRecommendedAttractions() {
         const response = await fetch('backend/attractions/get_attractions.php');
 
         if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`)
+            throw new Error(`Response status: ${response.status}`);
         } else {
             const result = await response.json();
             const recoData = result.data.filter(reco => reco.attraction_type === 'Recommended');
@@ -35,3 +35,20 @@ export async function getRecommendedAttractions() {
         return [];
     }
 } 
+
+// retrieve packages
+export async function getPackages() {
+    try {
+        const response = await fetch('backend/get_packages.php');
+
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`); 
+        } else {
+            const result = await response.json();
+            return result.data;
+        }
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
