@@ -240,7 +240,7 @@ body{
     .description-container {
         max-width: calc(25rem + 1em);
     }
-    
+
     .description-container {
         flex-direction: column; 
         gap: 1.5rem;
@@ -251,3 +251,4 @@ body{
         width: 100%;
     }
 
+}
