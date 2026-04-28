@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="asset/main.css?v=<?php echo filemtime('asset/main.css'); ?>">
     <link rel="stylesheet" href="asset/css/index.css?v=<?php echo filemtime('asset/css/index.css'); ?>">
     <script type="module" src="asset/script.js?v=<?php echo filemtime('asset/script.js'); ?>" defer></script>
-    <script type="module" src="asset/js/dynamic_ui.js?v=<?php echo filemtime('asset/js/dynamic_ui.js'); ?>" defer></script>
+    <script type="module" src="asset/js/dynamic_landing.js?v=<?php echo filemtime('asset/js/dynamic_landing.js'); ?>" defer></script>
     
 
 </head>
