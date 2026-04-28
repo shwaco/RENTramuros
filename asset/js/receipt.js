@@ -87,37 +87,62 @@ function confirmFinalAcceptance() {
 
 /* BACKEND API HAND-OFF */
 async function sendDataToDatabase() {
-    // 1. Clean up "None" selections so the database gets a clean NULL
-    let cleanVehicleId = reservationData.selectedVehicleId;
-    if (cleanVehicleId === 'veh-none' || cleanVehicleId === 'custom-veh-none') {
-        cleanVehicleId = null;
-    } else if (cleanVehicleId && cleanVehicleId.startsWith('custom-')) { // <-- Typo fixed right here!
-        cleanVehicleId = cleanVehicleId.replace('custom-', ''); 
+    
+    // 1. Clean up "None" selections and extract ONLY the numbers (Integers)
+    let finalVehicleId = null;
+    if (reservationData.selectedVehicleId && reservationData.selectedVehicleId !== 'veh-none' && reservationData.selectedVehicleId !== 'custom-veh-none') {
+        // Removes all letters/dashes and converts "veh-2" into the number 2
+        let numStr = reservationData.selectedVehicleId.replace(/\D/g, '');
+        finalVehicleId = parseInt(numStr);
     }
 
-    // 2. Format the payload exactly to your coworker's schema design
+    let finalPackageId = null;
+    if (reservationData.wantsPackage && reservationData.selectedPackageId) {
+        // Converts "pkg-1" into the number 1
+        let numStr = reservationData.selectedPackageId.replace(/\D/g, '');
+        finalPackageId = parseInt(numStr);
+    }
+
+    // Converts array of strings ["attr-2", "attr-7"] into array of numbers [2, 7]
+    let finalAttractions = [];
+    if (!reservationData.wantsPackage) {
+        finalAttractions = reservationData.customAttractionIds.map(id => {
+            return parseInt(id.replace(/\D/g, ''));
+        });
+    }
+
+    // 2. Format the payload exactly to the new FLAT structure requested
     const dbPayload = {
-        booking_history: {
-            type_of_booking: reservationData.wantsPackage ? "Package" : "Custom",
-            time: document.getElementById('time-display').innerText,
-            date: document.getElementById('date-display').innerText,
-            adults_and_senior: reservationData.tourists.adults, 
-            children: reservationData.tourists.children,
-            infants: reservationData.tourists.infants,
-            package_id: reservationData.wantsPackage ? reservationData.selectedPackageId : null,
-            vehicle_id: cleanVehicleId,
-            number_of_vehicle: reservationData.vehicleQuantity
-        },
-        contact_information: {
-            first_name: reservationData.contactInfo.firstName,
-            last_name: reservationData.contactInfo.lastName,
-            email_address: reservationData.contactInfo.email,
-            phone_number: reservationData.contactInfo.phone
-        },
-        request_attractions: reservationData.wantsPackage ? [] : reservationData.customAttractionIds
+        tourist_id: 1, // Placeholder (matches coworker's image)
+        booking_type: reservationData.wantsPackage ? "Package" : "Attractions",
+        
+        // Note: I kept time and date here because the database will still need them!
+        time: document.getElementById('time-display').innerText,
+        date: document.getElementById('date-display').innerText,
+        
+        adults_and_seniors: reservationData.tourists.adults, 
+        children: reservationData.tourists.children,
+        infants: reservationData.tourists.infants,
+        package_id: finalPackageId,
+        vehicle_id: finalVehicleId,
+        number_of_vehicles: reservationData.vehicleQuantity,
+        
+        first_name: reservationData.contactInfo.firstName,
+        last_name: reservationData.contactInfo.lastName,
+        email_address: reservationData.contactInfo.email,
+        phone_number: reservationData.contactInfo.phone,
+        
+        attraction_id: finalAttractions
     };
 
-    console.log("SENDING EXACT PAYLOAD TO API:", JSON.stringify(dbPayload, null, 2));
+    let displayJson = JSON.stringify(dbPayload, null, 2);
+    
+    // Use a quick trick to flatten ONLY the attraction_id array into one line
+    displayJson = displayJson.replace(/"attraction_id": \[\s*([\s\S]*?)\s*\]/, function(match, innerText) {
+        return '"attraction_id": [' + innerText.replace(/\s+/g, '') + ']';
+    });
+
+    console.log("SENDING EXACT PAYLOAD TO API:", displayJson);
 
     // 3. Call the API function from our separated file
     const isSuccess = await window.submitBookingRequest(dbPayload);
