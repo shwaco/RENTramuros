@@ -1,15 +1,4 @@
-import { getPopularAttractions, getRecommendedAttractions } from "../services/api.js";
-
-// Sidebar
-function showSidebar() {
-    const sidebar = document.querySelector('.sidebar')
-    sidebar.style.display = 'flex'
-}
-
-function hideSidebar() {
-    const sidebar = document.querySelector('.sidebar')
-    sidebar.style.display = 'none'
-}
+import { getPopularAttractions, getRecommendedAttractions, getPackages } from "../../services/api.js";
 
 // Image slider 
 const allSliders = document.querySelectorAll('.slider');
@@ -52,35 +41,60 @@ function updateButtonVisibility (track, prevBtn, nextBtn) {
 
     let maxScrollableWidth = track.scrollWidth - track.clientWidth;
 
-    if (maxScrollableWidth <= track.scrollLeft) {
+    if (track.scrollLeft > maxScrollableWidth - 3) {
         nextBtn.style.display = 'none';
     } else {
         nextBtn.style.display = 'flex';
     }
 }
 
-// retrieve popular and recommended attractions
+// retrieve image sliders
 
-function populateSliders(attractionsData, attractionsList) {
-    attractionsData.forEach(attraction => {
+function populateSliders(slidersData, slidersList) {
+    slidersData.forEach(sliders => {
+        
         
         const cardHTML = `
             <li>
                 <a href="#" rel="noopener noreferrer">
-                    <img src="../../asset/img/${attraction.image_file}" alt="${attraction.attraction_name} Image">
-                    <p>${attraction.attraction_name}</p>
+                    <img src="asset/img/${sliders.main_img}" alt="${sliders.attraction_name} Image">
+                    <p>${sliders.attraction_name}</p>
                 </a>
             </li>
         `;
         
-        attractionsList.insertAdjacentHTML('beforeend', cardHTML);
+        slidersList.insertAdjacentHTML('beforeend', cardHTML);
     }); 
 
-    const sliderContainer = attractionsList.closest('.slider');
+    const sliderContainer = slidersList.closest('.slider');
     const prevBtn = sliderContainer.querySelector('.slide-btn.one');
     const nextBtn = sliderContainer.querySelector('.slide-btn.two');
 
-    updateButtonVisibility(attractionsList, prevBtn, nextBtn);
+    updateButtonVisibility(slidersList, prevBtn, nextBtn);
+}
+
+// retrieve packages
+
+function packageSlider(slidersData, slidersList) {
+    slidersData.forEach(sliders => {
+
+        const cardHTML = `<li>
+                        <a href="." rel="noopener noreferrer"><div class="package one">
+
+                            <div class="image"><img src="asset/img/${sliders.image_file}" alt="${sliders.package_name} Image" width="auto" height="150"></div>
+
+                            <ul>
+                                <li><div class="number"><span>${sliders.package_name}</span></div></li>
+
+                                <li><div class="attractions"><span>${sliders.description}</span></div></li>
+
+                                <li><div class="price"><span>₱${sliders.price}</span></div></li>
+                            </ul>
+                        </div></a>
+                    </li>`;
+
+                    slidersList.insertAdjacentHTML('beforeend',cardHTML);
+    })
 }
 
 async function buildSlider() {
@@ -90,8 +104,12 @@ async function buildSlider() {
     const recoAttractions = await getRecommendedAttractions();
     const recoAttractionsList = document.getElementById('reco-attractions-list');
 
+    const packages = await getPackages();
+    const packageList = document.getElementById('package_list');
+
     populateSliders(popAttractions, popAttractionsList);
     populateSliders(recoAttractions, recoAttractionsList);
+    packageSlider(packages, packageList);
 }
 
 document.addEventListener('DOMContentLoaded', buildSlider);

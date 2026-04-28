@@ -26,6 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `admins`
 --
+DROP TABLE IF EXISTS `admins`;
 
 CREATE TABLE `admins` (
   `admin_id` int(11) NOT NULL,
@@ -342,8 +343,8 @@ INSERT INTO `tour_guides` (`guide_id`, `first_name`, `last_name`, `email`, `pass
 CREATE TABLE `upcoming_events` (
   `event_id` int(11) NOT NULL,
   `event_name` varchar(100) NOT NULL,
-  `event_date` date DEFAULT current_timestamp(),
-  `event_time` time DEFAULT current_timestamp(),
+  `event_date` date NOT NULL,
+  `event_time` time NOT NULL,
   `location` varchar(255) NOT NULL,
   `image_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

@@ -21,113 +21,6 @@ header {
     height: fit-content;
 }
 
-/* Navigation bar */
-nav {
-    background-color: white;
-    text-decoration: none;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-
-}
-
-nav ul {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    list-style: none;
-    margin: 0 3rem;
-    gap: 1rem
-}
-
-
-
-nav li a{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: black;
-    font-family: 'roboto flex';
-    font-weight: 300;
-    padding: 0.4rem;
-
-}
-
-nav li a:hover {
-    -webkit-text-stroke: 0.3px black;
-}
-
-
-nav .menu-btn {
-    display: none;
-    margin-right: 10px;
-}
-
-#logo {
-    display: block;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-
-
-nav li:first-child {
-    margin-right: auto;
-}
-
-nav .navbar li:last-child {
-    margin-left: 1rem;
-}
-
-nav button {
-    color: black;
-    background-color: white;
-    padding: 0.7em 2em ;
-    border-radius: 20px;
-    cursor: pointer;
-    border: transparent;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'roboto flex';
-    font-weight: 300;
-    transition: ease-in-out 0.2s;
-
-}
-
-nav button:hover {
-    opacity: 0.8;
-}
-
-/* Sidebar */
-nav .sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 250px;
-    z-index: 999;
-    background-color: white;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-    display: none;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    margin: 0;
-}
-
-nav .sidebar li a {
-    display: flex;
-    justify-content: flex-start;
-    gap: 0.5rem;
-    width: 100%;
-    padding: 1rem 2rem;
-}
-
-nav .sidebar .hideOnMobile.last{
-    margin: 0;
-}
 
 /* Main */
 main {
@@ -698,16 +591,6 @@ main {
     font-weight: bold;
     font-size: 1.1rem;
 
-}
-
-
-@media(max-width: 900px){
-    .hideOnMobile{
-        display: none;
-    }
-    nav .menu-btn {
-        display: flex;
-    }
 }
 
 @media(max-width: 1200px){
