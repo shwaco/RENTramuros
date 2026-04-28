@@ -6,10 +6,11 @@ function renderAttractionCards(attractionsList) {
     attractionsContainer.innerHTML = ''; 
     
     attractionsList.forEach(attraction => {
+        // Updated to match the new JSON keys: attraction_id, main_img, attraction_name
         const cardHTML = `
-            <div class="attraction-card" data-id="${attraction.id}">
-                <img src="${attraction.image}" alt="${attraction.name}">
-                <span class="attraction-name">${attraction.name}</span>
+            <div class="attraction-card" data-id="${attraction.attraction_id}">
+                <img src="${attraction.main_img}" alt="${attraction.attraction_name}">
+                <span class="attraction-name">${attraction.attraction_name}</span>
             </div>
         `;
         attractionsContainer.innerHTML += cardHTML;
