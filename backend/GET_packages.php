@@ -20,18 +20,28 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit();
 }
 
-$sql = "SELECT * FROM packages";
-$result = mysqli_query($con, $sql);
-if (mysqli_num_rows($result) > 0) {
-    $packages = [];
+$fetch_sql = "SELECT package_id, package_name, description, price FROM packages";
+$result = mysqli_query($con, $fetch_sql);
+
+if ($result) {
+    $packages_array = array();
     while ($row = mysqli_fetch_assoc($result)) {
-        $packages[] = $row;
+        $packages = array(
+        	"package_id" => $row['package_id'],
+            "package_name" => $row['package_name'],
+            "description" => $row['description'],
+            "price" => $row['price']
+        );
+
+        array_push($packages_array, $packages);
     }
-    echo json_encode(["status" => "success", "data" => $packages]);
+    if (count($packages_array) > 0) {
+    echo json_encode(["status" => "success", "data" => $packages_array]);
+    } else {
+    echo json_encode(["status" => "error", "message" => "No packages found."]);
+    }
 } else {
-    echo json_encode(["status" => "success", "data" => []]);
+    echo json_encode(["status" => "error", "message" => "Failed to retrieve packages."]);
 }
-
-
 
 ?>
