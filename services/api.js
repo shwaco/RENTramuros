@@ -45,10 +45,10 @@ export async function getPackages() {
             throw new Error(`Response status: ${response.status}`); 
         } else {
             const result = await response.json();
-            return result.data;
+            return result.data || [];
         }
     } catch (error) {
-        console.error(error);
+        console.error(error.message);
         return [];
     }
 }

@@ -75,25 +75,25 @@ function populateSliders(slidersData, slidersList) {
 
 // retrieve packages
 
-function packageSlider(slidersData, slidersList) {
-    slidersData.forEach(sliders => {
+function packageSlider(packageData, packageList) {
+    packageData.forEach(packages => {
 
         const cardHTML = `<li>
                         <a href="." rel="noopener noreferrer"><div class="package one">
 
-                            <div class="image"><img src="asset/img/${sliders.image_file}" alt="${sliders.package_name} Image" width="auto" height="150"></div>
+                            <div class="image"><img src="asset/img/${packages.image_file}" alt="${packages.package_name} Image" width="auto" height="150"></div>
 
                             <ul>
-                                <li><div class="number"><span>${sliders.package_name}</span></div></li>
+                                <li><div class="number"><span>${packages.package_name}</span></div></li>
 
-                                <li><div class="attractions"><span>${sliders.description}</span></div></li>
+                                <li><div class="attractions"><span>${packages.description}</span></div></li>
 
-                                <li><div class="price"><span>₱${sliders.price}</span></div></li>
+                                <li><div class="price"><span>₱${packages.price}</span></div></li>
                             </ul>
                         </div></a>
                     </li>`;
 
-                    slidersList.insertAdjacentHTML('beforeend',cardHTML);
+                    packageList.insertAdjacentHTML('beforeend',cardHTML);
     })
 }
 
@@ -104,12 +104,12 @@ async function buildSlider() {
     const recoAttractions = await getRecommendedAttractions();
     const recoAttractionsList = document.getElementById('reco-attractions-list');
 
-    const packages = await getPackages();
+    const packageMoData = await getPackages();
     const packageList = document.getElementById('package_list');
 
     populateSliders(popAttractions, popAttractionsList);
     populateSliders(recoAttractions, recoAttractionsList);
-    packageSlider(packages, packageList);
+    packageSlider(packageMoData, packageList);
 }
 
 document.addEventListener('DOMContentLoaded', buildSlider);
