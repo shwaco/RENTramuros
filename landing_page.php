@@ -264,22 +264,6 @@
                 <div class="heading three">Packages u cannot miss</div>
 
                 <ul class="packages" id="package_list">
-
-                    <li>
-                        <a href="." rel="noopener noreferrer"><div class="package one">
-
-                            <div class="image"><img src="asset/img/la_costa.jpg" alt="package_picture" width="auto" height="150"></div>
-
-                            <ul>
-                                <li><div class="number"><span>Package 1</span></div></li>
-
-                                <li><div class="attractions"><span>Casa la cote + Puerto berde + Juju on the beat + No merk + No dihh + no bruhhhhhhhhhhhhhhhhh + No shi + nosssssssssssssssssssssssssssssssssssssssssssssssssssss  </span></div></li>
-
-                                <li><div class="price"><span>₱67,6767</span></div></li>
-                            </ul>
-                        </div></a>
-                    </li>
-
                 </ul>
             </section>            
             
