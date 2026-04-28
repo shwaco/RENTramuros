@@ -286,13 +286,13 @@ function selectPackageOption(wantsPackage) {
 function selectPackage(packageId, packageName) {
     if (reservationData.selectedPackage === packageName) {
         reservationData.selectedPackage = null; 
-        reservationData.selectedPackageId = null; // Clear ID
+        reservationData.selectedPackageId = null; 
         document.querySelectorAll('.package-options-container > div').forEach(p => p.classList.remove('selected-card'));
     } else {
         reservationData.selectedPackage = packageName;
-        reservationData.selectedPackageId = packageId; // Save ID
+        reservationData.selectedPackageId = packageId; // Stores the pure number!
         document.querySelectorAll('.package-options-container > div').forEach(p => p.classList.remove('selected-card'));
-        document.getElementById(packageId).classList.add('selected-card');
+        document.getElementById(`pkg-${packageId}`).classList.add('selected-card'); // Adds prefix only for HTML
     }
 }
 
@@ -300,52 +300,56 @@ function selectPackage(packageId, packageName) {
 function selectVehicle(vehicleId, vehicleName) {
     if (reservationData.selectedVehicle === vehicleName) {
         reservationData.selectedVehicle = null;
-        reservationData.selectedVehicleId = null; // Clear ID
+        reservationData.selectedVehicleId = null;
         reservationData.vehicleQuantity = 0;
         document.querySelectorAll('#dynamic-package-vehicles .vehicle-card').forEach(v => v.classList.remove('selected-card'));
     } else {
         reservationData.selectedVehicle = vehicleName;
-        reservationData.selectedVehicleId = vehicleId; // Save ID
+        reservationData.selectedVehicleId = vehicleId; // Stores the pure number!
         reservationData.vehicleQuantity = 1;
         document.querySelectorAll('#dynamic-package-vehicles .veh-count').forEach(el => el.innerText = '1');
 
         document.querySelectorAll('#dynamic-package-vehicles .vehicle-card').forEach(v => v.classList.remove('selected-card'));
-        document.getElementById(vehicleId).classList.add('selected-card');
+        
+        const targetId = vehicleId === 'veh-none' ? 'veh-none' : `veh-${vehicleId}`;
+        document.getElementById(targetId).classList.add('selected-card');
     }
 }
 
 function selectCustomVehicle(vehicleId, vehicleName) {
     if (reservationData.selectedVehicle === vehicleName) {
         reservationData.selectedVehicle = null;
-        reservationData.selectedVehicleId = null; // Clear ID
+        reservationData.selectedVehicleId = null; 
         reservationData.vehicleQuantity = 0;
         document.querySelectorAll('#dynamic-custom-vehicles .custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
     } else {
         reservationData.selectedVehicle = vehicleName;
-        reservationData.selectedVehicleId = vehicleId; // Save ID
+        reservationData.selectedVehicleId = vehicleId; // Stores the pure number!
         reservationData.vehicleQuantity = 1;
         document.querySelectorAll('#dynamic-custom-vehicles .veh-count').forEach(el => el.innerText = '1');
 
         document.querySelectorAll('#dynamic-custom-vehicles .custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
-        document.getElementById(vehicleId).classList.add('selected-card');
+        
+        const targetId = vehicleId === 'custom-veh-none' ? 'custom-veh-none' : `custom-veh-${vehicleId}`;
+        document.getElementById(targetId).classList.add('selected-card');
     }
 }
 
 // --- STEP 2 CUSTOM LOGIC ---
 // UPDATED FOR THE JUNCTION TABLE
- function toggleAttraction(attractionName, elementId) {
+function toggleAttraction(attractionName, rawId) {
     const array = reservationData.customAttractions;
-    const idArray = reservationData.customAttractionIds; // Connects to the new ID array
+    const idArray = reservationData.customAttractionIds; 
     const index = array.indexOf(attractionName);
-    const card = document.getElementById(elementId);
+    const card = document.getElementById(`attr-${rawId}`); 
 
     if (index > -1) {
         array.splice(index, 1);
-        idArray.splice(index, 1); // Remove ID if unselected
+        idArray.splice(index, 1); 
         card.classList.remove('selected-card');
     } else {
         array.push(attractionName);
-        idArray.push(elementId); // Add ID if selected
+        idArray.push(rawId); // Stores the pure number!
         card.classList.add('selected-card');
     }
 }
@@ -415,98 +419,89 @@ function renderPackages(packages) {
     let html = '';
 
     packages.forEach((pkg, index) => {
-        // Now passes both ID and Name to selectPackage
+        const formatDesc = pkg.description ? pkg.description.replace(/\n/g, '<br>') : '';
+        // CHANGED: pkg.name is now pkg.package_name
+        const safeName = pkg.package_name.replace(/"/g, '&quot;');
+        
+        const numericPrice = parseFloat(pkg.price);
+        const displayPrice = isNaN(numericPrice) ? '₱0.00' : `₱${numericPrice.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+        // CHANGED: pkg.id is now pkg.package_id
         html += `
-        <div class="package-${index + 1}" id="${pkg.id}" onclick="selectPackage('${pkg.id}', '${pkg.name}')">
-            <div class="package-image"><img src="${pkg.image}" alt="${pkg.name}"></div>
+        <div class="package-${index + 1}" id="pkg-${pkg.package_id}" data-name="${safeName}" onclick="selectPackage(${pkg.package_id}, this.dataset.name)">
+            <div class="package-image"><img src="${pkg.image_file}" alt="${safeName}"></div>
             <div class="package-details-text">
-                <span class="package-label">${pkg.name}</span>
-                <span class="package-${index + 1}-inclusion">${pkg.inclusions}</span>
-                <span class="package-${index + 1}-price">${pkg.price}</span>
+                <span class="package-label">${pkg.package_name}</span>
+                <span class="package-description">${formatDesc}</span>
+                <span class="package-price">${displayPrice}</span>
             </div>
         </div>`;
     });
-
     container.innerHTML = html;
 }
 
 function renderVehicles(vehicles) {
     const pkgVehiclesContainer = document.getElementById('dynamic-package-vehicles');
     const customVehiclesContainer = document.getElementById('dynamic-custom-vehicles');
-
     let pkgHtml = '';
     let customHtml = '';
 
     vehicles.forEach((veh, index) => {
         const capacityClass = (index === 2) ? 'vehicle-3-capacity' : 'vehicle-capacity';
+        // CHANGED: veh.name is now veh.vehicle_type
+        const safeName = veh.vehicle_type.replace(/"/g, '&quot;');
 
-        // Regular Package Vehicles - added veh.id
+        // CHANGED: veh.id is now veh.vehicle_id, and veh.capacity is veh.passenger_capacity
         pkgHtml += `
-        <div class="vehicle-${index + 1} vehicle-card" id="${veh.id}" onclick="selectVehicle('${veh.id}', '${veh.name}')">
+        <div class="vehicle-${index + 1} vehicle-card" id="veh-${veh.vehicle_id}" data-name="${safeName}" onclick="selectVehicle(${veh.vehicle_id}, this.dataset.name)">
             <div class="vehicle-counter">
                 <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
                 <span class="veh-count">1</span>
                 <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
             </div>
-            <img src="${veh.image}" alt="${veh.name}">
+            <img src="${veh.image_file}" alt="${safeName}">
             <div class="vehicle-overlay">
-                <span class="vehicle-name">${veh.name}</span>
-                <span class="${capacityClass}">${veh.capacity}</span>
+                <span class="vehicle-name">${veh.vehicle_type}</span>
+                <span class="${capacityClass}">${veh.passenger_capacity}</span>
             </div>
         </div>`;
 
-        // Custom Vehicles - added custom-${veh.id}
         customHtml += `
-        <div class="custom-vehicle-${index + 1} custom-vehicle-card" id="custom-${veh.id}" onclick="selectCustomVehicle('custom-${veh.id}', '${veh.name}')">
+        <div class="custom-vehicle-${index + 1} custom-vehicle-card" id="custom-veh-${veh.vehicle_id}" data-name="${safeName}" onclick="selectCustomVehicle(${veh.vehicle_id}, this.dataset.name)">
             <div class="vehicle-counter">
                 <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
                 <span class="veh-count">1</span>
                 <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
             </div>
-            <img src="${veh.image}" alt="${veh.name}">
+            <img src="${veh.image_file}" alt="${safeName}">
             <div class="vehicle-overlay">
-                <span class="vehicle-name">${veh.name}</span>
-                <span class="${capacityClass}">${veh.capacity}</span>
+                <span class="vehicle-name">${veh.vehicle_type}</span>
+                <span class="${capacityClass}">${veh.passenger_capacity}</span>
             </div>
         </div>`;
     });
-
     pkgVehiclesContainer.innerHTML += pkgHtml;
     customVehiclesContainer.innerHTML += customHtml;
 }
 
 function renderAttractions(attractions) {
-    const layer1 = document.getElementById('dynamic-attractions-layer-1');
-    const layer2 = document.getElementById('dynamic-attractions-layer-2');
-
-    let layer1Html = '';
-    let layer2Html = '';
+    const container = document.getElementById('dynamic-attractions-container');
+    let html = '';
 
     attractions.forEach((attr, index) => {
-        // 1. Grab the fee from your JSON
         const fee = attr.fee || 0;
-        
-        // 2. Build the string
-        const dataString = `${attr.name} | ${fee}`;
+        // CHANGED: attr.name is now attr.attraction_name
+        const dataString = `${attr.attraction_name} | ${fee}`;
+        const safeDataString = dataString.replace(/"/g, '&quot;'); 
 
-        // THE FIX: This finds any apostrophes in names like "Rizal's" and safely escapes them!
-        const safeDataString = dataString.replace(/'/g, "\\'");
-
-        // 3. Pass safeDataString into toggleAttraction
-        const cardHtml = `
-        <div class="attraction-${index + 1} attraction-card" id="${attr.id}" onclick="toggleAttraction('${safeDataString}', '${attr.id}')">
-            <img src="${attr.image}" alt="${attr.name}">
+        // CHANGED: attr.id is now attr.attraction_id, and using attr.main_image
+        html += `
+        <div class="attraction-${index + 1} attraction-card" id="attr-${attr.attraction_id}" data-val="${safeDataString}" onclick="toggleAttraction(this.dataset.val, ${attr.attraction_id})">
+            <img src="${attr.main_image}" alt="${attr.attraction_name.replace(/"/g, '&quot;')}">
         </div>`;
-
-        if (index < 5) {
-            layer1Html += cardHtml;
-        } else {
-            layer2Html += cardHtml;
-        }
     });
-
-    layer1.innerHTML = layer1Html;
-    layer2.innerHTML = layer2Html;
+    
+    container.innerHTML = html;
 }
 
 // Fire it up when the DOM loads

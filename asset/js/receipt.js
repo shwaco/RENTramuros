@@ -23,17 +23,19 @@ function buildAndShowModal() {
     
     if (reservationData.customAttractions.length > 0) {
         reservationData.customAttractions.forEach(attr => {
-            // Your custom parsing logic: splits "Fort Santiago | 50"
             const parts = attr.split('|');
             const name = parts[0] ? parts[0].trim() : '';
-            const fee = parts[1] ? parseInt(parts[1], 10) : 0;
+            
+            // CHANGED: Using parseFloat to keep the decimals from the database!
+            const fee = parts[1] ? parseFloat(parts[1]) : 0;
             
             if (fee > 0) totalFee += fee;
 
             const li = document.createElement('li');
             if (fee > 0) {
-                // Formats the item with the green price tag
-                li.innerHTML = `• ${name}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">₱${fee}</span>`;
+                // Formats the individual item fee with 2 decimal places
+                const formattedFee = `₱${fee.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                li.innerHTML = `• ${name}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">${formattedFee}</span>`;
             } else {
                 li.innerHTML = `• ${name}`;
             }
@@ -45,9 +47,9 @@ function buildAndShowModal() {
 
     // Display the Total Fee using your colleague's updated formatting (No decimals)
     const feeDisplay = totalFee > 0 
-        ? `₱${totalFee.toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}` 
-        : '₱0';
-    document.getElementById('modal-total-fee').innerText = feeDisplay;
+        ? `₱${totalFee.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` 
+        : '₱0.00';
+    document.getElementById('modal-total-fee').innerText = feeDisplay;  
 
     // 4. VEHICLE
     const vehicleDisplay = document.getElementById('modal-vehicle');
@@ -88,27 +90,20 @@ function confirmFinalAcceptance() {
 /* BACKEND API HAND-OFF */
 async function sendDataToDatabase() {
     
-    // 1. Clean up "None" selections and extract ONLY the numbers (Integers)
+    // 1. IDs are already pure numbers from the JSON, no cleanup needed!
     let finalVehicleId = null;
     if (reservationData.selectedVehicleId && reservationData.selectedVehicleId !== 'veh-none' && reservationData.selectedVehicleId !== 'custom-veh-none') {
-        // Removes all letters/dashes and converts "veh-2" into the number 2
-        let numStr = reservationData.selectedVehicleId.replace(/\D/g, '');
-        finalVehicleId = parseInt(numStr);
+        finalVehicleId = reservationData.selectedVehicleId; 
     }
 
     let finalPackageId = null;
     if (reservationData.wantsPackage && reservationData.selectedPackageId) {
-        // Converts "pkg-1" into the number 1
-        let numStr = reservationData.selectedPackageId.replace(/\D/g, '');
-        finalPackageId = parseInt(numStr);
+        finalPackageId = reservationData.selectedPackageId; 
     }
 
-    // Converts array of strings ["attr-2", "attr-7"] into array of numbers [2, 7]
     let finalAttractions = [];
     if (!reservationData.wantsPackage) {
-        finalAttractions = reservationData.customAttractionIds.map(id => {
-            return parseInt(id.replace(/\D/g, ''));
-        });
+        finalAttractions = reservationData.customAttractionIds;
     }
 
     // 2. Format the payload exactly to the new FLAT structure requested
@@ -153,7 +148,7 @@ async function sendDataToDatabase() {
         location.reload(); 
     } else {
         alert("Server unreachable or database error. Check console (F12) to view the payload.");
-        document.querySelector('.accept-btn').innerText = "ACCEPT";
+        document.querySelector('.accept-btn').innerText = "SUBMIT";
         document.querySelector('.accept-btn').disabled = false;
     }
 }

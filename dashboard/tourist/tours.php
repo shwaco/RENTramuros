@@ -157,13 +157,8 @@
                     <div class="step-2-custom" id="step2Custom" style="display: none;">
                         <div class="attractions-container">
                             <div class="text-box"><span class="attractions-text">Choose the attractions to experience</span></div>
-                            <div class="attractions-options-container">
-                                
-                                <div class="attraction-layer-1" id="dynamic-attractions-layer-1">
-                                    </div>
-                                
-                                <div class="attraction-layer-2" id="dynamic-attractions-layer-2">
-                                    </div>
+                            <div class="attractions-options-container" id="dynamic-attractions-container">
+
                             </div>
                         </div>
                         
@@ -305,8 +300,8 @@
             </div>
 
             <footer style="display: flex; justify-content: flex-end">
-                <button class="accept-btn" onclick="confirmFinalAcceptance()" aria-label="Accept Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 2px; cursor: pointer; transition: background-color 0.2s;">
-                    ACCEPT
+                <button class="accept-btn" onclick="confirmFinalAcceptance()" aria-label="Submit Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 2px; cursor: pointer; transition: background-color 0.2s;">  
+                    SUBMIT
                 </button>
             </footer>
         </article>
