@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit();
 }
 
-$fetch_sql = "SELECT package_id, package_name, description, price FROM packages";
+$fetch_sql = "SELECT package_id, package_name, description, price, image_file FROM packages";
 $result = mysqli_query($con, $fetch_sql);
 
 if ($result) {
@@ -30,7 +30,8 @@ if ($result) {
         	"package_id" => $row['package_id'],
             "package_name" => $row['package_name'],
             "description" => $row['description'],
-            "price" => $row['price']
+            "price" => $row['price'],
+            "image_file" => $row['image_file']
         );
 
         array_push($packages_array, $packages);

@@ -75,7 +75,7 @@ function populateSliders(slidersData, slidersList) {
 
 // retrieve packages
 
-function packageSlider(packageData, packageList) {
+function packageSlider(packageData, packagesList) {
     packageData.forEach(packages => {
 
         const cardHTML = `<li>
@@ -93,7 +93,7 @@ function packageSlider(packageData, packageList) {
                         </div></a>
                     </li>`;
 
-                    packageList.insertAdjacentHTML('beforeend',cardHTML);
+                    packagesList.insertAdjacentHTML('beforeend',cardHTML);
     })
 }
 
