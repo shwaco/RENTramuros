@@ -292,14 +292,11 @@
                 </address>
             </section>
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; margin-bottom: 1.5rem; border-top: 1px solid #e5e7eb; padding-top: 1rem;">
+            <footer style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; margin-bottom: 0.5rem; border-top: 1px solid #e5e7eb; padding-top: 1.5rem;">
                 <div style="display: flex; gap: 0.75rem; align-items: center;">
                     <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; font-size: 0.9rem;">TOTAL FEE:</span>
                     <span id="modal-total-fee" style="font-weight: 600; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 1.1rem; font-style: italic;">₱0</span>
                 </div>
-            </div>
-
-            <footer style="display: flex; justify-content: flex-end">
                 <button class="accept-btn" onclick="confirmFinalAcceptance()" aria-label="Submit Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 2px; cursor: pointer; transition: background-color 0.2s;">  
                     SUBMIT
                 </button>
