@@ -6,6 +6,6 @@ export async function fetchAttractionData() {
         return data; 
     } catch (error) {
         console.error("Error loading the attraction data:", error);
-        return []; // Returns an empty array if it fails so the site doesn't crash
+        return []; 
     }
 }
