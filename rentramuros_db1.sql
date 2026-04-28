@@ -343,9 +343,9 @@ INSERT INTO `tour_guides` (`guide_id`, `first_name`, `last_name`, `email`, `pass
 CREATE TABLE `upcoming_events` (
   `event_id` int(11) NOT NULL,
   `event_name` varchar(100) NOT NULL,
-  `event_date` date NOT NULL,
-  `event_time` time NOT NULL,
-  `location` varchar(255) NOT NULL,
+  `event_date` varchar(100) NOT NULL,
+  `event_time` varchar(100) NOT NULL,
+  `location` varchar(255) NOT NULL, 
   `image_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

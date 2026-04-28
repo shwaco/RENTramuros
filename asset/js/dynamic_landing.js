@@ -1,4 +1,4 @@
-import { getPopularAttractions, getRecommendedAttractions, getPackages } from "../../services/api.js";
+import { getPopularAttractions, getRecommendedAttractions, getPackages, getUpcomingEvents } from "../../services/api.js";
 
 // Image slider 
 const allSliders = document.querySelectorAll('.slider');
@@ -97,6 +97,41 @@ function packageSlider(packageData, packagesList) {
     })
 }
 
+// retrieve upcoming events
+
+function upcomingEventsSlider(eventsData, eventsList) {
+    eventsData.forEach(events => {
+
+        const cardHTML = `<li><div class="event_container">
+                                <div class="image"><img src="asset/img/${events.image_file}" alt="${events.event_name} Image"></div>
+
+                                <div class="details_container">
+                                    <div class="schedule_container">
+                                        <div class="frequency">${events.event_date}</div>
+                                        <div class="time">${events.event_time}</div>
+                                    </div>
+                                    <div class="name">${events.event_name}</div>
+
+                                    <div class="loc_wrapper">
+                                        <img src="asset/img/location_icon.svg" alt="location_icon_image">
+
+                                        <div class="loc">${events.location}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>`;
+
+                    eventsList.insertAdjacentHTML('beforeend',cardHTML);
+    })
+
+    const sliderContainer = eventsList.closest('.slider');
+    const prevBtn = sliderContainer.querySelector('.slide-btn.one');
+    const nextBtn = sliderContainer.querySelector('.slide-btn.two');
+
+    updateButtonVisibility(eventsList, prevBtn, nextBtn);
+
+}
+
 async function buildSlider() {
     const popAttractions = await getPopularAttractions();
     const popAttractionsList = document.getElementById('pop-attractions-list');
@@ -107,9 +142,13 @@ async function buildSlider() {
     const packageMoData = await getPackages();
     const packageList = document.getElementById('package_list');
 
+    const upcomingEvents = await getUpcomingEvents();
+    const upcomingEventsList = document.getElementById('upcoming_events_list');
+
     populateSliders(popAttractions, popAttractionsList);
     populateSliders(recoAttractions, recoAttractionsList);
     packageSlider(packageMoData, packageList);
+    upcomingEventsSlider(upcomingEvents, upcomingEventsList);
 }
 
 document.addEventListener('DOMContentLoaded', buildSlider);

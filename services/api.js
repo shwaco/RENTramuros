@@ -52,3 +52,20 @@ export async function getPackages() {
         return [];
     }
 }
+
+// retrieve upcoming events
+export async function getUpcomingEvents() {
+    try {
+        const response = await fetch('backend/get_upcoming_events.php');
+
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        } else {
+            const result = await response.json();
+            return result.data || [];
+        }
+    } catch (error) {
+        console.Error(error.message);
+        return [];
+    }
+}

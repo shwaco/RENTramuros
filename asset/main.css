@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'roboto', arial, Helvetica, sans-serif;
-    outline: 1px solid green !important;
+    /* outline: 1px solid green !important; */
 }
 
 
@@ -284,7 +284,7 @@ main {
 
 .upcoming_container .slider ul .event_container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 1rem;
     padding: 1rem 1.5rem;
@@ -292,6 +292,7 @@ main {
     border-radius: 10px ;
     height: 100%;
     background-color: white;
+    overflow-x: hidden;
 }
 
 .upcoming_container  .event_container .image {
@@ -563,12 +564,17 @@ main {
 
 }
 
+.package_wrapper .packages .package ul li a{
+    border-radius: 10px;
+}
+
 .package_wrapper .packages .package ul span {
     color: black;
 }
 
 .package_wrapper .packages a {
     text-decoration: none;
+    border-radius: 10px;
 }
 
 
