@@ -16,9 +16,10 @@ function buildDestinationsHTML(destinationsString, adults = 0, children = 0, isP
         const baseFee = parts[1] ? parseFloat(parts[1]) : 0;
         const totalFee = baseFee * multiplier;
 
-        if (totalFee > 0) {
-            return `<span>${name}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">₱${totalFee}</span></span>`;
+        if (totalFee > 0 && !isPackage) {
+            return `<span>${name}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">₱${totalFee.toLocaleString('en-PH')}</span></span>`;
         }
+        
         return `<span>${name}</span>`;
     }).join('');
 }
@@ -27,42 +28,35 @@ function buildDestinationsHTML(destinationsString, adults = 0, children = 0, isP
 function calculateTotalFee(destinationsString, packagePrice, adults, children, vehiclePrice, isPackage, numberOfVehicles) {
     let vPrice = parseFloat(vehiclePrice) || 0;
     let pPrice = parseFloat(packagePrice) || 0;
-    
-    // Kinukuha kung ilan silang lahat (excluding infants)
     let pax = (parseInt(adults) || 0) + (parseInt(children) || 0);
     const multiplier = pax > 0 ? pax : 1;
-
-    // Kinukuha kung ilang sasakyan ang inorder
     let vehicles = parseInt(numberOfVehicles) || 0;
     const vMultiplier = vehicles > 0 ? vehicles : 1;
     
-    // FLOW: Base fee computation (Vehicle + Packages/Attractions)
-    let baseTotal = (vPrice * vMultiplier);
+    let baseTotal = (vPrice * vMultiplier); 
 
     if (isPackage) {
-        baseTotal += (pPrice * multiplier);
+        baseTotal += (pPrice * multiplier); 
     } else {
-       if (destinationsString && destinationsString.trim() !== '') {
+        if (destinationsString && destinationsString.trim() !== '') {
             destinationsString.split(',').forEach(dest => {
                 const parts = dest.trim().split('|');
                 const fee = parts[1] ? parseFloat(parts[1]) : 0;
-                if (fee > 0) baseTotal += (fee * multiplier);
+                if (fee > 0) {
+                    baseTotal += (fee * multiplier); 
+                }
             });
         }
     }
 
-    // Dito na natin ia-apply yung Guide Fee range (₱1,000 - ₱1,500)
-    if (baseTotal > 0) {
-        const minTotal = baseTotal + 1000; // Minimum Guide Fee
-        const maxTotal = baseTotal + 1500; // Maximum Guide Fee
+    const minGrandTotal = baseTotal + 1000;
+    const maxGrandTotal = baseTotal + 1500;
 
-        const formattedMin = minTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        const formattedMax = maxTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-        return `₱${formattedMin} - ₱${formattedMax}`;
-    }
-
-    return '₱0.00';
+    return {
+        baseStr: baseTotal.toLocaleString('en-PH'),
+        minGrandStr: minGrandTotal.toLocaleString('en-PH'),
+        maxGrandStr: maxGrandTotal.toLocaleString('en-PH')
+    };
 }
 
 // Taga-buo ng buong receipt HTML na ilalabas sa loob ng Modal.
@@ -75,14 +69,22 @@ function buildReceiptHTML({ id, formattedDate, adults_and_seniors, children, inf
     const vehiclePrice = parseFloat(vehicle_price_val) || 0;
     const vehicleCount = parseInt(number_of_vehicle) || 0;
     
-    const feeDisplay = calculateTotalFee(destinations, packagePrice, adults_and_seniors, children, vehiclePrice, isPackage, vehicleCount);
+    // tiga calculate ng Total ackage Cost (Package Price x Pax) para idisplay
+    const pax = (parseInt(adults_and_seniors) || 0) + (parseInt(children) || 0);
+    const multiplier = pax > 0 ? pax : 1;
+    const totalPackageCost = packagePrice * multiplier;
+
+    let packageDisplayString = `${package_name || 'No Package'}`;
+    if (isPackage && totalPackageCost > 0) {
+        packageDisplayString += `&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.85rem;">₱${totalPackageCost.toLocaleString('en-PH')}</span>`;
+    }
+
+    const feeData = calculateTotalFee(destinations, packagePrice, adults_and_seniors, children, vehiclePrice, isPackage, vehicleCount);
     
-    // FLOW: Tinanggal na natin yung breakdown (x 3 =) at parentheses.
-    // Direkta na ipapakita yung total cost ng vehicle para mas malinis tignan sa receipt!
     let vehicleDisplayString = `${vehicle_type || 'NONE'}`;
     if (vehiclePrice > 0) {
         const totalVehicleCost = vehiclePrice * (vehicleCount > 0 ? vehicleCount : 1);
-        vehicleDisplayString += `&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">₱${totalVehicleCost}</span>`;
+        vehicleDisplayString += `&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">₱${totalVehicleCost.toLocaleString('en-PH')}</span>`;
     }
 
     return `
@@ -119,7 +121,7 @@ function buildReceiptHTML({ id, formattedDate, adults_and_seniors, children, inf
 
         <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.85rem;">
             <span style="font-weight:700; font-family: 'Roboto Condensed', sans-serif; color: #000000;">PACKAGE</span>
-            <span style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">${package_name || 'No Package'}</span>
+            <span style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">${packageDisplayString}</span>
         </div>
 
         <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;">
@@ -155,13 +157,23 @@ function buildReceiptHTML({ id, formattedDate, adults_and_seniors, children, inf
             <span style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">${phone_number || ' '}</span>
         </div>
 
-        <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 1.5rem 0;">
+       <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 1.5rem 0;">
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
-            <div style="display: flex; gap: 0.75rem; align-items: center;">
-                <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; font-size: 0.9rem;">TOTAL FEE:</span>
-                <span style="font-weight: 600; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 1rem; font-style: italic;">${feeDisplay}</span>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2rem;">
+            
+            <div style="display: grid; grid-template-columns: max-content auto; column-gap: 0.75rem; row-gap: 0.4rem; align-items: baseline;">
+                
+                <span style="font-weight: 500; font-family: 'Roboto Condensed', sans-serif; color: #4b5563; font-size: 0.85rem;">TOTAL FEE:</span>
+                <span style="font-weight: 600; font-family: 'Roboto Condensed', sans-serif; color: #000; font-size: 0.85rem;">₱${feeData.baseStr}</span>
+                
+                <span style="font-weight: 500; font-family: 'Roboto Condensed', sans-serif; color: #4b5563; font-size: 0.85rem;">TOUR GUIDE FEE:</span>
+                <span style="font-weight: 600; font-family: 'Roboto Condensed', sans-serif; color: #000; font-size: 0.85rem;">₱1,000 - ₱1,500</span>
+                
+                <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; font-size: 0.95rem; margin-top: 0.3rem;">GRAND TOTAL:</span>
+                <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 1.05rem; font-style: italic; margin-top: 0.3rem;">₱${feeData.minGrandStr} - ₱${feeData.maxGrandStr}</span>
+                
             </div>
+
             ${actionArea}
         </div>
     `;

@@ -3,21 +3,38 @@ session_start();
 header('Content-Type: application/json');
 require_once('../../config/config.php');
 
-// GET endpoint — kinocall to ng JS polling (startPolling) every 5 second
-// nagre-return din siya ng JSON na may current_status at queue position ng guide
-
-
-
-// Idle sweep — also catches 'Available' para pag afk yung guide, mare-reset siya sa 'Offline' at mawawala sa queue jabang nasa "available" state
+// 1. IDLE SWEEP (Online/Available) -> 10 mins (600 seconds) ito yung if ever man na accidentally mawala sa site habang online yung status niya
+// automatic na ise-set sa 'Offline' yung status niya pag di siya nagparamdam ng 10 mins (600 seconds)
 $sweep_idle_sql = "UPDATE tour_guides SET current_status = 'Offline' 
-                   WHERE current_status IN ('Clocked In', 'Online', 'Available') 
-                   AND last_active_at < (NOW() - INTERVAL 120 SECOND)";
+                   WHERE current_status IN ('Online', 'Available') 
+                   AND last_active_at < (NOW() - INTERVAL 600 SECOND)";
 mysqli_query($con, $sweep_idle_sql);
 
+// QUEUE SWEEP (Queuing/Clocked In) -> 30 mins (1800 seconds)
 $sweep_queue_sql = "UPDATE tour_guides SET current_status = 'Offline' 
-                    WHERE current_status = 'Queuing' 
+                    WHERE current_status IN ('Queuing', 'Clocked In') 
                     AND last_active_at < (NOW() - INTERVAL 1800 SECOND)";
 mysqli_query($con, $sweep_queue_sql);
+
+// I-check muna kung may tourist na naghihintay
+$pending_check = mysqli_query($con, "SELECT booking_request_id FROM booking_history WHERE status = 'Pending' AND guide_id IS NULL LIMIT 1");
+
+if (mysqli_num_rows($pending_check) > 0) {
+    // Hanapin ang #1 guide sa queue
+    $top_guide_query = mysqli_query($con, "SELECT guide_id FROM tour_guides WHERE current_status = 'Queuing' ORDER BY became_available_at ASC, guide_id ASC LIMIT 1");
+    
+    if ($top_guide_row = mysqli_fetch_assoc($top_guide_query)) {
+        $top_guide_id = (int)$top_guide_row['guide_id'];
+        
+        // FIX: Hahayaan nating ang MySQL ang mag-compute ng 15 seconds para walang Timezone error!
+        $missed_sql = "UPDATE tour_guides 
+                       SET became_available_at = NOW() 
+                       WHERE guide_id = $top_guide_id 
+                       AND last_active_at < (NOW() - INTERVAL 15 SECOND)";
+        
+        mysqli_query($con, $missed_sql);
+    }
+}
 
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false]); exit();
@@ -26,7 +43,7 @@ if (!isset($_SESSION['guide_id'])) {
 $guide_id = $_SESSION['guide_id'];
 
 try {
-    // Heartbeat — ina-UPDATE ung last_active_at sa column ng table ng tour guide in every poll request para malaman yung server na buhay pa ang session ng guide
+    // inaupdate ung last_active_at sa column ng table ng tour guide in every poll request para malaman yung server na buhay pa ang session ng guide
     $stmtH = mysqli_prepare($con, "UPDATE tour_guides SET last_active_at = NOW() WHERE guide_id = ?");
     mysqli_stmt_bind_param($stmtH, "i", $guide_id);
     mysqli_stmt_execute($stmtH);
@@ -38,9 +55,7 @@ try {
 
     $position = 0;
 
-    // COUNT query para ma-compute ang queue position ng guide —
-    // ginagamit ang became_available_at para i-rank sila; kung same timestamp, ginagamit yung guide_id as tiebreaker
-
+    // COUNT query para ma-compute ang queue position ng guide
     if ($guideInfo['current_status'] === 'Queuing') {
         $stmtP = mysqli_prepare($con,
             "SELECT COUNT(*) + 1 as pos FROM tour_guides 

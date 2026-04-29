@@ -100,8 +100,8 @@ function buildDestinationsHTML(destinationsString, adults = 0, children = 0, isP
         const name = parts[0] ? parts[0].trim() : '';
         const fee = parts[1] ? parseFloat(parts[1]) : 0;
         
-        if (fee > 0) {
-            return `<span style="font-family: 'Roboto Condensed', sans-serif; font-size: 0.85rem;">${name}&nbsp;&nbsp;<span style=\"color: #109620; font-weight: 700; font-style: italic; font-size: 0.9rem;\">₱${fee}</span></span>`;
+        if (fee > 0 && !isPackage) {
+            return `<span style="font-family: 'Roboto Condensed', sans-serif; font-size: 0.85rem;">${name}&nbsp;&nbsp;<span style="color: #109620; font-weight: 700; font-style: italic; font-size: 0.9rem;">₱${fee.toLocaleString('en-PH')}</span></span>`;
         }
         return `<span style="font-family: 'Roboto Condensed', sans-serif; font-size: 0.85rem;">${name}</span>`;
     }).join('');
@@ -115,47 +115,56 @@ function calculateTotalFee(destinationsString, packagePrice, adults, children, v
     let vehicles = parseInt(numberOfVehicles) || 0;
     const vMultiplier = vehicles > 0 ? vehicles : 1;
     
-    // Base Total = Vehicle 
-    let baseTotal = (vPrice * vMultiplier); // Ex: 1500 * 3 = 4500
+    let baseTotal = (vPrice * vMultiplier); 
 
-    // Add Package Price if applicable
     if (isPackage) {
-        baseTotal += (pPrice * multiplier); // Ex: 100 * 8 = 800
-    } 
-    
-    // FIX: Palaging isama ang Destinations Fee para magmatch sa screenshot!
-    if (destinationsString && destinationsString.trim() !== '') {
-        destinationsString.split(',').forEach(dest => {
-            const parts = dest.trim().split('|');
-            const fee = parts[1] ? parseFloat(parts[1]) : 0;
-            if (fee > 0) baseTotal += fee; // Ex: 800 + 800 + 1600 = 3200
-        });
+        baseTotal += (pPrice * multiplier); 
+    } else {
+        if (destinationsString && destinationsString.trim() !== '') {
+            destinationsString.split(',').forEach(dest => {
+                const parts = dest.trim().split('|');
+                const fee = parts[1] ? parseFloat(parts[1]) : 0;
+                if (fee > 0) {
+                    baseTotal += (fee * multiplier); 
+                }
+            });
+        }
     }
 
-    // Apply Guide Fee Range (1k - 1.5k) to the Final Base
-    if (baseTotal > 0) {
-        const minTotal = baseTotal + 1000; 
-        const maxTotal = baseTotal + 1500; 
-        const formattedMin = minTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        const formattedMax = maxTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        return `₱${formattedMin} - ₱${formattedMax}`;
-    }
+    const minGrandTotal = baseTotal + 1000;
+    const maxGrandTotal = baseTotal + 1500;
 
-    return '₱0.00';
+    return {
+        baseStr: baseTotal.toLocaleString('en-PH'),
+        minGrandStr: minGrandTotal.toLocaleString('en-PH'),
+        maxGrandStr: maxGrandTotal.toLocaleString('en-PH')
+    };
 }
 
 function buildReceiptHTML({ id, formattedDate, adults_and_seniors, children, infants, package_name, package_price_val = 0, vehicle_price_val = 0, destinations, destinationsHTML, vehicle_type, number_of_vehicle, first_name, last_name, email_address, phone_number, actionArea = '' }) {
+    
     const isPackage = package_name && package_name !== 'No Package'; 
     const packagePrice = parseFloat(package_price_val) || 0;
     const vehiclePrice = parseFloat(vehicle_price_val) || 0;
     const vehicleCount = parseInt(number_of_vehicle) || 0;
     
-    const feeDisplay = calculateTotalFee(destinations, packagePrice, adults_and_seniors, children, vehiclePrice, isPackage, vehicleCount);
+    // Calculate Package Cost
+    const pax = (parseInt(adults_and_seniors) || 0) + (parseInt(children) || 0);
+    const multiplier = pax > 0 ? pax : 1;
+    const totalPackageCost = packagePrice * multiplier;
+
+    let packageDisplayString = `${package_name || 'No Package'}`;
+    if (isPackage && totalPackageCost > 0) {
+        packageDisplayString += `&nbsp;&nbsp;<span style="color: #109620; font-weight: 700; font-style: italic; font-size: 0.85rem;">₱${totalPackageCost.toLocaleString('en-PH')}</span>`;
+    }
+    
+    // Get structured fee data
+    const feeData = calculateTotalFee(destinations, packagePrice, adults_and_seniors, children, vehiclePrice, isPackage, vehicleCount);
     
     let vehicleDisplayString = `${vehicle_type || 'NONE'}`;
     if (vehiclePrice > 0) {
         const totalVehicleCost = vehiclePrice * (vehicleCount > 0 ? vehicleCount : 1);
-        vehicleDisplayString += `&nbsp;&nbsp;<span style="color: #109620; font-weight: 700; font-style: italic; font-size: 0.85rem;">₱${totalVehicleCost}</span>`;
+        vehicleDisplayString += `&nbsp;&nbsp;<span style="color: #109620; font-weight: 700; font-style: italic; font-size: 0.85rem;">₱${totalVehicleCost.toLocaleString('en-PH')}</span>`;
     }
 
     return `
@@ -192,7 +201,7 @@ function buildReceiptHTML({ id, formattedDate, adults_and_seniors, children, inf
 
         <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.8rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">
             <span style="font-weight:700;">PACKAGE</span>
-            <span style="font-weight: 500;">${package_name || 'No Package'}</span>
+            <span style="font-weight: 500;">${packageDisplayString}</span>
         </div>
 
         <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;">
@@ -228,11 +237,21 @@ function buildReceiptHTML({ id, formattedDate, adults_and_seniors, children, inf
 
         <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 1.5rem 0;">
 
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
-            <div style="display: flex; gap: 0.5rem; align-items: center;">
-                <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; font-size: 0.9rem;">TOTAL FEE:</span>
-                <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 0.95rem; font-style: italic;">${feeDisplay}</span>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2rem;">
+            
+            <div style="display: grid; grid-template-columns: max-content auto; column-gap: 0.75rem; row-gap: 0.4rem; align-items: baseline;">
+                
+                <span style="font-weight: 500; font-family: 'Roboto Condensed', sans-serif; color: #4b5563; font-size: 0.85rem;">TOTAL FEE:</span>
+                <span style="font-weight: 600; font-family: 'Roboto Condensed', sans-serif; color: #000; font-size: 0.85rem;">₱${feeData.baseStr}</span>
+                
+                <span style="font-weight: 500; font-family: 'Roboto Condensed', sans-serif; color: #4b5563; font-size: 0.85rem;">TOUR GUIDE FEE:</span>
+                <span style="font-weight: 600; font-family: 'Roboto Condensed', sans-serif; color: #000; font-size: 0.85rem;">₱1,000 - ₱1,500</span>
+                
+                <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; font-size: 0.95rem; margin-top: 0.3rem;">GRAND TOTAL:</span>
+                <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 1.05rem; font-style: italic; margin-top: 0.3rem;">₱${feeData.minGrandStr} - ₱${feeData.maxGrandStr}</span>
+                
             </div>
+
             ${actionArea}
         </div>
     `;
@@ -258,18 +277,18 @@ function viewTouristReceipt(index) {
     const isPackage = booking.package_name ? true : false;
     const destinationsHTML = buildDestinationsHTML(booking.destinations, booking.adults_and_seniors, booking.children, isPackage, 'No destinations listed');
 
-    // FLOW: Pagseset ng tamang buttons depende sa status
+    // Pagseset ng tamang buttons depende sa status
    let actionArea = '';
     
     if (booking.status === 'Pending') {
-        // Pending = Cancel button lang (Sagad sa kanan)
+        // Pending = Cancel button lang 
         actionArea = `
             <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-left: auto;">
                 <button onclick="touristAction('Cancel')" style="background-color: #FF0000; color: #ffffff; border: none; padding: 0.6rem 2rem; font-size: 1rem; font-weight: 900; border-radius: 4px; cursor: pointer; font-family: 'Roboto Condensed', sans-serif;">CANCEL</button>
             </div>
         `;
     } else if (booking.status === 'Accepted') {
-        // Accepted (On Tour) = Cancel at Done buttons (Sagad sa kanan)
+        // Accepted (On Tour) = Cancel at Done buttons 
         actionArea = `
             <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-left: auto;">
                 <button onclick="touristAction('Cancel')" style="background-color: #FF0000; color: #ffffff; border: none; padding: 0.6rem 2rem; font-size: 1rem; font-weight: 900; border-radius: 4px; cursor: pointer; font-family: 'Roboto Condensed', sans-serif;">CANCEL</button>
