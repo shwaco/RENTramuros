@@ -4,8 +4,8 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 
-require_once '../../../asset/config.php';
-require_once '../config/mailer_config.php';
+require_once '../../../backend.v2/config/config.php';
+require_once '../../../backend.v2/config/mailer_config.php';
 
 /** @var mysqli $con */
 
@@ -18,11 +18,12 @@ if(!isset($data->email)) {
 
 $email = $data->email;
 
-$sql = "SELECT tourists_id, first_name, is_verified FROM tourists WHERE email = ?";
-$sql = mysqli_prepare($con, $sql);
-mysqli_stmt_bind_param($sql, "s", $email);
-mysqli_stmt_execute($sql);
-$result = mysqli_stmt_get_result($sql);
+// Changed $sql to $stmt here for cleaner code
+$sql = "SELECT tourist_id, first_name, is_verified FROM tourists WHERE email = ?";
+$stmt = mysqli_prepare($con, $sql);
+mysqli_stmt_bind_param($stmt, "s", $email);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
     if ($row['is_verified']) {
@@ -33,9 +34,18 @@ if ($row = mysqli_fetch_assoc($result)) {
     $otp = rand(100000, 999999);
     $expiry_time = date("Y-m-d H:i:s", strtotime("+15 minutes"));
 
-    $update_sql = "UPDATE tourists SET otp_code = ?, otp_expiry = ? WHERE tourists_id = ?";
+    // FIX: Changed tourists_id to tourist_id
+    $update_sql = "UPDATE tourists SET otp_code = ?, otp_expiry = ? WHERE tourist_id = ?";
     $update_stmt = mysqli_prepare($con, $update_sql);
-    mysqli_stmt_bind_param($update_stmt, "ssi", $otp, $expiry_time, $row['tourists_id']);
+    
+    // PRO-TIP: Adding this check prevents 500 errors if you misspell a column again!
+    if (!$update_stmt) {
+        echo json_encode(["status" => "error", "message" => "Database error: " . mysqli_error($con)]);
+        exit();
+    }
+
+    mysqli_stmt_bind_param($update_stmt, "ssi", $otp, $expiry_time, $row['tourist_id']);
+    
     if (mysqli_stmt_execute($update_stmt)) {
         try {
             $mail->addAddress($email, $row['first_name']);

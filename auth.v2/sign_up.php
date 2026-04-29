@@ -16,31 +16,56 @@
 <body>
     <div class="main_container">
         <div class="form-box" id="sign_up">
-            <form action="destinationURL">
+            <form action="backend/api/signup_api.php" method="post" id="signup_form">
                 <h1>Sign up</h1>
                 <div class="wrapper">
                     <div class="name_wrapper">
-                        <input type="text" name="firstname" placeholder="First name" class="inputs first_name" required></input>
-                        <input type="text" name="lastname" placeholder="Last name" class="inputs last_name"required></input>
+                        <input type="text" name="first_name" placeholder="First name" class="inputs first_name" required></input>
+                        <input type="text" name="last_name" placeholder="Last name" class="inputs last_name"required></input>
                     </div>
                     <div class="email_wrapper">
                         <input class="inputs email" type="email" name="email" placeholder="Email" required></input>
                     </div>
                     <div class="password_wrapper">
-                        <input class="inputs pass" type="password" name="password" placeholder="Password" id="password_input" required>
+                        <input class="inputs pass" type="password" name="password_hash" placeholder="Password" id="password_input" required>
                         <button type="button" id="pass_visibility">
                             <img id="visibility_icon" src="../asset/img/pass_visibility.svg">
                         </button>
                     </div>
                     <div class="phone_number_wrapper">
-                        <input id="phone_num" class="inputs num" type="number" name="number" placeholder="Phone Number">
+                        <input id="phone_num" class="inputs num" type="number" name="phone_number" placeholder="Phone Number">
                     </div>
                     <div class="sign_up_wrapper">
-                        <button type="submit" id="submit_button" name="signup">Sign up</button>
+                        <button type="submit" id="submit_button">Sign up</button>
                     </div>
+                    <div id="signup_message"></div>
                 </div>
             </form>
         </div>  
+
+        <div class="form-box" id="otp_panel">
+            <h1>Verify Email</h1>
+            <div class="wrapper">
+                <p class="otp_email_hint">
+                    We sent a 6-digit code to<br>
+                    <span id="otp_email_display"></span>
+                </p>
+                <div class="otp_inputs_wrapper">
+                    <input class="otp_digit" type="text" inputmode="numeric" maxlength="1">
+                    <input class="otp_digit" type="text" inputmode="numeric" maxlength="1">
+                    <input class="otp_digit" type="text" inputmode="numeric" maxlength="1">
+                    <input class="otp_digit" type="text" inputmode="numeric" maxlength="1">
+                    <input class="otp_digit" type="text" inputmode="numeric" maxlength="1">
+                    <input class="otp_digit" type="text" inputmode="numeric" maxlength="1">
+                </div>
+                <div id="otp_timer">Code expires in <b id="countdown">15:00</b></div>
+                <div id="otp_message"></div>
+                <div class="sign_up_wrapper">
+                    <button type="button" id="verify_button">Verify</button>
+                </div>
+                <button id="resend_btn" disabled>Resend code (<span id="resend_countdown">60</span>s)</button>
+            </div>
+        </div>
     </div>
 
 </body>

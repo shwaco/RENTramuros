@@ -145,3 +145,102 @@ input, .password_wrapper {
     border-radius: 10px;
     transition: border 0.3s ease; 
 }
+
+
+/* ── OTP Panel ───────────────────────────────────────────────── */
+#otp_panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#otp_panel.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── OTP Digit Boxes ─────────────────────────────────────────── */
+.otp_inputs_wrapper {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.otp_digit {
+    width: 48px;
+    height: 56px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.otp_digit:focus {
+    border-color: #d32f2f;
+}
+
+/* ── Email Hint ──────────────────────────────────────────────── */
+.otp_email_hint {
+    font-size: 0.85rem;
+    color: #777;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.otp_email_hint span {
+    color: #d32f2f;
+    font-weight: 600;
+}
+
+/* ── Timer ───────────────────────────────────────────────────── */
+#otp_timer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* ── Messages ────────────────────────────────────────────────── */
+#otp_message {
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    min-height: 20px;
+}
+
+#otp_message.success { color: green; }
+#otp_message.error   { color: #d32f2f; }
+
+#signup_message {
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    min-height: 20px;
+}
+
+/* ── Resend Button ───────────────────────────────────────────── */
+#resend_btn {
+    background: none;
+    border: none;
+    color: #d32f2f;
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    margin-top: 8px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+#resend_btn:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+    text-decoration: none;
+}
