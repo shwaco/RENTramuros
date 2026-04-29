@@ -1,5 +1,7 @@
 // dynamic confirmation modal — ginagamit para sa accept tour, clock out
 
+// binubuksan yung dynamic modal yung for confirming ng guide actions like accepting a tour or clocking out
+
 function openDynamicModal(title, message, confirmCallback, buttonColor = '#16a34a') {
     document.getElementById('dynamic-modal-title').innerText = title;
     document.getElementById('dynamic-modal-msg').innerText = message;

@@ -4,7 +4,6 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-// EXACT FIX: Pointing to the correct config folder!
 require_once '../config/config.php';
 
 $data = json_decode(file_get_contents("php://input"));
@@ -16,6 +15,7 @@ if(!isset($data->email) || !isset($data->password_hash)) {
 $email = $data->email;
 $password_hash = $data->password_hash;
 
+// 1. Check Admins
 $admin_sql = "SELECT * FROM admins WHERE email = ?";
 $stmt = $con->prepare($admin_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
@@ -32,6 +32,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     exit();
 }
 
+// 2. Check Tour Guides
 $guide_sql = "SELECT * FROM tour_guides WHERE email = ?";
 $stmt = $con->prepare($guide_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
@@ -43,12 +44,11 @@ if ($row = mysqli_fetch_assoc($result)) {
         echo json_encode(["status" => "error", "message" => "Invalid password."]);
         exit();
     }
-    
+
     $_SESSION['guide_id'] = $row['guide_id'];
-    
-    // UPDATE STATUS TO ONLINE ONLY IF THEY WERE OFFLINE
-    // This preserves 'Queuing', 'Clocked In', or 'On Tour' statuses!
-    $update_stmt = $con->prepare("UPDATE tour_guides SET current_status = 'Online' WHERE guide_id = ? AND current_status = 'Offline'");
+
+    // Set to Online if they were Offline or Available (new DB default is 'Available')
+    $update_stmt = $con->prepare("UPDATE tour_guides SET current_status = 'Online' WHERE guide_id = ? AND current_status IN ('Offline', 'Available')");
     mysqli_stmt_bind_param($update_stmt, "i", $row['guide_id']);
     mysqli_stmt_execute($update_stmt);
 
@@ -56,6 +56,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     exit();
 }
 
+// 3. Check Tourists — uses tourist_id (not customer_id) and otp_code (not otp)
 $tourist_sql = "SELECT * FROM tourists WHERE email = ?";
 $stmt = $con->prepare($tourist_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
@@ -68,13 +69,13 @@ if ($row = mysqli_fetch_assoc($result)) {
         exit();
     }
     if ($row['is_verified'] == 0) {
-        echo json_encode(["status" => "error", "message" => "Account not verified. Please check your email for the OTP to verify your account."]);
+        echo json_encode(["status" => "unverified", "message" => "Account not verified. Please check your email for the OTP to verify your account."]);
         exit();
     }
     $_SESSION['tourist_id'] = $row['tourist_id'];
     echo json_encode(["status" => "success", "message" => "Login Successful as Tourist!", "role" => "tourist", "tourist_id" => $row['tourist_id']]);
     exit();
-} 
+}
 
 echo json_encode(["status" => "error", "message" => "Email not found. Please sign up first."]);
 ?>

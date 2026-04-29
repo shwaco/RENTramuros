@@ -1,5 +1,7 @@
 // logout, clock out confirmation, view switching, profile dropdown
 
+// nagpapadala ng POST request sa logout API at iriredirect ang guide sa login page 
+// ginagamit ito kapag gusto lang mag-sign out pero hindi mag-clock out
 async function handleLogoutOnly() {
     try {
         const response = await fetch('api/logout_api.php', { method: 'POST' });
@@ -19,10 +21,12 @@ function handleClockOut() {
         "Clock Out?",
         "Are you sure you want to clock out? You will lose your current place in the queue!",
         () => executeClockOut(),
-        "#dc2626"
+        "#FF0000"
     );
 }
 
+// nagpapadala ng POST request sa clock_out API
+// kapag successful, nire-reload ang page para bumalik sa Online/Clocked In state ng guide
 async function executeClockOut() {
     try {
         const response = await fetch('api/clock_out.php', { method: 'POST' });
@@ -39,6 +43,8 @@ async function executeClockOut() {
 }
 
 // para sa switching ng dashboard at history views
+// hinahide and pinapakita ang mga section depende sa napiling view
+// 'dashboard' = active tour section, 'history' = completed tours table
 function switchView(viewName) {
     const dashboard = document.getElementById('active-tour-view');
     const history = document.getElementById('history-view');

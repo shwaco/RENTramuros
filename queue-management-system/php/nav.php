@@ -7,7 +7,7 @@
         </div>
 
         <div class="nav-menu">
-            <a href="#" onclick="switchView('history'); return false;" class="nav-link">Tour history</a>
+            <a href="#" onclick="switchView('history'); return false;" class="nav-link">My Bookings</a>
             <a href="#" class="nav-link">About</a>
 
             <div class="profile-dropdown-container">

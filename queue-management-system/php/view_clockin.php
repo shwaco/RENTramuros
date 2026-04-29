@@ -10,7 +10,7 @@
 
 <article class="minimal-state-wrapper">
     <div style="display: flex; gap: 1rem; justify-content: center; align-items: center;">
-        <?php if ($currentStatus === 'Online'): ?>
+        <?php if ($currentStatus === 'Online' || $currentStatus === 'Offline' || $currentStatus === 'Available'): ?>
             <button onclick="clockIn()" class="btn-minimal-primary" style="background-color: #000000; border-color: #000000; color: #ffffff;">Clock In</button>
             <button class="btn-minimal-primary" style="opacity: 0.4; cursor: not-allowed;" disabled>Join Queue</button>
         <?php else: ?>

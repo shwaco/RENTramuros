@@ -28,15 +28,15 @@ then paste mo tong mga to para makagawa ng tour guide accounts
 
 -- GUIDE ACCOUNT 1
 INSERT INTO `tour_guides` 
-(`first_name`, `last_name`, `email`, `password_hash`, `current_status`) 
-VALUES 
-('Nesto', 'Arevalo', 'arevaloernesto@gmail.com', '$2a$12$isHmTjPr3u0zBPNrORVTCO.rmMj9dbZB/y/IUyM4DPu5J2PguWaIK', 'Offline');
+    (`first_name`, `last_name`, `email`, `password_hash`, `current_status`, `last_active_at`, `last_dispatch_time`, `became_available_at`, `current_tourist_id`)
+VALUES
+    ('Nesto', 'Arevalo', 'arevaloernestojohn@gmail.com', '$2a$12$1pIlEbk9ie3N0QZ8OZyUne/P/3CNMMLQraUWcPffAsxXomaMCImx.', 'Online', NOW(), NOW(), NOW(), NULL)
 
 -- GUIDE ACCOUNT 2
 INSERT INTO `tour_guides` 
-(`first_name`, `last_name`, `email`, `password_hash`, `current_status`) 
-VALUES 
-('Lence', 'Jalimao', 'lenceybou@gmail.com', '$2a$12$isHmTjPr3u0zBPNrORVTCO.rmMj9dbZB/y/IUyM4DPu5J2PguWaIK', 'Offline');
+    (`first_name`, `last_name`, `email`, `password_hash`, `current_status`, `last_active_at`, `last_dispatch_time`, `became_available_at`, `current_tourist_id`)
+VALUES
+    ('Lencey', 'Bou', 'lenceybou@gmail.com', '$2a$12$1pIlEbk9ie3N0QZ8OZyUne/P/3CNMMLQraUWcPffAsxXomaMCImx.', 'Online', NOW(), NOW(), NOW(), NULL)
 
 Credentials:
   Account 1 — user: arevaloernesto@gmail.com    | pass: password123
@@ -55,10 +55,9 @@ Login page:
 
 - Para may tourists na makita sa lobby, nag iinsert na lang ako for now ng tourist sa table ng tourist, gamit tong sql na to
 
-INSERT INTO `tourists` 
-(`first_name`, `last_name`, `email`, `phone_number`, `service_type`, `vehicle_count`, `status`, `adult_count`, `children_count`, `infant_count`, `destinations`) 
-VALUES 
-('David', 'Contreras', 'davidcontreras@gmail.com', '09171234567', 'Standard Kalesa', 1, 'waiting', 3, 2, 0, 'Fort Santiago|75, Manila Cathedral|0, Baluarte de San Diego|75, Casa Manila|75'),
-('Lee', 'Tuangco', 'leetuangco@yahoo.com', '09189876543', 'Tranvia', 1, 'waiting', 2, 0, 1, 'San Agustin Church|200, Rizal Shrine|0'),
-('Ian', 'Culcul', 'ianculcul@outlook.com', '09191122334', 'Bambike', 5, 'waiting', 5, 0, 0, 'Baluarte de San Diego|75, Puerta Real|0, Puerta Del Parian|0'),
-('Kenneth', 'Cadayona', 'keyelcadayona@icloud.com', '09204445566', 'NONE', 0, 'waiting', 4, 0, 0, 'Silahis Art & Artifacts Inc|0, Museo de Intramuros|200');
+INSERT INTO `booking_history`
+    (`tourist_id`, `booking_type`, `status`, `booking_time`, `booking_date`, `adults_and_seniors`, `children`, `infants`, `contact_info_id`, `vehicle_id`, `number_of_vehicle`, `guide_id`)
+VALUES
+    (NULL, 'Walk-in', 'Pending', TIME(NOW()), CURDATE(), 2, 1, 0, (SELECT MAX(contact_info_id) - 4 FROM contact_information), 2, 1, NULL),
+    (NULL, 'Walk-in', 'Pending', TIME(NOW()), CURDATE(), 3, 0, 1, (SELECT MAX(contact_info_id) - 3 FROM contact_information), 1, 1, NULL),
+    (NULL, 'Walk-in', 'Pending', TIME(NOW()), CURDATE(), 1, 2, 0, (SELECT MAX(contact_info_id) - 2 FROM contact_information), 3, 1, NULL);

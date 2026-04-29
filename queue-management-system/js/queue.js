@@ -1,67 +1,66 @@
 // lahat ng queue-related na actions ng guide: clock in, join queue, polling, at claim timer
 
+// nagsesend ng POST request sa clock_in API — nire-reload ang page kapag successful
+// para makita ng guide yung updated na dashboard state niya
 async function clockIn() {
     try {
         const res = await fetch('api/clock_in.php', { method: 'POST' });
         const data = await res.json();
-        // kung successful, i-reload na yung page para ma-update yung UI sa bagong status
         if (data.success) location.reload();
     } catch (e) {
         console.error("Error clocking in", e);
     }
 }
 
+// nagsesend ng POST request sa join_queue API — kapag successful, nire-reload ang page
+// para lumipat sa Queuing view na may queue number display
 async function joinQueue() {
     try {
         const res = await fetch('api/join_queue.php', { method: 'POST' });
         const data = await res.json();
-        // i-reload para makita na ng guide yung queue position niya
         if (data.success) location.reload();
     } catch (e) {
         console.error("Error joining queue", e);
     }
 }
 
-// regular polling para i-check sa server kung may updates sa queue position ng guide
+// Polls every 5 seconds for status/position changes.
+// Also runs when On Tour so the guide's page reloads automatically
+// when the tourist marks the booking as Done or Cancelled.
 function startPolling() {
     setInterval(async () => {
-        // kung On Tour na yung guide, walang reason na mag-poll pa para sa position
-        if (typeof CURRENT_GUIDE_STATUS !== 'undefined' && CURRENT_GUIDE_STATUS === 'On Tour') return;
-
         try {
             const response = await fetch('api/check_queue.php');
             const data = await response.json();
 
-            if (data.success && data.status === 'Queuing') {
-                
-                // kung hindi pa naka-set yung currentQueuePosition, ibabase sa PHP-injected na value
-                if (typeof window.currentQueuePosition === 'undefined') {
-                    window.currentQueuePosition = typeof queuePosition !== 'undefined' ? queuePosition : null;
-                }
+            if (!data.success) return;
 
-                // kung nagbago yung position ng guide sa queue, mag-reload para ma-update yung display
-                if (window.currentQueuePosition !== null && window.currentQueuePosition !== data.position) {
+            // Reload on any status change from what PHP rendered on load
+            if (data.status !== CURRENT_GUIDE_STATUS) {
+                window.location.reload();
+                return;
+            }
+
+            // Also reload if guide is Queuing and position changed
+            if (data.status === 'Queuing') {
+                if (currentQueuePosition !== null && currentQueuePosition !== data.position) {
                     window.location.reload();
                 }
-                
-                // ina-update yung global state para sa susunod na poll
-                window.currentQueuePosition = data.position;
+                currentQueuePosition = data.position;
             }
+
         } catch (e) {
             console.error("Radar error:", e);
         }
     }, 5000);
 }
 
-// 15-second timer para sa guide na nangunguna sa queue
+// 15-second timer for the #1 guide in queue to select a tourist
 function startClaimTimer() {
     let timeLeft = 15;
     const timerDisplay = document.getElementById('selection-timer');
 
-    // iclear muna yung existing timer kung meron para hindi magdoble
-    if (typeof claimTimerInterval !== 'undefined' && claimTimerInterval) {
-        clearInterval(claimTimerInterval);
-    }
+    if (claimTimerInterval) clearInterval(claimTimerInterval);
 
     claimTimerInterval = setInterval(async () => {
         timeLeft--;
@@ -69,14 +68,11 @@ function startClaimTimer() {
 
         if (timeLeft <= 0) {
             clearInterval(claimTimerInterval);
-
             try {
-                // kapag nag-expire yung timer, ipupush yung guide sa likod ng queue
                 await fetch('api/missed_turn.php', { method: 'POST' });
             } catch (e) {
                 console.error("Could not process missed turn", e);
             }
-
             alert("Time is up! You have been moved to the back of the queue.");
             window.location.reload();
         }

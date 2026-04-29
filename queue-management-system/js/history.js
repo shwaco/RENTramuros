@@ -1,68 +1,114 @@
-// naglo-load ng completed tour history ng guide at pinapakita sa history tab
+// kinocall niya yung get_history.php API (via GET request) 
+// tapos isesend niya sa DOM para maging history cards
 
-async function loadHistory() {
+ async function loadHistory() {
     try {
         const response = await fetch('api/get_history.php');
         const data = await response.json();
-        const tableBody = document.getElementById('historyTable');
+        // Updated to target the new container ID
+        const container = document.getElementById('historyContainer');
 
         if (data.success && data.history.length > 0) {
             historyTours = data.history;
 
-            // ginagawang table rows yung bawat tour history entry — clickable para makita yung full receipt
-            tableBody.innerHTML = historyTours.map((tour, index) => {
-                const dateObj = new Date(tour.completed_at);
-                const formattedDate =
-                    dateObj.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }) +
-                    ', ' +
-                    dateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+            // Iloloop niya isa-isa yung result galing database
+            container.innerHTML = historyTours.map((tour, index) => {
+                // Format Date to match image: "04/29/26 8AM"
+                const rawDate = tour.booking_date
+                    ? (tour.booking_time ? `${tour.booking_date} ${tour.booking_time}` : tour.booking_date)
+                    : null;
+                const dateObj = rawDate ? new Date(rawDate.replace(/-/g, '/')) : new Date();
+                const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                    month: '2-digit', 
+                    day: '2-digit', 
+                    year: '2-digit' 
+                });
+                // Extract just the hour and AM/PM (e.g., "8 AM") and remove the space
+                const timeString = dateObj.toLocaleTimeString('en-US', { 
+                    hour: 'numeric', 
+                    hour12: true 
+                }).replace(' ', '');
 
+                // Fallback title if it's an Attractions tour instead of a Package
+                const tourTitle = tour.package_name ? tour.package_name : 'Cultural Tour';
+                let statusText = 'Completed';
+                let statusClass = 'status-completed';
+
+                // here din nakabased yung design sa css (status)
+                if (tour.status === 'Cancelled') {
+                    statusText = 'Cancelled';
+                    statusClass = 'status-cancelled';
+                } else if (tour.status === 'Accepted') {
+                    statusText = 'Accepted';
+                    statusClass = 'status-accepted';
+                } else if (tour.status !== 'Done') {
+                    statusText = tour.status;
+                    statusClass = '';
+                }
+
+                // para to sa container/card ng bawat tour sa history view, ginagawa niyang clickable yung buong card para makita yung receipt modal
                 return `
-                    <tr class="history-row" onclick="viewHistoryReceipt(${index})" style="cursor: pointer;" title="Click to view full receipt">
-                        <td style="font-weight: 500;">${tour.first_name} ${tour.last_name}</td>
-                        <td style="color: #4b5563;">${formattedDate}</td>
-                        <td style="font-weight: 500; color: #111827;">&#10003;Completed</td>
-                    </tr>
+                    <div class="booking-card" onclick="viewHistoryReceipt(${index})">
+                        <div class="bc-left">
+                            <span class="bc-id">${tour.booking_request_id}</span>
+                        </div>
+                        <div class="bc-middle">
+                            <span class="bc-date">${formattedDate} ${timeString}</span>
+                            <span class="bc-title">${tourTitle}</span>
+                        </div>
+                        <div class="bc-right">
+                            <span class="bc-status ${statusClass}">${statusText}</span>
+                        </div>
+                    </div>
                 `;
             }).join('');
         } else {
-            // kung wala pang history, ipakita lang yung empty state message
-            tableBody.innerHTML = '<tr><td colspan="3" style="padding: 3rem; text-align: center; color: #9ca3af; font-style: italic;">No history available yet.</td></tr>';
+            container.innerHTML = '<div style="padding: 3rem; text-align: center; color: #9ca3af; font-style: italic;">No history available yet.</div>';
         }
     } catch (e) {
         console.error("Failed to load history:", e);
     }
 }
 
+// Keep your existing viewHistoryReceipt(index) function below this exactly as it is!
+
+// kinukuha yung tour data mula sa historyTours array gamit index 
+// ginegenerate yung receipt HTML at inoopen yung modal para sa history view
 function viewHistoryReceipt(index) {
     const tour = historyTours[index];
     if (!tour) return console.error("History tour not found!");
 
     // formatter ng date para sa receipt display
-    const dateObj = new Date(tour.completed_at || Date.now());
+    const rawDate = tour.booking_date
+        ? (tour.booking_time ? `${tour.booking_date} ${tour.booking_time}` : tour.booking_date)
+        : null;
+    const dateObj = rawDate ? new Date(rawDate.replace(/-/g, '/')) : new Date();
     const formattedDate =
         dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) +
         ' ; ' +
         dateObj.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' });
 
-    const destinationsHTML = buildDestinationsHTML(tour.destinations, 'No itineraries listed');
+    const isPackage = tour.package_name ? true : false;
+    const destinationsHTML = buildDestinationsHTML(tour.destinations, tour.adults_and_seniors, tour.children, isPackage, 'No destinations listed');
 
-    // ginagawa yung receipt HTML and inoopen yung modal para sa history view
+    // ginegenerate yung receipt HTML and inoopen yung modal para sa history view
     openReceiptModal(buildReceiptHTML({
-        id: tour.customer_id,
+        id: tour.booking_request_id,
         formattedDate,
-        adult_count: tour.adult_count,
-        children_count: tour.children_count,
-        infant_count: tour.infant_count,
+        adults_and_seniors: tour.adults_and_seniors,
+        children: tour.children,
+        infants: tour.infants,
         package_name: tour.package_name,
+        package_price_val: tour.package_price,
+        vehicle_price_val: tour.vehicle_price,
+        destinations: tour.destinations,
         destinationsHTML,
-        service_type: tour.vehicle_type,
-        vehicle_count: tour.vehicle_count,
+        vehicle_type: tour.vehicle_type,
+        number_of_vehicle: tour.number_of_vehicle,
         first_name: tour.first_name,
         last_name: tour.last_name,
-        email: tour.email,
+        email_address: tour.email_address,
         phone_number: tour.phone_number,
-        actionArea: '',
-        feeDisplay: '₱4,500-5000'
+        actionArea: ''
     }));
 }

@@ -1,4 +1,5 @@
 // kinukuha yung waiting tourists from the server and ina-update yung lobby display
+// ini-initialize yung tourist lobby section — kinukuha ang lahat ng Pending bookings at ginagawang clickable blocks para makita ng guide ang details ng bawat tourist
 async function initWaitingLobby() {
     const lobbyContainer = document.getElementById('tourist-lobby');
     const idleStateText = document.getElementById('idle-state-text');
@@ -16,7 +17,7 @@ async function initWaitingLobby() {
 
             // ginagawang clickable tourist blocks yung bawat waiting tourist
             lobbyContainer.innerHTML = waitingTourists.map(tourist => {
-                const displayTime = tourist.created_at || tourist.called_at;
+                const displayTime = tourist.booking_date || tourist.booking_time;
                 let timeString = "00:00";
                 let dateString = "00/00/00";
 
@@ -29,8 +30,8 @@ async function initWaitingLobby() {
                 }
 
                 return `
-                    <div class="t-block" onclick="viewTouristDetails(${tourist.customer_id})">
-                        <div class="t-block-left">${tourist.customer_id}</div>
+                    <div class="t-block" onclick="viewTouristDetails(${tourist.booking_request_id})">
+                        <div class="t-block-left">${tourist.booking_request_id}</div>
                         <div class="t-block-right">
                             <span style="font-weight:bold; color:#000;">${dateString}</span>
                             <span>${timeString}</span>
