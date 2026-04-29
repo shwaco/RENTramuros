@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'roboto', arial, Helvetica, sans-serif;
+    /* outline: 5px solid green !important; */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.main_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.form-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* .wrapper input:focus {
+    outline: none;
+    border: 2px solid red;
+} */
+
+form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    margin: 0 0 2rem 0; 
+    font-family: 'roboto slab';
+    font-size: 3rem;
+}
+
+.inputs {
+    width: 100%;
+}
+
+.inputs, input {
+    padding: 1rem;
+    font-size: 1rem;
+}   
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.password_wrapper {
+    display: flex;
+    align-items: center;       
+    border: 1px solid black; 
+    border-radius: 5px;
+    background-color: white;
+    width: 100%;
+    padding-right: 0.5rem;     
+}
+
+.password_wrapper input {
+    border: none;
+    outline: none;             
+    width: 100%;               
+    padding: 1rem;
+    background: transparent;   
+}
+
+#pass_visibility {
+    background: transparent;
+    border: none;
+    cursor: pointer;           
+    display: flex;
+    align-items: center;
+}
+
+#pass_visibility img {
+    height: 20px;
+    width: auto;
+}
+
+#submit_button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #8D230F;
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+    color: white;
+}
+
+#submit_button:hover {
+    background-color: #F1959B;
+}
+
+
