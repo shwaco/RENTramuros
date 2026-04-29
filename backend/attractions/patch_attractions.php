@@ -1,19 +1,20 @@
 <?php
-// session_start();
+session_start();
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: PATCH');
 
 require_once '../../../asset/config.php';
+/** @var mysqli $con */
 
-// if($_SESSION['admin_id'] ?? null) {
-//     // Admin is logged in, proceed with the request
-// } else {
-//     http_response_code(401);
-//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
-//     exit();
-// }
+if($_SESSION['admin_id'] ?? null) {
+    // Admin is logged in, proceed with the request
+} else {
+    http_response_code(401);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
     echo json_encode(["status" => "error", "message" => "Invalid request method."]);

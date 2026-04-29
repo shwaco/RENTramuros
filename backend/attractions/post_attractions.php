@@ -1,11 +1,19 @@
 <?php
-
+session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
-header('Access-ControlAllow-Method: POST');
+header('Access-Control-Allow-Method: POST');
 
-session_start();
 require_once '../../../asset/config.php';
+/** @var mysqli $con */
+
+if($_SESSION['admin_id'] ?? null) {
+    // Admin is logged in, proceed with the request
+} else {
+    http_response_code(401);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
+    exit();
+}
 
 $data = json_decode(file_get_contents("php://input"));
 if(empty($data->attraction_name) || empty($data->description) || empty($data->entrance_fee) || empty($data->operating_hours) || empty($data->image_file)) {
