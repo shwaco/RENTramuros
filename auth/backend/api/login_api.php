@@ -6,29 +6,29 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-require_once '../../../asset/config.php';
+require_once  '../../../asset/config.php';
 /** @var mysqli $con */
 
 $data = json_decode(file_get_contents("php://input"));
-if(!isset($data->email) || !isset($data->password_hash)) {
+if(!isset($data->email) || !isset($data->password)) {
     echo json_encode(["status" => "error", "message" => "Please Enter email or password."]);
     exit();
 }
 
 $email = $data->email;
-$password_hash = $data->password_hash;
+$raw_password = $data->password;
 
 $admin_sql = "SELECT * FROM admins WHERE email = ?";
-$stmt = $con->prepare($admin_sql);
+$stmt = mysqli_prepare($con, $admin_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
 
-    if (!password_verify($password_hash, $row['password_hash'])) {
-        echo json_encode(["status" => "error", "message" => "Invalid password."]);
-        exit();
+    if (!password_verify($raw_password, $row['password_hash'])) {
+    echo json_encode(["status" => "error", "message" => "Invalid password."]);
+    exit();
     }
 
     $_SESSION['admin_id'] = $row['admin_id'];
@@ -37,16 +37,16 @@ if ($row = mysqli_fetch_assoc($result)) {
 }
 
 $guide_sql = "SELECT * FROM tour_guides WHERE email = ?";
-$stmt = $con->prepare($guide_sql);
+$stmt = mysqli_prepare($con, $guide_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
 
-    if (!password_verify($password_hash, $row['password_hash'])) {
-        echo json_encode(["status" => "error", "message" => "Invalid password."]);
-        exit();
+    if (!password_verify($raw_password, $row['password_hash'])) {
+    echo json_encode(["status" => "error", "message" => "Invalid password."]);
+    exit();
     }
 
     $_SESSION['guide_id'] = $row['guide_id'];
@@ -55,16 +55,16 @@ if ($row = mysqli_fetch_assoc($result)) {
 }
 
 $tourist_sql = "SELECT * FROM tourists WHERE email = ?";
-$stmt = $con->prepare($tourist_sql);
+$stmt = mysqli_prepare($con, $tourist_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
 
-    if (!password_verify($password_hash, $row['password_hash'])) {
-        echo json_encode(["status" => "error", "message" => "Invalid password."]);
-        exit();
+    if (!password_verify($raw_password, $row['password_hash'])) {
+    echo json_encode(["status" => "error", "message" => "Invalid password."]);
+    exit();
     }
 
     if ($row['is_verified'] == 0) {

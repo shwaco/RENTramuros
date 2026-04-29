@@ -41,7 +41,7 @@ $otp = rand(100000, 999999);
 $expiry_time = date("Y-m-d H:i:s", strtotime("+15 minutes"));
 
 $sql = "INSERT INTO tourists (first_name, last_name, email, password_hash, phone_number) VALUES (?, ?, ?, ?, ?)";
-$stmt = $con->prepare($sql);
+$stmt = mysqli_prepare($con, $sql);
 mysqli_stmt_bind_param($stmt, "sssss", $firstname, $lastname, $email, $hashed_password, $phone);
 if (mysqli_stmt_execute($stmt)) {
 
