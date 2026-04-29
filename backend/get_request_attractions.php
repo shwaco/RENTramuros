@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
@@ -7,13 +7,13 @@ header('Access-Control-Allow-Methods: GET');
 
 require_once 'asset/config.php';
 
-// if ($_SESSION['tourist_id'] ?? null || $_SESSION['admin_id'] ?? null) {
-//     // Tourist or admin is logged in, proceed with the request
-// } else {
-//     http_response_code(401);
-//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
-//     exit();
-// }
+if ($_SESSION['tourist_id'] ?? null || $_SESSION['admin_id'] ?? null) {
+    // Tourist or admin is logged in, proceed with the request
+} else {
+    http_response_code(401);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
+    exit();
+}
 
 if(empty($_GET['booking_request_id'])) {
     echo json_encode(["status" => "error", "message" => "Missing required fields."]);
