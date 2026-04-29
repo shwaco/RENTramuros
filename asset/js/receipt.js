@@ -10,17 +10,15 @@ function buildAndShowModal() {
     const adultLabel = document.getElementById('modal-adult-label');
     adultLabel.innerText = reservationData.includesSeniors ? "ADULTS & SENIORS" : "ADULTS";
 
-    // Calculate Pax (Adults + Children) just like the backend
     const pax = reservationData.tourists.adults + reservationData.tourists.children;
-    const paxMultiplier = pax > 0 ? pax : 1; // Failsafe
+    const paxMultiplier = pax > 0 ? pax : 1; 
 
-    // 2. PACKAGE & DATE
-    document.getElementById('modal-package').innerText = reservationData.wantsPackage ? (reservationData.selectedPackage || "YES") : "NO PACKAGE";
+    // 2. DATE & TIME
     const travelDate = document.getElementById('date-display').innerText;
     const travelTime = document.getElementById('time-display').innerText;
     document.getElementById('modal-date-time').innerText = `${travelDate} ; ${travelTime}`;
 
-    // 3. THE NEW MATH (Base Fee Calculation)
+    // 3. THE NEW MATH ENGINE (Coworker's Rules Applied)
     let baseTotal = 0; 
     const itineraryList = document.getElementById('modal-itinerary-list');
     itineraryList.innerHTML = ""; 
@@ -28,33 +26,36 @@ function buildAndShowModal() {
     // --- A. Vehicle Math ---
     if (reservationData.selectedVehicle && reservationData.selectedVehicle !== 'None') {
         const vMultiplier = reservationData.vehicleQuantity > 0 ? reservationData.vehicleQuantity : 1;
-        baseTotal += (reservationData.selectedVehiclePrice * vMultiplier);
+        const totalVehicleCost = reservationData.selectedVehiclePrice * vMultiplier;
+        baseTotal += totalVehicleCost;
+        
+        const formattedVCost = `₱${totalVehicleCost.toLocaleString('en-PH', { maximumFractionDigits: 0 })}`;
+        document.getElementById('modal-vehicle').innerHTML = `${reservationData.selectedVehicle}&nbsp;&nbsp;<span style="color: #109620; font-weight: 700; font-style: italic; font-size: 0.85rem;">${formattedVCost}</span>`;
+        document.getElementById('modal-vehicle-quantity').innerText = reservationData.vehicleQuantity; 
+    } else {
+        document.getElementById('modal-vehicle').innerText = "NONE"; 
+        document.getElementById('modal-vehicle-quantity').innerText = ""; 
     }
 
-// --- B. Package or Attraction Math ---
+    // --- B. Package vs Custom Math ---
+    let packageDisplayString = "No Package";
+
     if (reservationData.wantsPackage) { 
-        // We calculate it dynamically from the attractions inside it!
+        // IF PACKAGE: Flat calculation, hide itinerary prices
+        packageDisplayString = reservationData.selectedPackage || "YES";
+        const totalPackageCost = reservationData.selectedPackagePrice * paxMultiplier;
+        baseTotal += totalPackageCost;
+        
+        if (totalPackageCost > 0) {
+            packageDisplayString += `&nbsp;&nbsp;<span style="color: #109620; font-weight: 700; font-style: italic; font-size: 0.85rem;">₱${totalPackageCost.toLocaleString('en-PH', { maximumFractionDigits: 0 })}</span>`;
+        }
         
         if (reservationData.selectedPackageDesc) {
             const items = reservationData.selectedPackageDesc.split('\n');
             items.forEach(item => {
                 const cleanName = item.replace(/^- /, '').trim();
                 if (cleanName) {
-                    
-                    // 1. Look up the fee in our master dictionary (defaults to 0 if not found)
-                    const baseFee = reservationData.attractionFees[cleanName] || 0;
-                    
-                    // 2. Multiply by the pax (adults + children)
-                    const totalFee = baseFee * paxMultiplier;
-                    baseTotal += totalFee; // Add it to the grand total
-                    
-                    // 3. Render it beautifully!
-                    if (totalFee > 0) {
-                        const formattedFee = `₱${totalFee.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-                        itineraryList.innerHTML += `<span>${cleanName}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">${formattedFee}</span></span>`;
-                    } else {
-                        itineraryList.innerHTML += `<span>${cleanName}</span>`; 
-                    }
+                    itineraryList.innerHTML += `<span style="font-family: 'Roboto Condensed', sans-serif; font-size: 0.85rem;">${cleanName}</span>`; 
                 }
             });
         } else {
@@ -62,23 +63,21 @@ function buildAndShowModal() {
         }
         
     } else {
+        // IF CUSTOM: Calculate and show individual attraction prices
         if (reservationData.customAttractions.length > 0) {
             reservationData.customAttractions.forEach(attr => {
                 const parts = attr.split('|');
                 const name = parts[0] ? parts[0].trim() : '';
-                const baseFee = parts[1] ? parseFloat(parts[1]) : 0; // Renamed for clarity
+                const baseFee = parts[1] ? parseFloat(parts[1]) : 0; 
                 
-                // NEW: Calculate the multiplied total for this specific attraction
                 const totalAttractionFee = baseFee * paxMultiplier;
                 
                 if (totalAttractionFee > 0) {
-                    baseTotal += totalAttractionFee; // Add to grand total
-                    
-                    // Display the MULTIPLIED total (e.g., 400), not the raw base fee (e.g., 100)!
-                    const formattedFee = `₱${totalAttractionFee.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-                    itineraryList.innerHTML += `<span>${name}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">${formattedFee}</span></span>`;
+                    baseTotal += totalAttractionFee; 
+                    const formattedFee = `₱${totalAttractionFee.toLocaleString('en-PH', { maximumFractionDigits: 0 })}`;
+                    itineraryList.innerHTML += `<span style="font-family: 'Roboto Condensed', sans-serif; font-size: 0.85rem;">${name}&nbsp;&nbsp;<span style="color: #109620; font-weight: 700; font-style: italic; font-size: 0.9rem;">${formattedFee}</span></span>`;
                 } else {
-                    itineraryList.innerHTML += `<span>${name}</span>`; 
+                    itineraryList.innerHTML += `<span style="font-family: 'Roboto Condensed', sans-serif; font-size: 0.85rem;">${name}</span>`; 
                 }
             });
         } else {
@@ -86,41 +85,21 @@ function buildAndShowModal() {
         }
     }
 
-    // --- C. Calculate the Guide Fee Range (The new final output!) ---
-    let feeDisplay = '₱0.00';
-    if (baseTotal > 0) {
-        const minTotal = baseTotal + 1000; 
-        const maxTotal = baseTotal + 1500; 
+    document.getElementById('modal-package').innerHTML = packageDisplayString;
 
-        const formattedMin = minTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        const formattedMax = maxTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    // --- C. The 3-Tier Grand Total Output ---
+    const minGrandTotal = baseTotal + 1000; 
+    const maxGrandTotal = baseTotal + 1500; 
 
-        feeDisplay = `₱${formattedMin} - ₱${formattedMax}`;
-    }
-    document.getElementById('modal-total-fee').innerText = feeDisplay;  
+    document.getElementById('modal-base-fee').innerText = `₱${baseTotal.toLocaleString('en-PH', { maximumFractionDigits: 0 })}`;
+    document.getElementById('modal-grand-total').innerText = `₱${minGrandTotal.toLocaleString('en-PH', { maximumFractionDigits: 0 })} - ₱${maxGrandTotal.toLocaleString('en-PH', { maximumFractionDigits: 0 })}`;
 
-    // 4. VEHICLE DISPLAY
-    const vehicleDisplay = document.getElementById('modal-vehicle');
-    const vehicleQuantityDisplay = document.getElementById('modal-vehicle-quantity');
-    
-    if (reservationData.selectedVehicle && reservationData.selectedVehicle !== 'None') {
-        const vMultiplier = reservationData.vehicleQuantity > 0 ? reservationData.vehicleQuantity : 1;
-        const totalVehicleCost = reservationData.selectedVehiclePrice * vMultiplier;
-        
-        const formattedVehicleCost = `₱${totalVehicleCost.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-        vehicleDisplay.innerHTML = `${reservationData.selectedVehicle}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">${formattedVehicleCost}</span>`;
-        vehicleQuantityDisplay.innerText = reservationData.vehicleQuantity; 
-    } else {
-        vehicleDisplay.innerText = "NONE"; 
-        vehicleQuantityDisplay.innerText = ""; 
-    }
-
-    // 5. CONTACT INFO
+    // 4. CONTACT INFO
     document.getElementById('modal-full-name').innerText = `${reservationData.contactInfo.firstName} ${reservationData.contactInfo.lastName}`;
     document.getElementById('modal-email').innerText = reservationData.contactInfo.email;
     document.getElementById('modal-phone').innerText = reservationData.contactInfo.phone;
 
-    // 6. SHOW MODAL
+    // 5. SHOW MODAL
     document.getElementById('confirmationModal').classList.add('show');
 }
 
@@ -133,10 +112,12 @@ function confirmFinalAcceptance() {
     const acceptBtn = document.querySelector('.accept-btn');
     acceptBtn.innerText = "PROCESSING...";
     acceptBtn.disabled = true;
+    
+    // Pass the baton to the real database function
     sendDataToDatabase();
 }
 
-/* BACKEND API HAND-OFF */
+/* REAL BACKEND API HAND-OFF */
 async function sendDataToDatabase() {
     
     // 1. IDs are already pure numbers from the JSON, no cleanup needed!
@@ -155,15 +136,12 @@ async function sendDataToDatabase() {
         finalAttractions = reservationData.customAttractionIds;
     }
 
-    // 2. Format the payload exactly to the new FLAT structure requested
+    // 2. Format the payload exactly to the FLAT structure your PHP expects
     const dbPayload = {
-        tourist_id: 1, // Placeholder (matches coworker's image)
+        tourist_id: 1, // Hardcoded tourist ID for testing
         booking_type: reservationData.wantsPackage ? "Package" : "Attractions",
-        
-        // Note: I kept time and date here because the database will still need them!
         time: document.getElementById('time-display').innerText,
         date: document.getElementById('date-display').innerText,
-        
         adults_and_seniors: reservationData.tourists.adults, 
         children: reservationData.tourists.children,
         infants: reservationData.tourists.infants,
@@ -179,24 +157,22 @@ async function sendDataToDatabase() {
         attraction_id: finalAttractions
     };
 
+    // 3. Keep the console log so you can still flex the data structure
     let displayJson = JSON.stringify(dbPayload, null, 2);
-    
-    // Use a quick trick to flatten ONLY the attraction_id array into one line
     displayJson = displayJson.replace(/"attraction_id": \[\s*([\s\S]*?)\s*\]/, function(match, innerText) {
         return '"attraction_id": [' + innerText.replace(/\s+/g, '') + ']';
     });
-
     console.log("SENDING EXACT PAYLOAD TO API:", displayJson);
 
-    // 3. Call the API function from our separated file
+    // 4. THE REAL API POST TO save_online_booking.php
     const isSuccess = await window.submitBookingRequest(dbPayload);
 
-    // 4. Handle the UI based on the API response
+    // 5. Handle the UI based on the real database response
     if (isSuccess) {
         alert("Thank you! Your reservation for RENTramuros has been submitted.");
         location.reload(); 
     } else {
-        alert("Server unreachable or database error. Check console (F12) to view the payload.");
+        alert("Server unreachable or database error. Make sure your local server (XAMPP) is running!");
         document.querySelector('.accept-btn').innerText = "SUBMIT";
         document.querySelector('.accept-btn').disabled = false;
     }

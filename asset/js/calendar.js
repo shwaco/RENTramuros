@@ -1,15 +1,24 @@
-    // -------- CALENDAR LOGIC ---------
+// -------- CALENDAR LOGIC ---------
     document.addEventListener("DOMContentLoaded", () => {
         const monthDisplay = document.querySelector('.current-month');
         const calendarGrid = document.querySelector('.calendar-grid');
         const prevBtn = document.querySelectorAll('.calendar-header .nav-arrow')[0];
         const nextBtn = document.querySelectorAll('.calendar-header .nav-arrow')[1];
 
-        let currentDate = new Date(); 
         let today = new Date();
         today.setHours(0, 0, 0, 0);
 
+        // 1. Calculate tomorrow's date (the earliest bookable date)
+        let tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        // 2. Set the calendar to open on tomorrow's month!
+        let currentDate = new Date(tomorrow); 
+
         const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        // 3. Automatically set the default UI text to tomorrow's date on load
+        document.getElementById('date-display').innerText = `${monthNames[tomorrow.getMonth()]} ${tomorrow.getDate()}, ${tomorrow.getFullYear()}`;
 
         function renderCalendar() {
             calendarGrid.innerHTML = '';
@@ -40,6 +49,7 @@
                     </div>
                 `;
 
+                // If the day is today or earlier, it gets disabled
                 if (cellDate <= today) {
                     dayCell.classList.add('disabled-day');
                 } else {

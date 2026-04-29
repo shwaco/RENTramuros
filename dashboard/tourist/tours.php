@@ -65,7 +65,7 @@
                                 </div> 
                                 <div class="date-dropdown">
                                     <div class="date-select" id="date-select-btn">
-                                        <span class="date-selected" id="date-display">April 25, 2026</span>
+                                        <span class="date-selected" id="date-display">April 30, 2026</span>
                                         <div class="date-caret"></div>
                                     </div>
                                     <div class="calendar-popup" id="calendar-popup">
@@ -288,17 +288,32 @@
 
             <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 1.5rem 0;">
 
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
-                <div style="display: flex; gap: 0.75rem; align-items: center;">
-                    <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; font-size: 0.9rem;">TOTAL FEE:</span>
-                    <span id="modal-total-fee" style="font-weight: 600; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 1rem; font-style: italic;">₱0</span>
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 1.5rem; margin-bottom: 1rem;">
+            
+            <div style="flex-grow: 1; max-width: 60%;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                    <span style="font-family: 'Roboto Condensed', sans-serif; font-weight: 400; font-size: 0.85rem; color: #6b7280;">TOTAL FEE:</span>
+                    <span id="modal-base-fee" style="font-family: 'Roboto Condensed', sans-serif; font-weight: 700; font-size: 0.85rem; color: #000000;">₱0</span>
                 </div>
-                <button class="accept-btn" onclick="confirmFinalAcceptance()" aria-label="Submit Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 2px; cursor: pointer; transition: background-color 0.2s;">  
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
+                    <span style="font-family: 'Roboto Condensed', sans-serif; font-weight: 400; font-size: 0.85rem; color: #6b7280;">TOUR GUIDE FEE:</span>
+                    <span style="font-family: 'Roboto Condensed', sans-serif; font-weight: 700; font-size: 0.85rem; color: #000000;">₱1,000 - ₱1,500</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.8rem;">
+                    <span style="font-family: 'Roboto Condensed', sans-serif; font-weight: 700; font-size: 1rem; color: #000000;">GRAND TOTAL:</span>
+                    <span id="modal-grand-total" style="font-family: 'Roboto Condensed', sans-serif; font-weight: 700; font-style: italic; font-size: 1.1rem; color: #109620;">₱0 - ₱0</span>
+                </div>
+            </div>
+
+            <div style="margin-left: 2rem;">
+                <button class="accept-btn" onclick="confirmFinalAcceptance()" aria-label="Submit Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.8rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 4px; cursor: pointer; transition: background-color 0.2s;">  
                     SUBMIT
                 </button>
             </div>
-        </article>
-    </div>
+            
+        </div>
+    </article>
+</div>
 
 </body>
 </html>

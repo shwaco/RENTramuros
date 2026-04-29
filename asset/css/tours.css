@@ -809,14 +809,13 @@ body{
 
 .package-options-container {
     padding-block: 1rem;
-    padding-inline: 2rem; /* Reduced slightly so 3 cards fit perfectly on the top row */
-    display: flex;
-    flex-wrap: wrap; /* This tells the 4th and 5th card to wrap to the next line */
-    justify-content: center; /* This perfectly centers the 2 cards on the bottom row */
-    gap: 2rem; /* Adjusted gap to keep it balanced */
+    padding-inline: 2rem; 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, 13.75rem); 
+    justify-content: center; 
+    gap: 3rem; 
 }
 
-/* Added .package-4 and .package-5 */
 .package-1, .package-2, .package-3, .package-4, .package-5 {
     width: 13.75rem; 
     height: 16.375rem; 
@@ -830,7 +829,6 @@ body{
     transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
 }
 
-/* Added .package-4:hover and .package-5:hover */
 .package-1:hover, .package-2:hover, .package-3:hover, .package-4:hover, .package-5:hover {
     border: 1px solid #8A2814;
     transform: translateY(-5px);
@@ -850,7 +848,7 @@ body{
 
 .package-details-text {
     width: 100%;
-    height: calc(100% - 6.25rem); /* Fills the rest of the card below the image */
+    height: calc(100% - 6.25rem);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -869,18 +867,17 @@ body{
 .package-description {
     display: block;
     width: 100%;
-    font-size: 0.85rem; /* Shrunk slightly so the list fits better */
+    font-size: 0.85rem;
     color: #313131;
     line-height: 1.3;
 }
 
-/* Added prices for 4 and 5 */
 .package-price {
     align-self: flex-end;
-    margin-top: auto; /* This magically pushes the price perfectly to the bottom! */
+    margin-top: auto;
     font-weight: 700;
     font-size: 1rem;
-    color: #8A2814; /* Colored it red to match your theme */
+    color: #8A2814;
     padding-bottom: 0.5rem;
 }
 

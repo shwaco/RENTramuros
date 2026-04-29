@@ -434,13 +434,14 @@ function renderPackages(packages) {
         const formatDesc = pkg.description ? pkg.description.replace(/\n/g, '<br>') : '';
         const safeName = pkg.package_name.replace(/"/g, '&quot;');
         
-        // NEW: Safely escape the description string for the dataset
+        // Safely escape the description string for the dataset
         const safeDesc = pkg.description ? pkg.description.replace(/"/g, '&quot;') : '';
         
         const numericPrice = parseFloat(pkg.price);
-        const displayPrice = isNaN(numericPrice) ? '₱0.00' : `₱${numericPrice.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        
+        // THE FIX: Changed to maximumFractionDigits: 0 to guarantee whole numbers only!
+        const displayPrice = isNaN(numericPrice) ? '₱0' : `₱${numericPrice.toLocaleString('en-PH', { maximumFractionDigits: 0 })}`;
 
-        // ADDED data-desc and updated the onclick function arguments!
         html += `
         <div class="package-${index + 1}" id="pkg-${pkg.package_id}" data-name="${safeName}" data-desc="${safeDesc}" onclick="selectPackage(${pkg.package_id}, this.dataset.name, ${pkg.price}, this.dataset.desc)">
             <div class="package-image"><img src="${pkg.image_file}" alt="${safeName}"></div>

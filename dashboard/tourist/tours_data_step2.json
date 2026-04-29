@@ -4,36 +4,36 @@
       "package_id": "1",
       "package_name": "Hero's Trail",
       "description": "- Fort Santiago\n- Rizal Shrine\n- Rizal's Bagumbayan Light & Sound Museum\n- Bambike Ecotours Intramuros",
-      "price": "676.67",
-      "image_file": "https://dummyimage.com/hd1080"
+      "price": "500",
+      "image_file": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "package_id": "2",
       "package_name": "Cultural Combo",
       "description": "- Casa Manila\n- Barbara's Heritage Restaurant\n- Silahis Arts & Artifacts",
-      "price": "767.67",
-      "image_file": "https://dummyimage.com/hd1080"
+      "price": "500",
+      "image_file": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "package_id": "3",
       "package_name": "Walled City Grand Tour",
       "description": "- Fort Santiago\n- San Agustin Museum\n- Minor Basilica\n- Casa Manila",
-      "price": "100.00",
-      "image_file": "https://dummyimage.com/hd1080"
+      "price": "500",
+      "image_file": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "package_id": "4",
       "package_name": "Bastions and Walls",
       "description": "- Puerta del Parian\n- Fort Santiago\n- Palacio del Gobernador\n- Puerta Real Gardens",
-      "price": "200.00",
-      "image_file": "https://dummyimage.com/hd1080"
+      "price": "500",
+      "image_file": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "package_id": "5",
       "package_name": "Sacred Route",
       "description": "- Minor Basilica\n- San Agustin Church",
-      "price": "100.00",
-      "image_file": "https://dummyimage.com/hd1080"
+      "price": "500",
+      "image_file": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     }
   ],
   "vehicles": [
@@ -42,21 +42,21 @@
       "vehicle_type": "Tuktuk",
       "passenger_capacity": "Capacity: 3-4",
       "price": "1000.00",
-      "image_file": "https://dummyimage.com/hd1080"
+      "image_file": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "vehicle_id": "2",
       "vehicle_type": "Kalesa",
       "passenger_capacity": "Capacity: 2-4",
       "price": "1500.00",
-      "image_file": "https://dummyimage.com/hd1080"
+      "image_file": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "vehicle_id": "3",
       "vehicle_type": "Tranvia",
       "passenger_capacity": "Capacity: 12-20",
       "price": "2500.00",
-      "image_file": "https://dummyimage.com/hd1080"
+      "image_file": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     }
   ],
   "attractions": [
@@ -64,92 +64,92 @@
       "attraction_id": "1",
       "attraction_name": "Fort Santiago",
       "fee": 100,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "2",
       "attraction_name": "Casa Manila",
       "fee": 100,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "3",
       "attraction_name": "San Agustin Museum",
       "fee": 200,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "4",
       "attraction_name": "San Agustin Church",
       "fee": 0,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "5",
       "attraction_name": "Centro de Turismo Intramuros",
       "fee": 100,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "6",
       "attraction_name": "Bambike Ecotours Intramuros",
       "fee": 100,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "7",
       "attraction_name": "Barbara's Heritage Restaurant",
       "fee": 0,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "8",
       "attraction_name": "Minor Basilica",
       "fee": 0,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "9",
       "attraction_name": "Museo de Intramuros",
       "fee": 75,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "10",
       "attraction_name": "Palacio del Gobernador",
       "fee": 0,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     }
     ,
     {
       "attraction_id": "11",
       "attraction_name": "Puerta del Parian",
       "fee": 0,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "12",
       "attraction_name": "Puerta Real Gardens",
       "fee": 0,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "13",
       "attraction_name": "Rizal Shrine",
       "fee": 75,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "14",
       "attraction_name": "Rizal's Bagumbayan Light & Sound Museum",
       "fee": 100,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     },
     {
       "attraction_id": "15",
       "attraction_name": "Silahis Arts & Artifacts",
       "fee": 150,
-      "main_image": "https://dummyimage.com/hd1080"
+      "main_image": "https://i.pinimg.com/1200x/07/d6/79/07d679fbcec5b078ad659ea23484ab9a.jpg"
     }
   ]
 }
