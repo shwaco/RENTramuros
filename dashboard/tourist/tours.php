@@ -147,7 +147,7 @@
                         <div class="select-vehicle-packages-conatiner">
                             <div class="text-box"><span class="select-vehicle-text">Choose a vehicle to ride</span></div>
                             <div class="vehicle-container" id="dynamic-package-vehicles">
-                                <div class="no-vehicle vehicle-card" id="veh-none" onclick="selectVehicle('veh-none', 'None')">
+                                <div class="no-vehicle vehicle-card" id="veh-none" onclick="selectVehicle('veh-none', 'None', 0)">
                                     <span class="none-text">NONE</span>
                                 </div>
                                 </div>
@@ -167,7 +167,7 @@
                                 <span class="custom-select-vehicle-text">Choose a vehicle to ride</span>
                             </div> 
                             <div class="custom-vehicle-container" id="dynamic-custom-vehicles">
-                                <div class="custom-no-vehicle custom-vehicle-card" id="custom-veh-none" onclick="selectCustomVehicle('custom-veh-none', 'None')">
+                                <div class="custom-no-vehicle custom-vehicle-card" id="custom-veh-none" onclick="selectCustomVehicle('custom-veh-none', 'None', 0)">
                                     <span class="none-text">NONE</span>
                                 </div>
                                 </div>
@@ -223,85 +223,80 @@
     
     <div class="modal-overlay" id="confirmationModal">
         <article class="receipt-container" aria-labelledby="receipt-id">
-            <header style="display: flex; justify-content: right; align-items: right; width: 100%; border-bottom: 1px solid #e5e7eb; padding-top: 1rem; padding-bottom: 1rem;">
-                <button aria-label="Close Receipt" class="close-btn" id="closeModal">&times;</button>
-            </header>
+            
+            <div style="display: flex; justify-content: flex-end; align-items: center; margin: 0 -2rem; padding: 1.5rem 2rem 1rem 2rem; border-bottom: 1px solid #e5e7eb;">
+                <button aria-label="Close Receipt" class="close-btn" id="closeModal" style="background:none; border:none; font-size:2rem; cursor:pointer; color:#9ca3af; font-style: normal; line-height: 1; padding: 0;">&times;</button>
+            </div>
 
-            <time id="modal-date-time" style="display: block; text-align: right; font-size: 0.8rem; color: #000000; margin-top: 1.5rem; margin-bottom: 2rem; font-family: 'Roboto Condensed', sans-serif; font-weight: 700;">
-            </time>
+            <div id="modal-date-time" style="text-align: right; font-size: 0.8rem; color: #000000; margin-top: 1.5rem; margin-bottom: 2rem; font-family: 'Roboto Condensed', sans-serif; font-weight: 400;">
+            </div>
 
-            <section aria-labelledby="tourist-heading">
-                <h3 id="tourist-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; color:#000000; font-family: 'Roboto Condensed', sans-serif;">TOURIST</h3>
-                <dl style="margin: 0; padding: 0;">
-                    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem; padding-left: 1.25rem;">
-                        <dt id="modal-adult-label" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">ADULTS</dt>
-                        <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(18 years old and above)</dd>
-                        <dd id="modal-adults" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">0</dd>
-                    </div>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem; padding-left: 1.25rem;">
-                        <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">CHILDREN</dt>
-                        <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(2 to 17 years old)</dd>
-                        <dd id="modal-children" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">0</dd>
-                    </div>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:1.5rem; font-size:0.85rem; padding-left: 1.25rem;">
-                        <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">INFANTS</dt>
-                        <dd style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">(under 2 years old)</dd>
-                        <dd id="modal-infants" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">0</dd>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.85rem;">
-                        <dt style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">PACKAGE</dt>
-                        <dd id="modal-package" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">NONE</dd>
-                    </div>
-                </dl>
-            </section>
+            <div style="font-weight:700; font-size:0.9rem; margin-bottom:1rem; color:#000; font-family: 'Roboto Condensed', sans-serif;">TOURIST</div>
 
-            <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;" aria-hidden="true">
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem;">
+                <span id="modal-adult-label" style="padding-left: 0.5rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">ADULTS</span>
+                <span style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000;">(18 years old and above)</span>
+                <span id="modal-adults" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000;">0</span>
+            </div>
 
-            <section aria-labelledby="itinerary-heading">
-                <h3 id="itinerary-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; font-family: 'Roboto Condensed', sans-serif; color: #000000;">ITINERARY</h3>
-                <ul id="modal-itinerary-list" style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; font-size: 0.8rem; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0 0 1.5rem 0;">
-                </ul>
-                <dl style="margin: 0; padding: 0;">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; font-size: 0.85rem;">
-                        <dt style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">VEHICLE</dt>
-                        <dd id="modal-vehicle" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-transform: uppercase; text-align: center; margin: 0;">NONE</dd>
-                        <dd id="modal-vehicle-quantity" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-align: right; font-weight: bold; margin: 0;"></dd>
-                    </div>
-                </dl>
-            </section>
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem;">
+                <span style="padding-left: 0.5rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">CHILDREN</span>
+                <span style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000;">(2 to 17 years old)</span>
+                <span id="modal-children" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000;">0</span>
+            </div>
 
-            <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;" aria-hidden="true">
+            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:1.5rem; font-size:0.85rem;">
+                <span style="padding-left: 0.5rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">INFANTS</span>
+                <span style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000;">(under 2 years old)</span>
+                <span id="modal-infants" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000;">0</span>
+            </div>
 
-            <section aria-labelledby="contact-heading">
-                <h3 id="contact-heading" style="font-weight: 700; font-size:0.9rem; margin: 0 0 1rem 0; font-family: 'Roboto Condensed', sans-serif; color: #000000;">CONTACT INFORMATION</h3>
-                <address style="font-style: normal; margin: 0; padding: 0;">
-                    <dl style="margin: 0; padding: 0;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
-                            <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">FULL NAME:</dt>
-                            <dd id="modal-full-name" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">---</dd>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
-                            <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">EMAIL ADDRESS:</dt>
-                            <dd id="modal-email" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">---</dd>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 0.85rem;">
-                            <dt style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">PHONE NUMBER:</dt>
-                            <dd id="modal-phone" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; margin: 0;">---</dd>
-                        </div>
-                    </dl>
-                </address>
-            </section>
+            <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.85rem;">
+                <span style="font-weight:700; font-family: 'Roboto Condensed', sans-serif; color: #000000;">PACKAGE</span>
+                <span id="modal-package" style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">NONE</span>
+            </div>
 
-            <footer style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; margin-bottom: 0.5rem; border-top: 1px solid #e5e7eb; padding-top: 1.5rem;">
+            <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;">
+
+            <div style="font-weight:700; font-size:0.9rem; margin-bottom:1rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">ITINERARY</div>
+
+            <div id="modal-itinerary-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; font-size: 0.8rem; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin-bottom: 1.5rem;">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; font-size: 0.85rem;">
+                <span style="font-weight:700; font-family: 'Roboto Condensed', sans-serif; color: #000000;">VEHICLE</span>
+                <span id="modal-vehicle" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-transform: uppercase; text-align: center;">NONE</span>
+                <span id="modal-vehicle-quantity" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-align: right; font-weight: bold;">0</span>
+            </div>
+
+            <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;">
+
+            <div style="font-weight:700; font-size:0.9rem; margin-bottom:1rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">CONTACT INFORMATION</div>
+
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
+                <span style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">FULL NAME:</span>
+                <span id="modal-full-name" style="text-transform: uppercase; font-family: 'Roboto Condensed', sans-serif; color: #000000;">---</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
+                <span style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">EMAIL ADDRESS:</span>
+                <span id="modal-email" style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">---</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 0.85rem;">
+                <span style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">PHONE NUMBER:</span>
+                <span id="modal-phone" style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">---</span>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 1.5rem 0;">
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
                 <div style="display: flex; gap: 0.75rem; align-items: center;">
                     <span style="font-weight: 700; font-family: 'Roboto Condensed', sans-serif; color: #000000; font-size: 0.9rem;">TOTAL FEE:</span>
-                    <span id="modal-total-fee" style="font-weight: 600; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 1.1rem; font-style: italic;">₱0</span>
-                    <span style="font-style: italic; color: #6b7280; font-size: 0.8rem; font-family: 'Roboto Condensed', sans-serif;">(except tour guide fee)</span>
+                    <span id="modal-total-fee" style="font-weight: 600; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 1rem; font-style: italic;">₱0</span>
                 </div>
                 <button class="accept-btn" onclick="confirmFinalAcceptance()" aria-label="Submit Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 2px; cursor: pointer; transition: background-color 0.2s;">  
                     SUBMIT
                 </button>
-            </footer>
+            </div>
         </article>
     </div>
 

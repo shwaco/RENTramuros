@@ -2,7 +2,7 @@
 
 function buildAndShowModal() {
     
-    // 1. TOURIST COUNTS
+    // 1. TOURIST COUNTS & PAX LOGIC
     document.getElementById('modal-adults').innerText = reservationData.tourists.adults;
     document.getElementById('modal-children').innerText = reservationData.tourists.children;
     document.getElementById('modal-infants').innerText = reservationData.tourists.infants;
@@ -10,62 +10,113 @@ function buildAndShowModal() {
     const adultLabel = document.getElementById('modal-adult-label');
     adultLabel.innerText = reservationData.includesSeniors ? "ADULTS & SENIORS" : "ADULTS";
 
+    // Calculate Pax (Adults + Children) just like the backend
+    const pax = reservationData.tourists.adults + reservationData.tourists.children;
+    const paxMultiplier = pax > 0 ? pax : 1; // Failsafe
+
     // 2. PACKAGE & DATE
-    document.getElementById('modal-package').innerText = reservationData.wantsPackage ? (reservationData.selectedPackage || "YES") : "NO";
+    document.getElementById('modal-package').innerText = reservationData.wantsPackage ? (reservationData.selectedPackage || "YES") : "NO PACKAGE";
     const travelDate = document.getElementById('date-display').innerText;
     const travelTime = document.getElementById('time-display').innerText;
     document.getElementById('modal-date-time').innerText = `${travelDate} ; ${travelTime}`;
 
-    // 3. ATTRACTIONS & FEE CALCULATION (The new logic!)
+    // 3. THE NEW MATH (Base Fee Calculation)
+    let baseTotal = 0; 
     const itineraryList = document.getElementById('modal-itinerary-list');
-    itineraryList.innerHTML = ""; // Clear old list
-    let totalFee = 0; // Initialize total
-    
-    if (reservationData.customAttractions.length > 0) {
-        reservationData.customAttractions.forEach(attr => {
-            const parts = attr.split('|');
-            const name = parts[0] ? parts[0].trim() : '';
-            
-            // CHANGED: Using parseFloat to keep the decimals from the database!
-            const fee = parts[1] ? parseFloat(parts[1]) : 0;
-            
-            if (fee > 0) totalFee += fee;
+    itineraryList.innerHTML = ""; 
 
-            const li = document.createElement('li');
-            if (fee > 0) {
-                // Formats the individual item fee with 2 decimal places
-                const formattedFee = `₱${fee.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-                li.innerHTML = `• ${name}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">${formattedFee}</span>`;
-            } else {
-                li.innerHTML = `• ${name}`;
-            }
-            itineraryList.appendChild(li);
-        });
-    } else {
-        itineraryList.innerHTML = "<li class='no-itinerary-text'>No custom attractions selected</li>";
+    // --- A. Vehicle Math ---
+    if (reservationData.selectedVehicle && reservationData.selectedVehicle !== 'None') {
+        const vMultiplier = reservationData.vehicleQuantity > 0 ? reservationData.vehicleQuantity : 1;
+        baseTotal += (reservationData.selectedVehiclePrice * vMultiplier);
     }
 
-    // Display the Total Fee using your colleague's updated formatting (No decimals)
-    const feeDisplay = totalFee > 0 
-        ? `₱${totalFee.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` 
-        : '₱0.00';
+// --- B. Package or Attraction Math ---
+    if (reservationData.wantsPackage) { 
+        // We calculate it dynamically from the attractions inside it!
+        
+        if (reservationData.selectedPackageDesc) {
+            const items = reservationData.selectedPackageDesc.split('\n');
+            items.forEach(item => {
+                const cleanName = item.replace(/^- /, '').trim();
+                if (cleanName) {
+                    
+                    // 1. Look up the fee in our master dictionary (defaults to 0 if not found)
+                    const baseFee = reservationData.attractionFees[cleanName] || 0;
+                    
+                    // 2. Multiply by the pax (adults + children)
+                    const totalFee = baseFee * paxMultiplier;
+                    baseTotal += totalFee; // Add it to the grand total
+                    
+                    // 3. Render it beautifully!
+                    if (totalFee > 0) {
+                        const formattedFee = `₱${totalFee.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                        itineraryList.innerHTML += `<span>${cleanName}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">${formattedFee}</span></span>`;
+                    } else {
+                        itineraryList.innerHTML += `<span>${cleanName}</span>`; 
+                    }
+                }
+            });
+        } else {
+            itineraryList.innerHTML = "<span class='no-itinerary-text' style='grid-column: span 3;'>No itinerary details available</span>";
+        }
+        
+    } else {
+        if (reservationData.customAttractions.length > 0) {
+            reservationData.customAttractions.forEach(attr => {
+                const parts = attr.split('|');
+                const name = parts[0] ? parts[0].trim() : '';
+                const baseFee = parts[1] ? parseFloat(parts[1]) : 0; // Renamed for clarity
+                
+                // NEW: Calculate the multiplied total for this specific attraction
+                const totalAttractionFee = baseFee * paxMultiplier;
+                
+                if (totalAttractionFee > 0) {
+                    baseTotal += totalAttractionFee; // Add to grand total
+                    
+                    // Display the MULTIPLIED total (e.g., 400), not the raw base fee (e.g., 100)!
+                    const formattedFee = `₱${totalAttractionFee.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                    itineraryList.innerHTML += `<span>${name}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">${formattedFee}</span></span>`;
+                } else {
+                    itineraryList.innerHTML += `<span>${name}</span>`; 
+                }
+            });
+        } else {
+            itineraryList.innerHTML = "<span class='no-itinerary-text' style='grid-column: span 3;'>No custom attractions selected</span>";
+        }
+    }
+
+    // --- C. Calculate the Guide Fee Range (The new final output!) ---
+    let feeDisplay = '₱0.00';
+    if (baseTotal > 0) {
+        const minTotal = baseTotal + 1000; 
+        const maxTotal = baseTotal + 1500; 
+
+        const formattedMin = minTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const formattedMax = maxTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        feeDisplay = `₱${formattedMin} - ₱${formattedMax}`;
+    }
     document.getElementById('modal-total-fee').innerText = feeDisplay;  
 
-    // 4. VEHICLE
+    // 4. VEHICLE DISPLAY
     const vehicleDisplay = document.getElementById('modal-vehicle');
     const vehicleQuantityDisplay = document.getElementById('modal-vehicle-quantity');
     
     if (reservationData.selectedVehicle && reservationData.selectedVehicle !== 'None') {
-        vehicleDisplay.innerText = reservationData.selectedVehicle;
+        const vMultiplier = reservationData.vehicleQuantity > 0 ? reservationData.vehicleQuantity : 1;
+        const totalVehicleCost = reservationData.selectedVehiclePrice * vMultiplier;
+        
+        const formattedVehicleCost = `₱${totalVehicleCost.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        vehicleDisplay.innerHTML = `${reservationData.selectedVehicle}&nbsp;&nbsp;<span style="color: #109620; font-weight: 600; font-style: italic; font-size: 0.8rem;">${formattedVehicleCost}</span>`;
         vehicleQuantityDisplay.innerText = reservationData.vehicleQuantity; 
     } else {
-        vehicleDisplay.innerText = ""; 
-        vehicleQuantityDisplay.innerText = "NONE"; 
+        vehicleDisplay.innerText = "NONE"; 
+        vehicleQuantityDisplay.innerText = ""; 
     }
 
     // 5. CONTACT INFO
     document.getElementById('modal-full-name').innerText = `${reservationData.contactInfo.firstName} ${reservationData.contactInfo.lastName}`;
-    
     document.getElementById('modal-email').innerText = reservationData.contactInfo.email;
     document.getElementById('modal-phone').innerText = reservationData.contactInfo.phone;
 
@@ -79,11 +130,9 @@ document.getElementById('closeModal').addEventListener('click', () => {
 });
 
 function confirmFinalAcceptance() {
-    // UX feedback
     const acceptBtn = document.querySelector('.accept-btn');
     acceptBtn.innerText = "PROCESSING...";
     acceptBtn.disabled = true;
-    
     sendDataToDatabase();
 }
 

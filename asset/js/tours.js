@@ -2,12 +2,16 @@
 let reservationData = {
     wantsPackage: null, 
     selectedPackage: null, 
-    selectedPackageId: null, // NEW: Tracks package_id
+    selectedPackageId: null, 
+    selectedPackagePrice: 0, // NEW: Tracks the package cost
     selectedVehicle: null,
-    selectedVehicleId: null, // NEW: Tracks vehicle_id
+    selectedVehicleId: null, 
+    selectedVehiclePrice: 0, // NEW: Tracks the vehicle cost
+    selectedPackageDesc: "", // NEW: Holds the text description for the receipt
+    attractionFees: {}, // NEW: Master dictionary of all attraction prices
     vehicleQuantity: 0,
     customAttractions: [], 
-    customAttractionIds: [], // NEW: Tracks array for REQUEST_ATTRACTIONS junction table
+    customAttractionIds: [],
     tourists: {
         adults: 2,
         children: 0,
@@ -283,53 +287,61 @@ function selectPackageOption(wantsPackage) {
 
 // --- FULLY DYNAMIC SELECTION LOGIC ---
 // --- PACKAGE LOGIC ---
-function selectPackage(packageId, packageName) {
+function selectPackage(packageId, packageName, packagePrice, packageDesc) { // ADDED packageDesc
     if (reservationData.selectedPackage === packageName) {
         reservationData.selectedPackage = null; 
         reservationData.selectedPackageId = null; 
+        reservationData.selectedPackagePrice = 0; 
+        reservationData.selectedPackageDesc = ""; // RESET
         document.querySelectorAll('.package-options-container > div').forEach(p => p.classList.remove('selected-card'));
     } else {
         reservationData.selectedPackage = packageName;
-        reservationData.selectedPackageId = packageId; // Stores the pure number!
+        reservationData.selectedPackageId = packageId; 
+        reservationData.selectedPackagePrice = parseFloat(packagePrice) || 0; 
+        reservationData.selectedPackageDesc = packageDesc || ""; // SAVE THE STRING
         document.querySelectorAll('.package-options-container > div').forEach(p => p.classList.remove('selected-card'));
-        document.getElementById(`pkg-${packageId}`).classList.add('selected-card'); // Adds prefix only for HTML
+        document.getElementById(`pkg-${packageId}`).classList.add('selected-card'); 
     }
 }
 
 // --- VEHICLE LOGIC ---
-function selectVehicle(vehicleId, vehicleName) {
+function selectVehicle(vehicleId, vehicleName, vehiclePrice) { // ADDED PRICE HERE
     if (reservationData.selectedVehicle === vehicleName) {
         reservationData.selectedVehicle = null;
         reservationData.selectedVehicleId = null;
+        reservationData.selectedVehiclePrice = 0; // RESET PRICE
         reservationData.vehicleQuantity = 0;
         document.querySelectorAll('#dynamic-package-vehicles .vehicle-card').forEach(v => v.classList.remove('selected-card'));
     } else {
         reservationData.selectedVehicle = vehicleName;
-        reservationData.selectedVehicleId = vehicleId; // Stores the pure number!
+        reservationData.selectedVehicleId = vehicleId; 
+        reservationData.selectedVehiclePrice = parseFloat(vehiclePrice) || 0; // SAVE PRICE
         reservationData.vehicleQuantity = 1;
         document.querySelectorAll('#dynamic-package-vehicles .veh-count').forEach(el => el.innerText = '1');
 
         document.querySelectorAll('#dynamic-package-vehicles .vehicle-card').forEach(v => v.classList.remove('selected-card'));
-        
         const targetId = vehicleId === 'veh-none' ? 'veh-none' : `veh-${vehicleId}`;
         document.getElementById(targetId).classList.add('selected-card');
     }
 }
 
-function selectCustomVehicle(vehicleId, vehicleName) {
+function selectCustomVehicle(vehicleId, vehicleName, vehiclePrice) { // ADDED PRICE HERE
     if (reservationData.selectedVehicle === vehicleName) {
+        // Same reset logic as above...
         reservationData.selectedVehicle = null;
         reservationData.selectedVehicleId = null; 
+        reservationData.selectedVehiclePrice = 0;
         reservationData.vehicleQuantity = 0;
         document.querySelectorAll('#dynamic-custom-vehicles .custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
     } else {
+        // Same save logic as above...
         reservationData.selectedVehicle = vehicleName;
-        reservationData.selectedVehicleId = vehicleId; // Stores the pure number!
+        reservationData.selectedVehicleId = vehicleId; 
+        reservationData.selectedVehiclePrice = parseFloat(vehiclePrice) || 0;
         reservationData.vehicleQuantity = 1;
         document.querySelectorAll('#dynamic-custom-vehicles .veh-count').forEach(el => el.innerText = '1');
 
         document.querySelectorAll('#dynamic-custom-vehicles .custom-vehicle-card').forEach(v => v.classList.remove('selected-card'));
-        
         const targetId = vehicleId === 'custom-veh-none' ? 'custom-veh-none' : `custom-veh-${vehicleId}`;
         document.getElementById(targetId).classList.add('selected-card');
     }
@@ -420,15 +432,17 @@ function renderPackages(packages) {
 
     packages.forEach((pkg, index) => {
         const formatDesc = pkg.description ? pkg.description.replace(/\n/g, '<br>') : '';
-        // CHANGED: pkg.name is now pkg.package_name
         const safeName = pkg.package_name.replace(/"/g, '&quot;');
+        
+        // NEW: Safely escape the description string for the dataset
+        const safeDesc = pkg.description ? pkg.description.replace(/"/g, '&quot;') : '';
         
         const numericPrice = parseFloat(pkg.price);
         const displayPrice = isNaN(numericPrice) ? '₱0.00' : `₱${numericPrice.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-        // CHANGED: pkg.id is now pkg.package_id
+        // ADDED data-desc and updated the onclick function arguments!
         html += `
-        <div class="package-${index + 1}" id="pkg-${pkg.package_id}" data-name="${safeName}" onclick="selectPackage(${pkg.package_id}, this.dataset.name)">
+        <div class="package-${index + 1}" id="pkg-${pkg.package_id}" data-name="${safeName}" data-desc="${safeDesc}" onclick="selectPackage(${pkg.package_id}, this.dataset.name, ${pkg.price}, this.dataset.desc)">
             <div class="package-image"><img src="${pkg.image_file}" alt="${safeName}"></div>
             <div class="package-details-text">
                 <span class="package-label">${pkg.package_name}</span>
@@ -453,7 +467,7 @@ function renderVehicles(vehicles) {
 
         // CHANGED: veh.id is now veh.vehicle_id, and veh.capacity is veh.passenger_capacity
         pkgHtml += `
-        <div class="vehicle-${index + 1} vehicle-card" id="veh-${veh.vehicle_id}" data-name="${safeName}" onclick="selectVehicle(${veh.vehicle_id}, this.dataset.name)">
+        <div class="vehicle-${index + 1} vehicle-card" id="veh-${veh.vehicle_id}" data-name="${safeName}" onclick="selectVehicle(${veh.vehicle_id}, this.dataset.name, ${veh.price})">
             <div class="vehicle-counter">
                 <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
                 <span class="veh-count">1</span>
@@ -467,7 +481,7 @@ function renderVehicles(vehicles) {
         </div>`;
 
         customHtml += `
-        <div class="custom-vehicle-${index + 1} custom-vehicle-card" id="custom-veh-${veh.vehicle_id}" data-name="${safeName}" onclick="selectCustomVehicle(${veh.vehicle_id}, this.dataset.name)">
+        <div class="custom-vehicle-${index + 1} custom-vehicle-card" id="custom-veh-${veh.vehicle_id}" data-name="${safeName}" onclick="selectCustomVehicle(${veh.vehicle_id}, this.dataset.name, ${veh.price})">
             <div class="vehicle-counter">
                 <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
                 <span class="veh-count">1</span>
@@ -490,7 +504,10 @@ function renderAttractions(attractions) {
 
     attractions.forEach((attr, index) => {
         const fee = attr.fee || 0;
-        // CHANGED: attr.name is now attr.attraction_name
+        
+        // NEW: Save the fee into our dictionary so the receipt can find it later!
+        reservationData.attractionFees[attr.attraction_name] = fee; 
+        
         const dataString = `${attr.attraction_name} | ${fee}`;
         const safeDataString = dataString.replace(/"/g, '&quot;'); 
 

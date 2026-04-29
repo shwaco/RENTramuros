@@ -1,30 +1,30 @@
 {
-  "packages":[
+ "packages":[
     {
       "package_id": "1",
       "package_name": "Hero's Trail",
-      "description": "- Fort Santiago entrance ticket\n- Rizal Shrine\n- Rizal's Bagumbayan Light & Sound Museum",
+      "description": "- Fort Santiago\n- Rizal Shrine\n- Rizal's Bagumbayan Light & Sound Museum\n- Bambike Ecotours Intramuros",
       "price": "676.67",
       "image_file": "https://dummyimage.com/hd1080"
     },
     {
       "package_id": "2",
       "package_name": "Cultural Combo",
-      "description": "- Casa Manila\n- Barbara's Heritage Restaurant\n- Silahis Center",
+      "description": "- Casa Manila\n- Barbara's Heritage Restaurant\n- Silahis Arts & Artifacts",
       "price": "767.67",
       "image_file": "https://dummyimage.com/hd1080"
     },
     {
       "package_id": "3",
       "package_name": "Walled City Grand Tour",
-      "description": "- Fort Santiago tour\n- San Agustin Museum\n- Minor Basilica\n- Casa Manila\n- Bambike",
+      "description": "- Fort Santiago\n- San Agustin Museum\n- Minor Basilica\n- Casa Manila",
       "price": "100.00",
       "image_file": "https://dummyimage.com/hd1080"
     },
     {
       "package_id": "4",
       "package_name": "Bastions and Walls",
-      "description": "- Puerta Del Parian\n- Fort Santiago\n- Palacio del Gobernador\n- Puerta Real",
+      "description": "- Puerta del Parian\n- Fort Santiago\n- Palacio del Gobernador\n- Puerta Real Gardens",
       "price": "200.00",
       "image_file": "https://dummyimage.com/hd1080"
     },
@@ -41,18 +41,21 @@
       "vehicle_id": "1",
       "vehicle_type": "Tuktuk",
       "passenger_capacity": "Capacity: 3-4",
+      "price": "1000.00",
       "image_file": "https://dummyimage.com/hd1080"
     },
     {
       "vehicle_id": "2",
       "vehicle_type": "Kalesa",
       "passenger_capacity": "Capacity: 2-4",
+      "price": "1500.00",
       "image_file": "https://dummyimage.com/hd1080"
     },
     {
       "vehicle_id": "3",
       "vehicle_type": "Tranvia",
       "passenger_capacity": "Capacity: 12-20",
+      "price": "2500.00",
       "image_file": "https://dummyimage.com/hd1080"
     }
   ],
