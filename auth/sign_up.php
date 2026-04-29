@@ -20,17 +20,16 @@
                 <h1>Sign up</h1>
                 <div class="wrapper">
                     <div class="name_wrapper">
-                        <input type="text" name="firstname" placeholder="First name" required></input>
-                        <input type="text" name="lastname" placeholder="Last name" required></input>
+                        <input type="text" name="firstname" placeholder="First name" class="inputs first_name" required></input>
+                        <input type="text" name="lastname" placeholder="Last name" class="inputs last_name"required></input>
                     </div>
                     <div class="email_wrapper">
                         <input class="inputs email" type="email" name="email" placeholder="Email" required></input>
                     </div>
                     <div class="password_wrapper">
-                         <input class="inputs pass" id="password_input" type="password" name="password" placeholder="Password" required>
-    
+                        <input class="inputs pass" type="password" name="password" placeholder="Password" id="password_input" required>
                         <button type="button" id="pass_visibility">
-                            <img id="visibility_icon" src="../asset/img/pass_visibility.svg" alt="Toggle Password">
+                            <img id="visibility_icon" src="../asset/img/pass_visibility.svg">
                         </button>
                     </div>
                     <div class="phone_number_wrapper">

@@ -29,11 +29,6 @@ body {
     width: 100%;
 }
 
-/* .wrapper input:focus {
-    outline: none;
-    border: 2px solid red;
-} */
-
 form {
     display: flex;
     align-items: center;
@@ -49,6 +44,14 @@ h1 {
     font-size: 3rem;
 }
 
+.name_wrapper input {
+    text-transform: uppercase;
+}
+
+.name_wrapper input::placeholder {
+    text-transform: none;
+}
+
 .inputs {
     width: 100%;
 }
@@ -56,6 +59,10 @@ h1 {
 .inputs, input {
     padding: 1rem;
     font-size: 1rem;
+    border: none;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    outline: none;
 }   
 
 .wrapper {
@@ -65,29 +72,36 @@ h1 {
 }
 
 .password_wrapper {
-    display: flex;
-    align-items: center;       
-    border: 1px solid black; 
-    border-radius: 5px;
-    background-color: white;
+    position: relative; 
     width: 100%;
-    padding-right: 0.5rem;     
+    border: none; 
 }
 
 .password_wrapper input {
-    border: none;
-    outline: none;             
-    width: 100%;               
+    width: 100%;
     padding: 1rem;
-    background: transparent;   
+    padding-right: 3rem; 
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border 0.3s ease;
+    border: none;
+}
+
+.password_wrapper input:focus {
+    outline: black;
 }
 
 #pass_visibility {
+    position: absolute; 
+    top: 50%;
+    right: 1rem; 
+    transform: translateY(-50%); 
     background: transparent;
     border: none;
-    cursor: pointer;           
+    cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 #pass_visibility img {
@@ -98,16 +112,36 @@ h1 {
 #submit_button {
     width: 100%;
     padding: 1rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     border: none;
     background-color: #8D230F;
-    transition: ease-in-out 0.2s;
-    cursor: pointer;
     color: white;
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+    border-radius: 10px; 
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 #submit_button:hover {
     background-color: #F1959B;
 }
 
+.name_wrapper {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
 
+.name_wrapper input {
+    flex: 1; 
+}
+
+input, .password_wrapper {
+    width: 100%;
+    font-size: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    transition: border 0.3s ease; 
+}
