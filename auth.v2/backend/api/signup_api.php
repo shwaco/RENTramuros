@@ -7,7 +7,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-require_once '../../../backend/config/config.php';
+require_once '../../config/config.php';
 require_once '../config/mailer_config.php';
 
 /** @var mysqli $con */
