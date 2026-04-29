@@ -17,7 +17,7 @@ $email = $data->email;
 $otp = $data->otp;
 
 $sql = "SELECT tourists_id, otp_code, otp_expiry FROM tourists WHERE email = ?";
-$stmt = $con->prepare($sql);
+$stmt = mysqli_prepare($con, $sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
@@ -35,7 +35,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     }
 
     $update_sql = "UPDATE tourists SET otp_code = NULL, otp_expiry = NULL WHERE tourists_id = ?";
-    $update_stmt = $con->prepare($update_sql);
+    $update_stmt = mysqli_prepare($con, $update_sql);
     mysqli_stmt_bind_param($update_stmt, "i", $row['tourists_id']);
     if  (mysqli_stmt_execute($update_stmt)){
         echo json_encode(["status" => "success", "message" => "OTP verified successfully!"]);
