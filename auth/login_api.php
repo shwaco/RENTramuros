@@ -5,6 +5,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 require_once '../config/config.php';
+/** @var mysqli $con */
 
 $data = json_decode(file_get_contents("php://input"));
 if(!isset($data->email) || !isset($data->password_hash)) {
@@ -17,7 +18,7 @@ $password_hash = $data->password_hash;
 
 // 1. Check Admins
 $admin_sql = "SELECT * FROM admins WHERE email = ?";
-$stmt = $con->prepare($admin_sql);
+$stmt = mysqli_prepare($con, $admin_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
@@ -34,7 +35,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 
 // 2. Check Tour Guides
 $guide_sql = "SELECT * FROM tour_guides WHERE email = ?";
-$stmt = $con->prepare($guide_sql);
+$stmt = mysqli_prepare($con, $guide_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
@@ -48,7 +49,8 @@ if ($row = mysqli_fetch_assoc($result)) {
     $_SESSION['guide_id'] = $row['guide_id'];
 
     // Set to Online if they were Offline or Available (new DB default is 'Available')
-    $update_stmt = $con->prepare("UPDATE tour_guides SET current_status = 'Online' WHERE guide_id = ? AND current_status IN ('Offline', 'Available')");
+    $update_sql = "UPDATE tour_guides SET current_status = 'Online' WHERE guide_id = ? AND current_status IN ('Offline', 'Available')";
+    $update_stmt = mysqli_prepare($con, $update_sql);
     mysqli_stmt_bind_param($update_stmt, "i", $row['guide_id']);
     mysqli_stmt_execute($update_stmt);
 
@@ -58,7 +60,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 
 // 3. Check Tourists — uses tourist_id (not customer_id) and otp_code (not otp)
 $tourist_sql = "SELECT * FROM tourists WHERE email = ?";
-$stmt = $con->prepare($tourist_sql);
+$stmt = mysqli_prepare($con, $tourist_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
