@@ -190,7 +190,7 @@ function startResendCooldown(seconds) {
                 msg.textContent = '✓ Verified! Redirecting...';
                 clearInterval(countdownTimer);
                 setTimeout(() => {
-                    window.location.href = 'auth.v2/backend'; // ← change to your login page
+                    window.location.href = 'log_in.php'; // ← change to your login page
                 }, 1500);
             } else {
                 msg.className     = 'error';

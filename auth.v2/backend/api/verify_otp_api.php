@@ -1,14 +1,13 @@
 <?php
+// Removed ob_start() so we can see real errors if they happen!
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
-ob_start();
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: POST');
 
-require_once __DIR__ . '/../../../backend.v2/config/config.php'; // ✅ Bug 2 fixed
+require_once __DIR__ . '/../../../backend.v2/config/config.php'; 
 /** @var mysqli $con */
 
 $data = json_decode(file_get_contents("php://input"));
@@ -20,7 +19,7 @@ if (!isset($data->email) || !isset($data->otp)) {
 $email = $data->email;
 $otp   = $data->otp;
 
-$sql  = "SELECT tourist_id, otp_code, otp_expiry FROM tourists WHERE email = ?"; // ✅ Bug 3 fixed
+$sql  = "SELECT tourist_id, otp_code, otp_expiry FROM tourists WHERE email = ?"; 
 $stmt = mysqli_prepare($con, $sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
 mysqli_stmt_execute($stmt);
@@ -37,14 +36,22 @@ if ($row = mysqli_fetch_assoc($result)) {
         exit();
     }
 
-    // ✅ Bug 4 fixed — set is_verified = 1
-    $update_sql  = "UPDATE tourists SET otp_code = NULL, otp_expiry = NULL, is_verified = 1 WHERE tourist_id = ?";
+    // FIX: Replaced NULL with '0' to avoid NOT NULL constraint crashes in MySQL!
+    $update_sql  = "UPDATE tourists SET otp_code = '0', is_verified = 1 WHERE tourist_id = ?";
     $update_stmt = mysqli_prepare($con, $update_sql);
-    mysqli_stmt_bind_param($update_stmt, "i", $row['tourist_id']); // ✅ Bug 3 fixed
+    
+    // SAFETY NET: This will tell us exactly what's wrong if the DB crashes
+    if (!$update_stmt) {
+        echo json_encode(["status" => "error", "message" => "SQL Error: " . mysqli_error($con)]);
+        exit();
+    }
+
+    mysqli_stmt_bind_param($update_stmt, "i", $row['tourist_id']); 
+    
     if (mysqli_stmt_execute($update_stmt)) {
         echo json_encode(["status" => "success", "message" => "OTP verified successfully!"]);
     } else {
-        echo json_encode(["status" => "error", "message" => "Error updating OTP status."]);
+        echo json_encode(["status" => "error", "message" => "Error updating DB: " . mysqli_error($con)]);
     }
 } else {
     echo json_encode(["status" => "error", "message" => "Email not found."]);
