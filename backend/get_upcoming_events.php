@@ -1,16 +1,17 @@
 <?php
-// session_start();
+session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: GET');
 
-require_once 'config/config.php';
+require_once '../asset/config.php';
+/** @var mysqli $con */
 
-// if(!isset($_SESSION['tourist_id']) && !isset($_SESSION['admin_id'])) {
-//     http_response_code(401);
-//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
-//     exit();
-// }
+if(!isset($_SESSION['tourist_id']) && !isset($_SESSION['admin_id'])) {
+    http_response_code(401);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
+    exit();
+}
 
 $fetch_sql = "SELECT event_name, event_date, event_time, location, image_file FROM upcoming_events ORDER BY event_date ASC, event_time ASC";
 $fetch_stmt = mysqli_prepare($con, $fetch_sql);

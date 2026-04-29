@@ -1,7 +1,8 @@
 <?php
-include_once('../connect_phpmyadmin.php');
+include_once('../../asset/config.php');
+/** @var mysqli $con */
 
-$result = mysqli_query($conn, "SELECT * FROM Attractions");
+$result = mysqli_query($con, "SELECT * FROM Attractions");
 ?>
 
 <h2>Tourist Attractions</h2>
@@ -30,8 +31,8 @@ echo "<td>".$row['entrance_fee']."</td>";
 echo "<td>".$row['operating_hours']."</td>";
 
 echo "<td>
-<a href='edit.php?id=".$rowo['attraction_id']."'>Edit</a> |
-<a href='delete.php?id=".$rowo['attraction_id']."'>Delete</a> 
+<a href='edit.php?id=".$row['attraction_id']."'>Edit</a> |
+<a href='delete.php?id=".$row['attraction_id']."'>Delete</a> 
 </td>";
 
 echo "</tr>";

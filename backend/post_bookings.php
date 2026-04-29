@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
@@ -7,15 +7,16 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
 require_once '../asset/config.php';
+/** @var mysqli $con */
 
-// if ($_SESSION['tourist_id'] ?? null) {
-//     $data = json_decode(file_get_contents("php://input"));
-//     $data->tourist_id = $_SESSION['tourist_id'];
-// } else {
-//     http_response_code(401);
-//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
-//     exit();
-// }
+if ($_SESSION['tourist_id'] ?? null) {
+    $data = json_decode(file_get_contents("php://input"));
+    $data->tourist_id = $_SESSION['tourist_id'];
+} else {
+    http_response_code(401);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -51,7 +52,7 @@ $attraction_id = $data->attraction_id ?? [];
 
 $first_name = $data->first_name ?? null;
 $last_name = $data->last_name ?? null;
-$email_address = $data->email ?? null;
+$email_address = $data->email_address ?? null;
 $phone_number = $data->phone_number ?? null;
 
 mysqli_begin_transaction($con);
@@ -67,8 +68,8 @@ try{
         }
         $contact_info_id = mysqli_insert_id($con);
     }
-    if($booking_type === 'Package') {
-        $booking_insert_sql = "INSERT INTO booking_history (tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, package_id, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    if($booking_type === 'Packages') {
+        $booking_insert_sql = "INSERT INTO booking_history (tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, package_id, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $booking_insert_stmt = mysqli_prepare($con, $booking_insert_sql);
         mysqli_stmt_bind_param($booking_insert_stmt, "isssiiisiiiii", $tourist_id, $status, $time_of_request, $date_of_request, $adults_and_seniors, $children, $infants, $booking_type, $package_id, $contact_info_id, $number_of_vehicle, $assigned_vehicle_id, $assigned_guide_id);
     } else if ($booking_type === 'Attractions') {
@@ -84,6 +85,16 @@ try{
     }
     $booking_request_id = mysqli_insert_id($con);
 
+    if($booking_type === 'Packages' && !empty($package_id)) {
+        $package_insert_sql = "INSERT INTO request_packages (booking_request_id, package_id) VALUES (?, ?)";
+        $package_insert_stmt = mysqli_prepare($con, $package_insert_sql);
+        
+        mysqli_stmt_bind_param($package_insert_stmt, "ii", $booking_request_id, $package_id);
+        
+        if(!mysqli_stmt_execute($package_insert_stmt)) {
+            throw new Exception("Failed to associate package with junction table.");
+        }
+    }
     if($booking_type === 'Attractions' && !empty($attraction_id) && is_array($attraction_id)) {
         $attraction_insert_sql = "INSERT INTO request_attractions (booking_request_id, attraction_id) VALUES (?, ?)";
         $attraction_insert_stmt = mysqli_prepare($con, $attraction_insert_sql);

@@ -1,24 +1,26 @@
 <?php
-// session_start();
+session_start();
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: PATCH');
 
-require_once 'asset/config.php';
+require_once '../asset/config.php';
+/** @var mysqli $con */
+
 if ($_SERVER['REQUEST_METHOD'] !== 'PATCH') {
     http_response_code(405);
     echo json_encode(["status" => "error", "message" => "Method Not Allowed. Use PATCH."]);
     exit();
 }
 
-// if($_SESSION['tourist_id']??null) {
-//     // Tourist is logged in, proceed with the request
-// } else {
-//     http_response_code(401);
-//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as tourist."]);
-//     exit();
-// }
+if($_SESSION['tourist_id']??null) {
+    // Tourist is logged in, proceed with the request
+} else {
+    http_response_code(401);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as tourist."]);
+    exit();
+}
 
 $data = json_decode(file_get_contents("php://input"));
 if(empty($data->booking_request_id)) {
