@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
@@ -7,6 +7,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 require_once '../../../asset/config.php';
+/** @var mysqli $con */
 
 $data = json_decode(file_get_contents("php://input"));
 if(!isset($data->email) || !isset($data->password_hash)) {

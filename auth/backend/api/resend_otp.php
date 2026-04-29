@@ -7,6 +7,8 @@ header('Access-Control-Allow-Methods: POST');
 require_once '../../../asset/config.php';
 require_once '../config/mailer_config.php';
 
+/** @var mysqli $con */
+
 $data = json_decode(file_get_contents("php://input"));
 
 if(!isset($data->email)) {
