@@ -32,17 +32,15 @@ function calculateTotalFee(destinationsString, packagePrice, adults, children, v
     let pax = (parseInt(adults) || 0) + (parseInt(children) || 0);
     const multiplier = pax > 0 ? pax : 1;
 
-    // here naman kung ilang vehicles yung inorder
+    // Kinukuha kung ilang sasakyan ang inorder
     let vehicles = parseInt(numberOfVehicles) || 0;
     const vMultiplier = vehicles > 0 ? vehicles : 1;
     
-    // Base fee: Price ng vehicle x amount of vehicles
+    // FLOW: Base fee computation (Vehicle + Packages/Attractions)
     let baseTotal = (vPrice * vMultiplier);
 
-    // Kung package tour, baseTotal = vehicle total + (package price x number of people)
     if (isPackage) {
         baseTotal += (pPrice * multiplier);
-    // Kung custom attractions, ia-add lahat ng individual fees na multiplied
     } else {
        if (destinationsString && destinationsString.trim() !== '') {
             destinationsString.split(',').forEach(dest => {
@@ -53,10 +51,12 @@ function calculateTotalFee(destinationsString, packagePrice, adults, children, v
         }
     }
 
+    // Dito na natin ia-apply yung Guide Fee range (₱1,000 - ₱1,500)
     if (baseTotal > 0) {
-        // estimated range (20%) para bigyan ng idea yung guide sa possible total fee
-        const maxTotal = baseTotal * 1.20;
-        const formattedMin = baseTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const minTotal = baseTotal + 1000; // Minimum Guide Fee
+        const maxTotal = baseTotal + 1500; // Maximum Guide Fee
+
+        const formattedMin = minTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         const formattedMax = maxTotal.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
         return `₱${formattedMin} - ₱${formattedMax}`;
