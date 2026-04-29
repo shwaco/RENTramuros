@@ -5,6 +5,7 @@ header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Method: DELETE');
 
 require_once '../../../asset/config.php';
+/** @var mysqli $con */
 
 if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
     echo json_encode(["status" => "error", "message" => "Invalid request method."]);
@@ -19,7 +20,6 @@ if(empty($data->attraction_id)) {
 }
 
 $attraction_id = $data->attraction_id;
-
 $delete_sql = "DELETE FROM Attractions WHERE attraction_id = ?";
 $delete_stmt = mysqli_prepare($con, $delete_sql);
 mysqli_stmt_bind_param($delete_stmt, "i", $attraction_id);
