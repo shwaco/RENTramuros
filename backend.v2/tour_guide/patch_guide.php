@@ -48,7 +48,7 @@ if(isset($data->email)) {
 }
 
 if(isset($data->password)) {
-    $update_fields[] = "password = ?";
+    $update_fields[] = "password_hash = ?"; 
     $params_array[] = password_hash($data->password, PASSWORD_DEFAULT);
 }
 

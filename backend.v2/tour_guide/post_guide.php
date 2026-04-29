@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Method: POST');
@@ -7,13 +7,13 @@ header('Access-Control-Allow-Method: POST');
 require_once '../../asset/config.php';
 /** @var mysqli $con */
 
-if($_SESSION['admin_id'] ?? null) {
-    // Admin is logged in, proceed with the request
-} else {
-    http_response_code(401);
-    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
-    exit();
-}
+// if($_SESSION['admin_id'] ?? null) {
+//     // Admin is logged in, proceed with the request
+// } else {
+//     http_response_code(401);
+//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
+//     exit();
+// }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["status" => "error", "message" => "Invalid request method."]);
@@ -43,7 +43,7 @@ if(mysqli_stmt_num_rows($check_stmt) > 0) {
     exit();
 }
 
-$insert_sql = "INSERT INTO tour_guides (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+$insert_sql = "INSERT INTO tour_guides (first_name, last_name, email, password_hash) VALUES (?, ?, ?, ?)";
 $insert_stmt = mysqli_prepare($con, $insert_sql);
 mysqli_stmt_bind_param($insert_stmt, "ssss", $first_name, $last_name, $email, $password);
 

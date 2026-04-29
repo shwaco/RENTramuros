@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $data = json_decode(file_get_contents("php://input"));
-if (empty($data->event_name) || empty($data->description) || empty($data->schedule) || empty($data->main_img)) {
+if (empty($data->event_name) || empty($data->description) || empty($data->schedule) || empty($data->image_file)) {
     echo json_encode(["status" => "error", "message" => "Missing required fields."]);
     exit();
 }
@@ -29,10 +29,10 @@ if (empty($data->event_name) || empty($data->description) || empty($data->schedu
 $event_name = $data->event_name;
 $description = $data->description;
 $schedule = $data->schedule;
-$main_img = $data->main_img;
-$insert_sql = "INSERT INTO upcoming_events (event_name, description, schedule, main_img) VALUES (?, ?, ?, ?)";
+$image_file = $data->image_file;
+$insert_sql = "INSERT INTO upcoming_events (event_name, description, schedule, image_file) VALUES (?, ?, ?, ?)";
 $insert_stmt = mysqli_prepare($con, $insert_sql);
-mysqli_stmt_bind_param($insert_stmt, "ssss", $event_name, $description, $schedule, $main_img);
+mysqli_stmt_bind_param($insert_stmt, "ssss", $event_name, $description, $schedule, $image_file);
 if (mysqli_stmt_execute($insert_stmt)) {
     echo json_encode(["status" => "success", "message" => "Event added successfully."]);
 } else {

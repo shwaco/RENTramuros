@@ -13,13 +13,14 @@ if(!isset($_SESSION['tourist_id']) && !isset($_SESSION['admin_id'])) {
     exit();
 }
 
-$fetch_sql = "SELECT event_name, event_date, event_time, location, image_file FROM upcoming_events ORDER BY event_date ASC, event_time ASC";
+$fetch_sql = "SELECT event_id, event_name, event_date, event_time, location, image_file FROM upcoming_events ORDER BY event_date ASC, event_time ASC";
 $fetch_stmt = mysqli_prepare($con, $fetch_sql);
 if(mysqli_stmt_execute($fetch_stmt)) {
     $result = mysqli_stmt_get_result($fetch_stmt);
     $events_array = array();
     while ($row = mysqli_fetch_assoc($result)) {
         $event = array(
+            "event_id" => $row['event_id'],
             "event_name" => $row['event_name'],
             "event_date" => $row['event_date'],
             "event_time" => $row['event_time'],

@@ -1,27 +1,18 @@
 <?php
-// session_start();
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: GET');
 
-require_once '../../asset/config.php';
+require_once '../asset/config.php';
 /** @var mysqli $con */
 
-// if ($_SESSION['admin_id'] ?? null) {
-//     // Tourist or admin is logged in, proceed with the request
-// } else {
-//     http_response_code(401);
-//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
-//     exit();
-// }
-
-if($_SERVER['REQUEST_METHOD'] !== 'GET') {
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
-    echo json_encode(["status" => "Error", "message" => "Method Not Allowed. Use GET."]);
+    echo json_encode(["status" => "error", "message" => "Method Not Allowed. Use GET."]);
     exit();
 }
 
-$fetch_sql = "SELECT guide_id, first_name, last_name, email, current_status, last_active_at, last_dispatch_time, became_available_at, current_tourist_id FROM tour_guides ORDER BY guide_id";
+$fetch_sql = "SELECT tourist_id, first_name, last_name, email, phone_number FROM tourists ORDER BY tourist_id ASC";
 $fetch_stmt = mysqli_prepare($con, $fetch_sql);
 
 if (mysqli_stmt_execute($fetch_stmt)) {

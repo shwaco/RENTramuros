@@ -1,0 +1,19 @@
+/* asset/css/style.css */
+
+.gradient-bg {
+    background: linear-gradient(135deg, #9e9b9b 0%, #444343 100%);
+}
+
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.queue-number {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
