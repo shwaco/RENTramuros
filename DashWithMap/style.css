@@ -1,0 +1,342 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  height: 100vh;
+  width: 100%;
+}
+
+#side-panel {
+    position: absolute;
+    top: 0;
+    left: -400px; 
+    width: 350px;
+    height: 100vh; 
+    background: #F4F1EA;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+    z-index: 9999; 
+    transition: left 0.3s ease-in-out; 
+    overflow-y: auto; 
+    font-family: sans-serif;
+}
+
+
+#side-panel.open {
+    left: 0; 
+}
+
+#panel-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover; 
+    display: block;
+}
+
+.panel-content {
+    padding: 25px;
+}
+
+#panel-title {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+#panel-text {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+#panel-operating-hours-header {
+    text-align: left;
+    font-size: 18px;
+    color: #333;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+#panel-operating-hours-details {
+    text-align: center;
+    line-height: 1.6;
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+#close-panel-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #F4F1EA;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#close-panel-btn:hover {
+    background: #f0f0f0;
+}
+
+.book-now-btn {
+    display: block;
+    outline: none;
+    margin-top: 30px;
+    text-align: center;
+    padding: 14px;
+    background: #8D230F;
+    color: #F4F1EA;
+    text-decoration: none;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.book-now-btn:hover {
+    background: #5D5C61;
+}
+
+#search-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: #F4F1EA;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    gap: 10px;
+    font-family: sans-serif;
+}
+
+#search-input {
+    padding: 10px;
+    width: 250px;
+    border: 1px solid #8D230F;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#search-btn {
+    padding: 10px 15px;
+    background: #C99E10;
+    color: white;
+    border-color: #8D230F;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#search-btn:hover {
+    background: #8D230F;
+}
+
+.leaflet-popup-content h3 {
+    font-size: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #333; 
+}
+
+.leaflet-popup-content {
+    width: 300px; 
+}
+
+.leaflet-popup-content img {
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover;
+}
+
+#map-logo {
+    position: absolute;
+    top: -80px; 
+    left: -600px; 
+    transform: translateX(-50%); 
+    width: 220px; 
+    z-index: 9999; 
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    pointer-events: none;
+}
+#church-buttons {
+    position: absolute;
+    top: 140px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.Churches-btn {
+    padding: 8px 15px;
+    background: #F4F1EA;
+    color: #8D230F;
+    border: 2px solid #8D230F;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: 0.2s;
+    font-family: sans-serif;
+}
+
+.Churches-btn:hover {
+    background: #8D230F;
+    color: #F4F1EA;      
+}
+
+#foodplaces-buttons {
+    position: absolute;
+    top: 240px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.Food-places-btn {
+    padding: 8px 15px;
+    background: #F4F1EA;
+    color: #8D230F;
+    border: 2px solid #8D230F;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: 0.2s;
+    font-family: sans-serif;
+}
+
+.Food-places-btn:hover {
+    background: #8D230F;
+    color: #F4F1EA;    
+}
+
+#museums-buttons {
+    position: absolute;
+    top: 190px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.Museum-btn {
+    padding: 8px 15px;
+    background: #F4F1EA;
+    color: #8D230F;
+    border: 2px solid #8D230F;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: 0.2s;
+    font-family: sans-serif;
+}
+
+.Museum-btn:hover {
+    background: #8D230F;
+    color: #F4F1EA;    
+}
+
+#landmarks-buttons {
+    position: absolute;
+    top: 290px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.Landmark-btn {
+    padding: 8px 15px;
+    background: #F4F1EA;
+    color: #8D230F;
+    border: 2px solid #8D230F;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: 0.2s;
+    font-family: sans-serif;
+}
+
+.Landmark-btn:hover {
+    background: #8D230F;
+    color: #F4F1EA;    
+}
+
+#rides-buttons {
+    position: absolute;
+    top: 90px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.Rides-btn {
+    padding: 8px 15px;
+    background: #F4F1EA;
+    color: #8D230F;
+    border: 2px solid #8D230F;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: 0.2s;
+    font-family: sans-serif;
+}
+
+.Rides-btn:hover {
+    background: #8D230F;
+    color: #F4F1EA;    
+}
+
+#show-all-buttons {
+    position: absolute;
+    top: 340px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.Show-all-btn {
+    padding: 8px 15px;
+    background: #8D230F;
+    color: #F4F1EA;
+    border: 2px solid #F4F1EA;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: 0.2s;
+    font-family: sans-serif;
+}
+
+.Show-all-btn:hover {
+    background: #F4F1EA;
+    color: #8D230F;    
+}
+
+/* filtration shits */
+.mini-label {
+    background-color: #F4F1EA;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    font-weight: bold;
+    color: #333;
+    padding: 5px 12px;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+    display: none;
+}
