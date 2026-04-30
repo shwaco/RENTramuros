@@ -1,19 +1,19 @@
 <?php
-session_start();
+// session_start();
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 
-require_once '../asset/config.php';
+require_once '../../asset/config.php';
 /** @var mysqli $con */
 
-if($_SESSION['admin_id'] ?? null) {
-    // Admin is logged in, proceed with the request
-} else {
-    http_response_code(401);
-    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
-    exit();
-}
+// if($_SESSION['admin_id'] ?? null) {
+//     // Admin is logged in, proceed with the request
+// } else {
+//     http_response_code(401);
+//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
+//     exit();
+// }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["status" => "error", "message" => "Invalid request method."]);
