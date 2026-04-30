@@ -1,14 +1,27 @@
 // asset/js/dashboard_stats.js
 
 const CHART_API_URL = 'backend.v2/get_chart_data.php';
+const STATS_API_URL = 'backend.v2/get_dashboard_stats.php';
 
-// We will build the logic to fetch the top 4 card numbers here later!
-// js/dashboard_stats.js
+document.addEventListener('DOMContentLoaded', async function() {
+    
+    try {
+        const statsRes = await fetch(STATS_API_URL);
+        const statsJson = await statsRes.json();
 
-// 1. Point this to exactly where you saved the PHP file above!
-const STATS_API_URL = 'http://localhost/ADMIN_DASHBOARD3/backend.v2/get_dashboard_stats.php'; 
+        if (statsJson.status === "success") {
+            // Note: Mapping to the exact IDs currently in your HTML
+            document.getElementById('waiting-count').textContent = statsJson.data.pending;
+            document.getElementById('serving-count').textContent = statsJson.data.accepted;
+            document.getElementById('completed-count').textContent = statsJson.data.on_tour; // This is the "On Tours" card
+            document.getElementById('today-count').textContent = statsJson.data.completed;   // This is the "Completed Tours" card
+        } else {
+            console.error("Stats API Error:", statsJson.message);
+        }
+    } catch (error) {
+        console.error("Failed to load top stats:", error);
+    }
 
-async function loadDashboardStats() {
     try {
         const response = await fetch(CHART_API_URL);
         const json = await response.json();
@@ -17,7 +30,7 @@ async function loadDashboardStats() {
             const apiData = json.data;
             renderCharts(apiData);
         } else {
-            console.error("API Error:", json.message);
+            console.error("Chart API Error:", json.message);
         }
     } catch (error) {
         console.error("Failed to load chart data:", error);

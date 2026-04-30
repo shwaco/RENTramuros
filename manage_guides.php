@@ -10,14 +10,55 @@
 </head>
 <body class="bg-gray-50 flex flex-col min-h-screen">
 
-    <!-- Header -->
-    <header class="gradient-bg text-white shadow-lg">
-        <div class="container mx-auto px-4 py-6 flex-grow">
-            <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-bold"><i class="fas fa-users mr-3"></i>RENTramuros</h1>
-                <div class="text-right">
-                    <div id="current-time" class="text-xl font-mono"></div>
-                    <div class="text-sm">Welcome, Admin</div>
+    <!-- Admin Hub Navbar -->
+    <header class="bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <!-- Left Side: Logo & Branding -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="admin.php" class="flex items-center text-white hover:opacity-80 transition duration-150">
+                        <i class="fas fa-chess-rook text-2xl mr-2"></i>
+                        <span class="font-bold text-xl tracking-wide">RENTramuros</span>
+                        <span class="text-gray-300 font-light text-xl mx-2">|</span>
+                        <span class="text-gray-300 font-light text-lg">Admin Hub</span>
+                    </a>
+                </div>
+
+                <!-- Middle/Right Side: Navigation & User Controls -->
+                <div class="flex items-center space-x-6">
+                    
+                    <!-- Main Nav Links -->
+                    <nav class="flex space-x-6">
+                        <a href="admin.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
+                            Dashboard
+                        </a>
+                        
+                        <!-- Active Link (Guides) -->
+                        <a href="manage_guides.php" class="text-white font-semibold px-1 py-2 border-b-2 border-blue-400 hover:text-blue-300 transition duration-150">
+                            Guides
+                        </a>
+                        
+                        <a href="manage_events.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
+                            Events
+                        </a>
+                    </nav>
+
+                    <!-- Divider -->
+                    <div class="h-6 w-px bg-gray-500 mx-2"></div>
+
+                    <!-- User Controls -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Re-added your live clock here to keep the functionality! -->
+                        <div id="current-time" class="text-gray-200 text-sm font-mono hidden md:block mr-2"></div>
+                        <span class="text-gray-200 text-sm">Welcome, Admin</span>
+                        
+                        <a href="logout.php" class="text-red-400 hover:text-red-300 font-semibold flex items-center transition duration-150">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            Logout
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
