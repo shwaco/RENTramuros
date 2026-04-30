@@ -17,31 +17,21 @@
 <body class="bg-gray-50 flex flex-col min-h-screen">
 
     <!-- Header Navigation -->
-    <!-- Main Header -->
-    <header class="bg-[#7a3229] text-white py-4 shadow-md w-full">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            
-            <!-- Left Side: Menu Icon & Logo -->
-            <div class="flex items-center space-x-6">
-                <button class="text-white hover:text-gray-300 focus:outline-none transition">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-                <div class="flex items-center space-x-2 text-xl tracking-wide cursor-pointer">
-                    <i class="far fa-image text-2xl"></i> <!-- Placeholder for your logo image -->
-                    <span class="font-bold">RENT<span class="font-light">ramuros</span></span>
-                </div>
+    <header class="gradient-bg text-white shadow-lg py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-chess-rook text-2xl"></i>
+                <h1 class="text-xl font-bold tracking-tight">RENTramuros <span class="font-light text-gray-300">| Admin Hub</span></h1>
             </div>
-
-            <!-- Right Side: Navigation Links & Profile -->
-            <nav class="flex items-center space-x-8 text-sm font-medium">
-                <a href="#" class="hover:text-gray-300 transition">Map</a>
-                <a href="#" class="hover:text-gray-300 transition">Tours</a>
-                <a href="#" class="hover:text-gray-300 transition">My Bookings</a>
-                
-                <!-- Profile Avatar Placeholder -->
-                <div class="w-8 h-8 bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300 transition"></div>
+            <nav class="flex items-center space-x-6">
+                <a href="admin.php" class="text-blue-200 font-bold border-b-2 border-blue-200 pb-1">Dashboard</a>
+                <a href="manage_guides.php" class="hover:text-blue-300 transition text-sm font-semibold">Guides</a>
+                <a href="manage_events.php" class="hover:text-blue-300 transition text-sm font-semibold">Events</a>
+                <span class="text-sm border-l border-gray-500 pl-6 text-gray-300">Welcome, Admin</span>
+                <button class="text-red-300 hover:text-red-100 text-sm font-bold transition">
+                    <i class="fas fa-sign-out-alt mr-1"></i>Logout
+                </button>
             </nav>
-            
         </div>
     </header>
 
@@ -137,57 +127,8 @@
     </main>
 
     <!-- Footer -->
-    <!-- Main Footer -->
-    <footer class="bg-[#7a3229] text-white pt-12 pb-6 mt-auto w-full">
-        <div class="container mx-auto px-6">
-            
-            <!-- Top Section: Logo, Socials, and Links -->
-            <div class="flex flex-col md:flex-row justify-between mb-10">
-                
-                <!-- Left Side: Logo & Social Icons -->
-                <div class="mb-8 md:mb-0">
-                    <div class="flex items-center space-x-2 text-2xl mb-4">
-                        <i class="far fa-image text-3xl"></i>
-                        <span class="font-bold">RENT<span class="font-light">ramuros</span></span>
-                    </div>
-                    <!-- Social Media Icons -->
-                    <div class="flex space-x-5 mt-2">
-                        <a href="#" class="text-white hover:text-gray-300 text-lg transition"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white hover:text-gray-300 text-lg transition"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white hover:text-gray-300 text-lg transition"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white hover:text-gray-300 text-lg transition"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-
-                <!-- Right Side: Info Columns -->
-                <div class="flex space-x-16 md:pr-12">
-                    <!-- Contact Column -->
-                    <div>
-                        <h4 class="font-bold mb-2 text-sm uppercase tracking-wider">Contact</h4>
-                        <p class="text-xs text-gray-300">Company Information</p>
-                    </div>
-
-                    <!-- About Column -->
-                    <div>
-                        <h4 class="font-bold mb-2 text-sm uppercase tracking-wider">About</h4>
-                        <p class="text-xs text-gray-300">Company Information</p>
-                    </div>
-
-                    <!-- Support Column -->
-                    <div>
-                        <h4 class="font-bold mb-2 text-sm uppercase tracking-wider">Support</h4>
-                        <p class="text-xs text-gray-300">Company Information</p>
-                    </div>
-                </div>
-                
-            </div>
-
-            <!-- Bottom Section: Copyright -->
-            <div class="flex justify-end items-center text-xs text-gray-300 mt-4">
-                <p>All right reserved. Copyright &copy; RENTramuros Manila.</p>
-            </div>
-            
-        </div>
+    <footer class="w-full text-center py-6 mt-auto text-sm text-gray-500">
+        &copy; 2026 RENTramuros. All rights reserved.
     </footer>
 
     <!-- JavaScript to load the top stats -->
