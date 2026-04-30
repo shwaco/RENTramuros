@@ -56,14 +56,19 @@
         </div>
     </main>
 
-    <div id="add-event-modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full z-50 flex items-center justify-center">
-        <div class="relative bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg mx-4 my-auto">
+    <div id="add-event-modal" class="hidden fixed inset-0 z-50 bg-gray-900 bg-opacity-50 flex items-center justify-center p-4">
+        <!-- Adjusted width, padding, and rounding to match manage_guides -->
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto relative">
+        
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Create Event</h2>
-                <button onclick="closeAddEventModal()" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times text-xl"></i></button>
+                <h2 id="modal-title" class="text-xl font-bold text-gray-800">
+                    <i class="fas fa-edit mr-2"></i>Create Event
+                </h2>
+                <button onclick="closeAddEventModal()" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times"></i></button>
             </div>
-            
-            <form id="add-event-form" class="space-y-4">
+        
+            <form id="add-event-form" class="space-y-4" data-mode="add">
+                <input type="hidden" id="event-id">
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Event Name</label>
                     <input type="text" id="event-name" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
@@ -78,25 +83,27 @@
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Location</label>
-                    <input type="text" id="event-time" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                    <!-- Fixed ID here -->
+                    <input type="text" id="event-location" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Image Link/Filename</label>
                     <input type="text" id="event-img" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div> <!-- Fixed missing closing div here! -->
 
-                <div class="flex justify-end space-x-3 pt-4 border-t">
-                    <button type="button" onclick="closeAddEventModal()" class="px-6 py-2 text-gray-600 font-semibold hover:bg-gray-100 rounded-lg">Cancel</button>
-                    <button type="submit" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 shadow-md">Save Event</button>
+                <div class="flex justify-end space-x-3 mt-6">
+                    <!-- Updated button styling to match manage_guides -->
+                    <button type="button" onclick="closeAddEventModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition">Cancel</button>
+                    <button type="submit" id="submit-btn" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition">Save Event</button>
                 </div>
             </form>
         </div>
     </div>
-    <footer class="bg-gray-400 text-white py-6 mt-auto">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; RENTramuros. All rights reserved.</p>
-        </div>
+    <!-- Removed the container wrapper and gray background block to make it full width and subtle -->
+    <footer class="w-full text-center py-6 mt-auto text-sm text-gray-500">
+        &copy; 2026 RENTramuros. All rights reserved.
     </footer>
-    
+
     <script src="asset/js/events_management.js"></script>
 </body>
 </html>

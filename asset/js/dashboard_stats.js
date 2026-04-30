@@ -1,34 +1,111 @@
-// js/dashboard_stats.js
+// asset/js/dashboard_stats.js
 
-console.log("Dashboard Stats module loaded successfully!");
+const CHART_API_URL = 'backend.v2/get_chart_data.php';
 
-// We will build the logic to fetch the top 4 card numbers here later!
-// js/dashboard_stats.js
-
-// 1. Point this to exactly where you saved the PHP file above!
-const STATS_API_URL = 'http://localhost/RENTramuros/backend.v2/get_dashboard_stats.php'; 
-
-async function loadDashboardStats() {
+document.addEventListener('DOMContentLoaded', async function() {
+    
     try {
-        const response = await fetch(STATS_API_URL);
+        const response = await fetch(CHART_API_URL);
         const json = await response.json();
 
         if (json.status === "success") {
-            const stats = json.data;
-            
-            // 2. Target your HTML IDs and inject the database numbers!
-            document.getElementById('waiting-count').innerText = stats.pending;
-            document.getElementById('serving-count').innerText = stats.accepted;
-            document.getElementById('completed-count').innerText = stats.on_tour;
-            document.getElementById('today-count').innerText = stats.completed;
-            
+            const apiData = json.data;
+            renderCharts(apiData);
         } else {
-            console.error("Stats API Error:", json.message);
+            console.error("API Error:", json.message);
         }
     } catch (error) {
-        console.error("Failed to fetch dashboard stats:", error);
+        console.error("Failed to load chart data:", error);
+    }
+});
+
+function renderCharts(data) {
+    // ==========================================
+    // 1. PIE CHART: Visits per Attraction
+    // ==========================================
+    const pieCanvas = document.getElementById('visitsPieChart');
+    if (pieCanvas && data.pie_chart.labels.length > 0) {
+        new Chart(pieCanvas.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: data.pie_chart.labels, // Dynamic Labels!
+                datasets: [{
+                    data: data.pie_chart.values, // Dynamic Data!
+                    backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#8B5CF6', '#EF4444', '#EC4899'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'right' } }
+            }
+        });
+    }
+
+    // ==========================================
+    // 2. BAR CHART: Packages Availed
+    // ==========================================
+    const barCanvas = document.getElementById('packagesBarChart');
+    if (barCanvas && data.bar_chart.labels.length > 0) {
+        new Chart(barCanvas.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: data.bar_chart.labels, // Dynamic Labels!
+                datasets: [{
+                    label: 'Bookings',
+                    data: data.bar_chart.values, // Dynamic Data!
+                    backgroundColor: 'rgba(139, 92, 246, 0.7)',
+                    borderColor: 'rgb(139, 92, 246)',
+                    borderWidth: 1,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    }
+
+    // ==========================================
+    // 3. LINE CHART: Packages vs Attractions
+    // ==========================================
+    const lineCanvas = document.getElementById('trendLineChart');
+    if (lineCanvas && data.line_chart.dates.length > 0) {
+        new Chart(lineCanvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: data.line_chart.dates, // Dynamic Dates!
+                datasets: [
+                    {
+                        label: 'Package Bookings',
+                        data: data.line_chart.packages, // Dynamic Data!
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Attraction Only Bookings',
+                        data: data.line_chart.attractions, // Dynamic Data!
+                        borderColor: '#10B981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                scales: { y: { beginAtZero: true, suggestedMax: 10 } }
+            }
+        });
     }
 }
-
-// 3. Run this as soon as the page loads!
-document.addEventListener('DOMContentLoaded', loadDashboardStats);
