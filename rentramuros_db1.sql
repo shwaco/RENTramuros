@@ -320,7 +320,7 @@ CREATE TABLE `tour_guides` (
   `last_name` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
-  `current_status` varchar(20) DEFAULT 'Available',
+  `current_status` varchar(20) DEFAULT 'Online',
   `last_active_at` datetime DEFAULT current_timestamp(),
   `last_dispatch_time` datetime DEFAULT current_timestamp(),
   `became_available_at` datetime DEFAULT current_timestamp(),

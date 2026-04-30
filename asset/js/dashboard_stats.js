@@ -6,7 +6,7 @@ console.log("Dashboard Stats module loaded successfully!");
 // js/dashboard_stats.js
 
 // 1. Point this to exactly where you saved the PHP file above!
-const STATS_API_URL = 'http://localhost/RENTramuros/backend.v2/get_dashboard_stats.php'; 
+const STATS_API_URL = 'http://localhost/ADMIN_DASHBOARD3/backend.v2/get_dashboard_stats.php'; 
 
 async function loadDashboardStats() {
     try {
