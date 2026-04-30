@@ -8,7 +8,7 @@ async function handleLogoutOnly() {
         const result = await response.json();
         // kapag successful yung logout, iriredirect pabalik sa login page
         if (result.status === 'success') {
-            window.location.href = "../auth/login.html";
+            window.location.href = "../auth.v2/login.php";
         }
     } catch (error) {
         console.error("Logout Error:", error);

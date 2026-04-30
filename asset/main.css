@@ -176,7 +176,7 @@ main {
 }
 
 /* Hero_sec button */
-.hero .content button {
+.hero .content .button {
     font-family: 'roboto condensed';
     cursor: pointer;
     padding: 1rem 2rem;
@@ -187,9 +187,10 @@ main {
     border: 2px solid transparent;
     transition: ease-in-out 0.3s;
     width: fit-content;
+    text-decoration: none;
 }
 
-.hero .content button:hover {
+.hero .content .button:hover {
     background-color: white;
     color: black;
     border-color: #8D230F;

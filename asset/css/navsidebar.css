@@ -27,12 +27,16 @@ nav li a{
     font-weight: 300;
     padding: 0.4rem;
 
+
 }
 
 nav li a:hover {
     -webkit-text-stroke: 0.3px black;
 }
 
+/* #nav_login {
+    border: 1px solid black;
+} */
 
 nav .menu-btn {
     display: none;

@@ -39,7 +39,7 @@
                 <li class="hideOnMobile"><a href="dashboard/tourist/tours.php" rel="noreferrer noopener" target="_blank"><img src="asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
                 <li class="hideOnMobile"><a href="#"><img src="asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li class="hideOnMobile last"><a href="#">About</a></li>
-                <li><button type="button">Log in</button></li>
+                <!-- <li><a href="auth.v2/login.php" id="nav_login"></li> -->
                 <li onclick=showSidebar() id="showSidebar" class="menu-btn"><a href="#" ><img src="asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
             </ul>
         </nav>
@@ -79,7 +79,7 @@
                     <li><img src="asset/img/CARTWHEEL_ICON.svg" height="15">Hassle-free</li>
                 </ul>
 
-                <button type="button">START YOUR JOURNEY</button>
+                <a href="auth.v2/log_in.php" class="button">START YOUR JOURNEY</a>
             </div>
         </section>
 

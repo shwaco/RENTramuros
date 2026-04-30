@@ -56,7 +56,7 @@ function startPolling() {
 }
 
 function startClaimTimer() {
-    let timeLeft = 15;
+    let timeLeft = 30;
     const timerDisplay = document.getElementById('selection-timer');
 
     if (claimTimerInterval) clearInterval(claimTimerInterval);
