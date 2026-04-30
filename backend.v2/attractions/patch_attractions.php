@@ -33,9 +33,19 @@ $attraction_id = $data->attraction_id;
 $update_fields = [];
 $params_array = [];
 
+if(!isset($data->attraction_type)){
+    $uodate_fields[] = "attraction_type = ?";
+    $params_array[] = $data->attraction_type;
+}
+
 if(isset($data->attraction_name)) {
     $update_fields[] = "attraction_name = ?";
     $params_array[] = $data->attraction_name;
+}
+
+if(!isset($data->address)){
+    $uodate_fields[] = "address = ?";
+    $params_array[] = $data->address;
 }
 
 if(isset($data->description)) {
