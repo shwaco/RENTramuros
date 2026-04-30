@@ -1,19 +1,111 @@
-/* asset/css/style.css */
-
 .gradient-bg {
     background: linear-gradient(135deg, #9e9b9b 0%, #444343 100%);
 }
 
 .card-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.card-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+.badge-online {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    background: #dbeafe;
+    color: #1e40af;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+.badge-queuing {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    background: #fef3c7;
+    color: #1e40af;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+.badge-offline {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    background: #f3f4f6;
+    color: #1e40af;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.badge-primary {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    background: #f3f4f6;
+    color: #1e40af;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.toast {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    max-width: 320px;
+    transition: opacity 0.3s ease;
+}
+.toast.hidden { display: none; }
+.toast.success { background: #1f2937; color: #fff; }
+.toast.error   { background: #7f1d1d; color: #fff; }
+.toast.success #toast-icon::before { content: "\f058"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: #6ee7b7; }
+.toast.error   #toast-icon::before { content: "\f057"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: #fca5a5; }
+
+#add-guide-feedback.success,
+#edit-guide-feedback.success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+#add-guide-feedback.error,
+#edit-guide-feedback.error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
 }
 
 .queue-number {
     font-family: 'Courier New', monospace;
     font-weight: bold;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.badge-ontour {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    background: #d1fae5;
+    color: #065f46;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.max-w-email {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

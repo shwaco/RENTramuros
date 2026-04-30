@@ -113,8 +113,8 @@ document.getElementById('edit-event-form').addEventListener('submit', async func
     const payload = {
         event_id: document.getElementById('edit-event-id').value,
         event_name: document.getElementById('edit-event-name').value,
-        event_date: document.getElementById('event-date').value,
-        event_time: document.getElementById('event-time').value,
+        event_date: document.getElementById('edit-event-date').value, 
+        event_time: document.getElementById('edit-event-time').value,
         location: document.getElementById('edit-event-location').value,
         image_file: document.getElementById('edit-event-img').value
     };
