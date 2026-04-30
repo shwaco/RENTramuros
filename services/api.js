@@ -56,7 +56,7 @@ export async function getPackages() {
 // retrieve upcoming events
 export async function getUpcomingEvents() {
     try {
-        const response = await fetch('backend/get_upcoming_events.php');
+        const response = await fetch('backend.v2/upcoming_events/get_upcoming_events.php');
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
