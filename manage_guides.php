@@ -263,7 +263,6 @@
                         placeholder="Leave blank to keep current password">
                 </div>
 
-                <!-- Inline feedback for edit form -->
                 <div id="edit-guide-feedback" class="hidden text-sm px-3 py-2 rounded-lg"></div>
 
                 <div class="flex justify-end space-x-3 mt-6">
@@ -280,13 +279,11 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
     <div id="toast" class="toast hidden">
         <i id="toast-icon"></i>
         <span id="toast-msg"></span>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-gray-400 text-white py-6 mt-auto">
         <div class="container mx-auto px-4 text-center">
             <p>&copy; RENTramuros. All rights reserved.</p>

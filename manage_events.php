@@ -51,7 +51,7 @@
                         <div id="current-time" class="text-gray-200 text-sm font-mono hidden md:block mr-2"></div>
                         <span class="text-gray-200 text-sm">Welcome, Admin</span>
                         
-                        <a href="logout.php" class="text-red-400 hover:text-red-300 font-semibold flex items-center transition duration-150">
+                        <a href="../../logout-api.php" class="text-red-400 hover:text-red-300 font-semibold flex items-center transition duration-150">
                             <i class="fas fa-sign-out-alt mr-2"></i>
                             Logout
                         </a>
