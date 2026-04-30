@@ -32,18 +32,18 @@
                 fetch('login_api.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email, password_hash: password })
+                    body: JSON.stringify({ email: email, password: password })
                 })
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
                        alertBox.innerHTML = `<div class="alert alert-success" role="alert">${data.message}</div>`;
                           setTimeout(() => {
-                             if (data.role === 'admin') {
+                             if (data.admin_id) {
                                  window.location.href = '../admin_dashboard.html';
-                             } else if (data.role === 'guide') {
+                             } else if (data.guide_id) {
                                  window.location.href = '../queue-management-system/index.php';
-                             } else {
+                             } else if (data.tourist_id) {
                                  window.location.href = '../tourist_dashboard.html';
                              }
                             }, 1500);
