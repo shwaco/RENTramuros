@@ -55,7 +55,6 @@ function startPolling() {
     }, 5000);
 }
 
-// 15-second timer for the #1 guide in queue to select a tourist
 function startClaimTimer() {
     let timeLeft = 15;
     const timerDisplay = document.getElementById('selection-timer');

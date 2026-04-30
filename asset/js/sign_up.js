@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // #region agent log (debug-mode)
+    console.log('[DEBUG 01db3a] sign_up.js loaded', { href: window.location.href, build: '2026-04-30T12:52+08' });
+    fetch('http://127.0.0.1:7837/ingest/9eca1514-e8a6-44df-bee1-e70e11ae4dd2',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'01db3a'},keepalive:true,body:JSON.stringify({sessionId:'01db3a',runId:'pre-fix',hypothesisId:'H7',location:'asset/js/sign_up.js:loaded',message:'sign_up.js loaded',data:{href:window.location.href,build:'2026-04-30T12:52+08'},timestamp:Date.now()})}).catch(()=>{});
+    // #endregion agent log (debug-mode)
 
     // ── Password visibility toggle ──────────────────────────────
     const passwordInput  = document.getElementById('password_input');
@@ -189,8 +193,20 @@ function startResendCooldown(seconds) {
                 msg.className   = 'success';
                 msg.textContent = '✓ Verified! Redirecting...';
                 clearInterval(countdownTimer);
+                // #region agent log (debug-mode)
+                fetch('http://127.0.0.1:7837/ingest/9eca1514-e8a6-44df-bee1-e70e11ae4dd2',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'01db3a'},body:JSON.stringify({sessionId:'01db3a',runId:'pre-fix',hypothesisId:'H5',location:'asset/js/sign_up.js:otp-success',message:'OTP verify success branch taken',data:{page:window.location.href},timestamp:Date.now()})}).catch(()=>{});
+                // #endregion agent log (debug-mode)
                 setTimeout(() => {
-                    window.location.href = 'log_in.php'; // ← change to your login page
+                    // #region agent log (debug-mode)
+                    fetch('http://127.0.0.1:7837/ingest/9eca1514-e8a6-44df-bee1-e70e11ae4dd2',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'01db3a'},body:JSON.stringify({sessionId:'01db3a',runId:'pre-fix',hypothesisId:'H1',location:'asset/js/sign_up.js:redirect',message:'OTP verified; about to redirect',data:{from:window.location.href,to:'log_in.php',resolvedTo:new URL('log_in.php',window.location.href).href},timestamp:Date.now()})}).catch(()=>{});
+                    // #endregion agent log (debug-mode)
+                    // #region agent log (debug-mode)
+                    fetch('http://127.0.0.1:7837/ingest/9eca1514-e8a6-44df-bee1-e70e11ae4dd2',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'01db3a'},keepalive:true,body:JSON.stringify({sessionId:'01db3a',runId:'pre-fix',hypothesisId:'H5',location:'asset/js/sign_up.js:redirect-keepalive',message:'Redirect keepalive log (navigation-safe)',data:{from:window.location.href,to:'log_in.php'},timestamp:Date.now()})}).catch(()=>{});
+                    // #endregion agent log (debug-mode)
+                    // #region agent log (debug-mode)
+                    fetch('http://127.0.0.1:7837/ingest/9eca1514-e8a6-44df-bee1-e70e11ae4dd2',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'01db3a'},keepalive:true,body:JSON.stringify({sessionId:'01db3a',runId:'post-fix',hypothesisId:'H1',location:'asset/js/sign_up.js:redirect-fixed',message:'Redirect target updated (fix for 404)',data:{from:window.location.href,to:'login.php',resolvedTo:new URL('login.php',window.location.href).href},timestamp:Date.now()})}).catch(()=>{});
+                    // #endregion agent log (debug-mode)
+                    window.location.href = 'login.php';
                 }, 1500);
             } else {
                 msg.className     = 'error';

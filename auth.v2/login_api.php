@@ -4,12 +4,10 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-<<<<<<< HEAD
 require_once '../config/config.php';
-=======
-require_once '../backend/config/config.php';
->>>>>>> ea24ad41558900a3169e1df362926e40b417f4bb
-/** @var mysqli $con */
+ @var mysqli 
+
+error_log('[01db3a login_api] reached login_api.php');
 
 $data = json_decode(file_get_contents("php://input"));
 if(!isset($data->email) || !isset($data->password)) {
@@ -20,7 +18,6 @@ if(!isset($data->email) || !isset($data->password)) {
 $email = $data->email;
 $password = $data->password;
 
-// 1. Check Admins
 $admin_sql = "SELECT * FROM admins WHERE email = ?";
 $stmt = mysqli_prepare($con, $admin_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
@@ -37,7 +34,6 @@ if ($row = mysqli_fetch_assoc($result)) {
     exit();
 }
 
-// 2. Check Tour Guides
 $guide_sql = "SELECT * FROM tour_guides WHERE email = ?";
 $stmt = mysqli_prepare($con, $guide_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);
@@ -52,13 +48,8 @@ if ($row = mysqli_fetch_assoc($result)) {
 
     $_SESSION['guide_id'] = $row['guide_id'];
 
-    // Set to Online if they were Offline or Available (new DB default is 'Available')
-<<<<<<< HEAD
     $update_sql = "UPDATE tour_guides SET current_status = 'Online' WHERE guide_id = ? AND current_status IN ('Offline', 'Available')";
     $update_stmt = mysqli_prepare($con, $update_sql);
-=======
-    $update_stmt = mysqli_prepare($con, "UPDATE tour_guides SET current_status = 'Online' WHERE guide_id = ? AND current_status IN ('Offline', 'Available')");
->>>>>>> ea24ad41558900a3169e1df362926e40b417f4bb
     mysqli_stmt_bind_param($update_stmt, "i", $row['guide_id']);
     mysqli_stmt_execute($update_stmt);
 
@@ -66,7 +57,6 @@ if ($row = mysqli_fetch_assoc($result)) {
     exit();
 }
 
-// 3. Check Tourists — uses tourist_id (not customer_id) and otp_code (not otp)
 $tourist_sql = "SELECT * FROM tourists WHERE email = ?";
 $stmt = mysqli_prepare($con, $tourist_sql);
 mysqli_stmt_bind_param($stmt, "s", $email);

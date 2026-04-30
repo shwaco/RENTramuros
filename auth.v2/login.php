@@ -44,7 +44,7 @@
                              } else if (data.guide_id) {
                                  window.location.href = '../queue-management-system/index.php';
                              } else if (data.tourist_id) {
-                                 window.location.href = '../tourist_dashboard.html';
+                                 window.location.href = '../dashboard/tourist/index.php';
                              }
                             }, 1500);
                     } else if (data.status === 'unverified') {
