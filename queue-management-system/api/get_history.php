@@ -1,0 +1,75 @@
+<?php
+session_start();
+header('Content-Type: application/json');
+require_once('../../config/config.php');
+
+// FLOW: Ito yung kinocall ng frontend para kunin yung listahan ng "My Bookings" ng isang guide.
+// Nagre-return ito ng JSON array ng lahat ng Done, Cancelled, o Accepted tours.
+
+if (!isset($_SESSION['guide_id'])) {
+    echo json_encode(['success' => false, 'message' => 'Not logged in']);
+    exit();
+}
+
+$guide_id = $_SESSION['guide_id'];
+
+try {
+    // Multi-table SELECT query. Dito pinagsasama-sama (LEFT JOIN) yung mga data
+    // from booking_history, vehicles, packages, at attractions.
+    $sql = "SELECT 
+                bh.booking_request_id,
+                bh.status,
+                bh.booking_date,
+                bh.booking_time,
+                bh.adults_and_seniors,
+                bh.children,
+                bh.infants,
+                bh.number_of_vehicle,
+                v.vehicle_type,
+                v.price AS vehicle_price,
+                ci.first_name,
+                ci.last_name,
+                ci.email_address,
+                ci.phone_number,
+                p.package_name,
+                p.price AS package_price,
+                
+                /* Dito kino-combine yung mga attractions into one string gamit GROUP_CONCAT */
+                GROUP_CONCAT(
+                    DISTINCT CONCAT(a.attraction_name, '|', IFNULL(a.fee, 0))
+                    ORDER BY a.attraction_name
+                    SEPARATOR ','
+                ) AS destinations
+
+            FROM booking_history bh
+            LEFT JOIN contact_information ci  ON bh.contact_info_id   = ci.contact_info_id
+            LEFT JOIN vehicles v              ON bh.vehicle_id         = v.vehicle_id
+            LEFT JOIN packages p              ON bh.package_id         = p.package_id
+            
+            LEFT JOIN request_attractions ra  ON bh.booking_request_id = ra.booking_request_id
+            LEFT JOIN package_itinerary pi    ON bh.package_id          = pi.package_id
+            LEFT JOIN attractions a           ON a.attraction_id = ra.attraction_id OR a.attraction_id = pi.attraction_id
+            
+            WHERE bh.status IN ('Done', 'Pending', 'Accepted', 'Cancelled')
+              AND bh.guide_id = ?
+            GROUP BY bh.booking_request_id
+            
+            /* FLOW: Sinosort natin mula sa pinakabago pababa. Yung ID DESC ang tie-breaker
+               kung sakaling magkapareho ng oras yung booking. */
+            ORDER BY bh.booking_date DESC, bh.booking_time DESC, bh.booking_request_id DESC
+            LIMIT 20";
+
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $guide_id);
+    mysqli_stmt_execute($stmt);
+
+    $result  = mysqli_stmt_get_result($stmt);
+    $history = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    // Ibinabalik sa JavaScript as JSON format
+    echo json_encode(['success' => true, 'history' => $history]);
+
+} catch (Exception $e) {
+    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+}
+?>

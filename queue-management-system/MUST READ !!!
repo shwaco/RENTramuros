@@ -1,0 +1,63 @@
+REQUIREMENTS BEFORE MAGSIMULA
+  - XAMPP (kailangan naka-ON yung Apache at MySQL)
+  - PHPMyAdmin access: http://localhost/phpmyadmin
+
+ I-SETUP MUNA YUNG DATABASE
+
+- sa phpmyadmin
+
+- Gumawa ng bagong database:
+     - Database name: rentramuros_database
+     - Click "Create"
+
+- I-import yung base database (ito munabago yung isa):
+     - Click "Import" tab sa itaas
+     - I-upload yung: database/rentramuros_database.sql
+     - Click "Import"
+
+- I-import yung queuing system schema (ITO YUNG PANGALAWA):
+     - Click "Import" ulit 
+     - I-upload yung: database/queuing_system.sql
+     - Click "Go" / "Import"
+     - or run mo na lang yung sql pwede rin
+
+mag insert ng tour guide accounts sa phpmyadmin since wala tayong sign up
+
+punta ka sa PHPMyAdmin, click mo yung rentramuros_database, then click "SQL" tab
+then paste mo tong mga to para makagawa ng tour guide accounts
+
+-- GUIDE ACCOUNT 1
+INSERT INTO `tour_guides` 
+    (`first_name`, `last_name`, `email`, `password_hash`, `current_status`, `last_active_at`, `last_dispatch_time`, `became_available_at`, `current_tourist_id`)
+VALUES
+    ('Nesto', 'Arevalo', 'arevaloernestojohn@gmail.com', '$2a$12$1pIlEbk9ie3N0QZ8OZyUne/P/3CNMMLQraUWcPffAsxXomaMCImx.', 'Online', NOW(), NOW(), NOW(), NULL)
+
+-- GUIDE ACCOUNT 2
+INSERT INTO `tour_guides` 
+    (`first_name`, `last_name`, `email`, `password_hash`, `current_status`, `last_active_at`, `last_dispatch_time`, `became_available_at`, `current_tourist_id`)
+VALUES
+    ('Lencey', 'Bou', 'lenceybou@gmail.com', '$2a$12$1pIlEbk9ie3N0QZ8OZyUne/P/3CNMMLQraUWcPffAsxXomaMCImx.', 'Online', NOW(), NOW(), NOW(), NULL)
+
+Credentials:
+  Account 1 — user: arevaloernesto@gmail.com    | pass: password123
+  Account 2 — user: lenceybou@gmail.com   | pass: password123
+
+Login page:
+  http://localhost/tourguide-logics/auth/login.html
+
+- testing ng queuing system
+
+- open lang yung login page sa dalawang magkaibang browser windows
+   (o yung isa sa normal window, yung isa sa Incognito/Private)
+
+- mag-login ng magkaibang guide sa bawat window
+
+
+- Para may tourists na makita sa lobby, nag iinsert na lang ako for now ng tourist sa table ng tourist, gamit tong sql na to
+
+INSERT INTO `booking_history`
+    (`tourist_id`, `booking_type`, `status`, `booking_time`, `booking_date`, `adults_and_seniors`, `children`, `infants`, `contact_info_id`, `vehicle_id`, `number_of_vehicle`, `guide_id`)
+VALUES
+    (NULL, 'Walk-in', 'Pending', TIME(NOW()), CURDATE(), 2, 1, 0, (SELECT MAX(contact_info_id) - 4 FROM contact_information), 2, 1, NULL),
+    (NULL, 'Walk-in', 'Pending', TIME(NOW()), CURDATE(), 3, 0, 1, (SELECT MAX(contact_info_id) - 3 FROM contact_information), 1, 1, NULL),
+    (NULL, 'Walk-in', 'Pending', TIME(NOW()), CURDATE(), 1, 2, 0, (SELECT MAX(contact_info_id) - 2 FROM contact_information), 3, 1, NULL);

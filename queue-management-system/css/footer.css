@@ -1,0 +1,102 @@
+/* footer layout para sa contact/support/logo info sa ibaba ng page */
+.bottom-footer {
+    background-color: #e5e5e5;
+    border-top: 3px solid #000000;
+    padding: 1rem 4rem;
+    margin-top: auto;
+}
+
+.footer-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto 0.5rem auto;
+}
+
+.footer-branding {
+    display: flex;
+    align-items: left;
+    gap: 1rem;
+}
+
+.footer-logo-wrapper {
+    border-bottom: 2px solid #000000;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.footer-logo-img {
+    height: 67px;
+    width: auto;
+    display: block;
+    filter: brightness(0);
+    margin-bottom: 5px;
+}
+
+.branding-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.social-icons i {
+    display: inline-block;
+    color: #000000;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-links {
+    display: flex;
+    gap: 6rem;
+}
+
+.link-column h4,
+.footer-column h4 {
+    margin: 0 0 15px 0;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 100%;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+.link-column a,
+.footer-column p,
+.footer-column span,
+.footer-column a {
+    text-decoration: none;
+    color: #4b5563;
+    font-size: 0.85rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.link-column a:hover,
+.footer-column a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.footer-copyright {
+    text-align: right;
+    font-size: 0.75rem;
+    color: #4b5563;
+    padding-top: 0.5rem;
+    border-top: none;
+    margin-top: 0;
+}
