@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 require_once '../config/config.php';
- @var mysqli 
+/** @var mysqli $con */
 
 error_log('[01db3a login_api] reached login_api.php');
 

@@ -3,7 +3,7 @@ session_start();
 require_once '../config/config.php';
 
 if (!isset($_SESSION['guide_id'])) {
-    header("Location: ../auth/login.html");
+    header("Location: ../auth.v2/login.php");
     exit();
 }
 
@@ -20,7 +20,7 @@ $guideInfo = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtInfo));
 if (!$guideInfo) {
     session_unset();
     session_destroy();
-    header("Location: ../auth/login.html");
+    header("Location: ../auth.v2/login.php");
     exit();
 }
 
