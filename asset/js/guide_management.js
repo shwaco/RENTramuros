@@ -1,8 +1,8 @@
 const API = {
-    GET:    'http://localhost/ADMIN_DASHBOARD3/backend.v2/tour_guide/get_guide.php',
-    POST:   'http://localhost/ADMIN_DASHBOARD3/backend.v2/tour_guide/post_guide.php',
-    PATCH:  'http://localhost/ADMIN_DASHBOARD3/backend.v2/tour_guide/patch_guide.php',
-    DELETE: 'http://localhost/ADMIN_DASHBOARD3/backend.v2/tour_guide/delete_guide.php',
+    GET:    'backend.v2/tour_guide/get_guide.php',
+    POST:   'backend.v2/tour_guide/post_guide.php',
+    PATCH:  'backend.v2/tour_guide/patch_guide.php',
+    DELETE: 'backend.v2/tour_guide/post_guide.php'
 };
 
 function showToast(message, type = 'success') {

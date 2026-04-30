@@ -41,6 +41,9 @@
                         <a href="manage_events.php" class="text-white font-semibold px-1 py-2 border-b-2 border-blue-400 hover:text-blue-300 transition duration-150">
                             Events
                         </a>
+                        <a href="manage_attractions.php" class="text-white font-semibold px-1 py-2 border-b-2 border-blue-400 hover:text-blue-300 transition duration-150">
+                            Attractions
+                        </a>
                     </nav>
 
                     <!-- Divider -->

@@ -33,14 +33,15 @@
                         <a href="admin.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
                             Dashboard
                         </a>
-                        
-                        <!-- Active Link (Guides) -->
-                        <a href="manage_guides.php" class="text-white font-semibold px-1 py-2 border-b-2 border-blue-400 hover:text-blue-300 transition duration-150">
+                        <a href="manage_guides.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
                             Guides
                         </a>
-                        
-                        <a href="manage_events.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
+                        <!-- Active Link (Events) -->
+                        <a href="manage_events.php" class="text-white font-semibold px-1 py-2 border-b-2 border-blue-400 hover:text-blue-300 transition duration-150">
                             Events
+                        </a>
+                        <a href="manage_attractions.php" class="text-white font-semibold px-1 py-2 border-b-2 border-blue-400 hover:text-blue-300 transition duration-150">
+                            Attractions
                         </a>
                     </nav>
 
@@ -49,16 +50,14 @@
 
                     <!-- User Controls -->
                     <div class="flex items-center space-x-4">
-                        <!-- Re-added your live clock here to keep the functionality! -->
                         <div id="current-time" class="text-gray-200 text-sm font-mono hidden md:block mr-2"></div>
                         <span class="text-gray-200 text-sm">Welcome, Admin</span>
                         
-                        <a href="logout.php" class="text-red-400 hover:text-red-300 font-semibold flex items-center transition duration-150">
+                        <a href="../../logout-api.php" class="text-red-400 hover:text-red-300 font-semibold flex items-center transition duration-150">
                             <i class="fas fa-sign-out-alt mr-2"></i>
                             Logout
                         </a>
                     </div>
-
                 </div>
             </div>
         </div>
