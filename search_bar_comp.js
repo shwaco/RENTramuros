@@ -24,36 +24,50 @@ document.addEventListener("DOMContentLoaded", async () => {
     const dropdownWrapper = document.querySelector(".search-dropdown-wrapper");
     const historyContainer = document.querySelector(".search-history-lists");
 
+    let isSearchLocked = false;
+    
     const attractionData = await fetchAttractionData();
     renderAttractionCards(attractionData);
 
-    // CLICK EVENTS TO CARDS ---
+   // CLICK EVENTS TO CARDS ---
     const allCards = document.querySelectorAll('.attraction-card');
 
     allCards.forEach((card) => {
-        card.addEventListener('click', () => {
-            const attractionName = card.querySelector('.attraction-name').innerText;
-            const cardId = card.getAttribute('data-id');
+        const attractionName = card.querySelector('.attraction-name').innerText;
+
+        // 1. HOVER EVENT
+        card.addEventListener("mouseenter", () => {
+            if (!isSearchLocked) {
+                searchInput.value = attractionName;
+            }
+        });
+
+        // 2. CLICK EVENT
+        card.addEventListener("click", () => {
+            isSearchLocked = true; // Engage the lock
+            searchInput.value = attractionName;
             
-            saveSearchToHistory(attractionName);
-            window.location.href = `overview.html?id=${cardId}`;
+            // Trigger the live-filter to isolate the card
+            searchInput.dispatchEvent(new Event('input')); 
+            searchInput.focus(); 
         });
     });
 
     // LIVE SEARCH FILTERING
     searchInput.addEventListener('input', (event) => {
+        if (event.isTrusted) {
+            isSearchLocked = false;
+        }
+
         dropdownWrapper.classList.add("active"); 
         const searchTerm = event.target.value.toLowerCase();
-        
-        allCards.forEach((card) => {
-            const attractionName = card.querySelector('.attraction-name').innerText.toLowerCase();
             if (attractionName.includes(searchTerm)) {
                 card.style.display = "block";
             } else {
                 card.style.display = "none";
             }
         });
-    });
+    
 
     // SHOW/HIDE DROPDOWN LOGIC
     searchInput.addEventListener("focus", () => {
@@ -79,21 +93,21 @@ document.addEventListener("DOMContentLoaded", async () => {
             pill.classList.add("history-pill");
             pill.innerText = term;
             
-            pill.addEventListener("click", () => {
-                let foundId = null;
-                allCards.forEach(card => {
-                    const cardName = card.querySelector('.attraction-name').innerText;
-                    if (cardName.toLowerCase() === term.toLowerCase()) {
-                        foundId = card.getAttribute('data-id');
-                    }
-                });
-
-                if (foundId) {
-                    window.location.href = `overview.html?id=${foundId}`;
-                } else {
+            // 1. HOVER EVENT: Preview text ONLY if the search bar is not locked
+            pill.addEventListener("mouseenter", () => {
+                if (!isSearchLocked) {
                     searchInput.value = term;
-                    dropdownWrapper.classList.remove("active");
                 }
+            });
+
+            // 2. CLICK EVENT: Lock the text and filter the grid
+            pill.addEventListener("click", () => {
+                isSearchLocked = true; // Engage the lock!
+                searchInput.value = term;
+                
+                // Triggers the live-filter to hide the other cards
+                searchInput.dispatchEvent(new Event('input')); 
+                searchInput.focus(); 
             });
 
             historyContainer.appendChild(pill);
