@@ -8,43 +8,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     const closeBtn = document.querySelector(".close");
 
     try {
-        const response = await fetch('attraction_overview_data.json');
-        const database = await response.json();
+        const database = await fetchOverviewData();
+
+        if (!database) {
+            throw new Error("Failed to load database from API.");
+        }
+
         const currentData = database[currentId];
 
         if (currentData) {
-            // --- DETECTIVE LOGIC: Is it a package or an attraction? ---
+            // --- checking if package or attraction ---
             const isPackage = currentData.package_id !== undefined;
 
-            // 1. TEXT INJECTION: Swap between attraction_name and package_name
             const titleText = isPackage ? currentData.package_name : currentData.attraction_name;   
             document.getElementById("page-title").textContent = `RENTramuros | ${titleText}`;
             document.getElementById("attraction-title").textContent = titleText;
             document.getElementById("attraction-description").textContent = currentData.description;
 
-           // 2. UI TOGGLES & RELATIONAL MAPPING
             const addressContainer = document.querySelector(".attraction-address"); 
             const locationIcon = document.querySelector(".location-icon");
             const addressSpan = document.getElementById("attraction-address");
             const hoursSpan = document.getElementById("attraction-hours");
 
-            let dbImages = []; // We will fill this dynamically!
+            let dbImages = [];
 
             if (isPackage) {
                 addressContainer.style.display = "flex"; 
                 locationIcon.style.display = "none"; 
                 hoursSpan.style.display = "none"; 
                 
-                // --- RELATIONAL LOGIC FOR TEXT AND IMAGES ---
                 if (currentData.attraction_ids && Array.isArray(currentData.attraction_ids)) {
                     
-                    // A. Fetch the actual attraction objects from the database
                     const linkedAttractions = currentData.attraction_ids.map(id => {
                         const matchKey = Object.keys(database).find(key => database[key].attraction_id === id);
                         return matchKey ? database[matchKey] : null;
-                    }).filter(attr => attr !== null); // Filter out any missing data
+                    }).filter(attr => attr !== null); 
 
-                    // B. Inject the text itinerary
+                    // Inject the text itinerary
                     const itineraryNames = linkedAttractions.map(attr => attr.attraction_name);
                     addressSpan.textContent = itineraryNames.join(" • ");
 
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
                 hoursSpan.style.display = "inline"; 
-                hoursSpan.textContent = `🕒 Open: ${currentData.schedule}`;
+                hoursSpan.textContent = ` Open: ${currentData.schedule}`;
 
                 // Standard image fetch for standalone attractions
                 dbImages = [
@@ -116,9 +116,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             const feeLabel = isPackage ? "Package Fee" : "Entrance";
 
             if (feeValue === 0 || isNaN(feeValue)) {
-                document.getElementById("attraction-price").textContent = `🎟️ ${feeLabel}: Free`;
+                document.getElementById("attraction-price").textContent = ` ${feeLabel}: Free`;
             } else {
-                document.getElementById("attraction-price").textContent = `🎟️ ${feeLabel}: ₱${feeValue.toFixed(2)}`;
+                document.getElementById("attraction-price").textContent = ` ${feeLabel}: ₱${feeValue.toFixed(2)}`;
             }
 
             // 4. IMAGE INJECTION & MODAL

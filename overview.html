@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="attraction_overview.css">
+    <link rel="stylesheet" href="overview.css">
 </head>
 <body>
 
@@ -55,10 +55,10 @@
     <div class="sticky-sidebar">
         <div class="sticky-sidebar-label">Tour Details</div> 
         
-        <span id="attraction-hours">🕒 Open: Loading...</span>
-        <span id="attraction-price">🎟️ Entrance: Loading...</span>
+        <span id="attraction-hours">Open: Loading...</span>
+        <span id="attraction-price">Entrance: Loading...</span>
         
-        <button class="book-btn">Book a Tour</button>
+        <button class="book-btn" onclick="window.location.href='tours.php'">Book a Tour</button>
     </div>
     </div>
     </div>
@@ -68,7 +68,8 @@
         <img class="modal-content" id="modalImg">
     </div>
 
-<script src="attraction_overview.js" defer></script>
+<script src="overview_api.js" defer></script>
+<script src="overview.js" defer></script>
 
 </body>
 </html>
