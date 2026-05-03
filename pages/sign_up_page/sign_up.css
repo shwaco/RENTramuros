@@ -44,10 +44,6 @@ h1 {
     font-size: 3rem;
 }
 
-.name_wrapper input {
-    text-transform: uppercase;
-}
-
 .name_wrapper input::placeholder {
     text-transform: none;
 }

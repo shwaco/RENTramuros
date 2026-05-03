@@ -81,7 +81,7 @@
                     <li><img src="asset/img/CARTWHEEL_ICON.svg" height="15">Hassle-free</li>
                 </ul>
 
-                <a href="auth.v2/log_in.php" class="button">START YOUR JOURNEY</a>
+                <a href="pages/sign_up.php" class="button">START YOUR JOURNEY</a>
             </div>
         </section>
 
