@@ -1,7 +1,7 @@
 // retrieve popular attractions 
 export async function getPopularAttractions() {
     try {
-        const response = await fetch('backend/attractions/get_attractions.php');
+        const response = await fetch('backend/endpoints/ui/attractions/get_attractions.php');
 
         if (!response.ok) {
             throw new Error (`Response status: ${response.status}`);
@@ -20,7 +20,7 @@ export async function getPopularAttractions() {
 // retrieve recommended attractions
 export async function getRecommendedAttractions() {
     try {
-        const response = await fetch('backend/attractions/get_attractions.php');
+        const response = await fetch('backend/endpoints/ui/attractions/get_attractions.php');
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -39,7 +39,7 @@ export async function getRecommendedAttractions() {
 // retrieve packages
 export async function getPackages() {
     try {
-        const response = await fetch('backend/get_packages.php');
+        const response = await fetch('backend/endpoints/ui/packages/get_packages.php');
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`); 
@@ -56,7 +56,7 @@ export async function getPackages() {
 // retrieve upcoming events
 export async function getUpcomingEvents() {
     try {
-        const response = await fetch('backend.v2/upcoming_events/get_upcoming_events.php');
+        const response = await fetch('backend/endpoints/ui/upcoming_events/get_upcoming_events.php');
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
