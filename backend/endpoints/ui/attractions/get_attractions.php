@@ -9,15 +9,15 @@ header('Access-Control-Allow-Methods: GET');
 require_once '../../../config/config.php';
 /** @var mysqli $con */
 
-if ($_GET['admin'] ?? null) {
-    if ($_SESSION['admin_id'] ?? null) {
-        // Admin is logged in, proceed with the request
-    } else {
-        http_response_code(401);
-        echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
-        exit();
-    }
-}
+// if ($_GET['admin'] ?? null) {
+//     if ($_SESSION['admin_id'] ?? null) {
+//         // Admin is logged in, proceed with the request
+//     } else {
+//         http_response_code(401);
+//         echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
+//         exit();
+//     }
+// }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);

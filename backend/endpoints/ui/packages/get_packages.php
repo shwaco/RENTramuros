@@ -9,11 +9,11 @@ header("Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 require_once '../../../config/config.php';
 /** @var mysqli $con */
 
-if(!isset($_SESSION['tourist_id']) && !isset($_SESSION['admin_id'])) {
-    http_response_code(401);
-    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
-    exit();
-}
+// if(!isset($_SESSION['tourist_id']) && !isset($_SESSION['admin_id'])) {
+//     http_response_code(401);
+//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
+//     exit();
+// }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
