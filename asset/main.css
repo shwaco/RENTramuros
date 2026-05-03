@@ -600,6 +600,8 @@ main {
 
 }
 
+
+
 @media(max-width: 1200px){
     .hero {
         height: 484px;
@@ -608,3 +610,5 @@ main {
         font-size: small;
     }
 }
+
+

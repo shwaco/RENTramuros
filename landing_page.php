@@ -9,13 +9,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />   
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+
+
+
     <link rel="stylesheet" href="asset/css/navsidebar.css?v=<?php echo filemtime('asset/css/navsidebar.css'); ?>">
     <link rel="stylesheet" href="DashWithMap/style.css?v=<?php echo filemtime('DashWithMap/style.css.css'); ?>">
     <link rel="stylesheet" href="asset/main.css?v=<?php echo filemtime('asset/main.css'); ?>">
     <link rel="stylesheet" href="asset/css/index.css?v=<?php echo filemtime('asset/css/index.css'); ?>">
     <script type="module" src="asset/navsidebar.js?v=<?php echo filemtime('asset/navsidebar.js'); ?>" defer></script>
     <script type="module" src="asset/js/dynamic_landing.js?v=<?php echo filemtime('asset/js/dynamic_landing.js'); ?>" defer></script>
-    <script type="module" src="DashWithMap/main.js?v=<?php echo filemtime('DashWithMap/main.js'); ?>" defer></script>
+    <script src="DashWithMap/main.js?v=<?php echo filemtime('DashWithMap/main.js'); ?>" defer></script>
     
 
 </head>
@@ -184,7 +189,6 @@
             </datalist>
             
             <button id="search-btn">🔎Search</button>
-            <img id="map-logo" src="./RENTRAMUROS_LOGO_BLACK.svg" alt="RENTramuros-logo">
         </div>
 
         <div id="map"></div>
@@ -224,7 +228,6 @@
         </div>
 
     </section>
-
 
 </body>
 </html>
