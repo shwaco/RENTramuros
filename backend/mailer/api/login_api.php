@@ -1,13 +1,13 @@
 <?php
-session_start();
-
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Origin: *'); 
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-require_once  '../../../asset/config.php';
+require_once '../config/config.php';
 /** @var mysqli $con */
+
+error_log('[01db3a login_api] reached login_api.php');
 
 $data = json_decode(file_get_contents("php://input"));
 if(!isset($data->email) || !isset($data->password)) {
@@ -16,7 +16,7 @@ if(!isset($data->email) || !isset($data->password)) {
 }
 
 $email = $data->email;
-$raw_password = $data->password;
+$password = $data->password;
 
 $admin_sql = "SELECT * FROM admins WHERE email = ?";
 $stmt = mysqli_prepare($con, $admin_sql);
@@ -25,14 +25,12 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
-
-    if (!password_verify($raw_password, $row['password_hash'])) {
-    echo json_encode(["status" => "error", "message" => "Invalid password."]);
-    exit();
+    if (!password_verify($password, $row['password_hash'])) {
+        echo json_encode(["status" => "error", "message" => "Invalid password."]);
+        exit();
     }
-
     $_SESSION['admin_id'] = $row['admin_id'];
-    echo json_encode(["status" => "success", "message" => "Login Successful as Admin!", "admin_id" => $row['admin_id']]);
+    echo json_encode(["status" => "success", "message" => "Login Successful as Admin!", "role" => "admin", "admin_id" => $row['admin_id']]);
     exit();
 }
 
@@ -43,14 +41,19 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
-
-    if (!password_verify($raw_password, $row['password_hash'])) {
-    echo json_encode(["status" => "error", "message" => "Invalid password."]);
-    exit();
+    if (!password_verify($password, $row['password_hash'])) {
+        echo json_encode(["status" => "error", "message" => "Invalid password."]);
+        exit();
     }
 
     $_SESSION['guide_id'] = $row['guide_id'];
-    echo json_encode(["status" => "success", "message" => "Login Successful as Tour Guide!", "guide_id" => $row['guide_id']]);
+
+    $update_sql = "UPDATE tour_guides SET current_status = 'Online' WHERE guide_id = ? AND current_status IN ('Offline', 'Available')";
+    $update_stmt = mysqli_prepare($con, $update_sql);
+    mysqli_stmt_bind_param($update_stmt, "i", $row['guide_id']);
+    mysqli_stmt_execute($update_stmt);
+
+    echo json_encode(["status" => "success", "message" => "Login Successful as Tour Guide!", "role" => "guide", "guide_id" => $row['guide_id']]);
     exit();
 }
 
@@ -61,21 +64,18 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($row = mysqli_fetch_assoc($result)) {
-
-    if (!password_verify($raw_password, $row['password_hash'])) {
-    echo json_encode(["status" => "error", "message" => "Invalid password."]);
-    exit();
-    }
-
-    if ($row['is_verified'] == 0) {
-        echo json_encode(["status" => "error", "message" => "Account not verified. Please check your email for the OTP to verify your account."]);
+    if (!password_verify($password, $row['password_hash'])) {
+        echo json_encode(["status" => "error", "message" => "Invalid password."]);
         exit();
     }
-
+    if ($row['is_verified'] == 0) {
+        echo json_encode(["status" => "unverified", "message" => "Account not verified. Please check your email for the OTP to verify your account."]);
+        exit();
+    }
     $_SESSION['tourist_id'] = $row['tourist_id'];
-    echo json_encode(["status" => "success", "message" => "Login Successful as Tourist!", "tourist_id" => $row['tourist_id']]);
+    echo json_encode(["status" => "success", "message" => "Login Successful as Tourist!", "role" => "tourist", "tourist_id" => $row['tourist_id']]);
     exit();
-} 
+}
 
 echo json_encode(["status" => "error", "message" => "Email not found. Please sign up first."]);
 ?>
