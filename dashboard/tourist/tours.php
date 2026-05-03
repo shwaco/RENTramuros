@@ -18,7 +18,7 @@
     <script src="../../asset/js/receipt.js?v=<?php echo filemtime('../../asset/js/receipt.js'); ?>" defer></script>
 
     <script type="module"> 
-        import { fetchToursData, submitBookingRequest } from '../../services/api.js'; 
+        import { fetchToursData, submitBookingRequest } from '../../services/tours_api.js'; 
         window.fetchToursData = fetchToursData;
         window.submitBookingRequest = submitBookingRequest; /* NEW: Exposes the POST API */
     </script>
