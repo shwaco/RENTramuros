@@ -29,11 +29,11 @@
                     <div class="password_wrapper">
                         <input class="inputs pass" type="password" name="password_hash" placeholder="Password" id="password_input" required>
                         <button type="button" id="pass_visibility">
-                            <img id="visibility_icon" src="../asset/img/pass_visibility.svg">
+                            <img id="visibility_icon" src="../../asset/img/pass_visibility.svg">
                         </button>
                     </div>
                     <div class="phone_number_wrapper">
-                        <input id="phone_num" class="inputs num" type="number" name="phone_number" placeholder="Phone Number">
+                        <input id="phone_num" class="inputs num" type="number" name="phone_number" placeholder="Phone Number" required>
                     </div>
                     <div class="sign_up_wrapper">
                         <button type="submit" id="submit_button">Sign up</button>

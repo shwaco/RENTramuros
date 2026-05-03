@@ -4,8 +4,8 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 
-require_once '../../../backend.v2/config/config.php';
-require_once '../../../backend.v2/config/mailer_config.php';
+require_once __DIR__. '/../../config/config.php';
+require_once __DIR__. '/../../config/mailer_config.php';
 
 /** @var mysqli $con */
 

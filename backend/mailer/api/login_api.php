@@ -4,10 +4,9 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-require_once '../config/config.php';
+require_once __DIR__. '/../../config/config.php';
 /** @var mysqli $con */
 
-error_log('[01db3a login_api] reached login_api.php');
 
 $data = json_decode(file_get_contents("php://input"));
 if(!isset($data->email) || !isset($data->password)) {

@@ -1,16 +1,12 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 session_start();
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
-require_once '../../../backend.v2/config/config.php';
-require_once '../../../backend.v2/config/mailer_config.php';
+require_once __DIR__. '/../../config/config.php';
+require_once __DIR__.'/../../config/mailer_config.php';
 
 /** @var mysqli $con */
 /** @var PHPMailer $mail */

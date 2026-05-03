@@ -3,8 +3,14 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <title>Login Page</title>
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="login.css?v=<?php echo filemtime('login.css'); ?>">
+
+        <script src="login.js?v=<?php echo filemtime('login.js'); ?>" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+
     </head>
     <body>
         <h1 class="text-center mt-4">Login</h1>
@@ -23,42 +29,8 @@
             </form>
         </div>
         <script>
-            document.getElementById('LoginForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                const email = document.getElementById('emailInput').value;
-                const password = document.getElementById('passwordInput').value;
-                const alertBox = document.getElementById('alertbox');
-
-                fetch('login_api.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email, password: password })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                       alertBox.innerHTML = `<div class="alert alert-success" role="alert">${data.message}</div>`;
-                          setTimeout(() => {
-                             if (data.admin_id) {
-                                 window.location.href = '../admin_dashboard.html';
-                             } else if (data.guide_id) {
-                                 window.location.href = '../queue-management-system/index.php';
-                             } else if (data.tourist_id) {
-                                 window.location.href = '../landing_page.php';
-                             }
-                            }, 1500);
-                    } else if (data.status === 'unverified') {
-                        alertBox.innerHTML = `<div class="alert alert-warning" role="alert">${data.message}</div>`;
-                    } else {
-                        alertBox.innerHTML = `<div class="alert alert-danger" role="alert">${data.message}</div>`;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alertBox.innerHTML = `<div class="alert alert-danger" role="alert">Server error. Check console.</div>`;
-                });
-         });
+            
         </script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
     </body>
 </html>
