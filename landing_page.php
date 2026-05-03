@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="asset/css/index.css?v=<?php echo filemtime('asset/css/index.css'); ?>">
     <script type="module" src="asset/navsidebar.js?v=<?php echo filemtime('asset/navsidebar.js'); ?>" defer></script>
     <script type="module" src="asset/js/dynamic_landing.js?v=<?php echo filemtime('asset/js/dynamic_landing.js'); ?>" defer></script>
-    <!-- <script src="DashWithMap/main.js?v=<?php echo filemtime('DashWithMap/main.js'); ?>" defer></script> -->
     
 
 </head>
