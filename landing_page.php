@@ -9,18 +9,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />   
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
-
 
 
     <link rel="stylesheet" href="asset/css/navsidebar.css?v=<?php echo filemtime('asset/css/navsidebar.css'); ?>">
-    <link rel="stylesheet" href="DashWithMap/style.css?v=<?php echo filemtime('DashWithMap/style.css.css'); ?>">
     <link rel="stylesheet" href="asset/main.css?v=<?php echo filemtime('asset/main.css'); ?>">
     <link rel="stylesheet" href="asset/css/index.css?v=<?php echo filemtime('asset/css/index.css'); ?>">
     <script type="module" src="asset/navsidebar.js?v=<?php echo filemtime('asset/navsidebar.js'); ?>" defer></script>
     <script type="module" src="asset/js/dynamic_landing.js?v=<?php echo filemtime('asset/js/dynamic_landing.js'); ?>" defer></script>
-    <script src="DashWithMap/main.js?v=<?php echo filemtime('DashWithMap/main.js'); ?>" defer></script>
+    <!-- <script src="DashWithMap/main.js?v=<?php echo filemtime('DashWithMap/main.js'); ?>" defer></script> -->
     
 
 </head>
@@ -168,66 +164,6 @@
 
     </main>
 
-    <section class="map_sec">
-        <div id="search-container">
-            <input list="intramuros-locations" id="search-input" placeholder="Search popular tourist spots...">
-            
-            <datalist id="intramuros-locations">
-                <option value="Fort Santiago">
-                <option value="Minor Basilica">
-                <option value="San Agustin Church">
-                <option value="Casa Manila">
-                <option value="Baluarte de San Diego">
-                <option value="Rizal Shrine">
-                <option value="Palacio Del Gobernador">
-                <option value="Museo De Intramuros">
-                <option value="Silahi's Art And Artifacts Inc">
-                <option value="Rizal's Bagumbayan Light and Sound Museum">
-                <option value="Barbara's Heritage Restaurant">
-                <option value="Bambike Ecotours">
-                <option value="Puerta Del Parian">
-            </datalist>
-            
-            <button id="search-btn">🔎Search</button>
-        </div>
-
-        <div id="map"></div>
-        <div id="side-panel">
-            <button id="close-panel-btn" onclick="document.getElementById('side-panel').classList.remove('open')">X</button>
-            
-            <img id="panel-img" src="" alt="Location Image">
-            
-            <div class="panel-content">
-                <h2 id="panel-title">Title</h2>
-                <p id="panel-text">Details dito</p>
-                <h3 id="panel-operating-hours-header">🕰️Operating Hours:</h3>
-                    <div id="panel-operating-hours-details"></div>
-                </details>
-                <a id="panel-btn" href="#" target="_blank" class="book-now-btn">
-                Book Now</a>
-            </div>
-        </div>
-
-        <div id="church-buttons">
-            <button id="churches-btn" class="Churches-btn">⛪ Churches</button>
-        </div>
-        <div id="foodplaces-buttons">
-            <button id="food-places-btn" class="Food-places-btn">🍽️ Food Places</button>
-        </div>
-        <div id="museums-buttons">
-            <button id="museum-btn" class="Museum-btn">🖼️ Museums </button>
-        </div>
-        <div id="landmarks-buttons">
-            <button id="landmark-btn" class="Landmark-btn">🏛️ Historical Landmarks </button>
-        </div>
-        <div id="rides-buttons">
-            <button id="ride-btn" class="Rides-btn">🚲 Activities </button>
-        </div>
-        <div id="show-all-buttons">
-            <button id="show-all-btn" class="Show-all-btn">📍 Show all pins</button>
-        </div>
-
-    </section>
 
 </body>
 </html>
