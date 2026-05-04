@@ -1,16 +1,13 @@
 <?php
-session_start();
 header('Content-Type: application/json');
-require_once('../../config/config.php');
-
+require_once __DIR__. '/../../../config/config.php';
+require_once __DIR__. '/../../../../shared/middleware/auth_check.php';
 // Called by the TOURIST when they mark the tour as Done.
 // Also resets the assigned guide back to Queuing automatically.
-if (!isset($_SESSION['tourist_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Not logged in']);
-    exit();
-}
+requireRole(['tourist']);
 
-$tourist_id = $_SESSION['tourist_id'];
+$user_id = $_SESSION['user_id'];
+$userRole = $_SESSION['role'];
 $data       = json_decode(file_get_contents("php://input"), true);
 $booking_id = isset($data['booking_request_id']) ? (int)$data['booking_request_id'] : null;
 
