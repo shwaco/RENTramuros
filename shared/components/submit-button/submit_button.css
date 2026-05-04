@@ -1,0 +1,12 @@
+.btn-submit {
+    background-color: #109620;
+    color: #ffffff;
+    border: none;
+    padding: 0.8rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 900;
+    font-family: 'Roboto Condensed', sans-serif;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}

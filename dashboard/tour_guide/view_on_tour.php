@@ -92,32 +92,35 @@
         </div>
 
         <div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 1rem;">
-            <span style="font-weight: 300; font-family: 'Roboto Condensed', sans-serif; color: #000000; font-size: 0.9rem;">TOTAL FEE:</span>
-            <?php
-                $pax        = ((int)($tourData['adults_and_seniors'] ?? 0)) + ((int)($tourData['children'] ?? 0));
-                $multiplier = $pax > 0 ? $pax : 1;
-                $vCount     = (int)($tourData['number_of_vehicle'] ?? 0);
-                $vMultiplier = $vCount > 0 ? $vCount : 1;
-                $vPrice     = isset($tourData['vehicle_price']) ? (float)$tourData['vehicle_price'] : 0;
-                $pkgFee     = isset($tourData['package_price']) ? (float)$tourData['package_price'] : 0;
-                $isPackage  = !empty($tourData['package_name']);
+    <span style="font-weight: 300; font-family: 'Roboto Condensed', sans-serif; color: #000000; font-size: 0.9rem;">TOTAL FEE:</span>
+    <?php
+        $pax        = ((int)($tourData['adults_and_seniors'] ?? 0)) + ((int)($tourData['children'] ?? 0));
+        $multiplier = $pax > 0 ? $pax : 1;
+        $vCount     = (int)($tourData['number_of_vehicle'] ?? 0);
+        $vMultiplier = $vCount > 0 ? $vCount : 1;
 
-                $totalFee = $vPrice * $vMultiplier;
-                if ($isPackage) {
-                    $totalFee += $pkgFee * $multiplier;
-                } elseif (!empty($tourData['destinations'])) {
-                    foreach (explode(',', $tourData['destinations']) as $dest) {
-                        $parts = explode('|', trim($dest));
-                        $fee   = isset($parts[1]) ? (float)$parts[1] : 0;
-                        if ($fee > 0) $totalFee += $fee * $multiplier;
-                    }
-                }
-                $maxFee = $totalFee * 1.20;
-            ?>
-            <span style="font-weight: 400; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 0.9rem; font-style: italic;">
-                ₱<?php echo number_format($totalFee, 2); ?> - ₱<?php echo number_format($maxFee, 2); ?>
-            </span>
-        </div>
+        $vPrice     = isset($tourData['vehicle_price']) ? (float)$tourData['vehicle_price'] : 0;
+        $pkgFee     = isset($tourData['package_price']) ? (float)$tourData['package_price'] : 0;
+        $isPackage  = !empty($tourData['package_name']);
+
+        $baseTotal = $vPrice * $vMultiplier;
+        if ($isPackage) {
+            $baseTotal += $pkgFee * $multiplier;
+        } elseif (!empty($tourData['destinations'])) {
+            foreach (explode(',', $tourData['destinations']) as $dest) {
+                $parts = explode('|', trim($dest));
+                $fee   = isset($parts[1]) ? (float)$parts[1] : 0;
+                if ($fee > 0) $baseTotal += $fee * $multiplier;
+            }
+        }
+
+        $minGrandTotal = $baseTotal + 1000;
+        $maxGrandTotal = $baseTotal + 1500;
+    ?>
+    <span style="font-weight: 400; font-family: 'Roboto Condensed', sans-serif; color: #109620; font-size: 0.9rem; font-style: italic;">
+        ₱<?php echo number_format($minGrandTotal, 2); ?> - ₱<?php echo number_format($maxGrandTotal, 2); ?>
+    </span>
+</div>
 
     </article>
 </div>
