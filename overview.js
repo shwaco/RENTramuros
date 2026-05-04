@@ -44,32 +44,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         let currentData = null;
         let database = null;
 
+        // Only fetch if the URL matches our dictionary
         if (translation) {
-            // --- CURRENT SETUP: USING THE JSON FILE ---
-            // Because the dictionary verified the link is real, we fetch the JSON
-            const response = await fetch('overview_data.json');
-            database = await response.json();
+            database = await fetchOverviewData();
             
-            // We use the URL text to find the right object in the JSON
-            currentData = database[currentUrlText]; 
+            // If the API failed and returned null, manually trigger the system error!
+            if (database === null) {
+                throw new Error("API returned null, triggering system failure fallback.");
+            }
 
-            /* 
-            =================================================================
-            🚨 FUTURE DATABASE SWAP INSTRUCTIONS 🚨
-            When the PHP API is ready, DELETE the 4 lines of code above, 
-            and UNCOMMENT the 3 lines of code below. That is literally it!
-            =================================================================
-            
-            const apiUrl = `get_overview_data.php?table=${translation.type}&id=${translation.db_id}`;
-            const response = await fetch(apiUrl);
-            currentData = await response.json(); 
-            
-            =================================================================
-            */
-           
-        } else {
-            throw new Error("Invalid URL ID or Item Not Found in Dictionary.");
+            if (database) {
+                currentData = database[currentUrlText]; 
+            }
         }
+        // Notice we REMOVED the "throw new Error" here so it doesn't skip the UI fallback!
 
         // =====================================================================
         // STEP 3: INJECT DATA INTO HTML
@@ -110,7 +98,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     const numAttrs = linkedAttractions.length;
                     
                     if (numAttrs >= 4) {
-                        // 4 or more: Grab the main_img from the first 4
                         dbImages = [
                             linkedAttractions[0].main_img,
                             linkedAttractions[1].main_img,
@@ -118,7 +105,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                             linkedAttractions[3].main_img
                         ];
                     } else if (numAttrs === 3) {
-                        // Exactly 3: Grab all 3 main_imgs, plus the mini_one from the first attraction
                         dbImages = [
                             linkedAttractions[0].main_img,
                             linkedAttractions[1].main_img,
@@ -126,7 +112,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                             linkedAttractions[0].mini_one_img
                         ];
                     } else if (numAttrs === 2) {
-                        // Exactly 2: Grab the main and mini_one from both
                         dbImages = [
                             linkedAttractions[0].main_img,
                             linkedAttractions[0].mini_one_img,
@@ -134,7 +119,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                             linkedAttractions[1].mini_one_img
                         ];
                     } else if (numAttrs === 1) {
-                        // Fallback just in case a package only has 1 attraction
                         dbImages = [
                             linkedAttractions[0].main_img,
                             linkedAttractions[0].mini_one_img,
@@ -145,10 +129,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 } else {
                     addressSpan.textContent = "Itinerary not available.";
-                    dbImages = ["", "", "", ""]; // Blank fallback if array is missing
+                    dbImages = ["", "", "", ""]; 
                 }
             } else {
-                // If Attraction: Standard text and image injection
                 if (currentData.address) {
                     addressContainer.style.display = "flex";
                     locationIcon.style.display = "inline"; 
@@ -158,8 +141,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
                 hoursSpan.style.display = "inline"; 
-                    hoursSpan.textContent = `🕒 Open: ${currentData.schedule}`;
-                // Standard image fetch for standalone attractions
+                hoursSpan.textContent = `🕒 Open: ${currentData.schedule}`;
+                
                 dbImages = [
                     currentData.main_img,
                     currentData.mini_one_img,
@@ -168,18 +151,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ];
             }
 
-            // 3. FEE LOGIC: Handle 0 vs Decimals
             const feeValue = parseFloat(isPackage ? currentData.price : currentData.fee); 
             const feeLabel = isPackage ? "Package Fee" : "Entrance";
 
             if (feeValue === 0 || isNaN(feeValue)) {
                 document.getElementById("attraction-price").textContent = `🎟️ ${feeLabel}: Free`;
             } else {
-                // Using Math.round() forces whole numbers so no decimals display on the UI
                 document.getElementById("attraction-price").textContent = `🎟️ ${feeLabel}: ₱${Math.round(feeValue)}`;
             }
 
-            // 4. IMAGE INJECTION & MODAL
             const imageBoxes = document.querySelectorAll('.images-grid-container .box img');
             
             dbImages.forEach((imageUrl, index) => {
@@ -187,7 +167,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                     imageBoxes[index].src = imageUrl;
 
                     imageBoxes[index].addEventListener("click", function() {
-                        if (this.src && !this.src.includes("index.html")) { 
+                        // This is the bulletproof check!
+                        const rawSrc = this.getAttribute("src");
+                        
+                        if (rawSrc && rawSrc !== "") { 
                             modal.classList.add("show");
                             modalImg.src = this.src;
                         }
@@ -195,19 +178,32 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             });
 
-            
+            // FIX #1: Dynamically set the booking button URL!
+            const bookBtn = document.querySelector('.book-btn');
+            if (bookBtn) {
+                // Remove the HTML hardcoded click and assign it here
+                bookBtn.onclick = function() {
+                    window.location.href = `booking_dashboard.html?id=${currentUrlText}`;
+                };
+            }
+
         } else {
-            // Error handling
+            // FIX #3: Because we didn't throw an error above, this fallback UI will now correctly show!
             document.getElementById("attraction-title").textContent = "Item Not Found";
-            document.getElementById("attraction-description").textContent = "Please return to the dashboard.";
+            document.getElementById("attraction-description").textContent = "The tour or attraction you are looking for does not exist. Please return to the dashboard.";
             document.getElementById("attraction-address").textContent = "";
             document.getElementById("attraction-hours").textContent = "";
             document.getElementById("attraction-price").textContent = "";
             document.querySelector(".location-icon").style.display = "none";
+            
+            // Hide the booking button if the item doesn't exist
+            const bookBtn = document.querySelector('.book-btn');
+            if (bookBtn) bookBtn.style.display = 'none';
         }
     } catch (error) {
         console.error("Error loading the data:", error);
-        document.getElementById("attraction-title").textContent = "Error Loading Data";
+        document.getElementById("attraction-title").textContent = "System Error";
+        document.getElementById("attraction-description").textContent = "Could not connect to the database. Please try again later.";
     }
 
     // MODAL CLOSING LOGIC 
