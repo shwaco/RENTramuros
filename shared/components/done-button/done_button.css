@@ -1,11 +1,20 @@
 .btn-complete {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 0.6rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
     background-color: #109620;
     color: #ffffff;
     border: none;
-    padding: 0.6rem 2rem;
-    font-size: 1rem;
-    font-weight: 900;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: 'Roboto Condensed', sans-serif;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-complete:hover {
+    background-color: #0d7a1a;
+}
+
+.btn-complete:active {
+    transform: scale(0.98);
 }
