@@ -136,22 +136,24 @@ async function sendDataToDatabase() {
 
     // 2. Format the payload exactly to the FLAT structure your PHP expects
     const dbPayload = {
-        tourist_id: 1, // Hardcoded tourist ID for testing
+        tourist_id: 1, // Keeping this hardcoded so your local testing works!
         booking_type: reservationData.wantsPackage ? "Package" : "Attractions",
-        time: document.getElementById('time-display').innerText,
-        date: document.getElementById('date-display').innerText,
+        booking_time: document.getElementById('time-display').innerText, // MATCHES SQL
+        booking_date: document.getElementById('date-display').innerText, // MATCHES SQL
         adults_and_seniors: reservationData.tourists.adults, 
         children: reservationData.tourists.children,
         infants: reservationData.tourists.infants,
         package_id: finalPackageId,
         vehicle_id: finalVehicleId,
-        number_of_vehicles: reservationData.vehicleQuantity,
+        number_of_vehicle: reservationData.vehicleQuantity, // MATCHES SQL (Singular)
         
+        // Contact info
         first_name: reservationData.contactInfo.firstName,
         last_name: reservationData.contactInfo.lastName,
         email_address: reservationData.contactInfo.email,
         phone_number: reservationData.contactInfo.phone,
         
+        // Attractions array
         attraction_id: finalAttractions
     };
 
