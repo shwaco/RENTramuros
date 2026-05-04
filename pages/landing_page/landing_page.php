@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../../asset/css/navsidebar.css?v=<?php echo filemtime('../../asset/css/navsidebar.css'); ?>">
     <link rel="stylesheet" href="../../asset/main.css?v=<?php echo filemtime('../../asset/main.css'); ?>">
     <link rel="stylesheet" href="../../asset/css/index.css?v=<?php echo filemtime('../../asset/css/index.css'); ?>">
-    <script type="module" src="../../asset/navsidebar.js?v=<?php echo filemtime('../../asset/navsidebar.js'); ?>" defer></script>
+    <script src="../../asset/js/navsidebar.js?v=<?php echo filemtime('../../asset/js/navsidebar.js'); ?>" defer></script>
     <script type="module" src="../../asset/js/dynamic_landing.js?v=<?php echo filemtime('../../asset/js/dynamic_landing.js'); ?>" defer></script>
     
 
@@ -27,22 +27,22 @@
 
             <!-- Sidebar -->
             <ul class="sidebar">
-                <li onclick=hideSidebar() id="hideSidebar"><a href="#" ><img src="asset/img/close_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="close-button" width="auto" height="30"></a></li>
-                <li><a href="#"><img src="asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
-                <li><a href="#"><img src="asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
-                <li><a href="#"><img src="asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                <li onclick=hideSidebar() id="hideSidebar"><a href="#" ><img src="../../asset/img/close_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="close-button" width="auto" height="30"></a></li>
+                <li><a href="#"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
+                <li><a href="#"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+                <li><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li><a href="#">About</a></li>
             </ul>
 
             <!-- Navigation bar -->
             <ul class="navbar">
-                <li><img src="asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo"></li>
-                <li class="hideOnMobile"><a href="#" id="maps"><img src="asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
-                <li class="hideOnMobile"><a href="dashboard/tourist/tours.php" rel="noreferrer noopener" target="_blank"><img src="asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
-                <li class="hideOnMobile"><a href="#"><img src="asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                <li><img src="../../asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo"></li>
+                <li class="hideOnMobile"><a href="#" id="maps"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
+                <li class="hideOnMobile"><a href="dashboard/tourist/tours.php" rel="noreferrer noopener" target="_blank"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+                <li class="hideOnMobile"><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li class="hideOnMobile last"><a href="#">About</a></li>
                 <!-- <li><a href="auth.v2/login.php" id="nav_login"></li> -->
-                <li onclick=showSidebar() id="showSidebar" class="menu-btn"><a href="#" ><img src="asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
+                <li onclick=showSidebar() id="showSidebar" class="menu-btn"><a href="#" ><img src="../../asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
             </ul>
         </nav>
 
@@ -60,7 +60,7 @@
                     <span class="line two"></span>
                 </div>
 
-                <div class="wheel_pic"><img src="asset/img/CARTWHEEL_ICON.svg" alt="wheel_pic" id="cartwheel" height="20"></div>
+                <div class="wheel_pic"><img src="../../asset/img/CARTWHEEL_ICON.svg" alt="wheel_pic" id="cartwheel" height="20"></div>
 
                 <div class="batch two">
                     <span class="line one"></span>
@@ -76,12 +76,12 @@
                 <p>Where history, culture, and seamless booking intertwine. Experience an effortless <br>and prepared journey for using the all-in-one platform for your Intramuros travel and tour needs.</p>
 
                 <ul class="list_container">
-                    <li><img src="asset/img/CARTWHEEL_ICON.svg" height="15">Navigate easily</li>
-                    <li><img src="asset/img/CARTWHEEL_ICON.svg" height="15">Travel with few clicks</li>
-                    <li><img src="asset/img/CARTWHEEL_ICON.svg" height="15">Hassle-free</li>
+                    <li><img src="../../asset/img/CARTWHEEL_ICON.svg" height="15">Navigate easily</li>
+                    <li><img src="../../asset/img/CARTWHEEL_ICON.svg" height="15">Travel with few clicks</li>
+                    <li><img src="../../asset/img/CARTWHEEL_ICON.svg" height="15">Hassle-free</li>
                 </ul>
 
-                <a href="pages/sign_up.php" class="button">START YOUR JOURNEY</a>
+                <a href="../sign_up/sign_up.php" class="button">START YOUR JOURNEY</a>
             </div>
         </section>
 
@@ -103,12 +103,12 @@
                 <!-- Sliding -->
                 <div class="slider">
                     
-                    <button class="slide-btn one" id="prev-btn"><img src="asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
+                    <button class="slide-btn one" id="prev-btn"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
                     <ul id="upcoming_events_list">
                     </ul>
 
-                    <button class="slide-btn two" id="next-btn"><img src="asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
+                    <button class="slide-btn two" id="next-btn"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
 
                 </div>
             </div>
@@ -122,11 +122,11 @@
 
                 <div class="slider one">
                         
-                    <button class="slide-btn one" id="prev-btn1"><img src="asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
+                    <button class="slide-btn one" id="prev-btn1"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
                     <ul id="pop-attractions-list"></ul>
 
-                    <button class="slide-btn two" id="next-btn1"><img src="asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
+                    <button class="slide-btn two" id="next-btn1"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
                 </div>
 
             </div>
@@ -139,12 +139,12 @@
 
                 <div class="slider two">
                         
-                    <button class="slide-btn one" id="prev-btn2"><img src="asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
+                    <button class="slide-btn one" id="prev-btn2"><img src="../../asset/img/chevron_backward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="back-arrow"></button>
 
                     <ul id="reco-attractions-list">
                     </ul>
 
-                    <button class="slide-btn two" id="next-btn2"><img src="asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
+                    <button class="slide-btn two" id="next-btn2"><img src="../../asset/img/chevron_forward_19dp_000000_FILL0_wght200_GRAD0_opsz20.svg" alt="forward-arrow"></button>
 
 
                 </div>
