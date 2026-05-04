@@ -1,21 +1,79 @@
-// fetching json data
+// THE TRANSLATOR DICTIONARY
+
+const routeDictionary = {
+    // --- ATTRACTIONS ---
+    "fort-santiago":          { db_id: 1, type: "attraction" },
+    "casa-manila":            { db_id: 2, type: "attraction" },
+    "san-agustin-museum":     { db_id: 3, type: "attraction" },
+    "san-agustin-church":     { db_id: 4, type: "attraction" },
+    "centro-de-turismo":      { db_id: 5, type: "attraction" },
+    "bambike":                { db_id: 6, type: "attraction" },
+    "barbaras":               { db_id: 7, type: "attraction" },
+    "minor-basilica":         { db_id: 8, type: "attraction" },
+    "museo-de-intramuros":    { db_id: 9, type: "attraction" },
+    "palacio-del-gobernador": { db_id: 10, type: "attraction" },
+    "puerta-del-parian":      { db_id: 11, type: "attraction" },
+    "puerta-real-gardens":    { db_id: 12, type: "attraction" },
+    "rizal-shrine":           { db_id: 13, type: "attraction" },
+    "light-and-sound-museum": { db_id: 14, type: "attraction" },
+    "silahis-art":            { db_id: 15, type: "attraction" },
+
+    // --- PACKAGES ---
+    "heros-trail":            { db_id: 1, type: "package" },
+    "cultural-combo":         { db_id: 2, type: "package" },
+    "walled-city-grand-tour": { db_id: 3, type: "package" },
+    "bastions-and-walls":     { db_id: 4, type: "package" },
+    "sacred-route":           { db_id: 5, type: "package" }
+};
+
+// =====================================================================
+// STEP 2: INTERCEPT AND FETCH
+// =====================================================================
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const currentId = urlParams.get('id')?.toLowerCase();
+    const currentUrlText = urlParams.get('id')?.toLowerCase();
 
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImg");
     const closeBtn = document.querySelector(".close");
 
-    try {
-        const database = await fetchOverviewData();
+    // 1. Look up the URL in our dictionary to see if it is a real page
+    const translation = routeDictionary[currentUrlText];
 
-        if (!database) {
-            throw new Error("Failed to load database from API.");
+    try {
+        let currentData = null;
+        let database = null;
+
+        if (translation) {
+            // --- CURRENT SETUP: USING THE JSON FILE ---
+            // Because the dictionary verified the link is real, we fetch the JSON
+            const response = await fetch('overview_data.json');
+            database = await response.json();
+            
+            // We use the URL text to find the right object in the JSON
+            currentData = database[currentUrlText]; 
+
+            /* 
+            =================================================================
+            🚨 FUTURE DATABASE SWAP INSTRUCTIONS 🚨
+            When the PHP API is ready, DELETE the 4 lines of code above, 
+            and UNCOMMENT the 3 lines of code below. That is literally it!
+            =================================================================
+            
+            const apiUrl = `get_overview_data.php?table=${translation.type}&id=${translation.db_id}`;
+            const response = await fetch(apiUrl);
+            currentData = await response.json(); 
+            
+            =================================================================
+            */
+           
+        } else {
+            throw new Error("Invalid URL ID or Item Not Found in Dictionary.");
         }
 
-        const currentData = database[currentId];
-
+        // =====================================================================
+        // STEP 3: INJECT DATA INTO HTML
+        // =====================================================================
         if (currentData) {
             // --- checking if package or attraction ---
             const isPackage = currentData.package_id !== undefined;
