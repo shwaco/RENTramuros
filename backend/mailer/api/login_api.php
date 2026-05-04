@@ -71,8 +71,13 @@ if ($row = mysqli_fetch_assoc($result)) {
         echo json_encode(["status" => "unverified", "message" => "Account not verified. Please check your email for the OTP to verify your account."]);
         exit();
     }
-    $_SESSION['tourist_id'] = $row['tourist_id'];
-    echo json_encode(["status" => "success", "message" => "Login Successful as Tourist!", "role" => "tourist", "tourist_id" => $row['tourist_id']]);
+    $_SESSION['user_id'] = $row['tourist_id'];
+    $SESSION['role'] = 'tourist';
+    echo json_encode([
+        "status" => "success", 
+        "message" => "Login Successful as Tourist!", 
+        "role" => "tourist", 
+        ]);
     exit();
 }
 
