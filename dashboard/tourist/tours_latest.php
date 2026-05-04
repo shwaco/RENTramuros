@@ -10,19 +10,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../asset/css/calendar.css?v=<?php echo filemtime('../../asset/css/calendar.css'); ?>">
-    <link rel="stylesheet" href="../../asset/css/receipt.css?v=<?php echo filemtime('../../asset/css/receipt.css'); ?>">
-    <link rel="stylesheet" href="../../asset/css/tours.css?v=<?php echo filemtime('../../asset/css/tours.css'); ?>">
+    <link rel="stylesheet" href="../../asset/css/calendar_latest.css?v=<?php echo filemtime('../../asset/css/calendar_latest.css'); ?>">
+    <link rel="stylesheet" href="../../asset/css/receipt_latest.css?v=<?php echo filemtime('../../asset/css/receipt_latest.css'); ?>">
+    <link rel="stylesheet" href="../../asset/css/tours_latest.css?v=<?php echo filemtime('../../asset/css/tours_latest.css'); ?>">
 
-    <script src="../../asset/js/calendar.js?v=<?php echo filemtime('../../asset/js/calendar.js'); ?>" defer></script>
-    <script src="../../asset/js/receipt.js?v=<?php echo filemtime('../../asset/js/receipt.js'); ?>" defer></script>
+    <script src="../../asset/js/calendar_latest.js?v=<?php echo filemtime('../../asset/js/calendar_latest.js'); ?>" defer></script>
+    <script src="../../asset/js/receipt_latest.js?v=<?php echo filemtime('../../asset/js/receipt_latest.js'); ?>" defer></script>
 
     <script type="module"> 
         import { fetchToursData, submitBookingRequest } from '../../services/tours_api.js'; 
         window.fetchToursData = fetchToursData;
         window.submitBookingRequest = submitBookingRequest; /* NEW: Exposes the POST API */
     </script>
-    <script src="../../asset/js/tours.js?v=<?php echo filemtime('../../asset/js/tours.js'); ?>" defer></script>
+    <script src="../../asset/js/tours_latest.js?v=<?php echo filemtime('../../asset/js/tours_latest.js'); ?>" defer></script>
 </head>
 <body>
     <div class="reservation-container">
