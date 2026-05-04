@@ -80,7 +80,7 @@ if ($row = mysqli_fetch_assoc($result)) {
         exit();
     }
     $_SESSION['user_id'] = $row['tourist_id'];
-    $SESSION['role'] = 'tourist';
+    $_SESSION['role'] = 'tourist';
     echo json_encode([
         "status" => "success", 
         "message" => "Login Successful as Tourist!", 
