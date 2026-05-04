@@ -1,11 +1,20 @@
 .btn-cancel {
-    background-color: #FF0000;
-    color: #ffffff;
-    border: none;
-    padding: 0.6rem 2rem;
+    font-family: 'Roboto Condensed', sans-serif;
     font-size: 1rem;
-    font-weight: 900;
+    font-weight: 700;
+    padding: 0.6rem 1.5rem;
     border-radius: 4px;
     cursor: pointer;
-    font-family: 'Roboto Condensed', sans-serif;
+    background-color: transparent;
+    color: #FF0000;
+    border: 1px solid #FF0000;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #fff0f0;
+}
+
+.btn-cancel:active {
+    transform: scale(0.98);
 }

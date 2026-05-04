@@ -21,7 +21,7 @@ function viewTouristDetails(id) {
     // kung #1 na yung guide sa queue, pwede na siyang pumili ng tourist so lalabas na yung accept button
     if (typeof IS_QUEUE_NUMBER_ONE !== 'undefined' && IS_QUEUE_NUMBER_ONE) {
         actionArea = `
-            <button onclick="acceptTour(${tourist.booking_request_id})" class="accept-btn" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 2px; cursor: pointer; transition: background-color 0.2s;">
+           <button onclick="acceptTour(${tourist.booking_request_id})" class="accept-btn">
                 ACCEPT
             </button>
         `;
