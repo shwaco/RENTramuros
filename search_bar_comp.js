@@ -1,6 +1,25 @@
 // IMPORT THE DATA FETCHER
 import { fetchAttractionData } from './search_bar_api.js';
 
+// Map official database names to your custom URL slugs
+const customSlugMap = {
+    "Fort Santiago": "fort-santiago",
+    "Casa Manila": "casa-manila",
+    "San Agustin Museum": "san-agustin-museum",
+    "San Agustin Church": "san-agustin-church",
+    "Centro de Turismo Intramuros": "centro-de-turismo",
+    "Bambike Ecotours Intramuros": "bambike",
+    "Barbara's Heritage Restaurant": "barbaras",
+    "Minor Basilica": "minor-basilica",
+    "Museo de Intramuros": "museo-de-intramuros",
+    "Palacio del Gobernador": "palacio-del-gobernador",
+    "Puerta del Parian": "puerta-del-parian",
+    "Puerta Real Gardens": "puerta-real-gardens",
+    "Rizal Shrine": "rizal-shrine",
+    "Rizal's Bagumbayan Light and Sound Museum": "light-and-sound-museum",
+    "Silahis Art and Artifacts Inc.": "silahis-art"
+};
+
 function renderAttractionCards(attractionsList) {
     const attractionsContainer = document.querySelector('.intramuros-attractions-lists');
     attractionsContainer.innerHTML = ''; 
@@ -138,19 +157,27 @@ document.addEventListener("DOMContentLoaded", async () => {
         const searchTerm = searchInput.value.trim();
         if (!searchTerm) return; 
 
-        let foundId = null;
+        let foundName = null;
 
         allCards.forEach(card => {
             const cardName = card.querySelector('.attraction-name').innerText;
+            // Check if what the user typed matches a card
             if (cardName.toLowerCase() === searchTerm.toLowerCase()) {
-                foundId = card.getAttribute('data-id');
+                foundName = cardName;
             }
         });
 
         saveSearchToHistory(searchTerm);
 
-        if (foundId) {
-            window.location.href = `overview.html?id=${foundId}`;
+        // If a match is found, look up its custom slug and redirect!
+        if (foundName) {
+            const urlSlug = customSlugMap[foundName]; // Grabs 'bambike', 'barbaras', etc.
+            
+            if (urlSlug) {
+                window.location.href = `overview.html?id=${urlSlug}`; 
+            } else {
+                console.error("URL slug not found for:", foundName);
+            }
         } else {
             dropdownWrapper.classList.remove("active");
         }
