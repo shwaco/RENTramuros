@@ -1,5 +1,6 @@
 <?php 
 function requireRole($allowedRoles) {
+    // check if you're logged in
     if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) ){
         http_response_code(401);
         echo json_encode([
@@ -9,6 +10,7 @@ function requireRole($allowedRoles) {
         exit(); 
     };
     
+    // check if you're authorized
     $currentUserRole = $_SESSION['role'];
 
     if (!in_array($currentUserRole, $allowedRoles)) {
