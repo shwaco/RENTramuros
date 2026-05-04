@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.1deb3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 04, 2026 at 10:10 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: May 04, 2026 at 09:15 PM
+-- Server version: 8.0.45-0ubuntu0.24.04.1
+-- PHP Version: 8.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rentramuros_database`
+-- Database: `rentramuros_db`
 --
 
 -- --------------------------------------------------------
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admins` (
-  `admin_id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password_hash` varchar(255) NOT NULL
+  `admin_id` int NOT NULL,
+  `first_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -49,17 +49,17 @@ INSERT INTO `admins` (`admin_id`, `first_name`, `last_name`, `email`, `password_
 --
 
 CREATE TABLE `attractions` (
-  `attraction_id` int(11) NOT NULL,
-  `attraction_type` varchar(50) DEFAULT NULL,
-  `attraction_name` varchar(100) DEFAULT NULL,
-  `address` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `schedule` varchar(50) DEFAULT NULL,
+  `attraction_id` int NOT NULL,
+  `attraction_type` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `attraction_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
+  `schedule` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `fee` decimal(5,2) DEFAULT NULL,
-  `main_img` varchar(255) DEFAULT NULL,
-  `mini_one_img` varchar(255) DEFAULT NULL,
-  `mini_two_img` varchar(255) DEFAULT NULL,
-  `rec_img` varchar(255) DEFAULT NULL
+  `main_img` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `mini_one_img` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `mini_two_img` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `rec_img` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -90,21 +90,21 @@ INSERT INTO `attractions` (`attraction_id`, `attraction_type`, `attraction_name`
 --
 
 CREATE TABLE `booking_history` (
-  `booking_request_id` int(11) NOT NULL,
-  `unique_id` varchar(50) DEFAULT NULL,
-  `tourist_id` int(11) DEFAULT NULL,
-  `booking_type` varchar(50) NOT NULL,
-  `status` varchar(50) DEFAULT 'Pending',
-  `booking_time` varchar(100) DEFAULT NULL,
-  `booking_date` varchar(100) DEFAULT NULL,
-  `adults_and_seniors` int(50) DEFAULT NULL,
-  `children` int(50) DEFAULT NULL,
-  `infants` int(50) DEFAULT NULL,
-  `package_id` int(11) DEFAULT NULL,
-  `contact_info_id` int(11) DEFAULT NULL,
-  `vehicle_id` int(11) DEFAULT NULL,
-  `number_of_vehicle` int(11) DEFAULT NULL,
-  `guide_id` int(11) DEFAULT NULL
+  `booking_request_id` int NOT NULL,
+  `unique_id` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tourist_id` int DEFAULT NULL,
+  `booking_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` varchar(50) COLLATE utf8mb4_general_ci DEFAULT 'Pending',
+  `booking_time` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `booking_date` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `adults_and_seniors` int DEFAULT NULL,
+  `children` int DEFAULT NULL,
+  `infants` int DEFAULT NULL,
+  `package_id` int DEFAULT NULL,
+  `contact_info_id` int DEFAULT NULL,
+  `vehicle_id` int DEFAULT NULL,
+  `number_of_vehicle` int DEFAULT NULL,
+  `guide_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -114,11 +114,11 @@ CREATE TABLE `booking_history` (
 --
 
 CREATE TABLE `contact_information` (
-  `contact_info_id` int(11) NOT NULL,
-  `first_name` varchar(100) DEFAULT NULL,
-  `last_name` varchar(100) DEFAULT NULL,
-  `email_address` varchar(255) DEFAULT NULL,
-  `phone_number` varchar(50) DEFAULT NULL
+  `contact_info_id` int NOT NULL,
+  `first_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `last_name` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `email_address` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `phone_number` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -128,11 +128,11 @@ CREATE TABLE `contact_information` (
 --
 
 CREATE TABLE `packages` (
-  `package_id` int(11) NOT NULL,
-  `package_name` varchar(150) NOT NULL,
-  `description` text DEFAULT NULL,
+  `package_id` int NOT NULL,
+  `package_name` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
   `price` decimal(10,2) NOT NULL,
-  `image_file` varchar(255) NOT NULL
+  `image_file` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -153,8 +153,8 @@ INSERT INTO `packages` (`package_id`, `package_name`, `description`, `price`, `i
 --
 
 CREATE TABLE `package_itinerary` (
-  `package_id` int(11) DEFAULT NULL,
-  `attraction_id` int(11) DEFAULT NULL
+  `package_id` int DEFAULT NULL,
+  `attraction_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -188,8 +188,8 @@ INSERT INTO `package_itinerary` (`package_id`, `attraction_id`) VALUES
 --
 
 CREATE TABLE `request_attractions` (
-  `booking_request_id` int(11) NOT NULL,
-  `attraction_id` int(11) NOT NULL
+  `booking_request_id` int NOT NULL,
+  `attraction_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -199,8 +199,8 @@ CREATE TABLE `request_attractions` (
 --
 
 CREATE TABLE `request_packages` (
-  `booking_request_id` int(11) NOT NULL,
-  `package_id` int(11) NOT NULL
+  `booking_request_id` int NOT NULL,
+  `package_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -210,13 +210,13 @@ CREATE TABLE `request_packages` (
 --
 
 CREATE TABLE `tourists` (
-  `tourist_id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password_hash` varchar(255) NOT NULL,
-  `phone_number` varchar(20) DEFAULT NULL,
-  `otp_code` varchar(6) NOT NULL,
+  `tourist_id` int NOT NULL,
+  `first_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone_number` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `otp_code` varchar(6) COLLATE utf8mb4_general_ci NOT NULL,
   `is_verified` tinyint(1) NOT NULL,
   `otp_expiry` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -228,16 +228,16 @@ CREATE TABLE `tourists` (
 --
 
 CREATE TABLE `tour_guides` (
-  `guide_id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password_hash` varchar(255) NOT NULL,
-  `current_status` varchar(20) DEFAULT 'Online',
-  `last_active_at` datetime DEFAULT current_timestamp(),
-  `last_dispatch_time` datetime DEFAULT current_timestamp(),
-  `became_available_at` datetime DEFAULT current_timestamp(),
-  `current_tourist_id` int(11) DEFAULT NULL
+  `guide_id` int NOT NULL,
+  `first_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `current_status` varchar(20) COLLATE utf8mb4_general_ci DEFAULT 'Online',
+  `last_active_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `last_dispatch_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `became_available_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `current_tourist_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -259,12 +259,12 @@ INSERT INTO `tour_guides` (`guide_id`, `first_name`, `last_name`, `email`, `pass
 --
 
 CREATE TABLE `upcoming_events` (
-  `event_id` int(11) NOT NULL,
-  `event_name` varchar(100) NOT NULL,
-  `event_date` varchar(100) NOT NULL,
-  `event_time` varchar(100) NOT NULL,
-  `location` varchar(255) NOT NULL,
-  `image_file` varchar(255) NOT NULL
+  `event_id` int NOT NULL,
+  `event_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `event_date` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `event_time` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `location` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `image_file` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -276,7 +276,7 @@ INSERT INTO `upcoming_events` (`event_id`, `event_name`, `event_date`, `event_ti
 (2, 'Pasig River Esplanade (Bazaar)', 'January 1, 2026 - December 31, 2026', '4:00 PM - 12:00 MN', 'Pasig River Esplanade', 'upcoming_events/esplanade_bazaar.jpg'),
 (3, 'TamRun', 'May 2, 2026', '8:00 AM - 12:00 NN', 'Fort Santiago', 'upcoming_events/TamRun.jpg'),
 (4, 'Philippine Eatsperience', 'January 1, 2026 - December 31, 2026', '7:00 AM - 5:00 PM', 'Baluarte Plano Luneta de Santa Isabel', 'upcoming_events/Eatsperience.jpg'),
-(5, 'Centro Entablado (Ina Choral Fest)', 'May 9, 2026', '4:00 PM', 'Centro De Turismo Intramuros', 'upcoming_events/ina_choral_fest.jpg');
+(5, 'Centro Entablado (Ina Choral Fest)', 'May 9, 2026', '4:00 PM', 'Centro De Turismo Intramuros', 'upcoming_events/ina_coral_festival.jpg');
 
 -- --------------------------------------------------------
 
@@ -285,11 +285,11 @@ INSERT INTO `upcoming_events` (`event_id`, `event_name`, `event_date`, `event_ti
 --
 
 CREATE TABLE `vehicles` (
-  `vehicle_id` int(11) NOT NULL,
-  `vehicle_type` varchar(50) NOT NULL,
-  `passenger_capacity` varchar(20) NOT NULL,
+  `vehicle_id` int NOT NULL,
+  `vehicle_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `passenger_capacity` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `image_file` varchar(255) NOT NULL
+  `image_file` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -398,55 +398,55 @@ ALTER TABLE `vehicles`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `admin_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `attractions`
 --
 ALTER TABLE `attractions`
-  MODIFY `attraction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `attraction_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `booking_history`
 --
 ALTER TABLE `booking_history`
-  MODIFY `booking_request_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `booking_request_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `contact_information`
 --
 ALTER TABLE `contact_information`
-  MODIFY `contact_info_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `contact_info_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `package_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `package_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tourists`
 --
 ALTER TABLE `tourists`
-  MODIFY `tourist_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tourist_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tour_guides`
 --
 ALTER TABLE `tour_guides`
-  MODIFY `guide_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `guide_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `upcoming_events`
 --
 ALTER TABLE `upcoming_events`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `event_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `vehicle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `vehicle_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
