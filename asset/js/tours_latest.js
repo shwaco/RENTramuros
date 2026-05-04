@@ -8,6 +8,8 @@ let reservationData = {
     selectedVehicleId: null, 
     selectedVehiclePrice: 0, // NEW: Tracks the vehicle cost
     selectedPackageDesc: "", // NEW: Holds the text description for the receipt
+    selectedPackageItineraryIds: [], // NEW: Stores the junction IDs
+    attractionDictionary: {},        // NEW: Translates IDs to Names
     attractionFees: {}, // NEW: Master dictionary of all attraction prices
     vehicleQuantity: 0,
     customAttractions: [], 
@@ -287,18 +289,23 @@ function selectPackageOption(wantsPackage) {
 
 // --- FULLY DYNAMIC SELECTION LOGIC ---
 // --- PACKAGE LOGIC ---
-function selectPackage(packageId, packageName, packagePrice, packageDesc) { // ADDED packageDesc
+function selectPackage(packageId, packageName, packagePrice, packageDesc, itineraryString) { 
     if (reservationData.selectedPackage === packageName) {
         reservationData.selectedPackage = null; 
         reservationData.selectedPackageId = null; 
         reservationData.selectedPackagePrice = 0; 
-        reservationData.selectedPackageDesc = ""; // RESET
+        reservationData.selectedPackageDesc = ""; 
+        reservationData.selectedPackageItineraryIds = []; // RESET
         document.querySelectorAll('.package-options-container > div').forEach(p => p.classList.remove('selected-card'));
     } else {
         reservationData.selectedPackage = packageName;
         reservationData.selectedPackageId = packageId; 
         reservationData.selectedPackagePrice = parseFloat(packagePrice) || 0; 
-        reservationData.selectedPackageDesc = packageDesc || ""; // SAVE THE STRING
+        reservationData.selectedPackageDesc = packageDesc || ""; 
+        
+        // Convert the string back into an array of numbers
+        reservationData.selectedPackageItineraryIds = itineraryString ? JSON.parse(itineraryString) : []; 
+
         document.querySelectorAll('.package-options-container > div').forEach(p => p.classList.remove('selected-card'));
         document.getElementById(`pkg-${packageId}`).classList.add('selected-card'); 
     }
@@ -420,9 +427,9 @@ async function initDynamicTours() {
     const data = await fetchToursData();
     
     if (data) {
+        renderAttractions(data.attractions); 
         renderPackages(data.packages);
         renderVehicles(data.vehicles);
-        renderAttractions(data.attractions);
     }
 }
 
@@ -431,23 +438,31 @@ function renderPackages(packages) {
     let html = '';
 
     packages.forEach((pkg, index) => {
-        const formatDesc = pkg.description ? pkg.description.replace(/\n/g, '<br>') : '';
-        const safeName = pkg.package_name.replace(/"/g, '&quot;');
         
-        // Safely escape the description string for the dataset
+        // NEW LOGIC: Build the bulleted list dynamically from the junction IDs!
+        let itineraryListHtml = '';
+        if (pkg.itinerary_ids && pkg.itinerary_ids.length > 0) {
+            pkg.itinerary_ids.forEach(id => {
+                // Look up the name using the dictionary we built in renderAttractions
+                const attrName = reservationData.attractionDictionary[id] || "Unknown Attraction";
+                itineraryListHtml += `- ${attrName}<br>`;
+            });
+        }
+
+        const safeName = pkg.package_name.replace(/"/g, '&quot;');
+        // We still save the description to the dataset just in case the backend needs it later
         const safeDesc = pkg.description ? pkg.description.replace(/"/g, '&quot;') : '';
         
         const numericPrice = parseFloat(pkg.price);
         
-        // THE FIX: Changed to maximumFractionDigits: 0 to guarantee whole numbers only!
         const displayPrice = isNaN(numericPrice) ? '₱0' : `₱${numericPrice.toLocaleString('en-PH', { maximumFractionDigits: 0 })}`;
 
         html += `
-        <div class="package-${index + 1}" id="pkg-${pkg.package_id}" data-name="${safeName}" data-desc="${safeDesc}" onclick="selectPackage(${pkg.package_id}, this.dataset.name, ${pkg.price}, this.dataset.desc)">
+        <div class="package-${index + 1}" id="pkg-${pkg.package_id}" data-name="${safeName}" data-desc="${safeDesc}" data-itinerary="[${pkg.itinerary_ids}]" onclick="selectPackage(${pkg.package_id}, this.dataset.name, ${pkg.price}, this.dataset.desc, this.dataset.itinerary)">
             <div class="package-image"><img src="${pkg.image_file}" alt="${safeName}"></div>
             <div class="package-details-text">
                 <span class="package-label">${pkg.package_name}</span>
-                <span class="package-description">${formatDesc}</span>
+                <span class="package-description">${itineraryListHtml}</span>
                 <span class="package-price">${displayPrice}</span>
             </div>
         </div>`;
@@ -506,8 +521,9 @@ function renderAttractions(attractions) {
     attractions.forEach((attr, index) => {
         const fee = attr.fee || 0;
         
-        // NEW: Save the fee into our dictionary so the receipt can find it later!
         reservationData.attractionFees[attr.attraction_name] = fee; 
+        // NEW LINE: Build the dictionary translating ID -> Name
+        reservationData.attractionDictionary[attr.attraction_id] = attr.attraction_name;
         
         const dataString = `${attr.attraction_name} | ${fee}`;
         const safeDataString = dataString.replace(/"/g, '&quot;'); 

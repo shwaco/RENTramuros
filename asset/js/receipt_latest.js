@@ -50,13 +50,11 @@ function buildAndShowModal() {
             packageDisplayString += `&nbsp;&nbsp;<span style="color: #109620; font-weight: 700; font-style: italic; font-size: 0.85rem;">₱${totalPackageCost.toLocaleString('en-PH', { maximumFractionDigits: 0 })}</span>`;
         }
         
-        if (reservationData.selectedPackageDesc) {
-            const items = reservationData.selectedPackageDesc.split('\n');
-            items.forEach(item => {
-                const cleanName = item.replace(/^- /, '').trim();
-                if (cleanName) {
-                    itineraryList.innerHTML += `<span style="font-family: 'Roboto Condensed', sans-serif; font-size: 0.85rem;">${cleanName}</span>`; 
-                }
+        if (reservationData.selectedPackageItineraryIds && reservationData.selectedPackageItineraryIds.length > 0) {
+            // Loop through the junction IDs and look up their names!
+            reservationData.selectedPackageItineraryIds.forEach(id => {
+                const attrName = reservationData.attractionDictionary[id] || "Unknown Attraction";
+                itineraryList.innerHTML += `<span style="font-family: 'Roboto Condensed', sans-serif; font-size: 0.85rem;">${attrName}</span>`; 
             });
         } else {
             itineraryList.innerHTML = "<span class='no-itinerary-text' style='grid-column: span 3;'>No itinerary details available</span>";
