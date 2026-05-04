@@ -4,7 +4,7 @@
 // para makita ng guide yung updated na dashboard state niya
 async function clockIn() {
     try {
-        const res = await fetch('api/clock_in.php', { method: 'POST' });
+        const res = await fetch('../../../backend/api/actions/tour_guide/clock_in.php', { method: 'POST' });
         const data = await res.json();
         if (data.success) location.reload();
     } catch (e) {
@@ -16,7 +16,7 @@ async function clockIn() {
 // para lumipat sa Queuing view na may queue number display
 async function joinQueue() {
     try {
-        const res = await fetch('api/join_queue.php', { method: 'POST' });
+        const res = await fetch('../../../backend/api/actions/tour_guide/join_queue.php', { method: 'POST' });
         const data = await res.json();
         if (data.success) location.reload();
     } catch (e) {
@@ -30,7 +30,7 @@ async function joinQueue() {
 function startPolling() {
     setInterval(async () => {
         try {
-            const response = await fetch('api/check_queue.php');
+            const response = await fetch('../../../backend/logics/check_queue.php');
             const data = await response.json();
 
             if (!data.success) return;
@@ -68,7 +68,7 @@ function startClaimTimer() {
         if (timeLeft <= 0) {
             clearInterval(claimTimerInterval);
             try {
-                await fetch('api/missed_turn.php', { method: 'POST' });
+                await fetch('../../../backend/logics/missed_turn.php', { method: 'POST' });
             } catch (e) {
                 console.error("Could not process missed turn", e);
             }

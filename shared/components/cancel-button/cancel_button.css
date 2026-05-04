@@ -1,0 +1,11 @@
+.btn-cancel {
+    background-color: #FF0000;
+    color: #ffffff;
+    border: none;
+    padding: 0.6rem 2rem;
+    font-size: 1rem;
+    font-weight: 900;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Roboto Condensed', sans-serif;
+}

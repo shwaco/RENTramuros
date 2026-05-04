@@ -3,7 +3,7 @@
 
  async function loadHistory() {
     try {
-        const response = await fetch('api/get_history.php');
+        const response = await fetch('../../../backend/api/ui/tourguide/get_guide_history.php');
         const data = await response.json();
         // Updated to target the new container ID
         const container = document.getElementById('historyContainer');

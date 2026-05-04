@@ -284,18 +284,17 @@ function viewTouristReceipt(index) {
         // Pending = Cancel button lang 
         actionArea = `
             <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-left: auto;">
-                <button onclick="touristAction('Cancel')" style="background-color: #FF0000; color: #ffffff; border: none; padding: 0.6rem 2rem; font-size: 1rem; font-weight: 900; border-radius: 4px; cursor: pointer; font-family: 'Roboto Condensed', sans-serif;">CANCEL</button>
-            </div>
+            <button onclick="touristAction('Cancel')" class="btn-cancel">CANCEL</button>
+        </div>
         `;
     } else if (booking.status === 'Accepted') {
-        // Accepted (On Tour) = Cancel at Done buttons 
-        actionArea = `
-            <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-left: auto;">
-                <button onclick="touristAction('Cancel')" style="background-color: #FF0000; color: #ffffff; border: none; padding: 0.6rem 2rem; font-size: 1rem; font-weight: 900; border-radius: 4px; cursor: pointer; font-family: 'Roboto Condensed', sans-serif;">CANCEL</button>
-                <button onclick="touristAction('Mark as Done')" style="background-color: #109620; color: #ffffff; border: none; padding: 0.6rem 2rem; font-size: 1rem; font-weight: 900; border-radius: 4px; cursor: pointer; font-family: 'Roboto Condensed', sans-serif;">DONE</button>
-            </div>
-        `;
-    }
+    actionArea = `
+        <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-left: auto;">
+            <button onclick="touristAction('Cancel')" class="btn-cancel">CANCEL</button>
+            <button onclick="touristAction('Mark as Done')" class="btn-complete">DONE</button>
+        </div>
+    `;
+}
 
     const modalBody = document.getElementById('tourist-receipt-content');
     modalBody.innerHTML = buildReceiptHTML({

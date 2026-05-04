@@ -4,7 +4,7 @@
 // ginagamit ito kapag gusto lang mag-sign out pero hindi mag-clock out
 async function handleLogoutOnly() {
     try {
-        const response = await fetch('api/logout_api.php', { method: 'POST' });
+        const response = await fetch('../../../backend/api/actions/tour_guide/logout_api.php', { method: 'POST' });
         const result = await response.json();
         // kapag successful yung logout, iriredirect pabalik sa login page
         if (result.status === 'success') {
@@ -16,20 +16,14 @@ async function handleLogoutOnly() {
 }
 
 function handleClockOut() {
-    // inoopen muna yung confirmation modal bago i-execute — para hindi maa-aksidente
-    openDynamicModal(
-        "Clock Out?",
-        "Are you sure you want to clock out? You will lose your current place in the queue!",
-        () => executeClockOut(),
-        "#FF0000"
-    );
+    executeClockOut(); 
 }
 
 // nagpapadala ng POST request sa clock_out API
 // kapag successful, nire-reload ang page para bumalik sa Online/Clocked In state ng guide
 async function executeClockOut() {
     try {
-        const response = await fetch('api/clock_out.php', { method: 'POST' });
+        const response = await fetch('../../../backend/api/actions/tour_guide/clock_out.php', { method: 'POST' });
         const result = await response.json();
         if (result.success) {
             // kung successful, irereload yung web para bumalik sa Online state ng dashboard

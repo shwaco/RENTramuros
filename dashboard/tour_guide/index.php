@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../config/config.php';
+require_once '../../config/config.php';
 
 if (!isset($_SESSION['guide_id'])) {
     header("Location: ../auth.v2/login.php");
@@ -20,7 +20,7 @@ $guideInfo = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtInfo));
 if (!$guideInfo) {
     session_unset();
     session_destroy();
-    header("Location: ../auth.v2/login.php");
+    header("Location: ../../auth.v2/login.php");
     exit();
 }
 
@@ -41,12 +41,13 @@ if ($currentStatus === 'On Tour') {
                 bh.infants,
                 bh.number_of_vehicle,
                 v.vehicle_type,
+                v.price AS vehicle_price,
                 ci.first_name,
                 ci.last_name,
                 ci.email_address,
                 ci.phone_number,
                 p.package_name,
-                p.price                                                     AS package_price,
+                p.price AS package_price,
                 GROUP_CONCAT(
                     CONCAT(a.attraction_name, '|', IFNULL(a.fee, 0))
                     ORDER BY a.attraction_name
@@ -101,32 +102,32 @@ if ($currentStatus === 'Queuing') {
 }
 ?>
 
-<?php require_once 'php/head.php'; ?>
+<?php require_once 'head.php'; ?>
 <body class="minimal-theme">
 
-<?php require_once 'php/nav.php'; ?>
+<?php require_once '../../shared/components/navbar/nav.php'; ?>
 
 <main style="padding-bottom: 10rem;">
     <section class="content-wrapper" id="active-tour-view" style="padding-top: 0.5rem; display: block;" aria-label="Dashboard">
 
         <?php if ($isAssigned): ?>
-            <?php require_once 'php/view_on_tour.php'; ?>
+            <?php require_once 'view_on_tour.php'; ?>
 
         <?php elseif ($currentStatus === 'Online' || $currentStatus === 'Clocked In' || $currentStatus === 'Offline' || $currentStatus === 'Available'): ?>
-            <?php require_once 'php/view_clockin.php'; ?>
+            <?php require_once 'view_clockin.php'; ?>
 
         <?php elseif ($currentStatus === 'Queuing'): ?>
-            <?php require_once 'php/view_queue.php'; ?>
+            <?php require_once 'view_queue.php'; ?>
 
         <?php endif; ?>
     </section>
 
-    <?php require_once 'php/view_history.php'; ?>
+    <?php require_once 'view_history.php'; ?>
 </main>
 
-<?php require_once 'php/footer.php'; ?>
-<?php require_once 'php/modals.php'; ?>
-<?php require_once 'php/scripts.php'; ?>
+<?php require_once '../../shared/components/footer/footer.php'; ?>
+<?php require_once 'modals.php'; ?>
+<?php require_once 'scripts.php'; ?>
 
 </body>
 </html>
