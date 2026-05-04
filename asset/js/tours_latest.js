@@ -522,16 +522,23 @@ function renderAttractions(attractions) {
         const fee = attr.fee || 0;
         
         reservationData.attractionFees[attr.attraction_name] = fee; 
-        // NEW LINE: Build the dictionary translating ID -> Name
         reservationData.attractionDictionary[attr.attraction_id] = attr.attraction_name;
         
         const dataString = `${attr.attraction_name} | ${fee}`;
         const safeDataString = dataString.replace(/"/g, '&quot;'); 
 
-        // CHANGED: attr.id is now attr.attraction_id, and using attr.main_image
+        // CHANGED: The ternary operator checks if the fee is greater than 0
+        const displayFee = fee > 0 ? `₱${fee.toLocaleString('en-PH', { maximumFractionDigits: 0 })}/head` : "FREE";
+
         html += `
         <div class="attraction-${index + 1} attraction-card" id="attr-${attr.attraction_id}" data-val="${safeDataString}" onclick="toggleAttraction(this.dataset.val, ${attr.attraction_id})">
             <img src="${attr.main_image}" alt="${attr.attraction_name.replace(/"/g, '&quot;')}">
+            
+            <span class="attraction-price-pill">${displayFee}</span>
+            
+            <div class="attraction-name-overlay">
+                <span class="attraction-name-label">${attr.attraction_name}</span>
+            </div>
         </div>`;
     });
     
