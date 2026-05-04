@@ -70,7 +70,7 @@
                 <h2 class="text-2xl font-bold text-gray-800">
                     <i class="fas fa-archway mr-2 text-[#7a3229]"></i>Active Attractions
                 </h2>
-                <button onclick="openAttractionModal()" class="bg-[#7a3229] text-white px-5 py-2 rounded-lg font-semibold hover:bg-red-900 transition flex items-center">
+                <button onclick="openAttractionModal()" class="bg-[#7a3229] text-red px-5 py-2 rounded-lg font-semibold hover:bg-red-900 transition flex items-center">
                     <i class="fas fa-plus-circle mr-2"></i>Add Attraction
                 </button>
             </div>
