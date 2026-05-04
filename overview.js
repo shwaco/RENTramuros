@@ -100,8 +100,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
                 hoursSpan.style.display = "inline"; 
-                hoursSpan.textContent = ` Open: ${currentData.schedule}`;
-
+                    hoursSpan.textContent = `🕒 Open: ${currentData.schedule}`;
                 // Standard image fetch for standalone attractions
                 dbImages = [
                     currentData.main_img,
@@ -116,10 +115,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             const feeLabel = isPackage ? "Package Fee" : "Entrance";
 
             if (feeValue === 0 || isNaN(feeValue)) {
-                document.getElementById("attraction-price").textContent = ` ${feeLabel}: Free`;
+                document.getElementById("attraction-price").textContent = `🎟️ ${feeLabel}: Free`;
             } else {
                 // Using Math.round() forces whole numbers so no decimals display on the UI
-                document.getElementById("attraction-price").textContent = ` ${feeLabel}: ₱${Math.round(feeValue)}`;
+                document.getElementById("attraction-price").textContent = `🎟️ ${feeLabel}: ₱${Math.round(feeValue)}`;
             }
 
             // 4. IMAGE INJECTION & MODAL
