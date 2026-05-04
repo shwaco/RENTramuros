@@ -61,12 +61,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         dropdownWrapper.classList.add("active"); 
         const searchTerm = event.target.value.toLowerCase();
+        
+        // THE MISSING LOOP WAS RESTORED HERE:
+        allCards.forEach((card) => {
+            const attractionName = card.querySelector('.attraction-name').innerText.toLowerCase();
             if (attractionName.includes(searchTerm)) {
                 card.style.display = "block";
             } else {
                 card.style.display = "none";
             }
         });
+    });
     
 
     // SHOW/HIDE DROPDOWN LOGIC
