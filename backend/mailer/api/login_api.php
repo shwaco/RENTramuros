@@ -28,10 +28,12 @@ if ($row = mysqli_fetch_assoc($result)) {
         echo json_encode(["status" => "error", "message" => "Invalid password."]);
         exit();
     }
-    $_SESSION['admin_id'] = $row['admin_id'];
-    echo json_encode(["status" => "success", 
-    "message" => "Login Successful as Admin!", 
-    "role" => "admin", 
+    $_SESSION['user_id'] = $row['admin_id'];
+    $_SESSION['role'] = 'admin';
+    echo json_encode([
+        "status" => "success", 
+        "message" => "Login Successful as Admin!", 
+        "role" => "admin", 
     ]);
     exit();
 }
