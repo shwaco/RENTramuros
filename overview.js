@@ -118,7 +118,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (feeValue === 0 || isNaN(feeValue)) {
                 document.getElementById("attraction-price").textContent = ` ${feeLabel}: Free`;
             } else {
-                document.getElementById("attraction-price").textContent = ` ${feeLabel}: ₱${feeValue.toFixed(2)}`;
+                // Using Math.round() forces whole numbers so no decimals display on the UI
+                document.getElementById("attraction-price").textContent = ` ${feeLabel}: ₱${Math.round(feeValue)}`;
             }
 
             // 4. IMAGE INJECTION & MODAL
