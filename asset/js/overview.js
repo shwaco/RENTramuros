@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             currentUrlText = foundSlug; // Swap the number for the readable text
             
             // Rewrite the URL in the browser bar so it looks clean!
-            const newUrl = ${window.location.pathname}?id=${foundSlug};
+            const newUrl = `${window.location.pathname}?id=${foundSlug}`;
             window.history.replaceState(null, '', newUrl); 
         }
     }
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const isPackage = currentData.package_id !== undefined;
 
             const titleText = isPackage ? currentData.package_name : currentData.attraction_name;   
-            document.getElementById("page-title").textContent = RENTramuros | ${titleText};
+            document.getElementById("page-title").textContent = `RENTramuros | ${titleText}`;
             document.getElementById("attraction-title").textContent = titleText;
             document.getElementById("attraction-description").textContent = currentData.description;
 
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
                 hoursSpan.style.display = "inline"; 
-                hoursSpan.textContent = 🕒 Open: ${currentData.schedule};
+                hoursSpan.textContent = `🕒 Open: ${currentData.schedule}`;
                 
                 dbImages = [
                     currentData.main_img,
@@ -181,9 +181,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             const feeLabel = isPackage ? "Package Fee" : "Entrance";
 
             if (feeValue === 0 || isNaN(feeValue)) {
-                document.getElementById("attraction-price").textContent =🎟️ ${feeLabel}: Free`;
+                document.getElementById("attraction-price").textContent = `🎟️ ${feeLabel}: Free`;
             } else {
-                document.getElementById("attraction-price").textContent =🎟️ ${feeLabel}: ₱${Math.round(feeValue)}`;
+                document.getElementById("attraction-price").textContent = `🎟️ ${feeLabel}: ₱${Math.round(feeValue)}`;
             }
 
             const imageBoxes = document.querySelectorAll('.images-grid-container .box img');
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (bookBtn) {
                 // Remove the HTML hardcoded click and assign it here
                 bookBtn.onclick = function() {
-                    window.location.href = booking_dashboard.html?id=${currentUrlText};
+                    window.location.href = `booking_dashboard.html?id=${currentUrlText}`;
                 };
             }
 
