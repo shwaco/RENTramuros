@@ -1,6 +1,6 @@
 async function fetchOverviewData() {
     try {
-        const response = await fetch('overview_data.json');
+        const response = await fetch('../../backend/api/ui/attractions/get_attractions.php');
         
         // Safety check to ensure the network request actually succeeded
         if (!response.ok) {

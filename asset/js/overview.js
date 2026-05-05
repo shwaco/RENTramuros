@@ -31,7 +31,32 @@ const routeDictionary = {
 // =====================================================================
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const currentUrlText = urlParams.get('id')?.toLowerCase();
+    
+    // IMPORTANT: We use 'let' instead of 'const' so the Magic Converter can change it!
+    let currentUrlText = urlParams.get('id')?.toLowerCase();
+    const typeParam = urlParams.get('type')?.toLowerCase();
+
+    // =================================================================
+    // 🚨 THE MAGIC CONVERTER (OPTION 2) 🚨
+    // Intercepts "?type=attraction&id=1" and turns it into "fort-santiago"
+    // =================================================================
+    if (!isNaN(currentUrlText) && typeParam) {
+        const numericId = parseInt(currentUrlText);
+        
+        // Find the text name in the dictionary using the number and type
+        const foundSlug = Object.keys(routeDictionary).find(key => {
+            return routeDictionary[key].db_id === numericId && routeDictionary[key].type === typeParam;
+        });
+
+        if (foundSlug) {
+            currentUrlText = foundSlug; // Swap the number for the readable text
+            
+            // Rewrite the URL in the browser bar so it looks clean!
+            const newUrl = ${window.location.pathname}?id=${foundSlug};
+            window.history.replaceState(null, '', newUrl); 
+        }
+    }
+    // =================================================================
 
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImg");
@@ -39,7 +64,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 1. Look up the URL in our dictionary to see if it is a real page
     const translation = routeDictionary[currentUrlText];
-
     try {
         let currentData = null;
         let database = null;
@@ -67,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const isPackage = currentData.package_id !== undefined;
 
             const titleText = isPackage ? currentData.package_name : currentData.attraction_name;   
-            document.getElementById("page-title").textContent = `RENTramuros | ${titleText}`;
+            document.getElementById("page-title").textContent = RENTramuros | ${titleText};
             document.getElementById("attraction-title").textContent = titleText;
             document.getElementById("attraction-description").textContent = currentData.description;
 
@@ -83,7 +107,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 locationIcon.style.display = "none"; 
                 hoursSpan.style.display = "none"; 
                 
-                if (currentData.attraction_ids && Array.isArray(currentData.attraction_ids)) {
+                if (currentData.attraction_id && Array.isArray(currentData.attraction_id)) {
                     
                     const linkedAttractions = currentData.attraction_ids.map(id => {
                         const matchKey = Object.keys(database).find(key => database[key].attraction_id === id);
@@ -141,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
                 hoursSpan.style.display = "inline"; 
-                hoursSpan.textContent = `🕒 Open: ${currentData.schedule}`;
+                hoursSpan.textContent = 🕒 Open: ${currentData.schedule};
                 
                 dbImages = [
                     currentData.main_img,
@@ -155,9 +179,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             const feeLabel = isPackage ? "Package Fee" : "Entrance";
 
             if (feeValue === 0 || isNaN(feeValue)) {
-                document.getElementById("attraction-price").textContent = `🎟️ ${feeLabel}: Free`;
+                document.getElementById("attraction-price").textContent =🎟️ ${feeLabel}: Free`;
             } else {
-                document.getElementById("attraction-price").textContent = `🎟️ ${feeLabel}: ₱${Math.round(feeValue)}`;
+                document.getElementById("attraction-price").textContent =🎟️ ${feeLabel}: ₱${Math.round(feeValue)}`;
             }
 
             const imageBoxes = document.querySelectorAll('.images-grid-container .box img');
@@ -183,7 +207,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (bookBtn) {
                 // Remove the HTML hardcoded click and assign it here
                 bookBtn.onclick = function() {
-                    window.location.href = `booking_dashboard.html?id=${currentUrlText}`;
+                    window.location.href = booking_dashboard.html?id=${currentUrlText};
                 };
             }
 
@@ -222,4 +246,4 @@ document.addEventListener("DOMContentLoaded", async () => {
             modal.classList.remove("show");
         }
     }
-}); 
+});

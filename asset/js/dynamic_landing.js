@@ -54,9 +54,10 @@ function populateSliders(slidersData, slidersList) {
     slidersData.forEach(sliders => {
         
         
+
         const cardHTML = `
             <li>
-                <a href="#" rel="noopener noreferrer">
+                <a href="../../dashboard/tourist/overview.html?type=attraction&id=${sliders.attraction_id}" rel="noopener noreferrer">
                     <img src="../../asset/img/${sliders.main_img}" alt="${sliders.attraction_name} Image">
                     <p>${sliders.attraction_name}</p>
                 </a>
