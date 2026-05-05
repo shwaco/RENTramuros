@@ -7,7 +7,7 @@
     
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="asset/css/admin.css">
+    <link rel="stylesheet" href="css/admin.css">
 </head>
 <body class="bg-gray-50 flex flex-col min-h-screen">
 
@@ -32,17 +32,20 @@
                     <!-- Main Nav Links -->
                     <nav class="flex space-x-6">
                         <a href="admin.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
-                            Dashboard
+                            Home Page
                         </a>
                         <a href="manage_guides.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
                             Guides
                         </a>
                         <!-- Active Link (Events) -->
-                        <a href="manage_events.php" class="text-white font-semibold px-1 py-2 border-b-2 border-blue-400 hover:text-blue-300 transition duration-150">
+                        <a href="manage_events.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
                             Events
                         </a>
-                        <a href="manage_attractions.php" class="text-white font-semibold px-1 py-2 border-b-2 border-blue-400 hover:text-blue-300 transition duration-150">
+                        <a href="manage_attractions.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
                             Attractions
+                        </a>
+                         <a href="statistics_overview.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
+                            Statistics
                         </a>
                     </nav>
 
@@ -69,7 +72,7 @@
         <div class="bg-white rounded-lg shadow-lg p-6 mb-8 card-hover">
             <div class="flex justify-between items-center mb-6 border-b pb-4">
                 <h2 class="text-2xl font-bold text-gray-800">
-                    <i class="fas fa-list-ul mr-2 text-blue-500"></i>Active Events
+                    <i class="fas fa-list-ul mr-2 text-blue-500"></i>Upcoming Events
                 </h2>
                 <button onclick="openAddEventModal()" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center">
                     <i class="fas fa-plus-circle mr-2"></i>Add New Event
@@ -191,7 +194,7 @@
         &copy; 2026 RENTramuros. All rights reserved.
     </footer>
 
-    <script src="asset/js/events_management.js"></script>
+    <script src="js/events_management.js"></script>
     <script>
         function updateClock() {
             const timeEl = document.getElementById('current-time');
