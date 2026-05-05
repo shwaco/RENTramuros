@@ -6,7 +6,7 @@
 <script src="../../queue-management-system/js/receipt.js"></script>
 <script src="../../queue-management-system/js/tour_details.js"></script>
 <script src="../../reusable_mybookings_and_receipt/tourist_bookings.js"></script>
-<script src="../../shared/components/confirmation-modal/confirmation.js"></script>
+<script src="js/confirmation.js"></script>
 <script src="js/history.js"></script>
 <script src="js/lobby.js"></script>
 <script src="js/queue.js"></script>

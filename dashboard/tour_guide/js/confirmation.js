@@ -3,7 +3,7 @@
 // binubuksan yung dynamic modal yung for confirming ng guide actions like accepting a tour or clocking out
 
 function openDynamicModal(title, message, confirmCallback, buttonColor = '#16a34a') {
-    console.log("Binubuksan ang modal..."); // Debug log
+    console.log("Binubuksan ang modal...");
 
     const overlay = document.getElementById('dynamic-confirm-overlay');
     const titleEl = document.getElementById('dynamic-modal-title');
@@ -22,12 +22,12 @@ function openDynamicModal(title, message, confirmCallback, buttonColor = '#16a34
     confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
 
     newConfirmBtn.onclick = function () {
-        console.log("Confirmed!"); // Debug log
+        console.log("Confirmed!");
         closeDynamicModal();
         confirmCallback();
     };
 
-    overlay.style.display = 'flex'; 
+    overlay.style.display = 'flex';
 }
 
 function closeDynamicModal() {

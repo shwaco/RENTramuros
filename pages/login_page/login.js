@@ -17,7 +17,7 @@ document.getElementById('LoginForm').addEventListener('submit', function(event) 
                             if (data.admin_id) {
                                 window.location.href = '../admin_dashboard.html';
                             } else if (data.guide_id) {
-                                window.location.href = '../../queue-management-system/index.php';
+                                window.location.href = '../../dashboard/tour_guide/index.php';
                             } else if (data.tourist_id) {
                                 window.location.href = '../landing_page/landing_page.php';
                             }

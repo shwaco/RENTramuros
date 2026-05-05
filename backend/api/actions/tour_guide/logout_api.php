@@ -4,7 +4,7 @@ header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Method: POST');
 session_start();
 
-require_once('../../config/config.php');
+require_once('../../../config/config.php');
 
 if (isset($_SESSION['guide_id'])) {
     $guide_id = $_SESSION['guide_id'];
