@@ -28,8 +28,13 @@ if ($row = mysqli_fetch_assoc($result)) {
         echo json_encode(["status" => "error", "message" => "Invalid password."]);
         exit();
     }
-    $_SESSION['admin_id'] = $row['admin_id'];
-    echo json_encode(["status" => "success", "message" => "Login Successful as Admin!", "role" => "admin", "admin_id" => $row['admin_id']]);
+    $_SESSION['user_id'] = $row['admin_id'];
+    $_SESSION['role'] = 'admin';
+    echo json_encode([
+        "status" => "success", 
+        "message" => "Login Successful as Admin!", 
+        "role" => "admin", 
+    ]);
     exit();
 }
 
@@ -45,14 +50,19 @@ if ($row = mysqli_fetch_assoc($result)) {
         exit();
     }
 
-    $_SESSION['guide_id'] = $row['guide_id'];
+    $_SESSION['user_id'] = $row['guide_id'];
+    $_SESSION['role'] = 'guide';
 
     $update_sql = "UPDATE tour_guides SET current_status = 'Online' WHERE guide_id = ? AND current_status IN ('Offline', 'Available')";
     $update_stmt = mysqli_prepare($con, $update_sql);
     mysqli_stmt_bind_param($update_stmt, "i", $row['guide_id']);
     mysqli_stmt_execute($update_stmt);
 
-    echo json_encode(["status" => "success", "message" => "Login Successful as Tour Guide!", "role" => "guide", "guide_id" => $row['guide_id']]);
+    echo json_encode([
+        "status" => "success", 
+        "message" => "Login Successful as Tour Guide!", 
+        "role" => "guide", 
+        ]);
     exit();
 }
 
@@ -71,8 +81,13 @@ if ($row = mysqli_fetch_assoc($result)) {
         echo json_encode(["status" => "unverified", "message" => "Account not verified. Please check your email for the OTP to verify your account."]);
         exit();
     }
-    $_SESSION['tourist_id'] = $row['tourist_id'];
-    echo json_encode(["status" => "success", "message" => "Login Successful as Tourist!", "role" => "tourist", "tourist_id" => $row['tourist_id']]);
+    $_SESSION['user_id'] = $row['tourist_id'];
+    $_SESSION['role'] = 'tourist';
+    echo json_encode([
+        "status" => "success", 
+        "message" => "Login Successful as Tourist!", 
+        "role" => "tourist", 
+        ]);
     exit();
 }
 

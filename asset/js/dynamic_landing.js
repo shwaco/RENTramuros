@@ -57,7 +57,7 @@ function populateSliders(slidersData, slidersList) {
         const cardHTML = `
             <li>
                 <a href="#" rel="noopener noreferrer">
-                    <img src="asset/img/${sliders.main_img}" alt="${sliders.attraction_name} Image">
+                    <img src="../../asset/img/${sliders.main_img}" alt="${sliders.attraction_name} Image">
                     <p>${sliders.attraction_name}</p>
                 </a>
             </li>
@@ -81,7 +81,7 @@ function packageSlider(packageData, packagesList) {
         const cardHTML = `<li>
                         <a href="." rel="noopener noreferrer"><div class="package one">
 
-                            <div class="image"><img src="asset/img/${packages.image_file}" alt="${packages.package_name} Image" width="auto" height="150"></div>
+                            <div class="image"><img src="../../asset/img/${packages.image_file}" alt="${packages.package_name} Image" width="auto" height="150"></div>
 
                             <ul>
                                 <li><div class="number"><span>${packages.package_name}</span></div></li>
@@ -103,7 +103,7 @@ function upcomingEventsSlider(eventsData, eventsList) {
     eventsData.forEach(events => {
 
         const cardHTML = `<li><div class="event_container">
-                                <div class="image"><img src="asset/img/${events.image_file}" alt="${events.event_name} Image"></div>
+                                <div class="image"><img src="../../asset/img/${events.image_file}" alt="${events.event_name} Image"></div>
 
                                 <div class="details_container">
                                     <div class="schedule_container">
@@ -113,7 +113,7 @@ function upcomingEventsSlider(eventsData, eventsList) {
                                     <div class="name">${events.event_name}</div>
 
                                     <div class="loc_wrapper">
-                                        <img src="asset/img/location_icon.svg" alt="location_icon_image">
+                                        <img src="../../asset/img/location_icon.svg" alt="location_icon_image">
 
                                         <div class="loc">${events.location}</div>
                                     </div>
