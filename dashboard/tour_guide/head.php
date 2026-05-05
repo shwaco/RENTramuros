@@ -10,11 +10,9 @@
     <link rel="stylesheet" href="css/pending_tourists_containers.css">
     <link rel="stylesheet" href="../../shared/components/navbar/nav.css">
     <link rel="stylesheet" href="../../shared/components/footer/footer.css">
-    <link rel="stylesheet" href="../../shared/components/cancel-button/cancel_button.css">
-    <link rel="stylesheet" href="../../shared/components/complete-button/complete_button.css">
-    <link rel="stylesheet" href="../../shared/components/submit-button/submit_button.css">
-    <link rel="stylesheet" href="../../shared/components/accept-button/accept_button.css">
-    <link rel="stylesheet" href="../../shared/components/accept-modal/accept_modal.css">   
+    <link rel="stylesheet" href="../../shared/components/accept-modal/accept_modal.css">
+    <link rel="stylesheet" href="../../shared/components/receipt/overall_receipt/overall_receipt.css">
+    <link rel="stylesheet" href="../../shared/components/receipt/tour_details/tour_details.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Roboto+Serif:wght@400;500;700&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
 </head>

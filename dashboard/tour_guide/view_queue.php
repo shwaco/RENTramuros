@@ -1,13 +1,16 @@
 <article class="queue-layout-wrapper">
     <header style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: -0.5rem; margin-bottom: 0.5rem;">
-        <h2 class="queue-status-header" style="margin: 0; font-family: 'Roboto', sans-serif; font-weight: 900;">
-            STATUS: <span class="text-green" style="font-family: 'Roboto Serif', serif; font-weight: 400;">Queuing #<?php echo $queuePosition; ?></span>
-        </h2>
+       <h2 class="queue-status-header" style="margin: 0; font-family: 'Roboto', sans-serif; font-weight: 900;">
+    STATUS: 
+    <span class="text-green" style="font-family: 'Roboto Serif', serif; font-weight: 400; font-style: normal; color: #08EB2A;">
+        Queuing #<?php echo $queuePosition; ?>
+    </span>
+</h2>
 
         <?php if ($queuePosition === 1): ?>
             <div style="background-color: #fee2e2; color: #dc2626; padding: 0.5rem 1.25rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; border: 1px solid #f87171; font-family: 'Roboto', sans-serif; white-space: nowrap; flex-shrink: 0;" aria-live="polite">
                 <i class="far fa-clock"></i>
-                <span>Select Tourist: <span style="font-family: 'Roboto Serif', serif;"><span id="selection-timer">15</span>s</span></span>
+                <span>Select Tourist: <span style="font-family: 'Roboto Serif', serif;"><span id="selection-timer">30</span>s</span></span>
             </div>
         <?php endif; ?>
     </header>

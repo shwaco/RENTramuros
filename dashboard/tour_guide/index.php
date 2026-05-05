@@ -20,7 +20,7 @@ $guideInfo = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtInfo));
 if (!$guideInfo) {
     session_unset();
     session_destroy();
-    header("Location: ../../pages/login_page/login.php");
+    header("Location: ../../auth.v2/login.php");
     exit();
 }
 

@@ -33,7 +33,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     echo json_encode([
         "status" => "success", 
         "message" => "Login Successful as Admin!", 
-        "role" => "admin", 
+        "role" => "admin",
     ]);
     exit();
 }
