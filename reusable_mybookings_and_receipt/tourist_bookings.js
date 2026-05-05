@@ -89,7 +89,7 @@ function loadTouristHistory() {
 
 document.addEventListener('DOMContentLoaded', loadTouristHistory);
 
-function buildDestinationsHTML(destinationsString, adults = 0, children = 0, isPackage = false, fallback = 'No Custom Attractions Selected') {
+//function buildDestinationsHTML(destinationsString, adults = 0, children = 0, isPackage = false, fallback = 'No Custom Attractions Selected') {
     const raw = destinationsString || fallback;
 
     return raw.split(',').map(dest => {
@@ -107,7 +107,7 @@ function buildDestinationsHTML(destinationsString, adults = 0, children = 0, isP
     }).join('');
 }
 
-function calculateTotalFee(destinationsString, packagePrice, adults, children, vehiclePrice, isPackage, numberOfVehicles) {
+//function calculateTotalFee(destinationsString, packagePrice, adults, children, vehiclePrice, isPackage, numberOfVehicles) {
     let vPrice = parseFloat(vehiclePrice) || 0;
     let pPrice = parseFloat(packagePrice) || 0;
     let pax = (parseInt(adults) || 0) + (parseInt(children) || 0);
@@ -141,7 +141,7 @@ function calculateTotalFee(destinationsString, packagePrice, adults, children, v
     };
 }
 
-function buildReceiptHTML({ id, formattedDate, adults_and_seniors, children, infants, package_name, package_price_val = 0, vehicle_price_val = 0, destinations, destinationsHTML, vehicle_type, number_of_vehicle, first_name, last_name, email_address, phone_number, actionArea = '' }) {
+//function buildReceiptHTML({ id, formattedDate, adults_and_seniors, children, infants, package_name, package_price_val = 0, vehicle_price_val = 0, destinations, destinationsHTML, vehicle_type, number_of_vehicle, first_name, last_name, email_address, phone_number, actionArea = '' }) {
     
     const isPackage = package_name && package_name !== 'No Package'; 
     const packagePrice = parseFloat(package_price_val) || 0;
@@ -257,7 +257,7 @@ function buildReceiptHTML({ id, formattedDate, adults_and_seniors, children, inf
     `;
 }
 
-function viewTouristReceipt(index) {
+//function viewTouristReceipt(index) {
     const booking = hardcodedBookings[index];
     if (!booking) return;
 

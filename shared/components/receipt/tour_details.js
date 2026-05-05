@@ -19,11 +19,13 @@ function viewTouristDetails(id) {
 
     let actionArea = '';
     // kung #1 na yung guide sa queue, pwede na siyang pumili ng tourist so lalabas na yung accept button
-    if (typeof IS_QUEUE_NUMBER_ONE !== 'undefined' && IS_QUEUE_NUMBER_ONE) {
+  if (typeof IS_QUEUE_NUMBER_ONE !== 'undefined' && IS_QUEUE_NUMBER_ONE) {
         actionArea = `
-           <button onclick="acceptTour(${tourist.booking_request_id})" class="accept-btn">
-                ACCEPT
-            </button>
+           <div style="margin-top: 2rem;">
+               <button onclick="acceptTour(${tourist.booking_request_id})" class="accept-tour-btn">
+                    ACCEPT
+                </button>
+           </div>
         `;
     }
 
@@ -65,7 +67,7 @@ function acceptTour(touristId) {
 // kapag successful, nire-reload ang page para lumipat sa On Tour view ang guide
 async function executeAcceptTour(touristId) {
     try {
-        const response = await fetch('api/post_accept_bookings.php', {
+        const response = await fetch('../../backend/api/actions/receipt/post_accept_bookings.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ tourist_id: touristId })

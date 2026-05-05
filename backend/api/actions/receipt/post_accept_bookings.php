@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once('../../config/config.php');
+require_once('../../../config/config.php');
 
 // POST endpoint — kinocall ng executeAcceptTour() sa tour_details.js
 // request body (JSON): { tourist_id: int } — ang "tourist_id" here yung booking_request_id

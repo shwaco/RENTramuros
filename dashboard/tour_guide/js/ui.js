@@ -4,11 +4,11 @@
 // ginagamit ito kapag gusto lang mag-sign out pero hindi mag-clock out
 async function handleLogoutOnly() {
     try {
-        const response = await fetch('../../../backend/api/actions/tour_guide/logout_api.php', { method: 'POST' });
+        const response = await fetch('../../backend/api/actions/tour_guide/logout_api.php', { method: 'POST' })
         const result = await response.json();
         // kapag successful yung logout, iriredirect pabalik sa login page
         if (result.status === 'success') {
-            window.location.href = "../auth.v2/login.php";
+            window.location.href = '../../pages/login_page/login.php';
         }
     } catch (error) {
         console.error("Logout Error:", error);
@@ -23,14 +23,14 @@ function handleClockOut() {
 // kapag successful, nire-reload ang page para bumalik sa Online/Clocked In state ng guide
 async function executeClockOut() {
     try {
-        const response = await fetch('../../../backend/api/actions/tour_guide/clock_out.php', { method: 'POST' });
+        const response = await fetch('../../backend/api/actions/tour_guide/clock_out.php', { method: 'POST' })
         const result = await response.json();
         if (result.success) {
             // kung successful, irereload yung web para bumalik sa Online state ng dashboard
             window.location.reload();
         } else {
             alert(result.message);
-        }
+        }   
     } catch (error) {
         console.error("Clock Out Error:", error);
     }

@@ -3,24 +3,34 @@
 // binubuksan yung dynamic modal yung for confirming ng guide actions like accepting a tour or clocking out
 
 function openDynamicModal(title, message, confirmCallback, buttonColor = '#16a34a') {
-    document.getElementById('dynamic-modal-title').innerText = title;
-    document.getElementById('dynamic-modal-msg').innerText = message;
+    console.log("Binubuksan ang modal...");
 
+    const overlay = document.getElementById('dynamic-confirm-overlay');
+    const titleEl = document.getElementById('dynamic-modal-title');
+    const msgEl = document.getElementById('dynamic-modal-msg');
     const confirmBtn = document.getElementById('dynamic-modal-btn');
+
+    if (!overlay || !titleEl || !msgEl || !confirmBtn) {
+        return console.error("Error: Hindi mahanap ang mga modal elements sa modals.php!");
+    }
+
+    titleEl.innerText = title;
+    msgEl.innerText = message;
     confirmBtn.style.backgroundColor = buttonColor;
 
-    // kino-clone yung button para matanggal yung mga lumang event listeners bago mag-attach ng bago
     const newConfirmBtn = confirmBtn.cloneNode(true);
     confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
 
     newConfirmBtn.onclick = function () {
+        console.log("Confirmed!");
         closeDynamicModal();
         confirmCallback();
     };
 
-    document.getElementById('dynamic-confirm-overlay').style.display = 'flex';
+    overlay.style.display = 'flex';
 }
 
 function closeDynamicModal() {
-    document.getElementById('dynamic-confirm-overlay').style.display = 'none';
+    const overlay = document.getElementById('dynamic-confirm-overlay');
+    if (overlay) overlay.style.display = 'none';
 }

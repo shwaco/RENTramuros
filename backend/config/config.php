@@ -4,8 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $HOSTNAME = getenv('RENTRAMUROS_DB_HOST') ?: 'localhost';
-$USERNAME = getenv('RENTRAMUROS_DB_USER') ?: 'shaco';
-$PASSWORD = getenv('RENTRAMUROS_DB_PASS') ?: 'lee';
+$USERNAME = getenv('RENTRAMUROS_DB_USER') ?: 'root';
+$PASSWORD = getenv('RENTRAMUROS_DB_PASS') ?: '';
 $DATABASE_NAME = getenv('RENTRAMUROS_DB_NAME') ?: 'rentramuros_db';
 
 // #region agent log (debug-mode)

@@ -7,7 +7,7 @@ async function initWaitingLobby() {
     if (!lobbyContainer) return;
 
     try {
-        const response = await fetch('../../../backend/api/ui/tourguide/get_waiting_tourists.php');
+        const response = await fetch('../../backend/api/ui/tourguide/get_waiting_tourists.php')
         const result = await response.json();
 
         if (result.success && result.data.length > 0) {

@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once('../../config/config.php');
+require_once('../../../config/config.php');
 
 // FLOW: Ito yung kinocall ng frontend para kunin yung listahan ng "My Bookings" ng isang guide.
 // Nagre-return ito ng JSON array ng lahat ng Done, Cancelled, o Accepted tours.

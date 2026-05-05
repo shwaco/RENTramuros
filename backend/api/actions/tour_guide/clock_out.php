@@ -2,7 +2,7 @@
 session_start();
 header('Content-Type: application/json');
 
-require_once('../../config/config.php');
+require_once('../../../config/config.php');
 
 if (!isset($_SESSION['guide_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
