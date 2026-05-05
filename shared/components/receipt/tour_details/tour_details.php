@@ -3,7 +3,7 @@
 
 <article class="receipt-card">
     <div class="receipt-header">
-        <div class="receipt-id-box"><?php echo $tourData['booking_request_id']; ?></div>
+        <div class="receipt-id-box"><?php echo $tourData['unique_id']; ?></div>
     </div>
 
     <div class="receipt-date">
