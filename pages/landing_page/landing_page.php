@@ -11,11 +11,11 @@
 
 
 
-    <link rel="stylesheet" href="../../asset/css/navsidebar.css?v=<?php echo filemtime('../../asset/css/navsidebar.css'); ?>">
-    <link rel="stylesheet" href="../../asset/main.css?v=<?php echo filemtime('../../asset/main.css'); ?>">
-    <link rel="stylesheet" href="../../asset/css/index.css?v=<?php echo filemtime('../../asset/css/index.css'); ?>">
-    <script src="../../asset/js/navsidebar.js?v=<?php echo filemtime('../../asset/js/navsidebar.js'); ?>" defer></script>
-    <script type="module" src="../../asset/js/dynamic_landing.js?v=<?php echo filemtime('../../asset/js/dynamic_landing.js'); ?>" defer></script>
+    <link rel="stylesheet" href="navsidebar.css?v=<?php echo filemtime('navsidebar.css'); ?>">
+    <link rel="stylesheet" href="main.css?v=<?php echo filemtime('main.css'); ?>">
+    <link rel="stylesheet" href="index.css?v=<?php echo filemtime('index.css'); ?>">
+    <script src="navsidebar.js?v=<?php echo filemtime('navsidebar.js'); ?>" defer></script>
+    <script type="module" src="dynamic_landing.js?v=<?php echo filemtime('dynamic_landing.js'); ?>" defer></script>
     
 
 </head>

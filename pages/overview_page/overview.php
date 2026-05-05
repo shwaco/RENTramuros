@@ -10,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../asset/css/overview.css">
+    <link rel="stylesheet" href="overview.css">
 
-    <script type="module" src="../../asset/js/overview.js" defer></script>
+    <script type="module" src="overview.js" defer></script>
 
 </head>
 <body>
