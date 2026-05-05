@@ -32,7 +32,7 @@ if(!isset($data->tourist_id)){
     exit();
 }
 
-function generateRandomcode ($length = 8) {
+function generateRandomcode($length = 8) {
     $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $code = '';
     for ($i = 0; $i < $length; $i++) {
@@ -41,7 +41,7 @@ function generateRandomcode ($length = 8) {
     return $code;
 }
 
-function generateBookingcode ($con) {
+function generateBookingcode($con) {
     $prefix = 'BR';
     do {
         $code = $prefix . "-" . generateRandomcode(8);
