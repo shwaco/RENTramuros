@@ -1,3 +1,5 @@
+import { getPopularAttractions, getRecommendedAttractions } from "../../services/api";
+
 // THE TRANSLATOR DICTIONARY
 
 const routeDictionary = {
