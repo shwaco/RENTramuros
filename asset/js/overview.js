@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Only fetch if the URL matches our dictionary
         if (translation) {
-            database = await fetchOverviewData();
+            database = await getPopularAttractions();
             
             // If the API failed and returned null, manually trigger the system error!
             if (database === null) {
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 
                 if (currentData.attraction_id && Array.isArray(currentData.attraction_id)) {
                     
-                    const linkedAttractions = currentData.attraction_ids.map(id => {
+                    const linkedAttractions = currentData.attraction_id.map(id => {
                         const matchKey = Object.keys(database).find(key => database[key].attraction_id === id);
                         return matchKey ? database[matchKey] : null;
                     }).filter(attr => attr !== null); 
