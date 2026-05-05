@@ -4,10 +4,13 @@ function renderTourDetails(tourData) {
     const pax = adults + children;
     const multiplier = pax > 0 ? pax : 1;
 
-    const isPackage = tourData.package_name && tourData.package_name !== 'No Package';
+    const isPackage = tourData.package_name && 
+                     tourData.package_name !== 'No Package' && 
+                     tourData.package_name !== 'Custom Tour';
+    
     const pkgFee = parseFloat(tourData.package_price) || 0;
     const totalPkgCost = pkgFee * multiplier;
-    
+
     const vPrice = parseFloat(tourData.vehicle_price) || 0;
     const vCount = parseInt(tourData.number_of_vehicle) || 0;
     const vMultiplier = vCount > 0 ? vCount : 1;
@@ -24,21 +27,26 @@ function renderTourDetails(tourData) {
 
     const itinContainer = document.getElementById('js-itinerary-container');
     if (!tourData.destinations || tourData.destinations.trim() === "") {
-        itinContainer.innerHTML = '<span>No Custom Attractions Selected</span>';
+        itinContainer.innerHTML = '<span>No Itineraries Selected</span>';
     } else {
         const destinationList = tourData.destinations.split(',');
         let itinHTML = '';
+        
         destinationList.forEach(dest => {
             const parts = dest.trim().split('|');
             const name = parts[0] || '';
             const fee = parseFloat(parts[1]) || 0;
             const totalDestFee = fee * multiplier;
 
-            if (totalDestFee > 0 && !isPackage) {
-                baseTotal += totalDestFee;
-                itinHTML += `<span>${name}&nbsp;&nbsp;<span class="text-green" style="font-size: 0.8rem;">₱${totalDestFee.toLocaleString('en-PH')}</span></span>`;
+            if (isPackage) {
+                itinHTML += `<span>${name}</span>`; 
             } else {
-                itinHTML += `<span>${name}</span>`;
+                if (totalDestFee > 0) {
+                    baseTotal += totalDestFee;
+                    itinHTML += `<span>${name}&nbsp;&nbsp;<span class="text-green" style="font-size: 0.8rem;">₱${totalDestFee.toLocaleString('en-PH')}</span></span>`;
+                } else {
+                    itinHTML += `<span>${name}</span>`;
+                }
             }
         });
         itinContainer.innerHTML = itinHTML;

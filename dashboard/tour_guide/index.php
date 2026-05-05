@@ -33,36 +33,41 @@ $tourData      = null;
 // conditional SELECT — JOIN query lang ang pinapatakbo kung 'On Tour' ang status
 // para maiwasan ang unnecessary DB queries para sa mga guide na hindi pa naka-tour
 if ($currentStatus === 'On Tour') {
-    $query = "SELECT 
-                bh.booking_request_id,
-                bh.booking_date,
-                bh.adults_and_seniors,
-                bh.children,
-                bh.infants,
-                bh.number_of_vehicle,
-                v.vehicle_type,
-                v.price AS vehicle_price,
-                ci.first_name,
-                ci.last_name,
-                ci.email_address,
-                ci.phone_number,
-                p.package_name,
-                p.price AS package_price,
-                GROUP_CONCAT(
-                    CONCAT(a.attraction_name, '|', IFNULL(a.fee, 0))
-                    ORDER BY a.attraction_name
-                    SEPARATOR ','
-                )                                                   AS destinations
-              FROM booking_history bh
-              LEFT JOIN contact_information ci  ON bh.contact_info_id   = ci.contact_info_id
-              LEFT JOIN vehicles v              ON bh.vehicle_id         = v.vehicle_id
-              LEFT JOIN packages p              ON bh.package_id         = p.package_id
-              LEFT JOIN request_attractions ra  ON bh.booking_request_id = ra.booking_request_id
-              LEFT JOIN attractions a           ON ra.attraction_id       = a.attraction_id
-              WHERE bh.guide_id = ?
-                AND bh.status = 'Accepted'
-              GROUP BY bh.booking_request_id
-              LIMIT 1";
+   $query = "SELECT 
+            bh.booking_request_id,
+            bh.unique_id,
+            bh.booking_date,
+            bh.adults_and_seniors,
+            bh.children,
+            bh.infants,
+            bh.number_of_vehicle,
+            v.vehicle_type,
+            v.price AS vehicle_price,
+            ci.first_name,
+            ci.last_name,
+            ci.email_address,
+            ci.phone_number,
+            p.package_name,
+            p.price AS package_price,
+            GROUP_CONCAT(
+                DISTINCT CONCAT(a.attraction_name, '|', IFNULL(a.fee, 0))
+                ORDER BY a.attraction_name
+                SEPARATOR ','
+            ) AS destinations
+          FROM booking_history bh
+          LEFT JOIN contact_information ci  ON bh.contact_info_id   = ci.contact_info_id
+          LEFT JOIN vehicles v              ON bh.vehicle_id         = v.vehicle_id
+          LEFT JOIN packages p              ON bh.package_id         = p.package_id
+          /* JOIN para sa custom attractions[cite: 24] */
+          LEFT JOIN request_attractions ra  ON bh.booking_request_id = ra.booking_request_id
+          /* JOIN para sa package itinerary[cite: 27] */
+          LEFT JOIN package_itinerary pi    ON bh.package_id          = pi.package_id
+          /* Kinukuha ang final attraction data[cite: 24] */
+          LEFT JOIN attractions a           ON (ra.attraction_id = a.attraction_id OR pi.attraction_id = a.attraction_id)
+          WHERE bh.guide_id = ?
+            AND bh.status = 'Accepted'
+          GROUP BY bh.booking_request_id
+          LIMIT 1";
 
    $stmtTour = mysqli_prepare($con, $query);
     mysqli_stmt_bind_param($stmtTour, "i", $guide_id);

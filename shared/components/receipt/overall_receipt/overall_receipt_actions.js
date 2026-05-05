@@ -19,7 +19,7 @@ function viewTouristDetails(id) {
 
     let actionArea = '';
     // kung #1 na yung guide sa queue, pwede na siyang pumili ng tourist so lalabas na yung accept button
-  if (typeof IS_QUEUE_NUMBER_ONE !== 'undefined' && IS_QUEUE_NUMBER_ONE) {
+    if (typeof IS_QUEUE_NUMBER_ONE !== 'undefined' && IS_QUEUE_NUMBER_ONE) {
         actionArea = `
            <div class="rcpt-action-area">
                <button onclick="acceptTour(${tourist.booking_request_id})" class="accept-tour-btn">
@@ -31,7 +31,7 @@ function viewTouristDetails(id) {
 
     // Ipapasa sa buildReceiptHTML yung kumpletong data para mag-generate ng resibo
     openReceiptModal(buildReceiptHTML({
-        id: tourist.booking_request_id,
+        id: tourist.unique_id,
         formattedDate,
         adults_and_seniors: tourist.adults_and_seniors,
         children: tourist.children,
