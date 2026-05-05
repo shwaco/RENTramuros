@@ -1,9 +1,8 @@
 // dynamic confirmation modal — ginagamit para sa accept tour, clock out
-
 // binubuksan yung dynamic modal yung for confirming ng guide actions like accepting a tour or clocking out
 
 function openDynamicModal(title, message, confirmCallback, buttonColor = '#16a34a') {
-    console.log("Binubuksan ang modal...");
+    console.log("Modal was opened...");
 
     const overlay = document.getElementById('dynamic-confirm-overlay');
     const titleEl = document.getElementById('dynamic-modal-title');
@@ -11,7 +10,7 @@ function openDynamicModal(title, message, confirmCallback, buttonColor = '#16a34
     const confirmBtn = document.getElementById('dynamic-modal-btn');
 
     if (!overlay || !titleEl || !msgEl || !confirmBtn) {
-        return console.error("Error: Hindi mahanap ang mga modal elements sa modals.php!");
+        return console.error("Error: Error cant find mondals.php!");
     }
 
     titleEl.innerText = title;

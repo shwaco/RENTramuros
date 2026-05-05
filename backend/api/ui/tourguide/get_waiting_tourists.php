@@ -18,6 +18,7 @@ try {
     // FLOW: Multi-table join ulit. Parehas lang din yung logic sa destinations para makita agad ng guide kung anong package or custom destinations yung pinili ng naghihintay na tourist
     $sql = "SELECT 
                 bh.booking_request_id,
+                bh.unique_id,
                 bh.booking_date,
                 bh.booking_time,
                 bh.adults_and_seniors,
@@ -32,7 +33,8 @@ try {
                 ci.last_name,
                 ci.email_address,
                 ci.phone_number,
-                p.package_name,
+                IFNULL(p.package_name, 'Custom Tour') AS package_name,
+                IFNULL(p.package_name, 'No Package')  AS package_name_modal,
                 p.price AS package_price,
                 GROUP_CONCAT(
                     CONCAT(a.attraction_name, '|', IFNULL(a.fee, 0))

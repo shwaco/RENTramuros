@@ -31,7 +31,7 @@ async function initWaitingLobby() {
 
                 return `
                     <div class="t-block" onclick="viewTouristDetails(${tourist.booking_request_id})">
-                        <div class="t-block-left">${tourist.booking_request_id}</div>
+                        <div class="t-block-left">${tourist.unique_id || tourist.booking_request_id}</div>
                         <div class="t-block-right">
                             <span style="font-weight:bold; color:#000;">${dateString}</span>
                             <span>${timeString}</span>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-require_once('../../config/config.php');
+require_once('../config/config.php');
 
 // POST endpoint — kinocall ng startClaimTimer() sa queue.js kapag naubos na yung 15 seconds timer
 // nag-aupdate ng became_available_at sa NOW() para mapush ang guide sa dulo ng queue 

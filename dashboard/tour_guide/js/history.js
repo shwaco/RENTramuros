@@ -5,7 +5,6 @@
     try {
         const response = await fetch('../../backend/api/ui/tourguide/get_guide_history.php')
         const data = await response.json();
-        // Updated to target the new container ID
         const container = document.getElementById('historyContainer');
 
         if (data.success && data.history.length > 0) {
@@ -50,7 +49,7 @@
                 return `
                     <div class="booking-card" onclick="viewHistoryReceipt(${index})">
                         <div class="bc-left">
-                            <span class="bc-id">${tour.booking_request_id}</span>
+                            <span class="bc-id">${tour.unique_id}</span>
                         </div>
                         <div class="bc-middle">
                             <span class="bc-date">${formattedDate} ${timeString}</span>
@@ -93,7 +92,7 @@ function viewHistoryReceipt(index) {
 
     // ginegenerate yung receipt HTML and inoopen yung modal para sa history view
     openReceiptModal(buildReceiptHTML({
-        id: tour.booking_request_id,
+        id: tour.unique_id,
         formattedDate,
         adults_and_seniors: tour.adults_and_seniors,
         children: tour.children,

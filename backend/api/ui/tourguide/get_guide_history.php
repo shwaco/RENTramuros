@@ -18,6 +18,7 @@ try {
     // from booking_history, vehicles, packages, at attractions.
     $sql = "SELECT 
                 bh.booking_request_id,
+                bh.unique_id,
                 bh.status,
                 bh.booking_date,
                 bh.booking_time,
@@ -31,10 +32,10 @@ try {
                 ci.last_name,
                 ci.email_address,
                 ci.phone_number,
-                p.package_name,
+                IFNULL(p.package_name, 'Custom Tour') AS package_name,
+                IFNULL(p.package_name, 'No Package')  AS package_name_modal,
                 p.price AS package_price,
                 
-                /* Dito kino-combine yung mga attractions into one string gamit GROUP_CONCAT */
                 GROUP_CONCAT(
                     DISTINCT CONCAT(a.attraction_name, '|', IFNULL(a.fee, 0))
                     ORDER BY a.attraction_name
