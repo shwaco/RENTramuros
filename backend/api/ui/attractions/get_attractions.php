@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit();
 }
 
-$fetch_sql = "SELECT attraction_id, attraction_type, attraction_name, description, schedule, fee, main_img, mini_one_img, mini_two_img, rec_img FROM attractions ";
+$fetch_sql = "SELECT attraction_id, attraction_type, attraction_name, address, description, schedule, fee, main_img, mini_one_img, mini_two_img, rec_img FROM attractions ";
 $result = mysqli_query($con, $fetch_sql);
     
 if ($result) {
@@ -35,6 +35,7 @@ if ($result) {
             "attraction_id" => $row['attraction_id'],
             "attraction_type" => $row['attraction_type'],
             "attraction_name" => $row['attraction_name'],
+            "address" => $row['address'],
             "description" => $row['description'],
             "fee" => $row['fee'],
             "schedule" => $row['schedule'],
