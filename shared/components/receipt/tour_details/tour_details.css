@@ -1,0 +1,87 @@
+.receipt-card {
+    background: #ffffff;
+    padding: 0 2rem 2.5rem 2rem;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #000000;
+}
+
+.receipt-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 -2rem;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.receipt-id-box {
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding: 0.4rem 1.2rem;
+    border-radius: 4px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.receipt-date {
+    text-align: right;
+    font-size: 0.8rem;
+    margin: 1.5rem 0 2rem 0;
+    font-weight: 400;
+}
+
+.section-label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.tourist-grid, .vehicle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    font-size: 0.85rem;
+}
+
+.tourist-label { padding-left: 0.5rem; }
+.tourist-sub { font-weight: 300; font-style: italic; font-size: 0.8rem; text-align: center; }
+.tourist-val { text-align: right; }
+
+.pkg-row, .contact-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+}
+
+.itinerary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.divider-dashed { border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0; }
+.divider-solid { border: 0; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
+.text-green { color: #109620; font-weight: 600; font-style: italic; }
+
+.totals-wrapper { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 2rem; }
+.totals-grid { display: grid; grid-template-columns: max-content auto; column-gap: 0.75rem; row-gap: 0.4rem; align-items: baseline; }
+.total-label { font-weight: 500; color: #4b5563; font-size: 0.85rem; }
+.total-val { font-weight: 600; font-size: 0.85rem; }
+.grand-label { font-weight: 700; font-size: 0.95rem; margin-top: 0.3rem; }
+.grand-val { font-weight: 700; color: #109620; font-size: 1.05rem; font-style: italic; margin-top: 0.3rem; }

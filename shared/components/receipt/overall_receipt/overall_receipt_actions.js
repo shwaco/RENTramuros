@@ -21,7 +21,7 @@ function viewTouristDetails(id) {
     // kung #1 na yung guide sa queue, pwede na siyang pumili ng tourist so lalabas na yung accept button
   if (typeof IS_QUEUE_NUMBER_ONE !== 'undefined' && IS_QUEUE_NUMBER_ONE) {
         actionArea = `
-           <div style="margin-top: 2rem;">
+           <div class="rcpt-action-area">
                <button onclick="acceptTour(${tourist.booking_request_id})" class="accept-tour-btn">
                     ACCEPT
                 </button>
@@ -53,11 +53,11 @@ function viewTouristDetails(id) {
 
 // nagva-validate muna na may valid tourist ID bago buksan ang confirmation modal
 function acceptTour(touristId) {
-    if (!touristId) return alert("Error: Could not find the Tourist ID.");
-    // inoopen yung confirmation modal muna
+    console.log("Accepting tour for ID:", touristId); // Debug check
+    
     openDynamicModal(
         "Accept tour?",
-        "You are accepting this tour. Cancellation or any form of abandonment can lead to legal action.",
+        "You are accepting this tour. Cancellation or abandonment can lead to legal action.",
         () => executeAcceptTour(touristId),
         "#109620"
     );
@@ -75,7 +75,6 @@ async function executeAcceptTour(touristId) {
         const result = await response.json();
 
         if (result.success) {
-            // kung successful, nirereload yung web para lumipat yung guide sa On Tour view
             location.reload();
         } else {
             alert("Database Error: " + (result.error || "Could not accept the tour."));

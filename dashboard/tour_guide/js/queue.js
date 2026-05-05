@@ -30,25 +30,25 @@ async function joinQueue() {
 function startPolling() {
     setInterval(async () => {
         try {
-            const response = await fetch('../../backend/logics/check_queue.php')
+            const response = await fetch('../../backend/logics/check_queue.php');
             const data = await response.json();
 
             if (!data.success) return;
 
-            // Reload on any status change from what PHP rendered on load
+            // Reload if status changed
             if (data.status !== CURRENT_GUIDE_STATUS) {
                 window.location.reload();
                 return;
             }
 
-            // Also reload if guide is Queuing and position changed
+            // Detect position change
             if (data.status === 'Queuing') {
+                // This now correctly compares the old position to the new database data
                 if (currentQueuePosition !== null && currentQueuePosition !== data.position) {
                     window.location.reload();
                 }
                 currentQueuePosition = data.position;
             }
-
         } catch (e) {
             console.error("Radar error:", e);
         }
@@ -56,7 +56,7 @@ function startPolling() {
 }
 
 function startClaimTimer() {
-    let timeLeft = 30;
+    let timeLeft = 30; // Matches your UI
     const timerDisplay = document.getElementById('selection-timer');
 
     if (claimTimerInterval) clearInterval(claimTimerInterval);
@@ -68,12 +68,17 @@ function startClaimTimer() {
         if (timeLeft <= 0) {
             clearInterval(claimTimerInterval);
             try {
-                await fetch('../../backend/logics/missed_turn.php', { method: 'POST' });
+                // This POST now works because we fixed the config path[cite: 18]
+                const res = await fetch('../../backend/logics/missed_turn.php', { method: 'POST' });
+                const data = await res.json();
+                
+                if (data.success) {
+                    alert("Time is up! You have been moved to the back of the queue.");
+                    window.location.reload();
+                }
             } catch (e) {
                 console.error("Could not process missed turn", e);
             }
-            alert("Time is up! You have been moved to the back of the queue.");
-            window.location.reload();
         }
     }, 1000);
 }

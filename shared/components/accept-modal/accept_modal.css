@@ -4,7 +4,7 @@
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
     z-index: 10000;
-    display: flex; /* JavaScript should switch display from 'none' to 'flex' */
+    display: flex;
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(2px);
