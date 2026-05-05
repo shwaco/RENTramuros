@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../config/config.php';
+require_once '../../backend/config/config.php';
 
 if (!isset($_SESSION['guide_id'])) {
     header("Location: ../auth.v2/login.php");

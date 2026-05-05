@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RENTramuros - Guide Dashboard</title>
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/confirmation.css">
+    <link rel="stylesheet" href="../../shared/components/confirmation-modal/confirmation_modal.css">
     <link rel="stylesheet" href="css/my_bookings.css">
     <link rel="stylesheet" href="css/pending_tourists_containers.css">
     <link rel="stylesheet" href="../../shared/components/navbar/nav.css">
