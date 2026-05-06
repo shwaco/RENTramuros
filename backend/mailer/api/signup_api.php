@@ -1,13 +1,11 @@
 <?php
-session_start();
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 
 require_once __DIR__. '/../../config/config.php';
-require_once __DIR__.'/../../config/mailer_config.php';
-
+require_once __DIR__. '/../../config/mailer_config.php';
 /** @var mysqli $con */
 /** @var PHPMailer $mail */
 
@@ -41,8 +39,8 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 $otp         = rand(100000, 999999);
 $expiry_time = date("Y-m-d H:i:s", strtotime("+15 minutes"));
 
-$sql  = "INSERT INTO tourists (first_name, last_name, email, password_hash, phone_number, otp_code, otp_expiry)
-         VALUES (?, ?, ?, ?, ?, ?, ?)";
+$sql  = "INSERT INTO tourists (first_name, last_name, email, password_hash, phone_number, otp_code, otp_expiry, is_verified)
+         VALUES (?, ?, ?, ?, ?, ?, ?, 0)";
 $stmt = mysqli_prepare($con, $sql);
 mysqli_stmt_bind_param($stmt, "sssssss", $firstname, $lastname, $email, $hashed_password, $phone, $otp, $expiry_time);
 
