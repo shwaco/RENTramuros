@@ -1,13 +1,20 @@
 <?php
 session_start();
 require_once '../../backend/config/config.php';
+require_once '../../middleware/auth_check.php';
+/** @var mysqli $con */
 
-if (!isset($_SESSION['guide_id'])) {
-    header("Location: ../../pages/login_page/login.php");
-    exit();
-}
+requireRole(['guide']);
 
-$guide_id = $_SESSION['guide_id'];
+$user_id = $_SESSION['user_id'];
+
+
+// if (!isset($_SESSION['guide_id'])) {
+//     header("Location: ../../pages/login_page/login.php");
+//     exit();
+// }
+
+$guide_id = $_SESSION['user_id'];
 
 
 // SELECT query para kunin yung guide info — kinukuha ang first_name, current_status, at became_available_at
@@ -20,7 +27,7 @@ $guideInfo = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtInfo));
 if (!$guideInfo) {
     session_unset();
     session_destroy();
-    header("Location: ../../auth.v2/login.php");
+    header("Location: ../../../pages/login_page/login.php");
     exit();
 }
 
