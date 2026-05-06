@@ -37,7 +37,7 @@
             <!-- Navigation bar -->
             <ul class="navbar">
                 <li><img src="../../asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo"></li>
-                <li class="hideOnMobile"><a href="#" id="maps"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
+                <li class="hideOnMobile"><a href="#interactive-map" id="maps"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
                 <li class="hideOnMobile"><a href="dashboard/tourist/tours.php" rel="noreferrer noopener" target="_blank"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
                 <li class="hideOnMobile"><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li class="hideOnMobile last"><a href="#">About</a></li>
@@ -159,9 +159,18 @@
             </section>            
             
         </section>
+        
+        <section id="interactive-map" class="map-section" style="width: 85%; margin: 2rem auto 5rem auto; border-radius: 20px; overflow: hidden;">
+            <div style="text-align: center; font-family: 'roboto flex'; font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">
+                Intramuros Interactive Map
+            </div>
+            
+            <div style="position: relative; height: 850px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <?php include '../../shared/components/map/index.php'; ?>
+            </div>
+        </section>
 
-
-    </main>
+    </main>   
 
 
 </body>
