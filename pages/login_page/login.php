@@ -28,9 +28,6 @@
                 <button type="submit" class="btn btn-primary w-100">Login</button>
             </form>
         </div>
-        <script>
-            
-        </script>
         
     </body>
 </html>
