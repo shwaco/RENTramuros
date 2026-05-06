@@ -479,7 +479,7 @@ function renderVehicles(vehicles) {
 
         pkgHtml += `
         <div class="vehicle-${index + 1} vehicle-card" id="veh-${veh.vehicle_id}" data-name="${veh.vehicle_type}" onclick="selectVehicle(${veh.vehicle_id}, this.dataset.name, ${veh.price})">
-            <div class="vehicle-counter">
+            <div class="vehicle-counter" onclick="event.stopPropagation()">
                 <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
                 <span class="veh-count">1</span>
                 <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
@@ -487,13 +487,13 @@ function renderVehicles(vehicles) {
             <img src="${imgPath}" alt="${veh.vehicle_type}">
             <div class="vehicle-overlay">
                 <span class="vehicle-name">${veh.vehicle_type}</span>
-                <span class="${capacityClass}">${veh.passenger_capacity}</span>
+                <span class="${capacityClass}">Capacity: ${veh.passenger_capacity}</span>
             </div>
         </div>`;
 
         customHtml += `
         <div class="custom-vehicle-${index + 1} custom-vehicle-card" id="custom-veh-${veh.vehicle_id}" data-name="${veh.vehicle_type}" onclick="selectCustomVehicle(${veh.vehicle_id}, this.dataset.name, ${veh.price})">
-            <div class="vehicle-counter">
+            <div class="vehicle-counter" onclick="event.stopPropagation()">
                 <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
                 <span class="veh-count">1</span>
                 <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
@@ -501,7 +501,7 @@ function renderVehicles(vehicles) {
             <img src="${imgPath}" alt="${veh.vehicle_type}">
             <div class="vehicle-overlay">
                 <span class="vehicle-name">${veh.vehicle_type}</span>
-                <span class="${capacityClass}">${veh.passenger_capacity}</span>
+                <span class="${capacityClass}">Capacity: ${veh.passenger_capacity}</span>
             </div>
         </div>`;
     });
