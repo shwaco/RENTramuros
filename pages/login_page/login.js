@@ -15,7 +15,7 @@ document.getElementById('LoginForm').addEventListener('submit', function(event) 
                     alertBox.innerHTML = `<div class="alert alert-success" role="alert">${data.message}</div>`;
                         setTimeout(() => {
                             if (data.admin_id) {
-                                window.location.href = '../admin_dashboard.html';
+                                window.location.href = '../../dashboard/admin/admin.php';
                             } else if (data.guide_id) {
                                 window.location.href = '../../dashboard/tour_guide/index.php';
                             } else if (data.tourist_id) {

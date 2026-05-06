@@ -3,232 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Queuing System</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Manage Tour Guides - RENTramuros</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="./asset/css/admin.css">
 </head>
-<body class="bg-gray-50 flex flex-col min-h-screen">
+<body class="flex h-screen bg-gray-50 antialiased overflow-hidden">
 
-    <!-- Admin Hub Navbar -->
-    <header class="bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                
-                <!-- Left Side: Logo & Branding -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="admin.php" class="flex items-center text-white hover:opacity-80 transition duration-150">
-                        <i class="fas fa-chess-rook text-2xl mr-2"></i>
-                        <span class="font-bold text-xl tracking-wide">RENTramuros</span>
-                        <span class="text-gray-300 font-light text-xl mx-2">|</span>
-                        <span class="text-gray-300 font-light text-lg">Admin Hub</span>
-                    </a>
-                </div>
-
-                <!-- Middle/Right Side: Navigation & User Controls -->
-                <div class="flex items-center space-x-6">
-                    
-                    <!-- Main Nav Links -->
-                    <nav class="flex space-x-6">
-                        <a href="admin.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
-                            Dashboard
-                        </a>
-                        <a href="manage_guides.php" class="text-gray-300 font-medium px-1 py-2 hover:text-white transition duration-150">
-                            Guides
-                        </a>
-                        <!-- Active Link (Events) -->
-                        <a href="manage_events.php" class="text-white font-semibold px-1 py-2 border-b-2 border-blue-400 hover:text-blue-300 transition duration-150">
-                            Events
-                        </a>
-                        <a href="manage_attractions.php" class="text-white font-semibold px-1 py-2 border-b-2 border-blue-400 hover:text-blue-300 transition duration-150">
-                            Attractions
-                        </a>
-                    </nav>
-
-                    <!-- Divider -->
-                    <div class="h-6 w-px bg-gray-500 mx-2"></div>
-
-                    <!-- User Controls -->
-                    <div class="flex items-center space-x-4">
-                        <div id="current-time" class="text-gray-200 text-sm font-mono hidden md:block mr-2"></div>
-                        <span class="text-gray-200 text-sm">Welcome, Admin</span>
-                        
-                        <a href="../../logout-api.php" class="text-red-400 hover:text-red-300 font-semibold flex items-center transition duration-150">
-                            <i class="fas fa-sign-out-alt mr-2"></i>
-                            Logout
-                        </a>
-                    </div>
-                </div>
+    <aside class="relative h-screen bg-gray-800 text-white flex flex-col shadow-2xl transition-all duration-300 w-20 hover:w-64 overflow-hidden group hidden md:flex shrink-0 z-50">
+        
+        <div class="flex items-center h-20 px-4 border-b border-gray-700 whitespace-nowrap">
+            <div class="w-12 flex justify-center shrink-0">
+                <i class="fas fa-chess-rook text-3xl text-gray-300"></i>
             </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <div class="container mx-auto px-4 py-8">
-
-        <!-- Stats Overview -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white rounded-lg shadow-md p-6 card-hover">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
-                        <i class="fas fa-clock text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-800" id="waiting-count">0</h3>
-                        <p class="text-gray-600">Pending Bookings</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md p-6 card-hover">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
-                        <i class="fas fa-user-check text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-800" id="serving-count">0</h3>
-                        <p class="text-gray-600">Accepted Bookings</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md p-6 card-hover">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">
-                        <i class="fas fa-horse text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-800" id="completed-count">0</h3>
-                        <p class="text-gray-600">On Tours</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md p-6 card-hover">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-red-100 text-red-600 mr-4">
-                        <i class="fas fa-check-circle text-2xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-800" id="today-count">0</h3>
-                        <p class="text-gray-600">Completed Tours</p>
-                    </div>
-                </div>
+            <div class="ml-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
+                <div class="font-bold text-xl tracking-wide">RENT<span class="font-light">ramuros</span></div>
+                <div class="text-[10px] text-gray-400 uppercase tracking-wider font-semibold">Admin Hub</div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <nav class="flex-1 px-4 py-6 space-y-3 overflow-y-auto overflow-x-hidden">
+            
+            <a href="admin.php" class="flex items-center py-3 text-gray-300 rounded-lg hover:bg-gray-700 hover:text-white transition whitespace-nowrap">
+                <div class="w-12 flex justify-center shrink-0"><i class="fas fa-home text-xl"></i></div>
+                <span class="ml-3 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">Home Page</span>
+            </a>
+            
+            <a href="manage_guides.php" class="flex items-center py-3 bg-[#7a3229] text-white rounded-lg shadow-md transition whitespace-nowrap">
+                <div class="w-12 flex justify-center shrink-0"><i class="fas fa-users text-xl"></i></div>
+                <span class="ml-3 font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Guides</span>
+            </a>
+            
+            <a href="manage_events.php" class="flex items-center py-3 text-gray-300 rounded-lg hover:bg-gray-700 hover:text-white transition whitespace-nowrap">
+                <div class="w-12 flex justify-center shrink-0"><i class="fas fa-calendar-alt text-xl"></i></div>
+                <span class="ml-3 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">Events</span>
+            </a>
+            
+            <a href="manage_attractions.php" class="flex items-center py-3 text-gray-300 rounded-lg hover:bg-gray-700 hover:text-white transition whitespace-nowrap">
+                <div class="w-12 flex justify-center shrink-0"><i class="fas fa-archway text-xl"></i></div>
+                <span class="ml-3 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">Attractions</span>
+            </a>
+            
+            <a href="statistics_overview.php" class="flex items-center py-3 text-gray-300 rounded-lg hover:bg-gray-700 hover:text-white transition whitespace-nowrap">
+                <div class="w-12 flex justify-center shrink-0"><i class="fas fa-chart-pie text-xl"></i></div>
+                <span class="ml-3 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">Statistics</span>
+            </a>
+        </nav>
+    </aside>
 
-            <!-- Add Tour Guide Form -->
-            <div class="lg:col-span-1">
-                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">
-                        <i class="fas fa-plus-circle mr-2"></i>Add New Tour Guide
-                    </h2>
+    <div class="flex-1 flex flex-col h-screen overflow-hidden relative bg-gray-50">
+        
+        <header class="bg-white shadow-sm py-4 px-6 flex justify-between items-center z-10 border-b border-gray-200 shrink-0">
+            <button class="md:hidden text-gray-600 focus:outline-none hover:text-[#7a3229]">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            
+            <div class="hidden md:block"></div>
 
-                    <form id="add-guide-form" class="space-y-4" novalidate>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                                <input type="text" id="guide-fname" required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder="Juan">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                                <input type="text" id="guide-lname" required
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                    placeholder="dela Cruz">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                            <input type="email" id="guide-email" required
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="juan@rentramuros.ph">
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                            <input type="password" id="guide-password" required minlength="8"
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                placeholder="Min. 8 characters">
-                        </div>
-
-                        <!-- Inline feedback for add form -->
-                        <div id="add-guide-feedback" class="hidden text-sm px-3 py-2 rounded-lg"></div>
-
-                        <button type="submit" id="add-guide-btn"
-                                class="w-full bg-gray-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-700 transition">
-                            <i class="fas fa-user-plus mr-2"></i>Create Guide Account
-                        </button>
-                    </form>
+            <div class="flex items-center space-x-6">
+                <div id="current-time" class="text-gray-500 text-sm font-mono hidden md:block"></div>
+                <div class="text-sm font-semibold text-gray-700 border-l pl-6 border-gray-300">
+                    Welcome, Admin
                 </div>
+                <a href="../../logout-api.php" class="text-red-500 hover:text-red-700 font-bold transition flex items-center text-sm">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                </a>
             </div>
+        </header>
 
-            <!-- Guide Table Panel -->
-            <div class="lg:col-span-2">
-                <div class="bg-white rounded-lg shadow-lg p-6 card-hover">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-800">
-                            <i class="fas fa-list mr-2"></i>Tour Guide Management
+        <main class="flex-1 overflow-x-hidden overflow-y-auto p-6 flex flex-col">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6 card-hover h-full">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6 border-b pb-3">
+                            <i class="fas fa-user-plus mr-2 text-[#7a3229]"></i>Add New Guide
                         </h2>
-                        <div class="flex space-x-2">
-                            <button onclick="loadTourGuides()"
-                                    class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">
-                                <i class="fas fa-sync-alt mr-2"></i>Refresh
+
+                        <form id="add-guide-form" class="space-y-4" novalidate>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">First Name</label>
+                                    <input type="text" id="guide-fname" required
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7a3229] outline-none"
+                                        placeholder="Juan">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-1">Last Name</label>
+                                    <input type="text" id="guide-lname" required
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7a3229] outline-none"
+                                        placeholder="dela Cruz">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="guide-email" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7a3229] outline-none"
+                                    placeholder="juan@rentramuros.ph">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
+                                <input type="password" id="guide-password" required minlength="8"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7a3229] outline-none"
+                                    placeholder="Min. 8 characters">
+                            </div>
+
+                            <div id="add-guide-feedback" class="hidden text-sm px-3 py-2 rounded-lg"></div>
+
+                            <button type="submit" id="add-guide-btn"
+                                    class="w-full bg-[#7a3229] text-white py-3 px-4 rounded-lg font-semibold hover:bg-red-900 transition mt-4 shadow-sm">
+                                Create Guide Account
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md border border-gray-100 p-6 card-hover h-full">
+                        <div class="flex justify-between items-center mb-6 border-b pb-3">
+                            <h2 class="text-xl font-bold text-gray-800">
+                                <i class="fas fa-list mr-2 text-[#7a3229]"></i>Guide Roster
+                            </h2>
+                            <button onclick="loadTourGuides()" class="bg-gray-100 text-gray-600 border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-200 transition text-sm font-medium">
+                                <i class="fas fa-sync-alt mr-1"></i> Refresh
                             </button>
                         </div>
-                    </div>
 
-                    <!-- On Tour Cards — dynamically populated by JS -->
-                    <div class="mb-8">
-                        <h3 class="text-lg font-semibold text-gray-700 mb-4">On Tour</h3>
-                        <div id="onTourCards" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <p id="no-tour-msg" class="text-sm text-gray-400 italic col-span-3">
-                                <i class="fas fa-spinner fa-spin mr-1"></i> Loading...
-                            </p>
+                        <div class="mb-8">
+                            <h3 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-3">Currently On Tour</h3>
+                            <div id="onTourCards" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <p id="no-tour-msg" class="text-sm text-gray-400 italic col-span-3">
+                                    <i class="fas fa-spinner fa-spin mr-1"></i> Loading...
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-auto whitespace-nowrap">
+                                <thead>
+                                    <tr class="bg-gray-50 text-left border-b border-gray-200">
+                                        <th class="px-3 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">ID</th>
+                                        <th class="px-3 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">First Name</th>
+                                        <th class="px-3 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Last Name</th>
+                                        <th class="px-3 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Email</th>
+                                        <th class="px-3 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th class="px-3 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Last Active</th>
+                                        <th class="px-3 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Dispatched</th>
+                                        <th class="px-3 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider">Available At</th>
+                                        <th class="px-3 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider text-center">Tourist ID</th>
+                                        <th class="px-3 py-3 text-xs font-bold text-gray-500 uppercase tracking-wider text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="guide-table-body" class="divide-y divide-gray-100 text-sm">
+                                    <tr>
+                                        <td colspan="10" class="px-3 py-8 text-center text-gray-400 italic font-medium">
+                                            <i class="fas fa-spinner fa-spin mr-2"></i>Loading guides...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
-                    <!-- Guide Table -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full table-auto whitespace-nowrap">
-                            <thead>
-                                <tr class="bg-gray-50 text-left border-b">
-                                    <th class="px-3 py-3 text-sm font-medium text-gray-700">guide_id</th>
-                                    <th class="px-3 py-3 text-sm font-medium text-gray-700">first_name</th>
-                                    <th class="px-3 py-3 text-sm font-medium text-gray-700">last_name</th>
-                                    <th class="px-3 py-3 text-sm font-medium text-gray-700">email</th>
-                                    <th class="px-3 py-3 text-sm font-medium text-gray-700">current_status</th>
-                                    <th class="px-3 py-3 text-sm font-medium text-gray-700">last_active_at</th>
-                                    <th class="px-3 py-3 text-sm font-medium text-gray-700">last_dispatch_time</th>
-                                    <th class="px-3 py-3 text-sm font-medium text-gray-700">became_available_at</th>
-                                    <th class="px-3 py-3 text-sm font-medium text-gray-700 text-center">current_tourist_id</th>
-                                    <th class="px-3 py-3 text-sm font-medium text-gray-700 text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="guide-table-body" class="divide-y divide-gray-200">
-                                <tr>
-                                    <td colspan="10" class="px-3 py-6 text-center text-gray-400 italic">
-                                        <i class="fas fa-spinner fa-spin mr-2"></i>Loading guides...
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
+        </main>
+
+        <footer class="bg-white border-t border-gray-200 w-full text-center py-4 text-sm text-gray-500 shrink-0">
+            &copy; 2026 RENTramuros. All rights reserved.
+        </footer>
     </div>
 
-    <!-- Edit Modal -->
     <div id="edit-modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 overflow-y-auto h-full w-full z-50 flex justify-center items-center">
-        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">
-                <i class="fas fa-edit mr-2"></i>Edit Tour Guide
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative">
+            <button onclick="closeEditModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">
+                <i class="fas fa-edit mr-2 text-[#7a3229]"></i>Edit Tour Guide
             </h2>
 
             <form id="edit-guide-form" class="space-y-4" novalidate>
@@ -236,41 +192,41 @@
 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">First Name</label>
                         <input type="text" id="edit-fname" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7a3229] outline-none">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Last Name</label>
                         <input type="text" id="edit-lname" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7a3229] outline-none">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
                     <input type="email" id="edit-email" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7a3229] outline-none">
                 </div>
 
                 <div class="mt-3">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">
                         New Password <span class="text-gray-400 font-normal">(Optional)</span>
                     </label>
                     <input type="password" id="edit-password"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Leave blank to keep current password">
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#7a3229] outline-none"
+                        placeholder="Leave blank to keep current">
                 </div>
 
                 <div id="edit-guide-feedback" class="hidden text-sm px-3 py-2 rounded-lg"></div>
 
-                <div class="flex justify-end space-x-3 mt-6">
+                <div class="flex justify-end space-x-3 mt-6 pt-4 border-t border-gray-100">
                     <button type="button" onclick="closeEditModal()"
                         class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition">
                         Cancel
                     </button>
                     <button type="submit" id="edit-guide-btn"
-                        class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition">
+                        class="px-4 py-2 bg-[#7a3229] text-white rounded-lg font-semibold hover:bg-red-900 transition shadow-sm">
                         <i class="fas fa-save mr-1"></i>Save Changes
                     </button>
                 </div>
@@ -283,19 +239,15 @@
         <span id="toast-msg"></span>
     </div>
 
-    <footer class="bg-gray-400 text-white py-6 mt-auto">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; RENTramuros. All rights reserved.</p>
-        </div>
-    </footer>
-
     <script src="asset/js/dashboard_stats.js"></script>
     <script src="asset/js/guide_management.js"></script>
     <script>
         function updateClock() {
-            const now = new Date();
-            document.getElementById('current-time').textContent =
-                now.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const timeEl = document.getElementById('current-time');
+            if(timeEl) {
+                const now = new Date();
+                timeEl.textContent = now.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            }
         }
         updateClock();
         setInterval(updateClock, 1000);
