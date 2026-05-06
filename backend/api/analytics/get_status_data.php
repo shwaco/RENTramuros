@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: GET');
 
-require_once '../asset/config.php'; // Adjust your ../ path depending on where you save this!
+require_once '../../config/config.php'; // Adjust your ../ path depending on where you save this!
 /** @var mysqli $con */
 
 try {

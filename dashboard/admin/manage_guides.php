@@ -239,8 +239,7 @@
         <span id="toast-msg"></span>
     </div>
 
-    <script src="asset/js/dashboard_stats.js"></script>
-    <script src="asset/js/guide_management.js"></script>
+    <script src="js/guides_management.js"></script>
     <script>
         function updateClock() {
             const timeEl = document.getElementById('current-time');
