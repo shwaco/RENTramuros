@@ -1,4 +1,4 @@
-const STATUS_API_URL = 'backend/api/analytics/get_status_data.php';
+const STATUS_API_URL = '../../backend/api/analytics/get_status_data.php';
 
 document.addEventListener('DOMContentLoaded', async function() {
     

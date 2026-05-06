@@ -1,8 +1,8 @@
 const API = {
-    GET:    'backend/api/ui/admin/get_guide.php',
-    POST:   'backend/api/actions/admin/post_guide.php',
-    PATCH:  'backend/api/actions/admin/patch_guide.php',
-    DELETE: 'backend/api/actions/admin/delete_guide.php'
+    GET:    '../../backend/api/ui/admin/get_guide.php',
+    POST:   '../../backend/api/actions/admin/post_guide.php',
+    PATCH:  '../../backend/api/actions/admin/patch_guide.php',
+    DELETE: '../../backend/api/actions/admin/delete_guide.php'
 };
 
 function showToast(message, type = 'success') {

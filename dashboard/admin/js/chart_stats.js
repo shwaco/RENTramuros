@@ -1,6 +1,6 @@
 // asset/js/dashboard_stats.js
 
-const CHART_API_URL = 'backend/api/analytics/get_chart_data.php';
+const CHART_API_URL = '../../backend/api/analytics/get_chart_data.php';
 
 function renderCharts(data) {
     // ==========================================
@@ -92,3 +92,20 @@ function renderCharts(data) {
         });
     }
 }
+async function loadChartData() {
+    try {
+        // Your fetch request should be inside here!
+        const response = await fetch('../../backend/api/analytics/get_chart_data.php');
+        const json = await response.json();
+        
+        if(json.status === 'success') {
+            // Render your charts here...
+        }
+    } catch(error) {
+        console.error("Error fetching charts:", error);
+    }
+}
+
+// THIS IS THE CRITICAL LINE! 
+// It tells the browser: "Hey, once the HTML is done loading, run this function!"
+document.addEventListener('DOMContentLoaded', loadChartData);

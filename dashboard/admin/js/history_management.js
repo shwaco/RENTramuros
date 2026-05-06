@@ -1,7 +1,7 @@
 async function loadBookingHistory() {
     try {
         // Pointing to your newly renamed endpoint!
-        const response = await fetch('../../backend/api/actions/get_booking_history.php');
+        const response = await fetch('../../backend/api/analytics/get_booking_history.php');
         const json = await response.json();
 
         if (json.status === "success") {

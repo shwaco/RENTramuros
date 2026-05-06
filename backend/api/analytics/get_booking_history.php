@@ -9,13 +9,16 @@ require_once '../../config/config.php';
 /** @var mysqli $con */
 
 // Security Check (Uncomment when ready)
-/*
-if(!isset($_SESSION['admin_id'])) {
+// /*
+// Inside get_guide.php
+
+// Change 'admin_id' to 'user_id' AND make sure the role is 'admin'
+if(!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     http_response_code(401);
-    echo json_encode(["status" => "error", "message" => "Unauthorized."]);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
     exit();
 }
-*/
+// */
 
 // Using LEFT JOIN ensures bookings without guides/vehicles still appear!
 $sql = "SELECT 

@@ -1,10 +1,10 @@
 // js/events_management.js
 
 // 1. Centralized API Paths (Adjust paths if your folders are different!)
-const EVENTS_API_URL = 'backend/api/ui/upcoming_events/get_upcoming_events.php'; 
-const DELETE_EVENT_API = 'backend/api/actions/upcoming_events/delete_upcoming_events.php';
-const PATCH_EVENT_API = 'backend/api/actions/upcoming_events/patch_upcoming_events.php';
-const POST_EVENT_API = 'backend/api/actions/upcoming_events/post_events.php';
+const EVENTS_API_URL = '../../backend/api/ui/upcoming_events/get_upcoming_events.php'; 
+const DELETE_EVENT_API = '../../backend/api/actions/upcoming_events/delete_upcoming_events.php';
+const PATCH_EVENT_API = '../../backend/api/actions/upcoming_events/patch_upcoming_events.php';
+const POST_EVENT_API = '../../backend/api/actions/upcoming_events/post_events.php';
 
 // ==========================================
 // LOAD EVENTS

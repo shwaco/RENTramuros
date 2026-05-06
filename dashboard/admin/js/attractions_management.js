@@ -1,10 +1,10 @@
 // asset/js/attractions_management.js
 
 // Adjust these paths to your actual PHP files!
-const GET_API = 'backend/api/ui/attractions/get_attractions.php';
-const POST_API = 'backend/api/actions/attractions/post_attractions.php';
-const PATCH_API = 'backend/api/actions/attractions/patch_attractions.php';
-const DELETE_API = 'backend/api/actions/attractions/delete_attractions.php';
+const GET_API = '../../backend/api/ui/attractions/get_attractions.php';
+const POST_API = '../../backend/api/actions/attractions/post_attractions.php';
+const PATCH_API = '../../backend/api/actions/attractions/patch_attractions.php';
+const DELETE_API = '../../backend/api/actions/attractions/delete_attractions.php';
 
 // ==========================================
 // 1. LOAD DATA
