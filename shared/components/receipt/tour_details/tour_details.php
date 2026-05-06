@@ -1,10 +1,6 @@
-<!-- Fixed CSS Path -->
 <link rel="stylesheet" href="../../shared/components/receipt/tour_details/tour_details.css">
 
 <article class="receipt-card">
-    <div class="receipt-header">
-        <div class="receipt-id-box"><?php echo $tourData['unique_id']; ?></div>
-    </div>
 
     <div class="receipt-date">
         <?php echo date('F j, Y ; h:i A', strtotime($tourData['booking_date'])); ?>
@@ -29,19 +25,18 @@
 
     <div class="pkg-row" style="margin-top: 1rem;">
         <span style="font-weight:700;">PACKAGE</span>
-        <span id="js-package-display">Loading...</span> <!-- Target ID -->
+        <span id="js-package-display">Loading...</span> 
     </div>
 
     <hr class="divider-dashed">
 
     <div class="section-label">ITINERARY</div>
     <div id="js-itinerary-container" class="itinerary-grid">
-        <!-- JS will inject destinations here -->
     </div>
 
     <div class="vehicle-grid">
         <span style="font-weight:700;">VEHICLE</span>
-        <span id="js-vehicle-name" style="text-transform: uppercase; text-align: center;">NONE</span> <!-- Target ID -->
+        <span id="js-vehicle-name" style="text-transform: uppercase; text-align: center;">NONE</span> 
         <span style="text-align: right; font-weight: bold;"><?php echo $tourData['number_of_vehicle'] ?: 0; ?></span>
     </div>
 

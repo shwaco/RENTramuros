@@ -3,14 +3,14 @@ let reservationData = {
     wantsPackage: null, 
     selectedPackage: null, 
     selectedPackageId: null, 
-    selectedPackagePrice: 0, // NEW: Tracks the package cost
+    selectedPackagePrice: 0,
     selectedVehicle: null,
     selectedVehicleId: null, 
-    selectedVehiclePrice: 0, // NEW: Tracks the vehicle cost
-    selectedPackageDesc: "", // NEW: Holds the text description for the receipt
-    selectedPackageItineraryIds: [], // NEW: Stores the junction IDs
-    attractionDictionary: {},        // NEW: Translates IDs to Names
-    attractionFees: {}, // NEW: Master dictionary of all attraction prices
+    selectedVehiclePrice: 0,
+    selectedPackageDesc: "", 
+    selectedPackageItineraryIds: [], 
+    attractionDictionary: {},       
+    attractionFees: {}, 
     vehicleQuantity: 0,
     customAttractions: [], 
     customAttractionIds: [],
@@ -426,6 +426,8 @@ async function initDynamicTours() {
     // Calls the function from tours-api.js
     const data = await fetchToursData();
     
+    console.log("Here is the raw data from PHP:", data); 
+    
     if (data) {
         renderAttractions(data.attractions); 
         renderPackages(data.packages);
@@ -438,28 +440,22 @@ function renderPackages(packages) {
     let html = '';
 
     packages.forEach((pkg, index) => {
-        
-        // NEW LOGIC: Build the bulleted list dynamically from the junction IDs!
         let itineraryListHtml = '';
         if (pkg.itinerary_ids && pkg.itinerary_ids.length > 0) {
             pkg.itinerary_ids.forEach(id => {
-                // Look up the name using the dictionary we built in renderAttractions
                 const attrName = reservationData.attractionDictionary[id] || "Unknown Attraction";
                 itineraryListHtml += `- ${attrName}<br>`;
             });
         }
 
-        const safeName = pkg.package_name.replace(/"/g, '&quot;');
-        // We still save the description to the dataset just in case the backend needs it later
-        const safeDesc = pkg.description ? pkg.description.replace(/"/g, '&quot;') : '';
-        
         const numericPrice = parseFloat(pkg.price);
-        
         const displayPrice = isNaN(numericPrice) ? '₱0' : `₱${numericPrice.toLocaleString('en-PH', { maximumFractionDigits: 0 })}`;
 
         html += `
-        <div class="package-${index + 1}" id="pkg-${pkg.package_id}" data-name="${safeName}" data-desc="${safeDesc}" data-itinerary="[${pkg.itinerary_ids}]" onclick="selectPackage(${pkg.package_id}, this.dataset.name, ${pkg.price}, this.dataset.desc, this.dataset.itinerary)">
-            <div class="package-image"><img src="${pkg.image_file}" alt="${safeName}"></div>
+        <div class="package-${index + 1}" id="pkg-${pkg.package_id}" data-name="${pkg.package_name}" data-desc="${pkg.description}" data-itinerary="[${pkg.itinerary_ids}]" onclick="selectPackage(${pkg.package_id}, this.dataset.name, ${pkg.price}, this.dataset.desc, this.dataset.itinerary)">
+            <div class="package-image">
+                <img src="../../asset/img/${pkg.image_file}" alt="${pkg.package_name}">
+            </div>
             <div class="package-details-text">
                 <span class="package-label">${pkg.package_name}</span>
                 <span class="package-description">${itineraryListHtml}</span>
@@ -478,18 +474,17 @@ function renderVehicles(vehicles) {
 
     vehicles.forEach((veh, index) => {
         const capacityClass = (index === 2) ? 'vehicle-3-capacity' : 'vehicle-capacity';
-        // CHANGED: veh.name is now veh.vehicle_type
-        const safeName = veh.vehicle_type.replace(/"/g, '&quot;');
 
-        // CHANGED: veh.id is now veh.vehicle_id, and veh.capacity is veh.passenger_capacity
+        const imgPath = `../../asset/img/${veh.image_file}`;
+
         pkgHtml += `
-        <div class="vehicle-${index + 1} vehicle-card" id="veh-${veh.vehicle_id}" data-name="${safeName}" onclick="selectVehicle(${veh.vehicle_id}, this.dataset.name, ${veh.price})">
+        <div class="vehicle-${index + 1} vehicle-card" id="veh-${veh.vehicle_id}" data-name="${veh.vehicle_type}" onclick="selectVehicle(${veh.vehicle_id}, this.dataset.name, ${veh.price})">
             <div class="vehicle-counter">
                 <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
                 <span class="veh-count">1</span>
                 <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
             </div>
-            <img src="${veh.image_file}" alt="${safeName}">
+            <img src="${imgPath}" alt="${veh.vehicle_type}">
             <div class="vehicle-overlay">
                 <span class="vehicle-name">${veh.vehicle_type}</span>
                 <span class="${capacityClass}">${veh.passenger_capacity}</span>
@@ -497,13 +492,13 @@ function renderVehicles(vehicles) {
         </div>`;
 
         customHtml += `
-        <div class="custom-vehicle-${index + 1} custom-vehicle-card" id="custom-veh-${veh.vehicle_id}" data-name="${safeName}" onclick="selectCustomVehicle(${veh.vehicle_id}, this.dataset.name, ${veh.price})">
+        <div class="custom-vehicle-${index + 1} custom-vehicle-card" id="custom-veh-${veh.vehicle_id}" data-name="${veh.vehicle_type}" onclick="selectCustomVehicle(${veh.vehicle_id}, this.dataset.name, ${veh.price})">
             <div class="vehicle-counter">
                 <button type="button" class="veh-minus" onclick="updateVehicleCount(-1, event)">-</button>
                 <span class="veh-count">1</span>
                 <button type="button" class="veh-plus" onclick="updateVehicleCount(1, event)">+</button>
             </div>
-            <img src="${veh.image_file}" alt="${safeName}">
+            <img src="${imgPath}" alt="${veh.vehicle_type}">
             <div class="vehicle-overlay">
                 <span class="vehicle-name">${veh.vehicle_type}</span>
                 <span class="${capacityClass}">${veh.passenger_capacity}</span>
@@ -520,28 +515,20 @@ function renderAttractions(attractions) {
 
     attractions.forEach((attr, index) => {
         const fee = attr.fee || 0;
-        
         reservationData.attractionFees[attr.attraction_name] = fee; 
         reservationData.attractionDictionary[attr.attraction_id] = attr.attraction_name;
         
-        const dataString = `${attr.attraction_name} | ${fee}`;
-        const safeDataString = dataString.replace(/"/g, '&quot;'); 
-
-        // CHANGED: The ternary operator checks if the fee is greater than 0
         const displayFee = fee > 0 ? `₱${fee.toLocaleString('en-PH', { maximumFractionDigits: 0 })}/head` : "FREE";
 
         html += `
-        <div class="attraction-${index + 1} attraction-card" id="attr-${attr.attraction_id}" data-val="${safeDataString}" onclick="toggleAttraction(this.dataset.val, ${attr.attraction_id})">
-            <img src="${attr.main_image}" alt="${attr.attraction_name.replace(/"/g, '&quot;')}">
-            
+        <div class="attraction-${index + 1} attraction-card" id="attr-${attr.attraction_id}" data-val="${attr.attraction_name} | ${fee}" onclick="toggleAttraction(this.dataset.val, ${attr.attraction_id})">
+            <img src="../../asset/img/${attr.main_img}" alt="${attr.attraction_name}">
             <span class="attraction-price-pill">${displayFee}</span>
-            
             <div class="attraction-name-overlay">
                 <span class="attraction-name-label">${attr.attraction_name}</span>
             </div>
         </div>`;
     });
-    
     container.innerHTML = html;
 }
 

@@ -10,19 +10,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../asset/css/calendar_latest.css?v=<?php echo filemtime('../../asset/css/calendar_latest.css'); ?>">
-    <link rel="stylesheet" href="../../asset/css/receipt_latest.css?v=<?php echo filemtime('../../asset/css/receipt_latest.css'); ?>">
-    <link rel="stylesheet" href="../../asset/css/tours_latest.css?v=<?php echo filemtime('../../asset/css/tours_latest.css'); ?>">
-
-    <script src="../../asset/js/calendar_latest.js?v=<?php echo filemtime('../../asset/js/calendar_latest.js'); ?>" defer></script>
-    <script src="../../asset/js/receipt_latest.js?v=<?php echo filemtime('../../asset/js/receipt_latest.js'); ?>" defer></script>
+   <!-- CSS Path Fixes: Pointing to the same folder[cite: 23] -->
+    <link rel="stylesheet" href="calendar_latest.css?v=<?php echo filemtime('calendar_latest.css'); ?>">
+    <link rel="stylesheet" href="tours_latest.css?v=<?php echo filemtime('tours_latest.css'); ?>">
+    
+    <!-- Path Fix: Reaching root shared components from pages/tour_page/[cite: 23] -->
+    <link rel="stylesheet" href="../../shared/components/receipt/tour_details/tour_details.css">
+    
+    <!-- JS Path Fixes: Pointing to the same folder[cite: 23] -->
+    <script src="calendar_latest.js?v=<?php echo filemtime('calendar_latest.js'); ?>" defer></script>
+    <script src="receipt_latest.js?v=<?php echo filemtime('receipt_latest.js'); ?>" defer></script>
 
     <script type="module"> 
+        // Path Fix: Reaching root services from pages/tour_page/[cite: 23]
         import { fetchToursData, submitBookingRequest } from '../../services/tours_api.js'; 
         window.fetchToursData = fetchToursData;
-        window.submitBookingRequest = submitBookingRequest; /* NEW: Exposes the POST API */
+        window.submitBookingRequest = submitBookingRequest;
     </script>
-    <script src="../../asset/js/tours_latest.js?v=<?php echo filemtime('../../asset/js/tours_latest.js'); ?>" defer></script>
+    
+    <script src="tours_latest.js?v=<?php echo filemtime('tours_latest.js'); ?>" defer></script>
 </head>
 <body>
     <div class="reservation-container">
@@ -221,99 +227,106 @@
         </div> 
     </div>
     
-    <div class="modal-overlay" id="confirmationModal">
-        <article class="receipt-container" aria-labelledby="receipt-id">
+    <div class="modal-overlay" id="confirmationModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(3px);">
+        
+        <article class="receipt-card" style="position: relative; max-height: 100vh; overflow-y: auto; width: 90%; max-width: 440px;">
             
-            <div style="display: flex; justify-content: flex-end; align-items: center; margin: 0 -2rem; padding: 1.5rem 2rem 1rem 2rem; border-bottom: 1px solid #e5e7eb;">
-                <button aria-label="Close Receipt" class="close-btn" id="closeModal" style="background:none; border:none; font-size:2rem; cursor:pointer; color:#9ca3af; font-style: normal; line-height: 1; padding: 0;">&times;</button>
+            <button aria-label="Close" class="close-btn" id="closeModal" style="position: absolute; top: 0.5rem; right: 1.5rem; background: none; border: none; font-size: 2rem; cursor: pointer; color: #000000;">&times;</button>
+
+            <div class="receipt-header">
             </div>
 
-            <div id="modal-date-time" style="text-align: right; font-size: 0.8rem; color: #000000; margin-top: 1.5rem; margin-bottom: 2rem; font-family: 'Roboto Condensed', sans-serif; font-weight: 400;">
+            <div class="receipt-date" id="modal-date-time">
             </div>
 
-            <div style="font-weight:700; font-size:0.9rem; margin-bottom:1rem; color:#000; font-family: 'Roboto Condensed', sans-serif;">TOURIST</div>
-
-            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem;">
-                <span id="modal-adult-label" style="padding-left: 0.5rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">ADULTS</span>
-                <span style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000;">(18 years old and above)</span>
-                <span id="modal-adults" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000;">0</span>
+            <div class="section-label">TOURIST</div>
+            <div class="tourist-grid">
+                <span class="tourist-label" id="modal-adult-label">ADULTS</span>
+                <span class="tourist-sub">(18 years old and above)</span>
+                <span class="tourist-val" id="modal-adults">0</span>
+            </div>
+            <div class="tourist-grid">
+                <span class="tourist-label">CHILDREN</span>
+                <span class="tourist-sub">(2 to 17 years old)</span>
+                <span class="tourist-val" id="modal-children">0</span>
+            </div>
+            <div class="tourist-grid" style="margin-bottom: 1.5rem;">
+                <span class="tourist-label">INFANTS</span>
+                <span class="tourist-sub">(under 2 years old)</span>
+                <span class="tourist-val" id="modal-infants">0</span>
             </div>
 
-            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:0.6rem; font-size:0.85rem;">
-                <span style="padding-left: 0.5rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">CHILDREN</span>
-                <span style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000;">(2 to 17 years old)</span>
-                <span id="modal-children" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000;">0</span>
+            <div class="pkg-row" style="margin-top: 1rem;">
+                <span style="font-weight:700;">PACKAGE</span>
+                <span id="modal-package">NONE</span>
             </div>
 
-            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; margin-bottom:1.5rem; font-size:0.85rem;">
-                <span style="padding-left: 0.5rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">INFANTS</span>
-                <span style="font-weight: 300; font-style:italic; font-size:0.8rem; text-align: center; font-family: 'Roboto Condensed', sans-serif; color: #000000;">(under 2 years old)</span>
-                <span id="modal-infants" style="text-align: right; font-family: 'Roboto Condensed', sans-serif; color: #000000;">0</span>
+            <hr class="divider-dashed">
+
+            <div class="section-label">ITINERARY</div>
+            <div id="modal-itinerary-list" class="itinerary-grid">
+                <!-- JS will inject destinations here -->
             </div>
 
-            <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.85rem;">
-                <span style="font-weight:700; font-family: 'Roboto Condensed', sans-serif; color: #000000;">PACKAGE</span>
-                <span id="modal-package" style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">NONE</span>
+            <div class="vehicle-grid">
+                <span style="font-weight:700;">VEHICLE</span>
+                <span id="modal-vehicle" style="text-transform: uppercase; text-align: center;">NONE</span>
+                <span id="modal-vehicle-quantity" style="text-align: right; font-weight: bold;">0</span>
             </div>
 
-            <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;">
+            <hr class="divider-dashed">
 
-            <div style="font-weight:700; font-size:0.9rem; margin-bottom:1rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">ITINERARY</div>
-
-            <div id="modal-itinerary-list" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; font-size: 0.8rem; font-family: 'Roboto Condensed', sans-serif; color: #000000; margin-bottom: 1.5rem;">
+            <div class="section-label">CONTACT INFORMATION</div>
+            <div class="contact-row">
+                <span>FULL NAME:</span>
+                <span id="modal-full-name" style="text-transform: uppercase;">---</span>
+            </div>
+            <div class="contact-row">
+                <span>EMAIL ADDRESS:</span>
+                <span id="modal-email">---</span>
+            </div>
+            <div class="contact-row" style="margin-bottom: 1.5rem;">
+                <span>PHONE NUMBER:</span>
+                <span id="modal-phone">---</span>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; font-size: 0.85rem;">
-                <span style="font-weight:700; font-family: 'Roboto Condensed', sans-serif; color: #000000;">VEHICLE</span>
-                <span id="modal-vehicle" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-transform: uppercase; text-align: center;">NONE</span>
-                <span id="modal-vehicle-quantity" style="font-family: 'Roboto Condensed', sans-serif; color: #000000; text-align: right; font-weight: bold;">0</span>
-            </div>
+            <hr class="divider-solid">
 
-            <hr style="border: 0; border-top: 1px dashed #d1d5db; margin: 1.5rem 0;">
-
-            <div style="font-weight:700; font-size:0.9rem; margin-bottom:1rem; font-family: 'Roboto Condensed', sans-serif; color: #000000;">CONTACT INFORMATION</div>
-
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
-                <span style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">FULL NAME:</span>
-                <span id="modal-full-name" style="text-transform: uppercase; font-family: 'Roboto Condensed', sans-serif; color: #000000;">---</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; font-size: 0.85rem;">
-                <span style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">EMAIL ADDRESS:</span>
-                <span id="modal-email" style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">---</span>
-            </div>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-size: 0.85rem;">
-                <span style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">PHONE NUMBER:</span>
-                <span id="modal-phone" style="font-family: 'Roboto Condensed', sans-serif; color: #000000;">---</span>
-            </div>
-
-            <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 1.5rem 0;">
-
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 1.5rem; margin-bottom: 1rem;">
-            
-            <div style="flex-grow: 1; max-width: 60%;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
-                    <span style="font-family: 'Roboto Condensed', sans-serif; font-weight: 400; font-size: 0.85rem; color: #6b7280;">TOTAL FEE:</span>
-                    <span id="modal-base-fee" style="font-family: 'Roboto Condensed', sans-serif; font-weight: 700; font-size: 0.85rem; color: #000000;">₱0</span>
+            <div class="totals-wrapper" style="display: flex; justify-content: space-between; align-items: flex-end;">
+                <div class="totals-grid" style="flex-grow: 1;">
+                    <span class="total-label">TOTAL FEE:</span>
+                    <span id="modal-base-fee" class="total-val">₱0</span> 
+                    <span class="total-label">TOUR GUIDE FEE:</span>
+                    <span class="total-val">₱1,000 - ₱1,500</span>
+                    
+                    <span class="grand-label">GRAND TOTAL:</span>
+                    <span id="modal-grand-total" class="grand-val" style="color: #109620;">₱0</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.4rem;">
-                    <span style="font-family: 'Roboto Condensed', sans-serif; font-weight: 400; font-size: 0.85rem; color: #6b7280;">TOUR GUIDE FEE:</span>
-                    <span style="font-family: 'Roboto Condensed', sans-serif; font-weight: 700; font-size: 0.85rem; color: #000000;">₱1,000 - ₱1,500</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.8rem;">
-                    <span style="font-family: 'Roboto Condensed', sans-serif; font-weight: 700; font-size: 1rem; color: #000000;">GRAND TOTAL:</span>
-                    <span id="modal-grand-total" style="font-family: 'Roboto Condensed', sans-serif; font-weight: 700; font-style: italic; font-size: 1.1rem; color: #109620;">₱0 - ₱0</span>
+                
+                <!-- Submit Button -->
+                <div style="margin-left: 2rem; padding-bottom: 0.5rem;">
+                    <button class="accept-btn" onclick="confirmFinalAcceptance()" style="background-color: #109620; color: #ffffff; border: none; padding: 0.8rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 4px; cursor: pointer;">  
+                        SUBMIT
+                    </button>
                 </div>
             </div>
+        </article>
+    </div>
 
-            <div style="margin-left: 2rem;">
-                <button class="accept-btn" onclick="confirmFinalAcceptance()" aria-label="Submit Tour" style="background-color: #109620; color: #ffffff; border: none; padding: 0.8rem 2.5rem; font-size: 1.1rem; font-weight: 900; font-family: 'Roboto Condensed', sans-serif; border-radius: 4px; cursor: pointer; transition: background-color 0.2s;">  
-                    SUBMIT
-                </button>
-            </div>
-            
-        </div>
-    </article>
-</div>
-
+    <script>
+        const modalOverlay = document.getElementById('confirmationModal');
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    if (modalOverlay.classList.contains('show')) {
+                        modalOverlay.style.display = 'flex';
+                    } else {
+                        modalOverlay.style.display = 'none';
+                    }
+                }
+            });
+        });
+        observer.observe(modalOverlay, { attributes: true });
+    </script>
 </body>
 </html>
