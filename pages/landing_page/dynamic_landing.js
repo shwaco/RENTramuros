@@ -82,7 +82,7 @@ function packageSlider(packageData, packagesList) {
         const cardHTML = `<li>
                         <a href="../overview_page/overview.php?type=package&id=${packages.package_id}" rel="noopener noreferrer"><div class="package one">
 
-                            <div class="image"><img src="../../asset/img/packages/${packages.image_file}" alt="${packages.package_name} Image" width="auto" height="150"></div>
+                            <div class="image"><img src="../../asset/img/${packages.image_file}" alt="${packages.package_name} Image" width="auto" height="150"></div>
 
                             <ul>
                                 <li><div class="number"><span>${packages.package_name}</span></div></li>
@@ -104,7 +104,7 @@ function upcomingEventsSlider(eventsData, eventsList) {
     eventsData.forEach(events => {
 
         const cardHTML = `<li><div class="event_container">
-                                <div class="image"><img src="../../asset/img/upcoming_events/${events.image_file}" alt="${events.event_name} Image"></div>
+                                <div class="image"><img src="../../asset/img/${events.image_file}" alt="${events.event_name} Image"></div>
 
                                 <div class="details_container">
                                     <div class="schedule_container">
@@ -214,9 +214,31 @@ async function loadHistory() {
 }
 
 // 2. Receipt View Click Handler[cite: 4]
+// 2. Receipt View Click Handler
 window.viewHistoryReceipt = function(index) {
     const tour = historyTours[index];
     if (!tour) return;
+
+    // 1. Logic para sa Action Area Buttons based on status
+    let actionAreaHTML = '';
+    
+    if (tour.status === 'Pending') {
+        // I-inject ang Cancel Button kung Pending
+        actionAreaHTML = `
+            <div class="rcpt-action-area" style="margin-top: 2rem; text-align: right;">
+                <button type="button" onclick="touristAction('Cancelled', '${tour.unique_id}')" class="btn-cancel">
+                    CANCEL
+                </button>
+            </div>`;
+    } else if (tour.status === 'Accepted') {
+        // I-inject ang Complete Button kung Accepted
+        actionAreaHTML = `
+            <div class="rcpt-action-area" style="margin-top: 2rem; text-align: right;">
+                <button type="button" onclick="touristAction('Done', '${tour.unique_id}')" class="btn-complete">
+                    DONE
+                </button>
+            </div>`;
+    }
 
     const rawDate = tour.booking_date ? (tour.booking_time ? `${tour.booking_date} ${tour.booking_time}` : tour.booking_date) : null;
     const dateObj = rawDate ? new Date(rawDate.replace(/-/g, '/')) : new Date();
@@ -226,7 +248,23 @@ window.viewHistoryReceipt = function(index) {
     const destinationsHTML = buildDestinationsHTML(tour.destinations, tour.adults_and_seniors, tour.children, isPackage, 'No destinations listed');
 
     openReceiptModal(buildReceiptHTML({
-        id: tour.unique_id, formattedDate, adults_and_seniors: tour.adults_and_seniors, children: tour.children, infants: tour.infants, package_name: tour.package_name, package_price_val: tour.package_price, vehicle_price_val: tour.vehicle_price, destinations: tour.destinations, destinationsHTML, vehicle_type: tour.vehicle_type, number_of_vehicle: tour.number_of_vehicle, first_name: tour.first_name, last_name: tour.last_name, email_address: tour.email_address, phone_number: tour.phone_number, actionArea: ''
+        id: tour.unique_id, 
+        formattedDate, 
+        adults_and_seniors: tour.adults_and_seniors, 
+        children: tour.children, 
+        infants: tour.infants, 
+        package_name: tour.package_name, 
+        package_price_val: tour.package_price, 
+        vehicle_price_val: tour.vehicle_price, 
+        destinations: tour.destinations, 
+        destinationsHTML, 
+        vehicle_type: tour.vehicle_type, 
+        number_of_vehicle: tour.number_of_vehicle, 
+        first_name: tour.first_name, 
+        last_name: tour.last_name, 
+        email_address: tour.email_address, 
+        phone_number: tour.phone_number, 
+        actionArea: actionAreaHTML 
     }));
 };
 
@@ -363,3 +401,37 @@ function openReceiptModal(html) {
     const overlay = document.getElementById('tourist-receipt-overlay');
     if (overlay) overlay.style.display = 'flex';
 }
+
+// Gawing global ang function para matawag ng onclick sa loob ng modal
+window.touristAction = async function(newStatus, bookingId) {
+    const confirmMsg = newStatus === 'Cancelled' 
+        ? "Are you sure you want to cancel this booking?" 
+        : "Mark this tour as completed?";
+
+    if (!confirm(confirmMsg)) return;
+
+    try {
+        // Siguraduhin na ang path na ito ay tama para sa iyong update API
+        const response = await fetch('../../backend/api/ui/tourist/update_booking_status.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                unique_id: bookingId,
+                status: newStatus
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            alert(`Booking ${newStatus.toLowerCase()} successfully!`);
+            closeReceipt();
+            loadHistory(); // I-refresh ang "My Bookings" view
+        } else {
+            alert("Failed to update status: " + result.message);
+        }
+    } catch (error) {
+        console.error("Error updating status:", error);
+        alert("An error occurred. Check your network or API path.");
+    }
+};

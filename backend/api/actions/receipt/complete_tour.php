@@ -25,7 +25,7 @@ try {
         "SELECT guide_id, status FROM booking_history 
          WHERE booking_request_id = ? AND tourist_id = ? FOR UPDATE"
     );
-    mysqli_stmt_bind_param($stmtCheck, "ii", $booking_id, $tourist_id);
+    mysqli_stmt_bind_param($stmtCheck, "ii", $booking_id, $user_id);
     mysqli_stmt_execute($stmtCheck);
     $booking = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtCheck));
 

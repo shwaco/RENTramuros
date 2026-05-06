@@ -20,6 +20,8 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist';
     <link rel="stylesheet" href="main.css?v=<?php echo filemtime('main.css'); ?>">
     <link rel="stylesheet" href="index.css?v=<?php echo filemtime('index.css'); ?>">
     <link rel="stylesheet" href="../reusable_bookings_and_receipt/styles.css?v=<?php echo filemtime('../reusable_bookings_and_receipt/styles.css'); ?>">
+    <link rel="stylesheet" href="../../shared/components/cancel-button/cancel_button.css">
+    <link rel="stylesheet" href="../../shared/components/complete-button/complete_button.css">
     <script src="navsidebar.js?v=<?php echo filemtime('navsidebar.js'); ?>" defer></script>
     <script type="module" src="dynamic_landing.js?v=<?php echo filemtime('dynamic_landing.js'); ?>" defer></script>
     <script>
@@ -44,8 +46,7 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist';
             border-radius: 8px;
             max-width: 500px;
             width: 90%;
-            min-height: 85vh;
-            max-height: 95vh;
+            max-height: 90vh;
             overflow-y: auto;
         }
         /* Pending status badge */
