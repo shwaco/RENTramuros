@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', arial, Helvetica, sans-serif;
+    /* outline: 5px solid green !important; */
 }
 
 body {
@@ -21,8 +22,8 @@ body {
     border-radius: 10px;
     background-color: white;
     width: 100%;
-    max-width: 500px;
-    min-height: 500px;
+    max-width: 460px;
+    min-width: 360px;
 }
 
 .form-box {
@@ -68,6 +69,7 @@ h1 {
 .password_wrapper {
     position: relative;
     width: 100%;
+    border: none;
 }
 
 .password_wrapper input {
@@ -76,11 +78,12 @@ h1 {
     padding-right: 3rem;
     border-radius: 10px;
     font-size: 1rem;
-    border: none;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
-    outline: none;
-    background-color: white;
     transition: border 0.3s ease;
+    border: none;
+}
+
+.password_wrapper input:focus {
+    outline: black;
 }
 
 #pass_visibility {
@@ -99,6 +102,10 @@ h1 {
 #pass_visibility img {
     height: 20px;
     width: auto;
+}
+
+.sign_up_wrapper {
+    width: 100%;
 }
 
 #submit_button {
@@ -120,6 +127,20 @@ h1 {
     background-color: #F1959B;
 }
 
+input, .password_wrapper {
+    width: 100%;
+    font-size: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    transition: border 0.3s ease;
+}
+
+#alertbox {
+    text-align: center;
+    font-size: 0.85rem;
+    min-height: 20px;
+}
+
 .login_footer {
     text-align: center;
     font-size: 0.9rem;
@@ -135,12 +156,3 @@ h1 {
 .login_footer a:hover {
     text-decoration: underline;
 }
-
-#login_message {
-    text-align: center;
-    font-size: 0.85rem;
-    min-height: 20px;
-}
-
-#login_message.success { color: green; }
-#login_message.error   { color: #d32f2f; }
