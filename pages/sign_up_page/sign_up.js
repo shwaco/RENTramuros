@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: formData
             });
             const data = await res.json();
+            console.log(data);
 
             if (data.status === 'success') {
                 userEmail = formData.get('email');

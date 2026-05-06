@@ -16,7 +16,7 @@
 <body>
     <div class="main_container">
         <div class="form-box" id="sign_up">
-            <form action="backend/api/signup_api.php" method="post" id="signup_form">
+            <form action="backend/api/signup_api.php" method="POST" id="signup_form">
                 <h1>Sign up</h1>
                 <div class="wrapper">
                     <div class="name_wrapper">

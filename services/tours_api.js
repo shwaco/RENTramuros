@@ -3,9 +3,9 @@
 export async function fetchToursData() {
     try {
         const [attrRes, pkgRes, vehRes] = await Promise.all([
-            fetch('/TOURGUIDE-LOGICS/backend/api/ui/attractions/get_attractions.php'),
-            fetch('/TOURGUIDE-LOGICS/backend/api/ui/packages/get_packages.php'),
-            fetch('/TOURGUIDE-LOGICS/backend/api/ui/vehicles/get_vehicles.php') 
+            fetch('../../backend/api/ui/attractions/get_attractions.php'),
+            fetch('../../backend/api/ui/packages/get_packages.php'),
+            fetch('../../backend/api/ui/vehicles/get_vehicles.php') 
         ]);
 
         const attrJson = await attrRes.json();
@@ -39,7 +39,7 @@ export async function fetchToursData() {
 
 export async function submitBookingRequest(payload) {
     try {
-        const response = await fetch('/TOURGUIDE-LOGICS/backend/api/actions/receipt/post_bookings.php', {
+        const response = await fetch('../../backend/api/actions/receipt/post_bookings.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
