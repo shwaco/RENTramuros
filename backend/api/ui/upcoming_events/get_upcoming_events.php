@@ -4,34 +4,30 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: GET');
 
-require_once '../../../config/config.php';
+require_once __DIR__. '/../../../config/config.php';
 /** @var mysqli $con */
 
-// if(!isset($_SESSION['tourist_id']) && !isset($_SESSION['admin_id'])) {
-//     http_response_code(401);
-//     echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
-//     exit();
-// }
+// Define who is allowed to access this API
+$allowed_roles = ['admin', 'tourist'];
 
-$fetch_sql = "SELECT event_name, event_date, event_time, location, image_file FROM upcoming_events ORDER BY event_date ASC, event_time ASC";
+// Check if they are logged in AND if their role is in the allowed list
+if(!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], $allowed_roles)) {
+    http_response_code(401);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
+    exit();
+}
+
+$fetch_sql = "SELECT event_id, event_name, event_date, event_time, location, image_file FROM upcoming_events ORDER BY event_date ASC, event_time ASC";
 $fetch_stmt = mysqli_prepare($con, $fetch_sql);
 if(mysqli_stmt_execute($fetch_stmt)) {
     $result = mysqli_stmt_get_result($fetch_stmt);
-    $events_array = array();
+    $events = [];
     while ($row = mysqli_fetch_assoc($result)) {
-        $event = array(
-            "event_name" => $row['event_name'],
-            "event_date" => $row['event_date'],
-            "event_time" => $row['event_time'],
-            "location" => $row['location'],
-            "image_file" => $row['image_file']
-        );
-
-        array_push($events_array, $event);
+        $events[] = $row;
     }
 
-    if (count($events_array) > 0) {
-        echo json_encode(["status" => "success", "data" => $events_array]);
+    if (count($events) > 0) {
+        echo json_encode(["status" => "success", "data" => $events]);
     } else {
         echo json_encode(["status" => "error", "message" => "No upcoming events found."]);
     }

@@ -1,3 +1,7 @@
+<?php
+session_start();
+$isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +17,9 @@
     <link rel="stylesheet" href="overview.css">
 
     <script type="module" src="overview.js" defer></script>
-
+    <script>
+    window.IS_LOGGED_IN = <?php echo $isLoggedIn ? 'true' : 'false'; ?>;
+</script>
 </head>
 <body>
 

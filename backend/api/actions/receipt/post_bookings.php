@@ -12,13 +12,13 @@ require_once('../../../logics/alphanumeric_id_generator.php');
 
 $data = json_decode(file_get_contents("php://input"));
 
-//if ($_SESSION['tourist_id'] ?? null) {
-//    $data->tourist_id = $_SESSION['tourist_id'];
-//} else {
-//   http_response_code(401);
-//    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
-//    exit();
-//}
+if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist') {
+    $data->tourist_id = $_SESSION['user_id'];
+} else {
+    http_response_code(401);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);

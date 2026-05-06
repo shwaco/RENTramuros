@@ -1,15 +1,9 @@
 <?php
-
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json; charset=UTF-8');
-header('Access-Control-Allow-Method: POST');
-
 session_start();
-
 session_unset();
-
 session_destroy();
 
-echo json_encode(["status" => "success", "message" => "Logged out successfully."]);
-
+// Imbes na mag-echo ng JSON, ire-redirect natin siya pabalik sa landing page
+header("Location: ../../../pages/landing_page/landing_page.php");
+exit();
 ?>
