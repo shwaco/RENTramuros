@@ -163,7 +163,9 @@ async function sendDataToDatabase() {
     // 5. Handle the UI based on the real database response
     if (isSuccess) {
         alert("Thank you! Your reservation for RENTramuros has been submitted.");
-        location.reload(); 
+        
+        window.location.href = "../landing_page/landing_page.php"; 
+        
     } else {
         alert("Server unreachable or database error. Make sure your local server (XAMPP) is running!");
         document.querySelector('.accept-btn').innerText = "SUBMIT";

@@ -11,17 +11,23 @@ document.getElementById('LoginForm').addEventListener('submit', function(event) 
             })
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'success') {
-                    alertBox.innerHTML = `<div class="alert alert-success" role="alert">${data.message}</div>`;
-                        setTimeout(() => {
-                            if (data.admin_id) {
-                                window.location.href = '../admin_dashboard.html';
-                            } else if (data.guide_id) {
-                                window.location.href = '../../dashboard/tour_guide/index.php';
-                            } else if (data.tourist_id) {
-                                window.location.href = '../landing_page/landing_page.php';
-                            }
-                        }, 1500);
+               if (data.status === 'success') {
+                    // Ipapakita yung green success banner mo
+                    alert(data.message); 
+
+                    // DITO KA NA-STUCK: Kailangan mong i-redirect ang user based sa role nila
+                    setTimeout(() => {
+                        if (data.role === 'tourist') {
+                            // Palitan ito ng tamang path papunta sa tourist dashboard mo
+                            window.location.href = '../../pages/landing_page/landing_page.php'; 
+                        } 
+                        else if (data.role === 'guide') {
+                            window.location.href = '../../dashboard/tour_guide/index.php';
+                        } 
+                        else if (data.role === 'admin') {
+                            window.location.href = '../../dashboard/admin/index.php';
+                        }
+                    }, 1000);
                 } else if (data.status === 'unverified') {
                     alertBox.innerHTML = `<div class="alert alert-warning" role="alert">${data.message}</div>`;
                 } else {

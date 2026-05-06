@@ -781,3 +781,26 @@ for (let locationName in searchMap) {
     clickedMarker.openPopup();
     });
 }
+
+// --- INTERACTIVE MAP BOOKING REDIRECT ---
+document.addEventListener('DOMContentLoaded', () => {
+    const bookNowBtn = document.getElementById('panel-btn');
+    
+    if (bookNowBtn) {
+        // Alisin ang target="_blank" para hindi magbukas ng bagong tab
+        bookNowBtn.removeAttribute('target');
+        
+        bookNowBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Pigilan ang default na '#' link
+
+            if (window.IS_LOGGED_IN) {
+                // Kung naka-login, diretso sa Tour Booking page
+                // Note: ../tour_page/ ang path dahil galing tayo sa pages/landing_page/
+                window.location.href = '../tour_page/tours_latest.php';
+            } else {
+                // Kung hindi naka-login, sa Login page
+                window.location.href = '../login_page/login.php';
+            }
+        });
+    }
+});

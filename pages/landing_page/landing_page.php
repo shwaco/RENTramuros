@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+$isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +22,9 @@
     <link rel="stylesheet" href="../reusable_bookings_and_receipt/styles.css?v=<?php echo filemtime('../reusable_bookings_and_receipt/styles.css'); ?>">
     <script src="navsidebar.js?v=<?php echo filemtime('navsidebar.js'); ?>" defer></script>
     <script type="module" src="dynamic_landing.js?v=<?php echo filemtime('dynamic_landing.js'); ?>" defer></script>
+    <script>
+        window.IS_LOGGED_IN = <?php echo $isLoggedIn ? 'true' : 'false'; ?>;
+    </script>
 
     <style>
         /* Receipt modal overlay */
@@ -34,9 +42,10 @@
             background: #ffffff;
             padding: 2rem;
             border-radius: 8px;
-            max-width: 560px;
+            max-width: 500px;
             width: 90%;
-            max-height: 90vh;
+            min-height: 85vh;
+            max-height: 95vh;
             overflow-y: auto;
         }
         /* Pending status badge */
@@ -52,26 +61,40 @@
     
     <header>
         <!-- Navigation bar-->
-        <nav>
+       <nav>
 
-            <!-- Sidebar -->
             <ul class="sidebar">
                 <li onclick=hideSidebar() id="hideSidebar"><a href="#" ><img src="../../asset/img/close_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="close-button" width="auto" height="30"></a></li>
                 <li><a href="#"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
-                <li><a href="#"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
-                <li><a href="#" onclick="openMyBookings(); hideSidebar(); return false;"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                
+                <?php if ($isLoggedIn): ?>
+                    <li><a href="../tour_page/tours_latest.php"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+                    <li><a href="#" onclick="openMyBookings(); hideSidebar(); return false;"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                <?php else: ?>
+                    <li><a href="../login_page/login.php"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+                    <li><a href="../login_page/login.php"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                <?php endif; ?>
+                
                 <li><a href="#">About</a></li>
             </ul>
 
-            <!-- Navigation bar -->
             <ul class="navbar">
                 <li><img src="../../asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo" onclick="closeMyBookings()" style="cursor:pointer;"></li>
                 <li class="hideOnMobile"><a href="#interactive-map" id="maps"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
-                <li class="hideOnMobile"><a href="dashboard/tourist/tours.php" rel="noreferrer noopener" target="_blank"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
-                <li class="hideOnMobile"><a href="#" onclick="openMyBookings(); return false;"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
-                <li class="hideOnMobile last"><a href="#">About</a></li>
-                <!-- <li><a href="auth.v2/login.php" id="nav_login"></li> -->
-                <li onclick=showSidebar() id="showSidebar" class="menu-btn"><a href="#" ><img src="../../asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
+                
+                <?php if ($isLoggedIn): ?>
+                    <li class="hideOnMobile"><a href="../tour_page/tours_latest.php"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+                    <li class="hideOnMobile"><a href="#" onclick="openMyBookings(); return false;"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                    <li class="hideOnMobile"><a href="#">About</a></li>
+                    <li class="hideOnMobile last"><a href="../../backend/mailer/api/logout_api.php" style="color: #8D230F; font-weight: bold;">Logout</a></li>
+                <?php else: ?>
+                    <li class="hideOnMobile"><a href="../login_page/login.php"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
+                    <li class="hideOnMobile"><a href="../login_page/login.php"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                    <li class="hideOnMobile"><a href="#">About</a></li>
+                    <li class="hideOnMobile last"><a href="../login_page/login.php" style="font-weight: bold;">Login</a></li>
+                <?php endif; ?>
+
+                <li onclick="showSidebar()" id="showSidebar" class="menu-btn"><a href="#" ><img src="../../asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
             </ul>
         </nav>
 
@@ -113,7 +136,9 @@
                     <li><img src="../../asset/img/CARTWHEEL_ICON.svg" height="15">Hassle-free</li>
                 </ul>
 
-                <a href="../sign_up_page/sign_up.php" class="button">START YOUR JOURNEY</a>
+                <?php if (!$isLoggedIn): ?>
+                    <a href="../sign_up_page/sign_up.php" class="button">START YOUR JOURNEY</a>
+                <?php endif; ?>
             </div>
         </section>
 
@@ -208,10 +233,6 @@
         <section id="my-bookings-view" style="display: none; padding: 4rem 2rem;">
             <div style="width: 100%; max-width: 800px; margin: 0 auto;">
                 <header style="margin-bottom: 2rem; text-align: left;">
-                    <button onclick="closeMyBookings()" style="background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:0.4rem; font-family:'Roboto',sans-serif; font-size:0.9rem; color:#6b7280; padding:0; margin-bottom:1.25rem;">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                        Back
-                    </button>
                     <h2 style="font-size: 2.5rem; font-weight: 900; margin: 0; color: #000; font-family: 'Roboto', sans-serif; letter-spacing: -1px;">My Bookings</h2>
                     <hr style="border: 0; border-bottom: 1px solid #000; margin-top: 1rem;">
                 </header>
@@ -291,7 +312,6 @@
     </template>
 
     <!-- Scripts -->
-    <script src="tourist_history.js?v=<?php echo filemtime('tourist_history.js'); ?>"></script>
     <script>
         // Same view-switching pattern as the tour guide index.php
         function openMyBookings() {

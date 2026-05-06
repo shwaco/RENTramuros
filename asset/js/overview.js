@@ -206,12 +206,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             // FIX #1: Dynamically set the booking button URL!
             const bookBtn = document.querySelector('.book-btn');
-            if (bookBtn) {
-                // Remove the HTML hardcoded click and assign it here
-                bookBtn.onclick = function() {
-                    window.location.href = `booking_dashboard.html?id=${currentUrlText}`;
-                };
-            }
+        if (bookBtn) {
+            bookBtn.onclick = function() {
+                // I-check kung true yung pinasa nating variable mula sa PHP
+                if (window.IS_LOGGED_IN) {
+                    // Kung naka-login, diretso sa Tour Booking page
+                    window.location.href = '../tour_page/tours_latest.php';
+                } else {
+                    // Kung hindi naka-login, ibabato sa Login page
+                    window.location.href = '../login_page/login.php';
+                }
+            };
+        }
 
         } else {
             // FIX #3: Because we didn't throw an error above, this fallback UI will now correctly show!
