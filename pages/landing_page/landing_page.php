@@ -14,8 +14,37 @@
     <link rel="stylesheet" href="navsidebar.css?v=<?php echo filemtime('navsidebar.css'); ?>">
     <link rel="stylesheet" href="main.css?v=<?php echo filemtime('main.css'); ?>">
     <link rel="stylesheet" href="index.css?v=<?php echo filemtime('index.css'); ?>">
+    <link rel="stylesheet" href="../reusable_bookings_and_receipt/styles.css?v=<?php echo filemtime('../reusable_bookings_and_receipt/styles.css'); ?>">
     <script src="navsidebar.js?v=<?php echo filemtime('navsidebar.js'); ?>" defer></script>
     <script type="module" src="dynamic_landing.js?v=<?php echo filemtime('dynamic_landing.js'); ?>" defer></script>
+
+    <style>
+        /* Receipt modal overlay */
+        #tourist-receipt-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        #tourist-receipt-content {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 560px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        /* Pending status badge */
+        .status-pending {
+            color: #d97706;
+            font-weight: 400;
+        }
+    </style>
     
 
 </head>
@@ -30,16 +59,16 @@
                 <li onclick=hideSidebar() id="hideSidebar"><a href="#" ><img src="../../asset/img/close_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="close-button" width="auto" height="30"></a></li>
                 <li><a href="#"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
                 <li><a href="#"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
-                <li><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                <li><a href="#" onclick="openMyBookings(); hideSidebar(); return false;"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li><a href="#">About</a></li>
             </ul>
 
             <!-- Navigation bar -->
             <ul class="navbar">
-                <li><img src="../../asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo"></li>
+                <li><img src="../../asset/img/RENTRAMUROS_LOGO_BLACK_1920X775.svg" alt="RENTRAMUROS_LOGO" width="auto" height="67" id="logo" onclick="closeMyBookings()" style="cursor:pointer;"></li>
                 <li class="hideOnMobile"><a href="#interactive-map" id="maps"><img src="../../asset/img/map_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="map" width="auto" height="20">Map</a></li>
                 <li class="hideOnMobile"><a href="dashboard/tourist/tours.php" rel="noreferrer noopener" target="_blank"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
-                <li class="hideOnMobile"><a href="#"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
+                <li class="hideOnMobile"><a href="#" onclick="openMyBookings(); return false;"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                 <li class="hideOnMobile last"><a href="#">About</a></li>
                 <!-- <li><a href="auth.v2/login.php" id="nav_login"></li> -->
                 <li onclick=showSidebar() id="showSidebar" class="menu-btn"><a href="#" ><img src="../../asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
@@ -49,6 +78,9 @@
     </header>
 
     <main>
+        <!-- Landing page content — hidden when My Bookings is active -->
+        <div id="landing-content">
+
         <!-- Hero section -->
         <section class="hero">
 
@@ -170,8 +202,111 @@
             </div>
         </section>
 
-    </main>   
+        </div><!-- end #landing-content -->
 
+        <!-- My Bookings view — shown when nav link is clicked, hidden by default -->
+        <section id="my-bookings-view" style="display: none; padding: 4rem 2rem;">
+            <div style="width: 100%; max-width: 800px; margin: 0 auto;">
+                <header style="margin-bottom: 2rem; text-align: left;">
+                    <button onclick="closeMyBookings()" style="background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:0.4rem; font-family:'Roboto',sans-serif; font-size:0.9rem; color:#6b7280; padding:0; margin-bottom:1.25rem;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                        Back
+                    </button>
+                    <h2 style="font-size: 2.5rem; font-weight: 900; margin: 0; color: #000; font-family: 'Roboto', sans-serif; letter-spacing: -1px;">My Bookings</h2>
+                    <hr style="border: 0; border-bottom: 1px solid #000; margin-top: 1rem;">
+                </header>
+                <div id="historyContainer" class="history-cards-container" style="display: flex; flex-direction: column; gap: 1rem;">
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Receipt modal overlay -->
+    <div id="tourist-receipt-overlay">
+        <div id="tourist-receipt-content"></div>
+    </div>
+
+    <!-- Receipt template -->
+    <template id="receipt-modal-template">
+        <div class="rcpt-header-container">
+            <div class="rcpt-id-badge">{{id}}</div>
+            <button onclick="closeReceipt()" class="rcpt-close-btn">&times;</button>
+        </div>
+        <div class="rcpt-date-text">{{formattedDate}}</div>
+        <div class="rcpt-section-title">TOURIST</div>
+        <div class="rcpt-grid-3">
+            <span class="rcpt-label">ADULTS & SENIORS</span>
+            <span class="rcpt-subtext">(18 years old and above)</span>
+            <span class="rcpt-value">{{adults_and_seniors}}</span>
+        </div>
+        <div class="rcpt-grid-3">
+            <span class="rcpt-label">CHILDREN</span>
+            <span class="rcpt-subtext">(2 to 17 years old)</span>
+            <span class="rcpt-value">{{children}}</span>
+        </div>
+        <div class="rcpt-grid-3 last">
+            <span class="rcpt-label">INFANTS</span>
+            <span class="rcpt-subtext">(under 2 years old)</span>
+            <span class="rcpt-value">{{infants}}</span>
+        </div>
+        <div class="rcpt-flex-between">
+            <span class="rcpt-bold-label">PACKAGE</span>
+            <span class="rcpt-font-condensed">{{packageDisplayString}}</span>
+        </div>
+        <hr class="rcpt-divider-dashed">
+        <div class="rcpt-section-title">ITINERARY</div>
+        <div class="rcpt-itinerary-grid">{{destinationsHTML}}</div>
+        <div class="rcpt-grid-3">
+            <span class="rcpt-bold-label">VEHICLE</span>
+            <span class="rcpt-uppercase rcpt-center">{{vehicleDisplayString}}</span>
+            <span class="rcpt-font-condensed rcpt-bold-value">{{number_of_vehicle}}</span>
+        </div>
+        <hr class="rcpt-divider-dashed">
+        <div class="rcpt-section-title">CONTACT INFORMATION</div>
+        <div class="rcpt-flex-between-sm">
+            <span class="rcpt-font-condensed">FULL NAME:</span>
+            <span class="rcpt-uppercase">{{first_name}} {{last_name}}</span>
+        </div>
+        <div class="rcpt-flex-between-sm">
+            <span class="rcpt-font-condensed">EMAIL ADDRESS:</span>
+            <span class="rcpt-font-condensed">{{email_address}}</span>
+        </div>
+        <div class="rcpt-flex-between-md">
+            <span class="rcpt-font-condensed">PHONE NUMBER:</span>
+            <span class="rcpt-font-condensed">{{phone_number}}</span>
+        </div>
+        <hr class="rcpt-divider-solid">
+        <div class="rcpt-totals-container">
+            <div class="rcpt-totals-grid">
+                <span class="rcpt-total-label">TOTAL FEE:</span>
+                <span class="rcpt-total-val">₱{{baseStr}}</span>
+                <span class="rcpt-total-label">TOUR GUIDE FEE:</span>
+                <span class="rcpt-total-val">₱1,000 - ₱1,500</span>
+                <span class="rcpt-grand-label">GRAND TOTAL:</span>
+                <span class="rcpt-grand-val">₱{{minGrandStr}} - ₱{{maxGrandStr}}</span>
+            </div>
+            {{actionArea}}
+        </div>
+    </template>
+
+    <!-- Scripts -->
+    <script src="tourist_history.js?v=<?php echo filemtime('tourist_history.js'); ?>"></script>
+    <script>
+        // Same view-switching pattern as the tour guide index.php
+        function openMyBookings() {
+            document.getElementById('landing-content').style.display = 'none';
+            document.getElementById('my-bookings-view').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+        function closeMyBookings() {
+            document.getElementById('my-bookings-view').style.display = 'none';
+            document.getElementById('landing-content').style.display = 'block';
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeReceipt();
+        });
+    </script>
 
 </body>
 </html>
