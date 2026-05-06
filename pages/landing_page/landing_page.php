@@ -46,7 +46,8 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist';
             border-radius: 8px;
             max-width: 500px;
             width: 90%;
-            max-height: 90vh;
+            min-height: 85vh;
+            max-height: 95vh;
             overflow-y: auto;
         }
         /* Pending status badge */
