@@ -54,9 +54,10 @@ function populateSliders(slidersData, slidersList) {
     slidersData.forEach(sliders => {
         
         
+
         const cardHTML = `
             <li>
-                <a href="#" rel="noopener noreferrer">
+                <a href="../overview_page/overview.php?type=attraction&id=${sliders.attraction_id}" rel="noopener noreferrer">
                     <img src="../../asset/img/${sliders.main_img}" alt="${sliders.attraction_name} Image">
                     <p>${sliders.attraction_name}</p>
                 </a>
@@ -79,7 +80,7 @@ function packageSlider(packageData, packagesList) {
     packageData.forEach(packages => {
 
         const cardHTML = `<li>
-                        <a href="." rel="noopener noreferrer"><div class="package one">
+                        <a href="../overview_page/overview.php?type=package&id=${packages.package_id}" rel="noopener noreferrer"><div class="package one">
 
                             <div class="image"><img src="../../asset/img/${packages.image_file}" alt="${packages.package_name} Image" width="auto" height="150"></div>
 

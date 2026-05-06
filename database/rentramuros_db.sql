@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 04, 2026 at 09:15 PM
+-- Generation Time: May 06, 2026 at 09:44 AM
 -- Server version: 8.0.45-0ubuntu0.24.04.1
 -- PHP Version: 8.3.6
 
@@ -140,11 +140,11 @@ CREATE TABLE `packages` (
 --
 
 INSERT INTO `packages` (`package_id`, `package_name`, `description`, `price`, `image_file`) VALUES
-(1, 'Hero\'s Trail', 'Walk the paths our national hero once roamed. This package is a focused tour of the history of Jose Rizal and it\'s main historical sites. Walk through Fort Santiago and Rizal Shrine, and immerse yourself in the Rizal Bagumbayan Light and Sound Museum while using Bambike as a fun way of exploration.', 250.00, 'packages/hero_s_trail.jpg'),
-(2, 'Cultural Combo', 'A showcase of the cultural heritage and colonial lifestyle of the walled city. This combo focuses on Intramuros\' social, cultural, and culinary history. The itinerary features Casa Manila, an experience at Barbara\'s, and concluding at Silahis to appreciate authentic hand-crafted souvenirs.  ', 100.00, 'packages/cultural_combo.jpg'),
-(3, 'Walled City Grand Tour', 'The definitive Intramuros journey, covering the most iconic locations and highlights. It provides a comprehensive tour, being the best choice for a full-scale overview. It shows the architectural grandeur of the Minor Basilica, and San Agustin, while experiencing history in the form of Fort Santiago and Casa Manila.', 500.00, 'packages/walled_city_grand_tour.jpg'),
-(4, 'Bastions and Walls', 'Find out about the engineering and structural ingenuity that defines the walled city. This itinerary guides you through the district\'s perimeter, showing key picturesque defensive points such as Puerta del Parian, Puerta Real, and Fort Santiago. It ends in Palacio del Gobernador, where you learn about the political context and administrative power that the fortifications were made to protect.', 100.00, 'packages/bastions_and_walls.jpg'),
-(5, 'Sacred Route', 'A tour focused on the spiritual and architectural heart of the city. It highlights the Baroque architecture and religious legacy that is central to the identity of Intramuros. Visit and appreciate the Minor Basilica and San Agustin Church, which are two of the religious landmarks that have stood the test of time.', 200.00, 'packages/sacred_route.jpg');
+(1, 'Hero\'s Trail', 'Walk the paths our national hero once roamed. This package is a focused tour of the history of Jose Rizal and it\'s main historical sites. Walk through Fort Santiago and Rizal Shrine, and immerse yourself in the Rizal Bagumbayan Light and Sound Museum while using Bambike as a fun way of exploration.', 250.00, 'fort_santiago/pic1_main.jpg'),
+(2, 'Cultural Combo', 'A showcase of the cultural heritage and colonial lifestyle of the walled city. This combo focuses on Intramuros\' social, cultural, and culinary history. The itinerary features Casa Manila, an experience at Barbara\'s, and concluding at Silahis to appreciate authentic hand-crafted souvenirs.  ', 100.00, 'casa_manila/pic1_main.jpg'),
+(3, 'Walled City Grand Tour', 'The definitive Intramuros journey, covering the most iconic locations and highlights. It provides a comprehensive tour, being the best choice for a full-scale overview. It shows the architectural grandeur of the Minor Basilica, and San Agustin, while experiencing history in the form of Fort Santiago and Casa Manila.', 500.00, 'san_agustin_museum/pic1_main.jpg'),
+(4, 'Bastions and Walls', 'Find out about the engineering and structural ingenuity that defines the walled city. This itinerary guides you through the district\'s perimeter, showing key picturesque defensive points such as Puerta del Parian, Puerta Real, and Fort Santiago. It ends in Palacio del Gobernador, where you learn about the political context and administrative power that the fortifications were made to protect.', 100.00, 'palacio_del_gobernador/pic1_main.jpg'),
+(5, 'Sacred Route', 'A tour focused on the spiritual and architectural heart of the city. It highlights the Baroque architecture and religious legacy that is central to the identity of Intramuros. Visit and appreciate the Minor Basilica and San Agustin Church, which are two of the religious landmarks that have stood the test of time.', 200.00, 'san_agustin_church/pic1_main.jpg');
 
 -- --------------------------------------------------------
 
