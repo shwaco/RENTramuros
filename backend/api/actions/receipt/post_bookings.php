@@ -12,13 +12,13 @@ require_once('../../../logics/alphanumeric_id_generator.php');
 
 $data = json_decode(file_get_contents("php://input"));
 
-if ($_SESSION['tourist_id'] ?? null) {
-    $data->tourist_id = $_SESSION['tourist_id'];
-} else {
-    http_response_code(401);
-    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
-    exit();
-}
+//if ($_SESSION['tourist_id'] ?? null) {
+//    $data->tourist_id = $_SESSION['tourist_id'];
+//} else {
+//   http_response_code(401);
+//    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
+//    exit();
+//}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -32,28 +32,7 @@ if(!isset($data->tourist_id)){
     exit();
 }
 
-<<<<<<< HEAD
 $unique_id = generateBookingCode($con);
-=======
-function generateRandomcode($length = 8) {
-    $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    $code = '';
-    for ($i = 0; $i < $length; $i++) {
-        $code .= $chars[random_int(0, strlen($chars) - 1)];
-    }
-    return $code;
-}
-
-function generateBookingcode($con) {
-    $prefix = 'BR';
-    do {
-        $code = $prefix . "-" . generateRandomcode(8);
-        $check = "SELECT unique_id FROM booking_history WHERE unique_id = '$code'";
-        $result = mysqli_query($con, $check);
-    } while (mysqli_num_rows($result) > 0);
-    return $code;
-}
->>>>>>> c12ef48b59f39cc2159546dfa2d9dcb5aa61ec85
 
 $tourist_id = $data->tourist_id;
 $booking_type = $data->booking_type;
@@ -90,19 +69,9 @@ try {
     }
     
     if($booking_type === 'Packages') {
-<<<<<<< HEAD
         $sql = "INSERT INTO booking_history (unique_id, tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, package_id, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($con, $sql);
         mysqli_stmt_bind_param($stmt, "sisssiiisiiiii", $unique_id, $tourist_id, $status, $time_of_request, $date_of_request, $adults_and_seniors, $children, $infants, $booking_type, $package_id, $contact_info_id, $number_of_vehicle, $assigned_vehicle_id, $assigned_guide_id);
-=======
-        $booking_insert_sql = "INSERT INTO booking_history (unique_id, tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, package_id, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $booking_insert_stmt = mysqli_prepare($con, $booking_insert_sql);
-        mysqli_stmt_bind_param($booking_insert_stmt, "sisssiiisiiiii", $unique_id, $tourist_id, $status, $time_of_request, $date_of_request, $adults_and_seniors, $children, $infants, $booking_type, $package_id, $contact_info_id, $number_of_vehicle, $assigned_vehicle_id, $assigned_guide_id);
-    } else if ($booking_type === 'Attractions') {
-        $booking_insert_sql = "INSERT INTO booking_history (unique_id, tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $booking_insert_stmt = mysqli_prepare($con, $booking_insert_sql);
-        mysqli_stmt_bind_param($booking_insert_stmt, "sisssiiisiiii", $unique_id, $tourist_id, $status, $time_of_request, $date_of_request, $adults_and_seniors, $children, $infants, $booking_type, $contact_info_id, $number_of_vehicle, $assigned_vehicle_id, $assigned_guide_id);
->>>>>>> c12ef48b59f39cc2159546dfa2d9dcb5aa61ec85
     } else {
         $sql = "INSERT INTO booking_history (unique_id, tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($con, $sql);
@@ -130,15 +99,11 @@ try {
 
     mysqli_commit($con);
     http_response_code(201);
-<<<<<<< HEAD
     echo json_encode([
         "status" => "success", 
         "message" => "Booking request created successfully.",
         "unique_id" => $unique_id
     ]);
-=======
-    echo json_encode(["status" => "success", "message" => "Booking request created successfully.", "data" => ['unique_id' => $unique_id]]);
->>>>>>> c12ef48b59f39cc2159546dfa2d9dcb5aa61ec85
 
 } catch (Exception $e) {
     mysqli_rollback($con);
