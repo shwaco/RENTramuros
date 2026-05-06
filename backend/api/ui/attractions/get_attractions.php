@@ -6,18 +6,18 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Methods: GET');
 
-require_once '../../../config/config.php';
+require_once __DIR__. '/../../../config/config.php';
 /** @var mysqli $con */
 
-// if ($_GET['admin'] ?? null) {
-//     if ($_SESSION['admin_id'] ?? null) {
-//         // Admin is logged in, proceed with the request
-//     } else {
-//         http_response_code(401);
-//         echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in as admin."]);
-//         exit();
-//     }
-// }
+// Define who is allowed to access this API
+$allowed_roles = ['admin', 'tourist'];
+
+// Check if they are logged in AND if their role is in the allowed list
+if(!isset($_SESSION['user_id']) || !in_array($_SESSION['role'], $allowed_roles)) {
+    http_response_code(401);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
