@@ -12,11 +12,14 @@ require_once('../../../logics/alphanumeric_id_generator.php');
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist') {
+// Debug: log session to PHP error log
+error_log('[post_bookings] session user_id=' . ($_SESSION['user_id'] ?? 'NONE') . ' role=' . ($_SESSION['role'] ?? 'NONE'));
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] === 'tourist') {
     $data->tourist_id = $_SESSION['user_id'];
 } else {
     http_response_code(401);
-    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in."]);
+    echo json_encode(["status" => "error", "message" => "Unauthorized. Please log in. Session: " . json_encode(['user_id' => $_SESSION['user_id'] ?? null, 'role' => $_SESSION['role'] ?? null])]);
     exit();
 }
 
@@ -55,7 +58,6 @@ $last_name = $data->last_name ?? null;
 $email_address = $data->email_address ?? null;
 $phone_number = $data->phone_number ?? null;
 
-$unique_id = generateBookingcode($con);
 
 mysqli_begin_transaction($con);
 

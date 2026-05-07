@@ -45,7 +45,10 @@ if(empty($update_fields)) {
 $update_sql = "UPDATE booking_history SET " . implode(", ", $update_fields) . " WHERE booking_request_id = ?";
 $params_array[] = $booking_request_id;
 $update_stmt = mysqli_prepare($con, $update_sql);
-if(mysqli_stmt_execute($update_stmt, $params_array)) {
+// Bind params manually - mysqli_stmt_execute doesn't accept array in older PHP
+$types = str_repeat('s', count($params_array) - 1) . 'i'; // last param is booking_request_id (int)
+mysqli_stmt_bind_param($update_stmt, $types, ...$params_array);
+if(mysqli_stmt_execute($update_stmt)) {
     echo json_encode(["status" => "success", "message" => "Booking request updated successfully."]);
 } else {
     http_response_code(500);

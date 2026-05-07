@@ -15,7 +15,7 @@ function requireRole($allowedRoles) {
 
     if (!in_array($currentUserRole, $allowedRoles)) {
         http_response_code(403);
-        echo_json_encode([
+        echo json_encode([
             "status" => "error",
             "message" => "Unauthorized. Your account type is not permitted."
         ]);

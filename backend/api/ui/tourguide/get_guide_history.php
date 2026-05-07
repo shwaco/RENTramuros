@@ -6,12 +6,12 @@ require_once('../../../config/config.php');
 // FLOW: Ito yung kinocall ng frontend para kunin yung listahan ng "My Bookings" ng isang guide.
 // Nagre-return ito ng JSON array ng lahat ng Done, Cancelled, o Accepted tours.
 
-if (!isset($_SESSION['guide_id'])) {
+if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();
 }
 
-$guide_id = $_SESSION['guide_id'];
+$guide_id = $_SESSION['user_id'];
 
 try {
     // Multi-table SELECT query. Dito pinagsasama-sama (LEFT JOIN) yung mga data
