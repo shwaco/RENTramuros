@@ -53,7 +53,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     $_SESSION['user_id'] = $row['guide_id'];
     $_SESSION['role'] = 'guide';
 
-    $update_sql = "UPDATE tour_guides SET current_status = 'Online' WHERE guide_id = ? AND current_status IN ('Offline', 'Available')";
+    $update_sql = "UPDATE tour_guides SET current_status = 'Online', last_active_at = NOW() WHERE guide_id = ? AND current_status NOT IN ('On Tour')";
     $update_stmt = mysqli_prepare($con, $update_sql);
     mysqli_stmt_bind_param($update_stmt, "i", $row['guide_id']);
     mysqli_stmt_execute($update_stmt);

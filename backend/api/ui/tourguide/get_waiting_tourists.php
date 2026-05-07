@@ -9,7 +9,7 @@ require_once('../../../config/config.php');
 
 // Returns all Pending bookings with no assigned guide.
 // Field names are aliased to match the existing JS (customer_id, adult_count, etc.)
-if (!isset($_SESSION['guide_id'])) {
+if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();
 }

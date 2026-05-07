@@ -93,7 +93,6 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist';
                     <li class="hideOnMobile"><a href="../login_page/login.php"><img src="../../asset/img/tour_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="tours" width="auto" height="20">Tours</a></li>
                     <li class="hideOnMobile"><a href="../login_page/login.php"><img src="../../asset/img/book_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="book" width="auto" height="20">My Bookings</a></li>
                     <li class="hideOnMobile"><a href="#">About</a></li>
-                    <li class="hideOnMobile last"><a href="../login_page/login.php" style="font-weight: bold;">Login</a></li>
                 <?php endif; ?>
 
                 <li onclick="showSidebar()" id="showSidebar" class="menu-btn"><a href="#" ><img src="../../asset/img/menu_19dp_000000_FILL0_wght400_GRAD0_opsz20.svg" alt="menu-button" width="auto" height="25" ></a></li>
