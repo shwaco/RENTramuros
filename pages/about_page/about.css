@@ -1,0 +1,127 @@
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    background-image: linear-gradient(to bottom, rgba(77, 77, 77, 0.7), rgba(71, 71, 71, 0.8)), 
+                      url('../../asset/img/intramuros-aerial.jpg');
+    background-attachment: fixed;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+.about-hero {
+    background-image: url('path-to-your-vintage-map-bg.jpg'); 
+    background-size: cover;
+    background-position: center;
+    padding: 3.125rem 1.25rem; /* 50px 20px */
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5rem;
+    color: #ebebeb; /* Pure white */
+    text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.125rem; /* 2px */
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    color: #ebebeb; /* Very light gray/off-white so it's not too glaring */
+    text-shadow: 0.0625rem 0.0625rem 0.1875rem rgba(0, 0, 0, 0.5);
+    max-width: 62.5rem; /* 1000px */
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* --- Bento Grid Layout --- */
+.about-bento-section {
+    padding: 2.5rem 5%; /* 40px */
+    background-color: transparent;
+}
+
+.section-title {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.875rem; /* 30px */
+    color: #ebebeb;
+    text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
+}
+
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.25rem; /* 20px */
+    max-width: 75rem; /* 1200px */
+    margin: 0 auto;
+}
+
+/* Base Card Styling */
+.bento-card {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.85); /* Transparency applied */
+    border-radius: 0.75rem; /* 12px */
+    padding: 1.25rem 1.875rem; /* 20px 30px */
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.08); /* 4px 10px */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bento-card:hover {
+    transform: translateY(-0.1875rem); /* -3px */
+    box-shadow: 0 0.375rem 0.9375rem rgba(0, 0, 0, 0.12); /* 6px 15px */
+}
+
+.bento-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.9375rem; /* 15px */
+    color: #8b2b2b; 
+}
+
+.bento-card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Grid Spanning Rules */
+.bento-large {
+    grid-column: span 1;
+}
+
+.bento-medium {
+    grid-column: span 1;
+}
+
+.bento-wide {
+    grid-column: span 3;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.85); /* Transparency applied */
+}
+
+/* Responsive adjustments */
+@media (max-width: 56.25rem) { /* 900px */
+    .bento-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .bento-large {
+        grid-column: span 2;
+        grid-row: auto;
+    }
+    .bento-wide {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 37.5rem) { /* 600px */
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+    .bento-large, .bento-medium, .bento-wide {
+        grid-column: span 1;
+    }
+}
