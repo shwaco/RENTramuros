@@ -1,7 +1,7 @@
 // retrieve popular attractions 
 export async function getPopularAttractions() {
     try {
-        const response = await fetch('backend/attractions/get_attractions.php');
+        const response = await fetch('../../backend/api/ui/attractions/get_attractions.php');
 
         if (!response.ok) {
             throw new Error (`Response status: ${response.status}`);
@@ -20,13 +20,14 @@ export async function getPopularAttractions() {
 // retrieve recommended attractions
 export async function getRecommendedAttractions() {
     try {
-        const response = await fetch('backend/attractions/get_attractions.php');
+        const response = await fetch('../../backend/api/ui/attractions/get_attractions.php');
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         } else {
             const result = await response.json();
-            const recoData = result.data.filter(reco => reco.attraction_type === 'Recommended');
+            // Note: DB has a typo 'Recommeded' for one entry — match both spellings
+            const recoData = result.data.filter(reco => reco.attraction_type === 'Recommended' || reco.attraction_type === 'Recommeded');
             return recoData || [];
         }
 
@@ -39,7 +40,7 @@ export async function getRecommendedAttractions() {
 // retrieve packages
 export async function getPackages() {
     try {
-        const response = await fetch('backend/get_packages.php');
+        const response = await fetch('../../backend/api/ui/packages/get_packages.php');
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`); 
@@ -56,7 +57,7 @@ export async function getPackages() {
 // retrieve upcoming events
 export async function getUpcomingEvents() {
     try {
-        const response = await fetch('backend/get_upcoming_events.php');
+        const response = await fetch('../../backend/api/ui/upcoming_events/get_upcoming_events.php');
 
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
@@ -65,7 +66,7 @@ export async function getUpcomingEvents() {
             return result.data || [];
         }
     } catch (error) {
-        console.Error(error.message);
+        console.error(error.message);
         return [];
     }
 }

@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'roboto', arial, Helvetica, sans-serif;
+    /* outline: 5px solid green !important; */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.main_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.form-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+#otp_panel h1 {
+    margin-left: 2rem;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    margin: 0 0 2rem 0;
+    font-family: 'roboto slab';
+    font-size: 3rem;
+}
+
+.name_wrapper input::placeholder {
+    text-transform: none;
+}
+
+.inputs {
+    width: 100%;
+}
+
+.inputs, input {
+    padding: 1rem;
+    font-size: 1rem;
+    border: none;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    outline: none;
+}   
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.password_wrapper {
+    position: relative; 
+    width: 100%;
+    border: none; 
+}
+
+.password_wrapper input {
+    width: 100%;
+    padding: 1rem;
+    padding-right: 3rem; 
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border 0.3s ease;
+    border: none;
+}
+
+.password_wrapper input:focus {
+    outline: black;
+}
+
+#pass_visibility {
+    position: absolute; 
+    top: 50%;
+    right: 1rem; 
+    transform: translateY(-50%); 
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign_up_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* #verify_button {
+    padding: 0 7.5rem 0 7.5rem;
+    background-color: #8D230F;
+    color: white;
+} */
+
+#pass_visibility img {
+    height: 20px;
+    width: auto;
+}
+
+#submit_button, #verify_button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: none;
+    background-color: #8D230F;
+    color: white;
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+    border-radius: 10px; 
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#submit_button:hover {
+    background-color: #F1959B;
+}
+
+.name_wrapper {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.name_wrapper input {
+    flex: 1; 
+}
+
+input, .password_wrapper {
+    width: 100%;
+    font-size: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    transition: border 0.3s ease; 
+}
+
+
+/* ── OTP Panel ───────────────────────────────────────────────── */
+#otp_panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#otp_panel.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── OTP Digit Boxes ─────────────────────────────────────────── */
+.otp_inputs_wrapper {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.otp_digit {
+    width: 48px;
+    height: 56px;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.otp_digit:focus {
+    border-color: #d32f2f;
+}
+
+/* ── Email Hint ──────────────────────────────────────────────── */
+.otp_email_hint {
+    font-size: 0.85rem;
+    color: #777;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.otp_email_hint span {
+    color: #d32f2f;
+    font-weight: 600;
+}
+
+/* ── Timer ───────────────────────────────────────────────────── */
+#otp_timer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* ── Messages ────────────────────────────────────────────────── */
+#otp_message {
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    min-height: 20px;
+}
+
+#otp_message.success { color: green; }
+#otp_message.error   { color: #d32f2f; }
+
+#signup_message {
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    min-height: 20px;
+}
+
+/* ── Resend Button ───────────────────────────────────────────── */
+#resend_btn {
+    background: none;
+    border: none;
+    color: #d32f2f;
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    margin-top: 8px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+#resend_btn:disabled {
+    color: #aaa;
+    cursor: not-allowed;
+    text-decoration: none;
+}

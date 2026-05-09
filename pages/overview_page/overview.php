@@ -1,0 +1,82 @@
+<?php
+session_start();
+$isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">RENTramuros | Tour Overview</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="overview.css">
+
+    <script type="module" src="overview.js" defer></script>
+    <script>
+    window.IS_LOGGED_IN = <?php echo $isLoggedIn ? 'true' : 'false'; ?>;
+</script>
+</head>
+<body>
+
+<div class="attraction-container">
+    <h3 id="attraction-title" class="attraction-headlabel">Loading Attraction...</h3>
+
+    <div class="images-grid-container">
+        <div class="box" style="grid-area: box-1;">
+            <img src="" alt="Attraction Image 1">
+        </div>
+
+        <div class="box" style="grid-area: box-2;">
+            <img src="" alt="Attraction Image 2">
+        </div>
+
+        <div class="box" style="grid-area: box-3;">
+            <img src="" alt="Attraction Image 3">
+        </div>
+
+        <div class="box" style="grid-area: box-4;">
+            <img src="" alt="Attraction Image 4">
+        </div>
+    </div>
+
+    <div class="attraction-address">
+        <img src="https://i.pinimg.com/736x/3c/56/7d/3c567d69bf20612b0a5ca420e8ec3d32.jpg" class="location-icon" alt="Location Icon">
+        <span id="attraction-address">Loading address...</span>
+    </div>
+
+    <div class="attraction-description-label">
+        <span>Overview</span>
+    </div>
+
+    <div class="description-container">
+    
+    <div class="description-text">
+        <span id="attraction-description" class="attraction-description">
+            Loading overview information...
+        </span>
+    </div> 
+    
+    <div class="sticky-sidebar">
+        <div class="sticky-sidebar-label">Tour Details</div> 
+        
+        <span id="attraction-hours">Open: Loading...</span>
+        <span id="attraction-price">Entrance: Loading...</span>
+        
+        <button class="book-btn">Book a Tour</button>
+    </div>
+    </div>
+    </div>
+    
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+
+</body>
+</html>

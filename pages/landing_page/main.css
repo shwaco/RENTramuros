@@ -1,0 +1,914 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'roboto', arial, Helvetica, sans-serif;
+    /* outline: 1px solid green !important; */
+}
+
+
+body {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+}
+
+/* Header */
+header {
+    z-index: 1000;
+    width: 100%;
+    height: fit-content;
+}
+
+
+/* Main */
+main {
+    width: 100%;
+}
+
+/* Hero section */
+.hero {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    width: 90%;
+    margin: 2rem auto 5rem auto; 
+    position: relative;
+    padding: 0 0 3rem 0;
+}
+
+/* Hero_sec decorative lines */
+
+.hero .lines {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 0 1rem;
+    margin: 3.5rem 0 0 0;
+    position: absolute;
+    top: 0;
+
+}
+
+.hero .lines .wheel_pic {
+    display: block;
+}
+
+#cartwheel {
+    display: flex;
+}
+
+.hero .lines .batch {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.hero .lines .batch span {
+    display: block;
+    height: 5px;
+}
+
+
+.hero .lines .batch.one .line.one {
+    background: black;
+    width: 100%;
+}
+
+.hero .lines .batch.one .line.two {
+    background: #FFEA60;
+    width: 70%;
+    align-self: flex-end;
+}
+
+.hero .lines .batch.two .line.one {
+    background: #3700FF;
+    width: 100%;
+}
+
+.hero .lines .batch.two .line.two {
+    background: #FF0000;
+    width: 70%;
+    align-self: flex-start;
+}
+
+/* Hero_sec header */
+.hero .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    margin: 5rem 0 0 0 ;
+    padding: 0 2rem;
+}
+
+.hero .content h1 {
+    font-family: "Roboto Condensed", arial;
+    font-size: clamp(0.5rem, calc(10vw - 1rem), 3rem);
+    font-weight: 500;
+    font-style: italic;
+    text-align: center;
+    margin: 0 0 2rem 0;
+}
+
+.hero .content h1 .span {
+    font-family: "Roboto Condensed", arial;
+    font-weight: 400;
+    font-style: italic;
+    text-shadow:
+    -0.7px -0.7px 0 #000,
+     0   -0.7px 0 #000,
+     0.7px -0.7px 0 #000,
+     0.7px  0   0 #000,
+     0.7px  0.7px 0 #000,
+     0    0.7px 0 #000,
+    -0.7px  0.7px 0 #000,
+    -0.7px  0   0 #000;
+}
+
+.hero .content h1 .span.rent {
+    color: #FFCC00;
+}
+
+.hero .content h1 .span.ramuros {
+    color: #8D230F;
+}
+
+/* Hero_sec paragraph */
+.hero .content p {
+    font-family: 'roboto condensed';
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 0 0 2rem 0;
+    text-align: center;
+}
+
+/* Hero_sec list */
+.hero .content .list_container {
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+    gap: 4rem;
+    margin: 0 0 2rem 0;
+    width: 100%;
+}
+
+.hero .content .list_container li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    font-family: 'roboto slab';
+}
+
+.hero .content .list_container li img {
+    width: fit-content;
+}
+
+/* Hero_sec button */
+.hero .content .button {
+    font-family: 'roboto condensed';
+    cursor: pointer;
+    padding: 1rem 2rem;
+    font-weight: 400;
+    font-size: 1rem;
+    background-color: #8D230F;
+    color: white;
+    border: 2px solid transparent;
+    transition: ease-in-out 0.3s;
+    width: fit-content;
+    text-decoration: none;
+}
+
+.hero .content .button:hover {
+    background-color: white;
+    color: black;
+    border-color: #8D230F;
+
+}
+
+/* Mid main kuys */
+.mid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0 7rem;
+    width: 100%;
+    gap: 3rem;
+    margin-bottom: 5rem;
+}
+
+/* Upcoming events */
+.upcoming_container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    /* overflow-x: hidden; */
+}
+
+.upcoming_container .title_wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.upcoming_container .title_wrapper .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.upcoming_container .title_wrapper .title .upcoming, .v_calendar, .feedback {
+    font-family: 'roboto flex';
+}
+
+.upcoming_container .title_wrapper .title .upcoming {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.upcoming_container .title_wrapper .title .v_calendar {
+    font-weight: 200;
+    font-style: italic;
+
+}
+
+.upcoming_container .title_wrapper .title .v_calendar a {
+    text-decoration: none;
+    color: black;
+
+}
+
+.upcoming_container .title_wrapper .feedback a{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+/* Sliding */
+.upcoming_container .slider {
+    display: flex; 
+    position: relative; 
+    width: 100%;
+}
+
+#upcoming_events_list {
+    position: relative;
+    list-style: none;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+}
+
+.upcoming_container .slider ul li {
+    flex: 1 0 auto;
+    width: calc((100% - 2rem) / 3);
+    scroll-snap-align: start;
+
+}
+
+.upcoming_container .slider ul .event_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    box-shadow: inset 0 0 1px 0.5px rgba(0, 0, 0, 0.5);
+    border-radius: 10px ;
+    height: 100%;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+.upcoming_container  .event_container .image {
+    flex-shrink: 0;
+    width: 100px;
+    height: 90px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.upcoming_container .slider .event_container .image img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.upcoming_container .slider .event_container .details_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.upcoming_container .slider .event_container .schedule_container {
+    display: flex;
+    align-items: center;
+    background-color: #8D230F;
+    color: white;
+    width: fit-content;
+    border-radius: 20px;
+}  
+
+.upcoming_container .slider .event_container .details_container .schedule_container .frequency {
+    font-family: 'roboto condensed';
+    padding: 0.2rem 0.6rem;
+    border-right: 1px solid white;
+}
+
+.upcoming_container .slider .event_container .details_container .schedule_container .time {
+    font-family: 'roboto condensed';
+    padding: 0.2rem 1rem;
+    white-space: nowrap;
+}
+
+.upcoming_container .slider .event_container .details_container .name {
+    font-family: 'roboto condensed';
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.upcoming_container .slider 
+.event_container .details_container .loc_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.upcoming_container .slider 
+.event_container .details_container .loc_wrapper img {
+    display: block;
+    height: 18px;
+    width: auto;
+}
+
+.upcoming_container .slider 
+.event_container .details_container .loc_wrapper .loc {
+    font-family: 'roboto condensed';
+    font-size: 1rem;
+}
+
+.upcoming_container .slider .slide-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 50;
+    top: 50%;
+    translate: 0 0;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px 0.2px rgba(0, 0, 0, 0.5);
+    margin: -1.25rem;
+    max-height: 4em;
+    max-width: 4em;
+}
+
+.upcoming_container .slider .slide-btn img {
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+
+}
+
+.upcoming_container .slider .slide-btn.one {
+    left: 0;
+}
+
+.upcoming_container .slider .slide-btn.two {
+    right: 0;
+}
+
+/* Pop & Reco attractions */
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.mid .heading {
+    font-family: 'roboto flex';
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+}
+
+.slider-container .slider  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    list-style: none;
+    width: 100%;
+    position: relative;
+    
+}   
+
+.slider-container .slider ul {
+    display: flex;
+    justify-content: flex-start;
+    list-style: none;
+    gap: 1rem;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+}
+
+.slider-container .slider ul li {
+    flex: 1 0 auto;
+    width: calc((100% - 4rem) / 5);
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+    scroll-snap-align: start;
+
+}
+
+
+.slider-container .slider ul li img {
+    transition: ease-in-out 0.4s;
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    display: block;
+
+}
+
+.slider-container .slider ul li:hover img {
+    transform: scale(1.1);
+}
+
+.slider-container .slider ul p {
+    position: absolute;
+    color: white;
+    top: 70%;
+    left: 4%;
+    font-weight: 800;
+    font-size: 1.7em;
+    font-family: 'roboto';
+    text-shadow: 3px 3px 0.5px rgba(0, 0, 0, 0.5);
+    text-shadow:
+    -0.7px -0.7px 0 #000,
+     0   -0.7px 0 #000,
+     0.7px -0.7px 0 #000,
+     0.7px  0   0 #000,
+     0.7px  0.7px 0 #000,
+     0    0.7px 0 #000,
+    -0.7px  0.7px 0 #000,
+    -0.7px  0   0 #000;
+    z-index: 500;
+    text-decoration-thickness: 1px;
+}
+
+
+.slider-container .slide-btn.one {
+    left: 0;
+}
+
+.slider-container .slide-btn.two {
+    right: 0;
+
+}
+
+.slider-container .slider .slide-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 50;
+    top: 50%;
+    translate: 0 0;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px 0.2px rgba(0, 0, 0, 0.5);
+    margin: -1.25rem;
+    max-height: 4em;
+    max-width: 4em;
+
+}
+
+.slider-container .slider .slide-btn img {
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+}
+
+/* Packages */
+.package_wrapper {
+    width: fit-content;
+}
+
+.package_wrapper .packages { 
+    display: grid;
+    grid-template-columns: repeat(4 , 1fr);
+    gap: 2rem;
+    list-style: none;
+}
+
+.package_wrapper .packages .package {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.5);
+}
+
+.package_wrapper .packages .package .image {
+    overflow: hidden;
+}
+
+.package_wrapper .packages .package .image img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: ease-in-out 0.4s;
+}
+
+.package_wrapper .packages .package:hover .image img {
+    transform: scale(1.1);
+}
+
+.package_wrapper .packages .package ul {
+    list-style: none;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
+    background-color: white;
+
+}
+
+.package_wrapper .packages .package ul li a{
+    border-radius: 10px;
+}
+
+.package_wrapper .packages .package ul span {
+    color: black;
+}
+
+.package_wrapper .packages a {
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+
+.package_wrapper .packages .package .number {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.package_wrapper .packages .package .attractions span{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+.package_wrapper .packages .package .price {
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+    font-size: 1.1rem;
+
+}
+
+
+
+/* ===== My Bookings (from my_bookings.css) ===== */
+.booking-card {
+    display: flex;
+    align-items: stretch;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.booking-card:hover {
+    border-color: #9ca3af;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.bc-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    border-right: 1px solid #d1d5db;
+    padding: 1rem;
+}
+
+.bc-id {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1f2937;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.bc-middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 0.75rem 1.25rem;
+}
+
+.bc-date {
+    font-size: 0.7rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.bc-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #111827;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.bc-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 1.5rem;
+}
+
+.bc-status {
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.status-completed {
+    color: #109620;
+    font-weight: 400;
+}
+
+.status-cancelled {
+    color: #FF0000;
+    font-weight: 400;
+}
+
+.status-accepted {
+    color: #FBA56C;
+    font-weight: 400;
+}
+
+.rcpt-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 -2rem;
+    padding: 1.5rem 2rem 1rem 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.rcpt-id-badge {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 0.95rem; 
+    font-weight: 700;
+    padding: 0.4rem 1.2rem;
+    border-radius: 4px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.rcpt-close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #9ca3af;
+    font-style: normal;
+    line-height: 1;
+    padding: 0;
+}
+
+.rcpt-date-text {
+    text-align: right;
+    font-size: 0.8rem;
+    color: #000000;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 400;
+}
+
+.rcpt-section-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: #000;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+/* Layout Grids */
+.rcpt-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    font-size: 0.85rem;
+}
+
+.rcpt-grid-3.last {
+    margin-bottom: 1.5rem;
+}
+
+.rcpt-flex-between {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+.rcpt-flex-between-sm {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.rcpt-flex-between-md {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    font-size: 0.85rem;
+}
+
+.rcpt-itinerary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #000000;
+    margin-bottom: 1.5rem;
+}
+
+.rcpt-totals-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 2rem;
+}
+
+.rcpt-totals-grid {
+    display: grid;
+    grid-template-columns: max-content auto;
+    column-gap: 0.75rem;
+    row-gap: 0.4rem;
+    align-items: baseline;
+}
+
+/* Typography & Colors */
+.rcpt-font-condensed {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #000000;
+}
+
+.rcpt-label {
+    padding-left: 0.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #000000;
+}
+
+.rcpt-subtext {
+    font-weight: 300;
+    font-style: italic;
+    font-size: 0.8rem;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #000000;
+}
+
+.rcpt-value {
+    text-align: right;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #000000;
+}
+
+.rcpt-bold-label {
+    font-weight: 700;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #000000;
+}
+
+.rcpt-uppercase {
+    text-transform: uppercase;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #000000;
+}
+
+.rcpt-center {
+    text-align: center;
+}
+
+.rcpt-bold-value {
+    text-align: right;
+    font-weight: bold;
+}
+
+.rcpt-green-text {
+    color: #109620;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+.rcpt-green-sm {
+    color: #109620;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+.rcpt-total-label {
+    font-weight: 500;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #4b5563;
+    font-size: 0.85rem;
+}
+
+.rcpt-total-val {
+    font-weight: 600;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #000;
+    font-size: 0.85rem;
+}
+
+.rcpt-grand-label {
+    font-weight: 700;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #000000;
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+}
+
+.rcpt-grand-val {
+    font-weight: 700;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #109620;
+    font-size: 1.05rem;
+    font-style: italic;
+    margin-top: 0.3rem;
+}
+
+.rcpt-divider-dashed {
+    border: 0;
+    border-top: 1px dashed #d1d5db;
+    margin: 1.5rem 0;
+}
+
+.rcpt-divider-solid {
+    border: 0;
+    border-top: 1px solid #e5e7eb;
+    margin: 1.5rem 0;
+}
+
+.rcpt-action-area {
+    margin-top: 2rem;
+}
+
+@media(max-width: 1200px){
+    .hero {
+        height: 484px;
+    }
+    .content {
+        font-size: small;
+    }
+}
