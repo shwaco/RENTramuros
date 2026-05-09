@@ -4,12 +4,12 @@ header('Content-Type: application/json');
 
 require_once('../../../config/config.php');
 
-if (!isset($_SESSION['guide_id'])) {
+if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']);
     exit();
 }
 
-$guide_id = $_SESSION['guide_id'];
+$guide_id = $_SESSION['user_id'];
 
 try {
     // tiga-check muna kung On Tour pa yung guide — bawal mag-clock out habang may aktibong tour

@@ -6,8 +6,8 @@ session_start();
 
 require_once('../../../config/config.php');
 
-if (isset($_SESSION['guide_id'])) {
-    $guide_id = $_SESSION['guide_id'];
+if (isset($_SESSION['user_id'])) {
+    $guide_id = $_SESSION['user_id'];
 
     // here pag nag sign out ka while yung status mo is 'Online', ise-set siya to 'Offline' unlike sa iba na kapag on tour ka or queuing or clocked in di magiging offline status mo makkep pa rin as is
     $sql = "UPDATE tour_guides SET current_status = 'Offline' WHERE guide_id = ? AND current_status = 'Online'";

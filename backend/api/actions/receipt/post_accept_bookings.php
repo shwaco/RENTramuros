@@ -9,13 +9,13 @@ require_once('../../../config/config.php');
 
 // Guide accepts a booking — sets booking_history.status to 'Accepted'
 // and links guide to tourist via tour_guides.current_tourist_id
-if (!isset($_SESSION['guide_id'])) {
+if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false, 'message' => 'Not logged in']); exit();
 }
 
 $data        = json_decode(file_get_contents('php://input'), true);
 $booking_id  = $data['tourist_id'] ?? null;  // frontend sends tourist_id which is now booking_request_id
-$guide_id    = $_SESSION['guide_id'];
+$guide_id    = $_SESSION['user_id'];
 
 try {
     mysqli_begin_transaction($con);
