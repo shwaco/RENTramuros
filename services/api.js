@@ -26,7 +26,8 @@ export async function getRecommendedAttractions() {
             throw new Error(`Response status: ${response.status}`);
         } else {
             const result = await response.json();
-            const recoData = result.data.filter(reco => reco.attraction_type === 'Recommended');
+            // Note: DB has a typo 'Recommeded' for one entry — match both spellings
+            const recoData = result.data.filter(reco => reco.attraction_type === 'Recommended' || reco.attraction_type === 'Recommeded');
             return recoData || [];
         }
 
@@ -65,7 +66,7 @@ export async function getUpcomingEvents() {
             return result.data || [];
         }
     } catch (error) {
-        console.Error(error.message);
+        console.error(error.message);
         return [];
     }
 }

@@ -29,6 +29,10 @@ body {
     width: 100%;
 }
 
+#otp_panel h1 {
+    margin-left: 2rem;
+}
+
 form {
     display: flex;
     align-items: center;
@@ -39,7 +43,7 @@ form {
 h1 {
     display: flex;
     align-items: center;
-    margin: 0 0 2rem 0; 
+    margin: 0 0 2rem 0;
     font-family: 'roboto slab';
     font-size: 3rem;
 }
@@ -100,12 +104,24 @@ h1 {
     justify-content: center;
 }
 
+.sign_up_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* #verify_button {
+    padding: 0 7.5rem 0 7.5rem;
+    background-color: #8D230F;
+    color: white;
+} */
+
 #pass_visibility img {
     height: 20px;
     width: auto;
 }
 
-#submit_button {
+#submit_button, #verify_button {
     width: 100%;
     padding: 1rem;
     font-size: 1.1rem;

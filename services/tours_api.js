@@ -41,6 +41,7 @@ export async function submitBookingRequest(payload) {
     try {
         const response = await fetch('../../backend/api/actions/receipt/post_bookings.php', {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },

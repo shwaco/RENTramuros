@@ -7,7 +7,7 @@ require_once('../config/config.php');
 // automatic na ise-set sa 'Offline' yung status niya pag di siya nagparamdam ng 10 mins (600 seconds)
 $sweep_idle_sql = "UPDATE tour_guides SET current_status = 'Offline' 
                    WHERE current_status IN ('Online', 'Available') 
-                   AND last_active_at < (NOW() - INTERVAL 600 SECOND)";
+                   AND last_active_at < (NOW() - INTERVAL 3600 SECOND)";
 mysqli_query($con, $sweep_idle_sql);
 
 // QUEUE SWEEP (Queuing/Clocked In) -> 30 mins (1800 seconds)
@@ -36,11 +36,11 @@ if (mysqli_num_rows($pending_check) > 0) {
     }
 }
 
-if (!isset($_SESSION['guide_id'])) {
+if (!isset($_SESSION['user_id'])) {
     echo json_encode(['success' => false]); exit();
 }
 
-$guide_id = $_SESSION['guide_id'];
+$guide_id = $_SESSION['user_id'];
 
 try {
     // inaupdate ung last_active_at sa column ng table ng tour guide in every poll request para malaman yung server na buhay pa ang session ng guide

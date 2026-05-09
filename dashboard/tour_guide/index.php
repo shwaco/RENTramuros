@@ -1,18 +1,20 @@
 <?php
-session_start();
+
 require_once '../../backend/config/config.php';
+require_once '../../shared/middleware/auth_check.php';
+/** @var mysqli $con */
 
-if (!isset($_SESSION['guide_id'])) {
-    header("Location: ../../pages/login_page/login.php");
-    exit();
-}
+// 1. Activate the Bouncer
+requireRole(['guide']);
 
-$guide_id = $_SESSION['guide_id'];
+$guide_id = $_SESSION['user_id']; 
 
 
-// SELECT query para kunin yung guide info — kinukuha ang first_name, current_status, at became_available_at
+// SELECT query para kunin yung guide info
 $stmtInfo = mysqli_prepare($con, "SELECT first_name, current_status, became_available_at FROM tour_guides WHERE guide_id = ?");
-mysqli_stmt_bind_param($stmtInfo, "i", $guide_id);
+
+// This will now work perfectly because $guide_id holds the session passkey!
+mysqli_stmt_bind_param($stmtInfo, "i", $guide_id); 
 mysqli_stmt_execute($stmtInfo);
 $guideInfo = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtInfo));
 
@@ -20,9 +22,11 @@ $guideInfo = mysqli_fetch_assoc(mysqli_stmt_get_result($stmtInfo));
 if (!$guideInfo) {
     session_unset();
     session_destroy();
-    header("Location: ../../auth.v2/login.php");
+    header("Location: ../../../pages/login_page/login.php");
     exit();
 }
+
+// ... the rest of your file remains exactly the same ...
 
 $guideName     = $guideInfo['first_name'];
 $currentStatus = $guideInfo['current_status'];
