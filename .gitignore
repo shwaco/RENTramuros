@@ -2,3 +2,4 @@
 Thumbs.db
 .vscode/
 backend/config/config.php
+.cursor
