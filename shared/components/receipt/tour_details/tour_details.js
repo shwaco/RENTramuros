@@ -1,4 +1,4 @@
-function renderTourDetails(tourData) {
+    function renderTourDetails(tourData) {
     const adults = parseInt(tourData.adults_and_seniors) || 0;
     const children = parseInt(tourData.children) || 0;
     const pax = adults + children;

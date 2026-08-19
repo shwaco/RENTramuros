@@ -41,6 +41,7 @@ if ($currentStatus === 'On Tour') {
             bh.booking_request_id,
             bh.unique_id,
             bh.booking_date,
+            bh.booking_time,
             bh.adults_and_seniors,
             bh.children,
             bh.infants,
@@ -71,6 +72,7 @@ if ($currentStatus === 'On Tour') {
           WHERE bh.guide_id = ?
             AND bh.status = 'Accepted'
           GROUP BY bh.booking_request_id
+          ORDER BY bh.booking_request_id DESC
           LIMIT 1";
 
    $stmtTour = mysqli_prepare($con, $query);

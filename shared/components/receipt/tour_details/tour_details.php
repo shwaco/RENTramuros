@@ -3,7 +3,13 @@
 <article class="receipt-card">
 
     <div class="receipt-date">
-        <?php echo date('F j, Y ; h:i A', strtotime($tourData['booking_date'])); ?>
+        <?php 
+            $rawDate = $tourData['booking_date'];
+            if (!empty($tourData['booking_time'])) {
+                $rawDate .= ' ' . $tourData['booking_time'];
+            }
+            echo date('F j, Y ; h:i A', strtotime($rawDate)); 
+        ?>
     </div>
 
     <div class="section-label">TOURIST</div>

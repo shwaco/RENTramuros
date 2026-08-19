@@ -17,12 +17,14 @@ async function initWaitingLobby() {
 
             // ginagawang clickable tourist blocks yung bawat waiting tourist
             lobbyContainer.innerHTML = waitingTourists.map(tourist => {
-                const displayTime = tourist.booking_date || tourist.booking_time;
+                const rawDate = tourist.booking_date
+                    ? (tourist.booking_time ? `${tourist.booking_date} ${tourist.booking_time}` : tourist.booking_date)
+                    : null;
                 let timeString = "00:00";
                 let dateString = "00/00/00";
 
-                if (displayTime) {
-                    const dateObj = new Date(displayTime.replace(/-/g, '/'));
+                if (rawDate) {
+                    const dateObj = new Date(rawDate.replace(/-/g, '/'));
                     if (!isNaN(dateObj.getTime())) {
                         timeString = dateObj.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
                         dateString = dateObj.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' });
