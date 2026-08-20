@@ -71,7 +71,7 @@
                 <div class="text-sm font-semibold text-gray-700 border-l pl-6 border-gray-300">
                     Welcome, Admin
                 </div>
-                <a href="../../logout-api.php" class="text-red-500 hover:text-red-700 font-bold transition flex items-center text-sm">
+                <a href="../../pages/login_page/login.php" class="text-red-500 hover:text-red-700 font-bold transition flex items-center text-sm">
                     <i class="fas fa-sign-out-alt mr-2"></i> Logout
                 </a>
             </div>
