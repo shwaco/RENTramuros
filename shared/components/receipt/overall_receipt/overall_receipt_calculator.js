@@ -67,16 +67,7 @@ function closeReceipt() {
 // ito yung kinocall ng viewTouristDetails at viewHistoryReceipt
 function openReceiptModal(html) {
     const modalBody = document.getElementById('tourist-receipt-content');
-    if (modalBody) {
-        modalBody.innerHTML = html;
-        
-        modalBody.style.padding = '0';
-        if (modalBody.parentElement) {
-            modalBody.parentElement.style.padding = '0';
-            modalBody.parentElement.style.overflow = 'hidden';
-        }
-    }
-    
+    if (modalBody) modalBody.innerHTML = html;
     const overlay = document.getElementById('tourist-receipt-overlay');
     if (overlay) overlay.style.display = 'flex';
 }
