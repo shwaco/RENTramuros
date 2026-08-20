@@ -29,6 +29,8 @@ async function joinQueue() {
 // when the tourist marks the booking as Done or Cancelled.
 function startPolling() {
     setInterval(async () => {
+        initWaitingLobby();
+
         try {
             const response = await fetch('../../backend/logics/check_queue.php');
             const data = await response.json();
@@ -41,9 +43,7 @@ function startPolling() {
                 return;
             }
 
-            // Detect position change
             if (data.status === 'Queuing') {
-                // This now correctly compares the old position to the new database data
                 if (currentQueuePosition !== null && currentQueuePosition !== data.position) {
                     window.location.reload();
                 }
@@ -56,7 +56,7 @@ function startPolling() {
 }
 
 function startClaimTimer() {
-    let timeLeft = 30; // Matches your UI
+    let timeLeft = 30;
     const timerDisplay = document.getElementById('selection-timer');
 
     if (claimTimerInterval) clearInterval(claimTimerInterval);
@@ -68,7 +68,6 @@ function startClaimTimer() {
         if (timeLeft <= 0) {
             clearInterval(claimTimerInterval);
             try {
-                // This POST now works because we fixed the config path[cite: 18]
                 const res = await fetch('../../backend/logics/missed_turn.php', { method: 'POST' });
                 const data = await res.json();
                 

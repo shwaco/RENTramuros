@@ -34,7 +34,7 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist';
             display: none;
             position: fixed;
             top: 0; left: 0;
-            width: 100%; height: 100%;
+            width: 100%; height: 100vh;
             background: rgba(0, 0, 0, 0.55);
             z-index: 9999;
             justify-content: center;
@@ -46,7 +46,6 @@ $isLoggedIn = isset($_SESSION['user_id']) && $_SESSION['role'] === 'tourist';
             border-radius: 8px;
             max-width: 500px;
             width: 90%;
-            min-height: 85vh;
             max-height: 95vh;
             overflow-y: auto;
         }

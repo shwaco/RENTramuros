@@ -336,7 +336,7 @@ function buildDestinationsHTML(destinationsString, adults = 0, children = 0, isP
     return raw.split(',').map(dest => {
         const trimmed = dest.trim();
         if (trimmed === fallback || trimmed === 'No Custom Attractions Selected' || trimmed === '') {
-            return `<span>${fallback}</span>`;
+            return `<span class="rcpt-font-condensed">${fallback}</span>`;
         }
         
         const parts = trimmed.split('|');
@@ -345,10 +345,10 @@ function buildDestinationsHTML(destinationsString, adults = 0, children = 0, isP
         const totalFee = baseFee * multiplier;
 
         if (totalFee > 0 && !isPackage) {
-            return `<span>${name}&nbsp;&nbsp;<span class="rcpt-green-sm">₱${totalFee.toLocaleString('en-PH')}</span></span>`;
+            return `<span class="rcpt-font-condensed">${name}&nbsp;&nbsp;<span class="rcpt-green-sm">₱${totalFee.toLocaleString('en-PH')}</span></span>`;
         }
         
-        return `<span>${name}</span>`;
+        return `<span class="rcpt-font-condensed">${name}</span>`;
     }).join('');
 }
 

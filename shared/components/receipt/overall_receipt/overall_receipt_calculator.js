@@ -8,7 +8,7 @@ function buildDestinationsHTML(destinationsString, adults = 0, children = 0, isP
     return raw.split(',').map(dest => {
         const trimmed = dest.trim();
         if (trimmed === fallback || trimmed === 'No Custom Attractions Selected' || trimmed === '') {
-            return `<span>${fallback}</span>`;
+            return `<span class="rcpt-font-condensed">${fallback}</span>`;
         }
         
         const parts = trimmed.split('|');
@@ -17,10 +17,10 @@ function buildDestinationsHTML(destinationsString, adults = 0, children = 0, isP
         const totalFee = baseFee * multiplier;
 
         if (totalFee > 0 && !isPackage) {
-            return `<span>${name}&nbsp;&nbsp;<span class="rcpt-green-sm">₱${totalFee.toLocaleString('en-PH')}</span></span>`;
+            return `<span class="rcpt-font-condensed">${name}&nbsp;&nbsp;<span class="rcpt-green-sm">₱${totalFee.toLocaleString('en-PH')}</span></span>`;
         }
         
-        return `<span>${name}</span>`;
+        return `<span class="rcpt-font-condensed">${name}</span>`;
     }).join('');
 }
 
@@ -67,7 +67,16 @@ function closeReceipt() {
 // ito yung kinocall ng viewTouristDetails at viewHistoryReceipt
 function openReceiptModal(html) {
     const modalBody = document.getElementById('tourist-receipt-content');
-    if (modalBody) modalBody.innerHTML = html;
+    if (modalBody) {
+        modalBody.innerHTML = html;
+        
+        modalBody.style.padding = '0';
+        if (modalBody.parentElement) {
+            modalBody.parentElement.style.padding = '0';
+            modalBody.parentElement.style.overflow = 'hidden';
+        }
+    }
+    
     const overlay = document.getElementById('tourist-receipt-overlay');
     if (overlay) overlay.style.display = 'flex';
 }
