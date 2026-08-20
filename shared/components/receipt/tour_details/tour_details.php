@@ -2,8 +2,21 @@
 
 <article class="receipt-card">
 
-    <div class="receipt-date">
-        <?php echo date('F j, Y ; h:i A', strtotime($tourData['booking_date'])); ?>
+    <div class="rcpt-header-container">
+        <div class="rcpt-id-badge">
+            <?php echo htmlspecialchars($tourData['unique_id'] ?? 'N/A'); ?>
+        </div>
+        <!-- Note: Close button removed since this is embedded on the dashboard, not a popup -->
+    </div>
+
+    <div class="rcpt-date-text">
+        <?php 
+            $rawDate = $tourData['booking_date'];
+            if (!empty($tourData['booking_time'])) {
+                $rawDate .= ' ' . $tourData['booking_time'];
+            }
+            echo date('F j, Y ; h:i A', strtotime($rawDate)); 
+        ?>
     </div>
 
     <div class="section-label">TOURIST</div>

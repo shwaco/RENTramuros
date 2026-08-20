@@ -1,4 +1,16 @@
-function renderTourDetails(tourData) {
+    function renderTourDetails(tourData) {
+        const idBadge = document.getElementById('js-receipt-id');
+    if (idBadge) {
+        idBadge.innerText = tourData.unique_id || 'N/A';
+    }
+    const dateElement = document.getElementById('js-receipt-date');
+    if (dateElement) {
+        const rawDate = tourData.booking_date ? (tourData.booking_time ? `${tourData.booking_date} ${tourData.booking_time}` : tourData.booking_date) : null;
+        const dateObj = rawDate ? new Date(rawDate.replace(/-/g, '/')) : new Date();
+        const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) + ' ; ' + dateObj.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit' });
+        
+        dateElement.innerText = formattedDate;
+    }
     const adults = parseInt(tourData.adults_and_seniors) || 0;
     const children = parseInt(tourData.children) || 0;
     const pax = adults + children;

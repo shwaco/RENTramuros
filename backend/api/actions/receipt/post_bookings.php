@@ -70,16 +70,10 @@ try {
         $contact_info_id = mysqli_insert_id($con);
     }
     
-    if($booking_type === 'Packages') {
-        $sql = "INSERT INTO booking_history (unique_id, tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, package_id, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_prepare($con, $sql);
-        mysqli_stmt_bind_param($stmt, "sisssiiisiiiii", $unique_id, $tourist_id, $status, $time_of_request, $date_of_request, $adults_and_seniors, $children, $infants, $booking_type, $package_id, $contact_info_id, $number_of_vehicle, $assigned_vehicle_id, $assigned_guide_id);
-    } else {
-        $sql = "INSERT INTO booking_history (unique_id, tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_prepare($con, $sql);
-        mysqli_stmt_bind_param($stmt, "sisssiiisiiii", $unique_id, $tourist_id, $status, $time_of_request, $date_of_request, $adults_and_seniors, $children, $infants, $booking_type, $contact_info_id, $number_of_vehicle, $assigned_vehicle_id, $assigned_guide_id);
-    }
-
+    $sql = "INSERT INTO booking_history (unique_id, tourist_id, status, booking_time, booking_date, adults_and_seniors, children, infants, booking_type, package_id, contact_info_id, number_of_vehicle, vehicle_id, guide_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "sisssiiisiiiii", $unique_id, $tourist_id, $status, $time_of_request, $date_of_request, $adults_and_seniors, $children, $infants, $booking_type, $package_id, $contact_info_id, $number_of_vehicle, $assigned_vehicle_id, $assigned_guide_id);
+    
     mysqli_stmt_execute($stmt);
     $booking_request_id = mysqli_insert_id($con);
 

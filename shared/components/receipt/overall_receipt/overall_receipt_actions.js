@@ -6,7 +6,10 @@ function viewTouristDetails(id) {
     if (!tourist) return console.error("Tourist not found in array!");
 
     // taga format lang ng date
-    const dateObj = new Date(tourist.booking_date || Date.now());
+    const rawDate = tourist.booking_date
+        ? (tourist.booking_time ? `${tourist.booking_date} ${tourist.booking_time}` : tourist.booking_date)
+        : null;
+    const dateObj = rawDate ? new Date(rawDate.replace(/-/g, '/')) : new Date();
     const formattedDate =
         dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) +
         ' ; ' +

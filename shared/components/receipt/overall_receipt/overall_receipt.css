@@ -90,6 +90,7 @@
     gap: 0.75rem;
     font-size: 0.8rem;
     font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 400;
     color: #000000;
     margin-bottom: 1.5rem;
 }
@@ -113,12 +114,14 @@
 .rcpt-font-condensed {
     font-family: 'Roboto Condensed', sans-serif;
     color: #000000;
+    font-weight: 400;
 }
 
 .rcpt-label {
     padding-left: 0.5rem;
     font-family: 'Roboto Condensed', sans-serif;
     color: #000000;
+    font-weight: 400;
 }
 
 .rcpt-subtext {
@@ -134,6 +137,7 @@
     text-align: right;
     font-family: 'Roboto Condensed', sans-serif;
     color: #000000;
+    font-weight: 400;
 }
 
 .rcpt-bold-label {
@@ -146,6 +150,7 @@
     text-transform: uppercase;
     font-family: 'Roboto Condensed', sans-serif;
     color: #000000;
+    font-weight: 400;
 }
 
 .rcpt-center {
@@ -162,6 +167,7 @@
     font-weight: 600;
     font-style: italic;
     font-size: 0.85rem;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .rcpt-green-sm {
@@ -169,6 +175,7 @@
     font-weight: 600;
     font-style: italic;
     font-size: 0.8rem;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .rcpt-total-label {

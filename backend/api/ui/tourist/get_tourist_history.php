@@ -47,7 +47,7 @@ $query = "SELECT
           LEFT JOIN attractions a           ON (ra.attraction_id = a.attraction_id OR pi.attraction_id = a.attraction_id)
           WHERE bh.tourist_id = ? 
           GROUP BY bh.booking_request_id
-          ORDER BY bh.booking_date DESC";
+          ORDER BY bh.booking_request_id DESC";
 
 $stmt = mysqli_prepare($con, $query);
 mysqli_stmt_bind_param($stmt, "i", $tourist_id);
