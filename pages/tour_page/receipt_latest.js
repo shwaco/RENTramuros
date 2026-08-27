@@ -104,7 +104,6 @@ function confirmFinalAcceptance() {
     acceptBtn.innerText = "PROCESSING...";
     acceptBtn.disabled = true;
     
-    // Pass the baton to the real database function
     sendDataToDatabase();
 }
 
@@ -167,7 +166,7 @@ async function sendDataToDatabase() {
         window.location.href = "../landing_page/landing_page.php"; 
         
     } else {
-        alert("Server unreachable or database error. Make sure your local server (XAMPP) is running!");
+        alert("Server unreachable or database error. Make sure your local server is running!");
         document.querySelector('.accept-btn').innerText = "SUBMIT";
         document.querySelector('.accept-btn').disabled = false;
     }
