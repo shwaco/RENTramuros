@@ -26,7 +26,6 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "tourist") {
     
     <!-- JS Path Fixes: Pointing to the same folder[cite: 23] -->
     <script src="calendar_latest.js?v=<?php echo filemtime('calendar_latest.js'); ?>" defer></script>
-    <script src="receipt_send_input.js?v=<?php echo filemtime('receipt_send_input.js'); ?>" defer></script>
     
 
     <script type="module"> 
@@ -37,6 +36,9 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "tourist") {
     </script>
     
     <script src="tours_latest.js?v=<?php echo filemtime('tours_latest.js'); ?>" defer></script>
+    <script src="receipt_send_input.js?v=<?php echo filemtime('receipt_send_input.js'); ?>" defer></script>
+    <script src="receipt_latest.js?v=<?php echo filemtime('receipt_latest.js'); ?>" defer></script>
+
 </head>
 <body>
     <div class="reservation-container">
