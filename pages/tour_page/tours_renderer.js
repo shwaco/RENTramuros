@@ -109,3 +109,6 @@ function renderAttractions(attractions) {
     });
     container.innerHTML = html;
 }
+
+// Fire it up when the DOM loads
+document.addEventListener('DOMContentLoaded', initDynamicTours);
