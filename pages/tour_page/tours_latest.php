@@ -38,7 +38,8 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "tourist") {
     <script src="tours_latest.js?v=<?php echo filemtime('tours_latest.js'); ?>" defer></script>
     <script src="receipt_send_input.js?v=<?php echo filemtime('receipt_send_input.js'); ?>" defer></script>
     <script src="receipt_latest.js?v=<?php echo filemtime('receipt_latest.js'); ?>" defer></script>
-    <script src="receipt_store.js?v=<?php echo filemtime('receipt_latest.js'); ?>" defer></script>
+    <script src="receipt_store.js?v=<?php echo filemtime('receipt_store.js'); ?>" defer></script>
+    <script src="tours_renderer.js?v=<?php echo filemtime('tours_renderer.js'); ?>" defer></script>
 
 </head>
 <body>
