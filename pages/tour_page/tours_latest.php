@@ -26,7 +26,7 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "tourist") {
     
     <!-- JS Path Fixes: Pointing to the same folder[cite: 23] -->
     <script src="calendar_latest.js?v=<?php echo filemtime('calendar_latest.js'); ?>" defer></script>
-    <script src="receipt_latest.js?v=<?php echo filemtime('receipt_latest.js'); ?>" defer></script>
+    
 
     <script type="module"> 
         // Path Fix: Reaching root services from pages/tour_page/[cite: 23]
@@ -35,7 +35,12 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "tourist") {
         window.submitBookingRequest = submitBookingRequest;
     </script>
     
-    <script src="tours_latest.js?v=<?php echo filemtime('tours_latest.js'); ?>" defer></script>
+    <script src="tours_controller.js?v=<?php echo filemtime('tours_controller.js'); ?>" defer></script>
+    <script src="receipt_send_data.js?v=<?php echo filemtime('receipt_send_data.js'); ?>" defer></script>
+    <script src="receipt_latest.js?v=<?php echo filemtime('receipt_latest.js'); ?>" defer></script>
+    <script src="tours_store.js?v=<?php echo filemtime('tours_store.js'); ?>" defer></script>
+    <script src="tours_renderer.js?v=<?php echo filemtime('tours_renderer.js'); ?>" defer></script>
+
 </head>
 <body>
     <div class="reservation-container">

@@ -1,4 +1,4 @@
-// tours step 2 
+// tours step 2     
 
 export async function fetchToursData() {
     try {
